@@ -37,7 +37,12 @@ public static class ServiceCollectionExtension {
     public static void RegisterDistributedCache(this IServiceCollection services) {
         var sp = services.BuildServiceProvider();
         var config = sp.GetService<IConfiguration>();
+        var redisConfig = config!.GetValue<string>("Redis:Client:ConnectionString") ?? "localhost";
 
+
+        var multiplexer = ConnectionMultiplexer.Connect(redisConfig);
+
+        services.AddSingleton(new RedisConnectionProvider(multiplexer));
         services.AddDistributedRedisCache(config);
         services
         .AddDataProtection()
@@ -68,14 +73,9 @@ public static class ServiceCollectionExtension {
         .AddKubernetes()
         .AddConfigServer()
         .AddEnvironmentVariables();
+
         builder.Logging.AddDynamicSerilog();
         builder.Services.AddRedisConnectionMultiplexer(config);
-
-        var redisConfig = config.GetValue<string>("Redis:Client:ConnectionString") ?? "localhost";
-        var multiplexer = ConnectionMultiplexer.Connect(redisConfig);
-
-        builder.Services.AddDbMigrationsActuator();
-        builder.Services.AddSingleton(new RedisConnectionProvider(multiplexer));
         builder.Services.RegisterDistributedCache();
         builder.Services.AddServiceDiscovery(o => o.UseConsul());
         builder.Services.AddAllActuators(config);
@@ -83,6 +83,7 @@ public static class ServiceCollectionExtension {
         builder.Services.AddDistributedTracingAspNetCore();
         builder.Services.AddDistributedTracing();
         builder.Services.AddSpringBootAdminClient();
+        builder.Services.AddDbMigrationsActuator();
         builder.Services.Configure<FormOptions>(options => {
             options.MultipartBodyLengthLimit = 268435456;
         });
