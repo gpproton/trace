@@ -38,7 +38,7 @@ services:
       RABBITMQ_DEFAULT_PASS: secret
     ports:
       - 5672:5672
-      - 8005:8080
+      - 8085:15672
     volumes:
       - ./.docker/rabbitmq:/var/lib/rabbitmq
 
