@@ -99,6 +99,7 @@
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
     <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
     <PackageVersion Include="NetEscapades.Configuration.Yaml" Version="3.1.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Zipkin" Version="1.1.0-rc1" />
   </ItemGroup>
 
 </Project>

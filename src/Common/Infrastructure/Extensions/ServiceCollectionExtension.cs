@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OpenTelemetry;
+using OpenTelemetry.Exporter;
 using Redis.OM;
 using StackExchange.Redis;
 using Steeltoe.Common.Http.Discovery;
@@ -84,6 +86,10 @@ public static class ServiceCollectionExtension {
         builder.Services.AddDbMigrationsActuator();
         builder.Services.Configure<FormOptions>(options => {
             options.MultipartBodyLengthLimit = 268435456;
+        });
+        builder.Services.PostConfigure<ZipkinExporterOptions>(options => {
+            options.ExportProcessorType = ExportProcessorType.Batch;
+            options.BatchExportProcessorOptions.ExporterTimeoutMilliseconds = 1000;
         });
 
         return builder;

@@ -58,6 +58,7 @@
     <PackageReference Include="Minio" />
     <PackageReference Include="Redis.OM" />
     <PackageReference Include="NetEscapades.Configuration.Yaml" />
+    <PackageReference Include="OpenTelemetry.Exporter.Zipkin" />
   </ItemGroup>
 
   <ItemGroup>
