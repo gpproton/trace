@@ -38,8 +38,6 @@ public static class ServiceCollectionExtension {
         var sp = services.BuildServiceProvider();
         var config = sp.GetService<IConfiguration>();
         var redisConfig = config!.GetValue<string>("Redis:Client:ConnectionString") ?? "localhost";
-
-
         var multiplexer = ConnectionMultiplexer.Connect(redisConfig);
 
         services.AddSingleton(new RedisConnectionProvider(multiplexer));
