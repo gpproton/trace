@@ -71,6 +71,8 @@
     <PackageVersion Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageVersion Include="Steeltoe.Security.DataProtection.RedisCore"
       Version="$(SteeltoeVersion)" />
+    <PackageVersion Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageVersion Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <!-- HotChocolate packages -->

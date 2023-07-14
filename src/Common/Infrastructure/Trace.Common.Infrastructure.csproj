@@ -38,6 +38,8 @@
     <PackageReference Include="Steeltoe.Management.TracingCore" />
     <PackageReference Include="Steeltoe.Messaging.RabbitMQ" />
     <PackageReference Include="Steeltoe.Security.DataProtection.RedisCore" />
+    <PackageReference Include="Steeltoe.Stream.Binder.RabbitMQ" />
+    <PackageReference Include="Steeltoe.Stream.StreamBase" />
   </ItemGroup>
 
   <ItemGroup Label="HotChocolate">
