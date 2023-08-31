@@ -71,6 +71,8 @@
     <PackageVersion Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
     <PackageVersion Include="Steeltoe.Security.DataProtection.RedisCore"
       Version="$(SteeltoeVersion)" />
+    <PackageVersion Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
+    <PackageVersion Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
   </ItemGroup>
 
   <!-- HotChocolate packages -->
@@ -99,6 +101,7 @@
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
     <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
     <PackageVersion Include="NetEscapades.Configuration.Yaml" Version="3.1.0" />
+    <PackageVersion Include="OpenTelemetry.Exporter.Zipkin" Version="1.1.0-rc1" />
   </ItemGroup>
 
 </Project>
