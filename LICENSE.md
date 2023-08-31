@@ -3,23 +3,25 @@
 License text copyright (c) 2020 MariaDB Corporation Ab, All Rights Reserved.
 “Business Source License” is a trademark of MariaDB Corporation Ab.
 
-Parameters
+## Parameters
 
+```
 Licensor: drolx Technologies
 Licensed Work: Trace 0.1-dev. The Licensed Work is (c) 2023 drolx Technologies.
 Additional Use Grant: You may make production use of the Licensed Work,
-                      provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with HashiCorp's products.
-Change Date:          Four years from the date the Licensed Work is published.
-Change License:       RPL 1.5
+provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with HashiCorp's products.
+Change Date: Four years from the date the Licensed Work is published.
+Change License:  Reciprocal Public License (RPL-1.5)
+```
 
 For information about alternative licensing arrangements for the Licensed Work,
 please contact dev@drolx.com.
 
 Notice
 
-Business Source License 1.1
+## Business Source License 1.1
 
-Terms
+### Terms
 
 The Licensor hereby grants you the right to copy, modify, create derivative
 works, redistribute, and make non-production use of the Licensed Work. The
