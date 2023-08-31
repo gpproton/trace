@@ -6,19 +6,18 @@ delivery to the customer and ending with return logistics.
 
 ## License
 
-Trace is license under the [Business Source License 1.1](./LICENSE.md)
-
-[![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE.md)
+Trace is license under the [![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE.md)
 
 - Agboola Solomon ([agboolas@outlook.com](mailto:agboolas@outlook.com))
 - Godwin peter .O ([me@godwin.dev](mailto:me@godwin.dev))
 
-| Licensor: | drolx Techonologies. |
+| | |
 |---|---|
+| Licensor: | drolx Techonologies. |
 | Licensed Work: | The Licensed Work is (c) 2023 drolx Tecnologies. |
 | Additional Use Grant: | You may make production use of the Licensed Work, provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with drolx's products |
 | Change Date: | Four years from the date a Licensed version is published |
-| Change License: | Reciprocal Public License (RPL-1.5)  |
+| Change License: | Reciprocal Public License (RPL-1.5) |
 
 ## Goals
 * Unify all logistics data source
