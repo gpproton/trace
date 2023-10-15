@@ -1,51 +1,43 @@
 {
   "name": "@trace/core",
-  "version": "0.0.1-alpha.1",
   "description": "Trace logistics system",
-  "main": "index.js",
+  "version": "0.0.1-alpha.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/11Clouds/trace.git"
+    "url": "https://github.com/drolx/trace.git"
   },
   "keywords": [
     "gps",
     "track"
   ],
   "author": "radioActive DROID <me@godwin.dev>",
-  "license": "RPL-1.5",
+  "license": "BSL-1.1",
   "bugs": {
-    "url": "https://github.com/11Clouds/trace/issues"
+    "url": "https://github.com/drolx/trace/issues"
   },
   "homepage": "https://trace.ng",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "client": "pnpm -r --filter ./client run",
-    "docs": "pnpm -r --filter ./docs run",
-    "website": "pnpm -r --filter ./website run",
-    "dev": "pnpm -r --filter ./ --parallel run dev",
-    "dev:client": "pnpm run client dev",
-    "dev:docs": "pnpm run docs dev",
-    "build": "pnpm -r --filter ./ run build",
     "clean": " pnpm clean:dist && pnpm clean:packages",
     "clean:packages": "rimraf **/node_modules **/yarn* **/package-lock.* **/.pnpm-debug* **/pnpm-lock.yaml",
-    "clean:dist": "rimraf app/**/dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "@trace/app": "workspace:*",
-    "@trace/client": "workspace:*",
-    "@trace/docs": "workspace:*",
-    "@trace/website": "workspace:*"
+    "clean:dist": "rimraf app/**/dist"
   },
   "devDependencies": {
     "pnpm": "^8.2.0",
     "rimraf": "^3.0.2",
-    "typescript": "^5.1.6"
+    "typescript": "^5.0.0",
+    "bun-types": "latest"
   },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "client/*"
+  ],
   "engines": {
-    "node": "^18 || ^16 || ^14",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1",
-    "pnpm": ">=3"
+    "npm": "please-use-pnpm",
+    "pnpm": ">= 8.2.0",
+    "yarn": "please-use-pnpm",
+    "bun": ">= 1.0.1",
+    "node": ">= 16.0.0"
   }
 }
