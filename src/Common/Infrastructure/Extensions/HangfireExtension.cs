@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.Redis;
+using Hangfire.Redis.StackExchange;
 using HangfireBasicAuthenticationFilter;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
