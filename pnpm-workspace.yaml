@@ -1,5 +1,0 @@
-packages:
-  - 'client'
-  - 'client/*'
-  - 'docs'
-  - 'website'

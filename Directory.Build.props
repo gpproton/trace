@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/gpproton/trace</RepositoryUrl>
     <PackageProjectUrl>https://github.com/gpproton/trace</PackageProjectUrl>
     <LicenseFile>$(MSBuildThisFileDirectory)LICENSE</LicenseFile>
-    <PackageLicenseExpression>RPL-1.5</PackageLicenseExpression>
+    <PackageLicenseExpression>BSL-1.1</PackageLicenseExpression>
     <Copyright>© Trace Contributors. All rights reserved.</Copyright>
   </PropertyGroup>
 
@@ -24,18 +24,18 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AxolotlVersion>8.0-preview.19</AxolotlVersion>
-    <AspCoreVersion>8.0.0-preview.5.23302.2</AspCoreVersion>
-    <DotnetVersion>8.0.0-preview.5.23280.8</DotnetVersion>
-    <EfcoreVersion>8.0.0-preview.5.23280.1</EfcoreVersion>
-    <MauiVersion>8.0.0-preview.5.8529</MauiVersion>
-    <NpgsqlVersion>8.0.0-preview.4</NpgsqlVersion>
+    <AxolotlVersion>8.0-preview.20</AxolotlVersion>
+    <AspCoreVersion>8.0.0-rc.1.23421.29</AspCoreVersion>
+    <DotnetVersion>8.0.0-rc.1.23419.4</DotnetVersion>
+    <EfcoreVersion>8.0.0-rc.1.23419.6</EfcoreVersion>
+    <MauiVersion>8.0.0-rc.1.9171</MauiVersion>
+    <NpgsqlVersion>8.0.0-rc.1</NpgsqlVersion>
     <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
-    <SteeltoeVersion>3.2.3</SteeltoeVersion>
-    <HotChocolateVersion>13.3.1</HotChocolateVersion>
-    <CassandraVersion>3.19.2</CassandraVersion>
-    <MinioVersion>5.0.0</MinioVersion>
-    <MQTTnetVersion>4.2.1.781</MQTTnetVersion>
+    <SteeltoeVersion>3.2.4</SteeltoeVersion>
+    <HotChocolateVersion>13.5.1</HotChocolateVersion>
+    <CassandraVersion>3.19.3</CassandraVersion>
+    <MinioVersion>6.0.0</MinioVersion>
+    <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
   </PropertyGroup>
 
 </Project>

@@ -6,10 +6,10 @@ License text copyright (c) 2020 MariaDB Corporation Ab, All Rights Reserved.
 ## Parameters
 
 ```
-Licensor: drolx Technologies
-Licensed Work: Trace 0.1-dev. The Licensed Work is (c) 2023 drolx Technologies.
+Licensor: drolx Solutions
+Licensed Work: Trace 0.1-alpha. The Licensed Work is (c) 2023 drolx Solutions.
 Additional Use Grant: You may make production use of the Licensed Work,
-provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with HashiCorp's products.
+provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with drolx's products.
 Change Date: Four years from the date the Licensed Work is published.
 Change License:  Reciprocal Public License (RPL-1.5)
 ```
