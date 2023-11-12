@@ -1,43 +1,43 @@
 ## Main front-end
-http://staging.traefik.me/
+http://staging.trace.ng/
 ## Wildcards && custom domain =>> http://***.**
 
 ## Containers registry
-https://registry.traefik.me/
+https://registry.trace.ng/
 
 ## GraphQl federation proxy
-http://staging.traefik.me/graphql/
+http://staging.trace.ng/graphql/
 
 ## Object store proxy
-http://staging.traefik.me/service/storage/
-http://storage.traefik.me/
+http://staging.trace.ng/service/storage/
+http://storage.trace.ng/
 
 ## Navigation routing proxy
-http://staging.traefik.me/service/routing/
+http://staging.trace.ng/service/routing/
 
 ## Geocoding proxy
-http://staging.traefik.me/service/geocoding/
+http://staging.trace.ng/service/geocoding/
 
 ## Tracking data ingest proxy
-http://staging.traefik.me/service/movement/
+http://staging.trace.ng/service/movement/
 
 ## Docs and support platform front-end
-http://support.traefik.me/
+http://support.trace.ng/
 
 ## Main management front-end
-http://manage.traefik.me/
+http://manage.trace.ng/
 
 ## Proxy administration UI
-http://manage.traefik.me/proxy/
+http://manage.trace.ng/proxy/
 
 ## Data administration UI
-http://manage.traefik.me/data-admin/
+http://manage.trace.ng/data-admin/
 
 ## Management GraphQl proxy/front-end
-http://manage.traefik.me/graphql/
+http://manage.trace.ng/graphql/
 
 ## Object store management UI
-http://manage-storage.traefik.me/
+http://manage-storage.trace.ng/
 
 ## Traccar management UI
-http://manage-iot.traefik.me/
+http://manage-iot.trace.ng/
