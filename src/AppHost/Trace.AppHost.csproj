@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="..\Trace.ApiService\Trace.ApiService.csproj" /> -->
+    <ProjectReference Include="..\Gateway\Trace.Gateway.csproj" />
   </ItemGroup>
 
   <ItemGroup>

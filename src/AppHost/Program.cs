@@ -1,12 +1,11 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedisContainer("cache")
-    .WithAnnotation(new ContainerImageAnnotation { Image = "docker.io/redis/redis-stack", Tag = "7.2.0-v6" })
-    .WithServiceBinding(containerPort: 8001, scheme: "http");
+    .WithAnnotation(new ContainerImageAnnotation { Image = "docker.io/redis/redis-stack", Tag = "7.2.0-v6" });
 
 var messaging = builder.AddRabbitMQContainer("messaging")
     .WithAnnotation(new ContainerImageAnnotation { Image = "docker.io/rabbitmq", Tag = "3-management-alpine" })
-    .WithServiceBinding(containerPort: 15672, scheme: "http")
+    // .WithServiceBinding(containerPort: 15672, scheme: "http")
     .WithEnvironment("RABBITMQ_DEFAULT_USER", "admin")
     .WithEnvironment("RABBITMQ_DEFAULT_PASS", "secret");
 
@@ -22,12 +21,7 @@ var traceDb = builder.AddPostgresContainer("trace-db")
 .WithEnvironment("POSTGRES_DB", "trace")
 .AddDatabase("trace");
 
-// var db = builder.AddNpgsqlDbContext<YourDbContext>("db", static settings =>
-//     settings.ConnectionString = "YOUR_CONNECTIONSTRING");
-
-// var apiservice = builder.AddProject<Projects.Trace_ApiService>("apiservice");
-// builder.AddProject<Projects.Trace_Web>("webfrontend")
-//     .WithReference(cache)
-//     .WithReference(apiservice);
+var gatewayService = builder.AddProject<Projects.Trace_Gateway>("gateway")
+    .WithReference(cache);
 
 builder.Build().Run();

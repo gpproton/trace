@@ -7,8 +7,9 @@
     <IsAspireSharedProject>true</IsAspireSharedProject>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Label="Aspire">
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
 
     <PackageReference Include="Microsoft.Extensions.Http.Resilience" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery" />
@@ -18,6 +19,42 @@
     <PackageReference Include="OpenTelemetry.Instrumentation.GrpcNetClient" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Http" />
     <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" />
+  </ItemGroup>
+
+  <ItemGroup Label="AspNet">
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
+    <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
+    <PackageReference Include="MQTTnet.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup Label="Hangfire">
+    <PackageReference Include="Hangfire.AspNetCore" />
+    <PackageReference Include="Hangfire.Dashboard.Basic.Authentication" />
+    <PackageReference Include="Hangfire.Redis.StackExchange" />
+  </ItemGroup>
+
+  <ItemGroup Label="HotChocolate">
+    <PackageReference Include="HotChocolate.Data" />
+    <PackageReference Include="HotChocolate.Data.EntityFramework" />
+    <PackageReference Include="HotChocolate.Data.Spatial" />
+    <PackageReference Include="HotChocolate.Diagnostics" />
+    <PackageReference Include="HotChocolate.PersistedQueries.InMemory" />
+    <PackageReference Include="HotChocolate.PersistedQueries.Redis" />
+    <PackageReference Include="HotChocolate.Stitching" />
+    <PackageReference Include="HotChocolate.Stitching.Redis" />
+    <PackageReference Include="HotChocolate.Subscriptions.Redis" />
+    <PackageReference Include="HotChocolate.Types" />
+  </ItemGroup>
+
+  <ItemGroup Label="Others">
+    <PackageReference Include="CassandraCSharpDriver" />
+    <PackageReference Include="Minio" />
+    <PackageReference Include="Redis.OM" />
+    <PackageReference Include="NetEscapades.Configuration.Yaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -6,10 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Domain\Trace.Common.Domain.csproj" />
-    <ProjectReference Include="..\Common\Infrastructure\Trace.Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\Common\Standard\Trace.Common.Standard.csproj" />
-    <ProjectReference Include="..\Common\Service\Trace.Common.Service.csproj" />
+    <ProjectReference Include="..\Common\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
