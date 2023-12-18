@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <Title>Trace</Title>
-    <Version>0.0.1-alpha.1</Version>
+    <Version>0.0.1-preview.1</Version>
     <Authors>Godwin peter .O</Authors>
     <Description>An end to end logistic crm platform</Description>
     <RepositoryType>git</RepositoryType>
@@ -24,12 +24,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AxolotlVersion>8.0-preview.20</AxolotlVersion>
-    <AspCoreVersion>8.0.0-rc.1.23421.29</AspCoreVersion>
-    <DotnetVersion>8.0.0-rc.1.23419.4</DotnetVersion>
-    <EfcoreVersion>8.0.0-rc.1.23419.6</EfcoreVersion>
-    <MauiVersion>8.0.0-rc.1.9171</MauiVersion>
-    <NpgsqlVersion>8.0.0-rc.1</NpgsqlVersion>
+    <AxolotlVersion>8.0.0</AxolotlVersion>
+    <AspireVersion>8.0.0-preview.3.23618.1</AspireVersion>
+    <AspCoreVersion>8.0.0</AspCoreVersion>
+    <DotnetVersion>8.0.0</DotnetVersion>
+    <EfcoreVersion>8.0.0</EfcoreVersion>
+    <NpgsqlVersion>8.0.0</NpgsqlVersion>
     <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
     <SteeltoeVersion>3.2.4</SteeltoeVersion>
     <HotChocolateVersion>13.5.1</HotChocolateVersion>
