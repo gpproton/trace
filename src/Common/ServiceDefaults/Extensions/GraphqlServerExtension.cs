@@ -14,11 +14,11 @@ public static class GraphqlServerExtension {
         .AddProjections()
         .AddType<UploadType>()
         .UseAutomaticPersistedQueryPipeline()
-        .AddRedisQueryStorage(sp => sp.GetRequiredService<ConnectionMultiplexer>().GetDatabase())
+        .AddRedisQueryStorage(sp => sp.GetRequiredService<IConnectionMultiplexer>().GetDatabase())
         // .RegisterDbContext<OperationContext>(DbContextKind.Pooled)
         .AddApolloTracing()
         .AddMutationConventions(applyToAllMutations: true)
-        .AddRedisSubscriptions(sp => sp.GetRequiredService<ConnectionMultiplexer>())
+        .AddRedisSubscriptions(sp => sp.GetRequiredService<IConnectionMultiplexer>())
         .ModifyRequestOptions(opt => {
             opt.Complexity.ApplyDefaults = true;
             opt.Complexity.DefaultComplexity = 1;
@@ -29,7 +29,7 @@ public static class GraphqlServerExtension {
             services.PublishSchemaDefinition(c => {
                 c.SetName(name)
                 .PublishToRedis(Nodes.GroupName,
-                    sp => sp.GetRequiredService<ConnectionMultiplexer>());
+                    sp => sp.GetRequiredService<IConnectionMultiplexer>());
             });
 
         return services;

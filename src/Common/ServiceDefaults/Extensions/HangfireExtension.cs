@@ -14,7 +14,7 @@ public static class HangfireExtension {
             config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseRecommendedSerializerSettings()
-            .UseRedisStorage(sp.GetRequiredService<ConnectionMultiplexer>(),
+            .UseRedisStorage(sp.GetRequiredService<IConnectionMultiplexer>(),
                 new RedisStorageOptions {
                     Prefix = $"Job:{serviceName}",
                     ExpiryCheckInterval = TimeSpan.FromHours(1),
