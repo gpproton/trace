@@ -1,20 +1,12 @@
-using Trace.Common.Infrastructure;
-using Trace.Common.Service;
-using Trace.Common.Standard;
-
-var option = new NodeOption {
-    Group = Nodes.GroupName,
-    Name = Nodes.Core,
-    Service = true,
-    Graphql = true,
-    Scheduler = true
-};
+using Trace.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddInfrastructure<Program>(option);
-builder.Services.RegisterService();
+builder.AddServiceDefaults();
+builder.AddRedisDistributedCache("cache");
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
-app.RegisterInfrastructure(option);
+app.MapGet("/", () => "service-core");
+app.MapDefaultEndpoints();
 
 app.Run();

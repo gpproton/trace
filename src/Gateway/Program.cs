@@ -7,7 +7,7 @@ builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello");
+app.MapGet("/", () => "gateway");
 app.MapDefaultEndpoints();
 
 app.Run();

@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 
-namespace Trace.Common.Infrastructure;
+namespace Trace.ServiceDefaults;
 
 public static class Initializer {
     internal static ILogger GetLogger<T>() {

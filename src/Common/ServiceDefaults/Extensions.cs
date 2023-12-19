@@ -10,7 +10,7 @@ using OpenTelemetry.Trace;
 
 namespace Trace.ServiceDefaults.Extensions;
 
-public static class AspireExtensions
+public static class Extensions
 {
     public static IHostApplicationBuilder AddServiceDefaults(this IHostApplicationBuilder builder)
     {

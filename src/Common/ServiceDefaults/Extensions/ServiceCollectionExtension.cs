@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Redis.OM;
 using StackExchange.Redis;
-using Trace.Common.Infrastructure;
 
 namespace Trace.ServiceDefaults.Extensions;
 
@@ -49,16 +48,6 @@ public static class ServiceCollectionExtension {
     }
 
     public static WebApplicationBuilder RegisterSharedArchitecture(this WebApplicationBuilder builder) {
-        var env = builder.Environment;
-        var config = builder.Configuration;
-
-        config.SetBasePath(env.ContentRootPath)
-        .AddYamlFile("config.yaml", optional: true, reloadOnChange: true)
-        .AddYamlFile($"config.{env.EnvironmentName}.yaml", optional: true, reloadOnChange: true)
-        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-        .AddEnvironmentVariables();
-
         builder.Services.RegisterDistributedCache();
         builder.Services.Configure<FormOptions>(options => {
             options.MultipartBodyLengthLimit = 268435456;

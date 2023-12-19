@@ -11,11 +11,6 @@ public static class PersistenceExtensions {
         var config = sp.GetService<IConfiguration>();
         var postgresConfig = config!.GetValue<string>("Postgres:Client:ConnectionString");
 
-        // services.AddRabbitMQConnection(config);
-        // services.AddRabbitServices(true);
-        // services.AddRabbitAdmin();
-        // services.AddRabbitTemplate();
-        // services.AddPostgresHealthContributor(config);
         // services.AddDbContext<OperationContext>(options =>
         // options.UseSnakeCaseNamingConvention()
         // .UseNpgsql(postgresConfig, b => b

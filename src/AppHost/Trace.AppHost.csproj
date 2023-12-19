@@ -8,10 +8,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Gateway\Trace.Gateway.csproj" />
+    <ProjectReference Include="..\Service\Core\Trace.Service.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" />
+    <!-- Required packages -->
+    <!--
+    <PackageReference Include="Aspire.Npgsql" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Aspire.StackExchange.Redis" />
+    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
+    <PackageReference Include="Aspire.RabbitMQ.Client" />
+    -->
   </ItemGroup>
 
 </Project>

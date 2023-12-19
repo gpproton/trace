@@ -25,12 +25,12 @@ public static class GraphqlServerExtension {
             opt.Complexity.DefaultResolverComplexity = 5;
         });
 
-        // if (name is not null)
-        //     services.PublishSchemaDefinition(c => {
-        //         c.SetName(name)
-        //         .PublishToRedis(Nodes.GroupName,
-        //             sp => sp.GetRequiredService<ConnectionMultiplexer>());
-        //     });
+        if (name is not null)
+            services.PublishSchemaDefinition(c => {
+                c.SetName(name)
+                .PublishToRedis(Nodes.GroupName,
+                    sp => sp.GetRequiredService<ConnectionMultiplexer>());
+            });
 
         return services;
     }
