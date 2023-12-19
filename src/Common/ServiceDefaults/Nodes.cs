@@ -4,11 +4,11 @@ public static class Nodes {
     public const string GroupName = "Trace";
 
     public static readonly IReadOnlyList<string> All = new List<string> {
-        Identity,
-        Integration,
         Core,
-        Route,
-        Stream
+        // Identity,
+        // Integration,
+        // Route,
+        // Stream
     };
 
     // Services

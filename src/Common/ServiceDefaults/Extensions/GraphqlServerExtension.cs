@@ -15,6 +15,7 @@ public static class GraphqlServerExtension {
         .AddType<UploadType>()
         .UseAutomaticPersistedQueryPipeline()
         .AddRedisQueryStorage(sp => sp.GetRequiredService<IConnectionMultiplexer>().GetDatabase())
+        // TODO: Hook up DbContext for GraphQL
         // .RegisterDbContext<OperationContext>(DbContextKind.Pooled)
         .AddApolloTracing()
         .AddMutationConventions(applyToAllMutations: true)
