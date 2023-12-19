@@ -18,22 +18,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);AD0001;NU1507;</NoWarn>
-    <LangVersion>preview</LangVersion>
-    <!-- TODO: Activate when out of preview -->
-    <!-- <UseArtifactsOutput>true</UseArtifactsOutput> -->
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <AxolotlVersion>8.0.0</AxolotlVersion>
-    <AspireVersion>8.0.0-preview.3.23618.1</AspireVersion>
-    <AspCoreVersion>8.0.0</AspCoreVersion>
-    <DotnetVersion>8.0.0</DotnetVersion>
-    <EfcoreVersion>8.0.0</EfcoreVersion>
-    <NpgsqlVersion>8.0.0</NpgsqlVersion>
-    <HotChocolateVersion>13.5.1</HotChocolateVersion>
-    <CassandraVersion>3.19.3</CassandraVersion>
-    <MinioVersion>6.0.0</MinioVersion>
-    <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
+    <LangVersion>12</LangVersion>
   </PropertyGroup>
 
 </Project>

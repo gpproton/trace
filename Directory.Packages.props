@@ -1,6 +1,18 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <AxolotlVersion>8.0.0</AxolotlVersion>
+    <AspireVersion>8.0.0-preview.3.23618.1</AspireVersion>
+    <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
+    <RuntimeVersion>8.0.0</RuntimeVersion>
+    <EFCoreVersion>8.0.0</EFCoreVersion>
+    <NpgsqlVersion>8.0.0</NpgsqlVersion>
+    <HotChocolateVersion>13.5.1</HotChocolateVersion>
+    <CassandraVersion>3.19.3</CassandraVersion>
+    <MinioVersion>6.0.0</MinioVersion>
+    <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
+    <MassTransitVersion>8.1.2</MassTransitVersion>
   </PropertyGroup>
 
   <!-- Core packages -->
@@ -15,23 +27,23 @@
   <!-- Axolotl packages -->
   <ItemGroup Label="Axolotl">
     <PackageVersion Include="Axolotl" Version="$(AxolotlVersion)" />
-    <PackageVersion Include="Axolotl.Http" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.AspNet" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.EFCore" Version="$(AxolotlVersion)" />
   </ItemGroup>
 
   <!-- AspNet packages -->
   <ItemGroup Label="AspNetCore">
-    <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Yarp.ReverseProxy" Version="2.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
   </ItemGroup>
 
   <!-- EFcore packages -->
   <ItemGroup Label="Efcore">
     <PackageVersion Include="EFCore.NamingConventions" Version="8.0.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfcoreVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfcoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlVersion)" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="$(NpgsqlVersion)" />
   </ItemGroup>
@@ -72,15 +84,25 @@
     <PackageVersion Include="HotChocolate.Types" Version="$(HotChocolateVersion)" />
   </ItemGroup>
 
-  <!-- Other packages -->
-  <ItemGroup Label="Others">
-    <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
+  <!-- Hangfire packages -->
+  <ItemGroup Label="Hangfire">
     <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.5" />
     <PackageVersion Include="Hangfire.Dashboard.Basic.Authentication" Version="7.0.1" />
     <PackageVersion Include="Hangfire.Redis.StackExchange" Version="1.9.4-beta" />
+  </ItemGroup>
+
+  <!-- MassTransit packages -->
+  <ItemGroup Label="MassTransit">
+    <PackageVersion Include="MassTransit" Version="$(MassTransitVersion)" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
+    <PackageVersion Include="MassTransit.EntityFrameworkCore" Version="$(MassTransitVersion)" />
+    <PackageVersion Include="MassTransit.Hangfire" Version="$(MassTransitVersion)" />
+  </ItemGroup>
+
+  <!-- Other packages -->
+  <ItemGroup Label="Others">
+    <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
-    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
-    <PackageVersion Include="NetEscapades.Configuration.Yaml" Version="3.1.0" />
   </ItemGroup>
 
 </Project>
