@@ -25,7 +25,7 @@ public static class HangfireExtension {
             const string name = "Main";
             options.ServerName = name;
             options.WorkerCount = 5;
-            options.Queues = new string[] { name };
+            options.Queues = new[] { name };
             options.SchedulePollingInterval = TimeSpan.FromMinutes(1);
         });
 
@@ -37,7 +37,7 @@ public static class HangfireExtension {
         var endpoint = config!.GetValue<string>("Hangfire:Endpoint") ?? "/schedule";
 
         app.UseHangfireDashboard(endpoint, new DashboardOptions {
-            // DashboardTitle = $"{serviceName.Capitalize()} Schedule",
+            DashboardTitle = $"{serviceName.ToUpper()} Schedule",
             Authorization = new[] {
                 new HangfireCustomBasicAuthenticationFilter{
                     User = config!.GetValue<string>("Hangfire:Username") ?? "trace",

@@ -11,19 +11,19 @@
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
-  <Import Project="..\..\Aspire.props" />
-  <Import Project="..\..\HotChocolate.props" />
-  <Import Project="..\..\Hangfire.props" />
+  <Import Project="..\Aspire.props" />
+  <Import Project="..\HotChocolate.props" />
+  <Import Project="..\Hangfire.props" />
 
   <ItemGroup Label="AspNet">
+    <PackageReference Include="Microsoft.Extensions.Configuration" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
-    <PackageReference Include="Minio" />
-    <PackageReference Include="Redis.OM" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Trace.Common.Shared.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>
 
 </Project>

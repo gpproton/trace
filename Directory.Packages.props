@@ -17,6 +17,8 @@
 
   <!-- Core packages -->
   <ItemGroup Label="Core">
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
     <PackageVersion Include="MediatR" Version="12.1.1" />
     <PackageVersion Include="NetTopologySuite" Version="2.5.0" />

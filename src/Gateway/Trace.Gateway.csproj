@@ -2,25 +2,18 @@
 
   <PropertyGroup>
     <Title>Trace.Gateway</Title>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\ServiceDefaults\Trace.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Aspire.StackExchange.Redis" />
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
     <PackageReference Include="Yarp.ReverseProxy" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
+   <ItemGroup>
+    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>
+
+  <Import Project="..\Shared.props" />
 
 </Project>

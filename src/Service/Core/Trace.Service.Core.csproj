@@ -2,25 +2,13 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Core</Title>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
-
-   <ItemGroup>
-    <PackageReference Include="Aspire.RabbitMQ.Client" />
-    <PackageReference Include="Aspire.StackExchange.Redis" />
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.Shared.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
   </ItemGroup>
+
+  <Import Project="..\Shared.props" />
 
 </Project>
