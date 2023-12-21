@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Gateway</Title>
+    <UseAppHost>true</UseAppHost>
   </PropertyGroup>
 
   <ItemGroup>

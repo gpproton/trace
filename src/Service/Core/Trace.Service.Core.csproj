@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Core</Title>
+    <UseAppHost>true</UseAppHost>
   </PropertyGroup>
 
   <ItemGroup>

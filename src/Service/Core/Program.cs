@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.RegisterDefaults();
 builder.RegisterPersistence();
-builder.Services.RegisterSharedServices();
+builder.Services.RegisterDefaultServices();
 builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)

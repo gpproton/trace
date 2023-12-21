@@ -4,14 +4,14 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
-WORKDIR /src
+WORKDIR /workspace
 COPY . .
 RUN dotnet restore "src/Gateway/Trace.Gateway.csproj"
-WORKDIR "/src/src/Gateway"
+WORKDIR "/workspace/src/Gateway"
 RUN dotnet build "Trace.Gateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Trace.Gateway.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Trace.Gateway.csproj" -c Release -o /app/publish /p:UseAppHost=true
 
 FROM base AS final
 WORKDIR /app

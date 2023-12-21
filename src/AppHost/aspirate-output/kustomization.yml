@@ -1,0 +1,9 @@
+resources:
+- service-core
+- gateway
+- manager
+- frontend
+
+generatorOptions:
+  disableNameSuffixHash: true
+

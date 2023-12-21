@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{name}}
+{{#if hasAnyAnnotations}}
+  annotations:
+  {{#each annotations}}
+    {{@key}}: {{this}}
+  {{/each}}
+{{/if}}
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{name}}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: {{name}}
+    spec:
+      containers:
+      - name: {{name}}
+        image: {{containerImage}}
+        imagePullPolicy: {{imagePullPolicy}}
+        {{#if isDockerfile}}
+        {{#if hasPorts}}
+        ports:
+        {{#each ports}}
+        - containerPort: {{port}}
+        {{/each}}
+        {{/if}}
+        {{/if}}
+        {{#if isProject}}
+        ports:
+        - containerPort: 8080
+        {{/if}}
+        envFrom:
+        - configMapRef:
+            name: {{name}}-env
+        {{#if hasAnySecrets}}
+        - secretRef:
+            name: {{name}}-secrets
+        {{/if}}
+      terminationGracePeriodSeconds: 180

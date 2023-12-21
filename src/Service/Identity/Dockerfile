@@ -1,9 +1,9 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview-alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-preview-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /src
 COPY . .
 RUN dotnet restore "src/Service/Identity/Trace.Service.Identity.csproj"
@@ -11,7 +11,7 @@ WORKDIR "/src/src/Service/Identity"
 RUN dotnet build "Trace.Service.Identity.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Trace.Service.Identity.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Trace.Service.Identity.csproj" -c Release -o /app/publish /p:UseAppHost=true
 
 FROM base AS final
 WORKDIR /app

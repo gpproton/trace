@@ -62,7 +62,7 @@ public static class DependencyInjection {
         return builder;
     }
 
-    public static IServiceCollection RegisterSharedServices(this IServiceCollection services) {
+    public static IServiceCollection RegisterDefaultServices(this IServiceCollection services) {
         services.AddProblemDetails();
         services.AddCors();
         services.AddAntiforgery();

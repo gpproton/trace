@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <Nullable>enable</Nullable>
     <IsAspireHost>true</IsAspireHost>
   </PropertyGroup>
 
@@ -15,14 +14,6 @@
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting" />
-    <!-- Required packages -->
-    <!--
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
-    <PackageReference Include="Aspire.StackExchange.Redis" />
-    <PackageReference Include="Aspire.StackExchange.Redis.DistributedCaching" />
-    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
-    <PackageReference Include="Aspire.RabbitMQ.Client" />
-    -->
   </ItemGroup>
 
 </Project>

@@ -1,9 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <PublishSingleFile>false</PublishSingleFile>
     <UserSecretsId>aspnet-Trace.Manager-005dbf40-7827-4488-9a6b-e87f5e04cd10</UserSecretsId>
   </PropertyGroup>
 
@@ -21,6 +20,7 @@
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
   </ItemGroup>
 
   <ItemGroup Label="UI">

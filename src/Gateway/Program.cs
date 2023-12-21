@@ -6,7 +6,7 @@ using Trace.ServiceDefaults.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.RegisterDefaults();
-builder.Services.RegisterSharedServices();
+builder.Services.RegisterDefaultServices();
 builder.Services.RegisterSchemaHttpClients(Nodes.All.ToDictionary(schema => schema,
     schema => new Uri($"http://service-{schema}/graphql")
 ));

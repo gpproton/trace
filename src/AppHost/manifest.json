@@ -1,0 +1,90 @@
+{
+  "resources": {
+    "service-core": {
+      "type": "project.v0",
+      "path": "../Service/Core/Trace.Service.Core.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "gateway": {
+      "type": "project.v0",
+      "path": "../Gateway/Trace.Gateway.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "services__service-core__0": "{service-core.bindings.http.url}",
+        "services__service-core__1": "{service-core.bindings.https.url}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "manager": {
+      "type": "project.v0",
+      "path": "../Manager/Service/Trace.Manager.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "frontend": {
+      "type": "project.v0",
+      "path": "../Frontend/Trace.Frontend.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "services__geocoding": "https://nominatim.openstreetmap.org/",
+        "services__routing": "https://valhalla.openstreetmap.de/",
+        "services__manager__0": "{manager.bindings.http.url}",
+        "services__manager__1": "{manager.bindings.https.url}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    }
+  }
+}
