@@ -1,9 +1,25 @@
-version: '3.7'
+version: '3.9'
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
+
+volumes:
+  rabbitmq:
+  redis:
+  postgres:
+  scylla:
+  traccar:
 
 services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
+    hostname: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: admin
       RABBITMQ_DEFAULT_PASS: secret
@@ -11,35 +27,66 @@ services:
       - 5672:5672
       - 8085:15672
     volumes:
-      - ./.docker/rabbitmq:/var/lib/rabbitmq
+      - rabbitmq:/var/lib/rabbitmq
+    networks:
+      default:
+        ipv4_address: 192.168.55.10
 
   redis:
     image: docker.io/redis/redis-stack:7.2.0-v6
     container_name: redis
+    hostname: redis
     volumes:
-      - ./.docker/redis:/data
+      - redis:/data
     ports:
       - 6379:6379
       - 8011:8001
+    networks:
+      default:
+        ipv4_address: 192.168.55.20
 
   postgres:
     image: docker.io/postgis/postgis:15-3.3
     container_name: postgres
+    hostname: postgres
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: trace
       POSTGRES_PASSWORD: trace
       POSTGRES_DB: trace
     volumes:
-      - ./.docker/postgres:/var/lib/postgresql/data/pgdata
+      - postgres:/var/lib/postgresql/data/pgdata
     ports:
       - 5432:5432
+    networks:
+      default:
+        ipv4_address: 192.168.55.30
 
   scylla:
     image: scylladb/scylla:5.4
     container_name: scylla
+    hostname: scylla
     ports:
       - 9042:9042
       - 9160:9160
     volumes:
-      - ./.docker/scylla:/var/lib/scylla
+      - scylla:/var/lib/scylla
+    networks:
+      default:
+        ipv4_address: 192.168.55.40
+
+  traccar:
+    image: ghcr.io/drolx/track:alpine
+    container_name: traccar
+    hostname: traccar
+    ports:
+      - 6000:5000
+      - 6055:5055
+      - 8088:8082
+    volumes:
+      - traccar:/opt/traccar/data:rw
+      - ./traccar.xml:/opt/traccar/traccar.xml:ro
+      - ./logs/:/opt/traccar/logs:rw
+    networks:
+      default:
+        ipv4_address: 192.168.55.50
