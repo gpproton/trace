@@ -1,0 +1,7 @@
+{
+  "TemplatePath": "/home/leanny/work/drolx/trace/src/AppHost/templates",
+  "ContainerSettings": {
+    "Registry": null,
+    "Tag": "latest"
+  }
+}
