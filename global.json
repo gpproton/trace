@@ -5,6 +5,8 @@
     "allowPrerelease": true
   },
   "scripts": {
+    "w:update": "dotnet workload update --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json",
+    "w:restore": "dotnet workload update",
     "lint": "dotnet format ./Trace.sln",
     "install": "dotnet restore && dotnet build",
     "clean": "dotnet clean && pnpm clean && rm -rf ./**/{bin,obj} && pnpm store prune",
