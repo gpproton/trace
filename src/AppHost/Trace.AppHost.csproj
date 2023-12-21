@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Frontend\Trace.Frontend.csproj" />
     <ProjectReference Include="..\Gateway\Trace.Gateway.csproj" />
     <ProjectReference Include="..\Manager\Service\Trace.Manager.csproj" />
     <ProjectReference Include="..\Service\Core\Trace.Service.Core.csproj" />

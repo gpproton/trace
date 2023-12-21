@@ -1,11 +1,11 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview-alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
 FROM node:18-alpine AS node
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-preview-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 
 # Import Node.js binaries
 COPY --from=node /usr/lib /usr/lib
@@ -17,14 +17,14 @@ RUN npm i -g pnpm npm @quasar/cli
 
 WORKDIR /src
 COPY . .
-RUN dotnet restore "src/Client/Trace.Client.csproj"
-WORKDIR "/src/src/Client"
-RUN dotnet build "Trace.Client.csproj" -c Release -o /app/build
+RUN dotnet restore "src/Frontend/Trace.Frontend.csproj"
+WORKDIR "/src/src/Frontend"
+RUN dotnet build "Trace.Frontend.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Trace.Client.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Trace.Frontend.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Trace.Client.dll"]
+ENTRYPOINT ["dotnet", "Trace.Frontend.dll"]

@@ -7,27 +7,24 @@
     <UserSecretsId>bd15d7c4-4ab5-4b71-9826-24d28bd2df4b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <SpaRoot>..\..\client</SpaRoot>
-    <SpaProxyLaunchCommand>npm run dev:support</SpaProxyLaunchCommand>
-    <SpaProxyServerUrl>http://localhost:3040</SpaProxyServerUrl>
+    <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+    <SpaProxyServerUrl>http://localhost:3010</SpaProxyServerUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
-  </ItemGroup>
+  <Import Project="..\Shared.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\client\Trace.Frontend.Resources.esproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\client\Trace.Frontend.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Common\Infrastructure\Trace.Common.Infrastructure.csproj" />
+    <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
+    <PackageReference Include="Yarp.ReverseProxy" />
   </ItemGroup>
 
 </Project>

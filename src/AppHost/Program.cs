@@ -7,4 +7,6 @@ builder.AddProject<Projects.Trace_Gateway>("gateway")
 
 builder.AddProject<Projects.Trace_Manager>("manager");
 
+builder.AddProject<Projects.Trace_Frontend>("frontend");
+
 builder.Build().Run();

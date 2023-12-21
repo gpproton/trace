@@ -43,10 +43,12 @@
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(AspNetCoreVersion)" />
-    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
-    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
   </ItemGroup>
 
   <!-- EFcore packages -->
@@ -112,6 +114,7 @@
 
   <!-- Other packages -->
   <ItemGroup Label="Others">
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
   </ItemGroup>
