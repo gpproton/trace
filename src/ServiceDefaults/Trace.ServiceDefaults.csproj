@@ -22,6 +22,12 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
   </ItemGroup>
 
+  <ItemGroup Label="MassTransit">
+    <PackageReference Include="MassTransit" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
+    <PackageReference Include="MassTransit.Hangfire" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>

@@ -10,6 +10,7 @@
 
 using System.Reflection;
 using HotChocolate.AspNetCore;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,6 +43,20 @@ public static class DependencyInjection {
         builder.AddRabbitMQ("messaging");
         // TODO: Hook up shared DbContext
         // builder.AddNpgsqlDbContext<OperationContext>("db");
+
+        var rabbitMqConnectionString = builder.Configuration.GetConnectionString("messaging") ?? "localhost";
+        builder.Services.AddMassTransit(x => {
+            x.AddHangfireConsumers();
+            x.UsingRabbitMq((context,cfg) => {
+                cfg.Host(rabbitMqConnectionString, h => {
+                    h.Heartbeat(TimeSpan.Zero);
+                    h.Username("admin");
+                    h.Password("secret");
+                });
+
+                cfg.ConfigureEndpoints(context);
+            });
+        });
 
         return builder;
     }
