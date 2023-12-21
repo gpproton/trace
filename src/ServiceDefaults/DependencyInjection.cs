@@ -64,14 +64,17 @@ public static class DependencyInjection {
     public static IServiceCollection RegisterSharedServices(this IServiceCollection services) {
         services.AddProblemDetails();
         services.AddCors();
+        services.AddAntiforgery();
         services.AddAuthorization();
 
         return services;
     }
 
     public static WebApplication RegisterDefaults(this WebApplication app) {
-        app.UseAuthorization();
         app.UseRouting();
+        app.UseStaticFiles();
+        app.UseAntiforgery();
+        app.UseAuthorization();
         app.UseSession();
         app.UseWebSockets();
         app.UseCors(o => {

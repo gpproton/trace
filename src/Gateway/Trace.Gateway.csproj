@@ -9,7 +9,7 @@
     <PackageReference Include="Yarp.ReverseProxy" />
   </ItemGroup>
 
-   <ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
   </ItemGroup>

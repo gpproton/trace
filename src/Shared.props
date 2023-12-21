@@ -11,9 +11,9 @@
   </ItemGroup>
 
    <ItemGroup>
-    <Content Include="..\..\config\**\*.*" Link="config\%(Filename)%(Extension)">
+    <None Include="..\..\config\**\*.*" Link="config\%(Filename)%(Extension)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
 
 </Project>
