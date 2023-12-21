@@ -28,8 +28,14 @@
     <PackageReference Include="MassTransit.Hangfire" />
   </ItemGroup>
 
+  <ItemGroup Label="Other">
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Riok.Mapperly" />
+  </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Shared\Trace.Common.Shared.csproj" />
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Common\Shared\Trace.Common.Shared.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
   </ItemGroup>
 
   <Import Project="..\Shared.props" />

@@ -13,15 +13,8 @@ using Trace.Common.Service;
 using Trace.Common.Standard;
 using Trace.Worker.DefaultServices;
 
-var option = new NodeOption {
-    Group = Nodes.GroupName,
-    Name = Nodes.Worker,
-    Service = true,
-    Scheduler = true
-};
-
 var builder = WebApplication.CreateBuilder(args);
-builder.AddInfrastructure<Program>(option);
+
 builder.Services.RegisterService();
 builder.Services.AddHostedService<MaintenanceWorker>();
 builder.Services.AddHostedService<MigrationService>();

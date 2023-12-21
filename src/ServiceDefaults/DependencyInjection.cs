@@ -9,6 +9,7 @@
 // limitations under the License.
 
 using System.Reflection;
+using FluentValidation;
 using HotChocolate.AspNetCore;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
@@ -47,7 +48,7 @@ public static class DependencyInjection {
         var rabbitMqConnectionString = builder.Configuration.GetConnectionString("messaging") ?? "localhost";
         builder.Services.AddMassTransit(x => {
             x.AddHangfireConsumers();
-            x.UsingRabbitMq((context,cfg) => {
+            x.UsingRabbitMq((context, cfg) => {
                 cfg.Host(rabbitMqConnectionString, h => {
                     h.Heartbeat(TimeSpan.Zero);
                     h.Username("admin");
@@ -103,5 +104,13 @@ public static class DependencyInjection {
         app.MapDefaultEndpoints();
 
         return app;
+    }
+
+    public static IServiceCollection RegisterService(this IServiceCollection services, Assembly assembly) {
+
+        services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+        services.AddValidatorsFromAssembly(assembly);
+
+        return services;
     }
 }
