@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AxolotlVersion>8.0.0</AxolotlVersion>
-    <AspireVersion>8.0.0-preview.3.23618.1</AspireVersion>
+    <AspireVersion>8.0.0-preview.3.23619.4</AspireVersion>
     <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
     <EFCoreVersion>8.0.0</EFCoreVersion>
@@ -88,7 +88,7 @@
 
   <!-- Hangfire packages -->
   <ItemGroup Label="Hangfire">
-    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.5" />
+    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.6" />
     <PackageVersion Include="Hangfire.Dashboard.Basic.Authentication" Version="7.0.1" />
     <PackageVersion Include="Hangfire.Redis.StackExchange" Version="1.9.4-beta" />
   </ItemGroup>
@@ -97,7 +97,6 @@
   <ItemGroup Label="MassTransit">
     <PackageVersion Include="MassTransit" Version="$(MassTransitVersion)" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
-    <PackageVersion Include="MassTransit.EntityFrameworkCore" Version="$(MassTransitVersion)" />
     <PackageVersion Include="MassTransit.Hangfire" Version="$(MassTransitVersion)" />
   </ItemGroup>
 
