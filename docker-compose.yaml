@@ -9,35 +9,35 @@ networks:
           gateway: 192.168.55.1
 
 volumes:
-  rabbitmq:
-  redis:
-  postgres:
-  scylla:
+  messaging:
+  cache:
+  db:
+  scylladb:
   traccar:
 
 services:
-  rabbitmq:
+  messaging:
     image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
-    hostname: rabbitmq
+    container_name: messaging
+    hostname: messaging
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: secret
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
     ports:
       - 5672:5672
       - 8085:15672
     volumes:
-      - rabbitmq:/var/lib/rabbitmq
+      - messaging:/var/lib/rabbitmq
     networks:
       default:
         ipv4_address: 192.168.55.10
 
-  redis:
+  cache:
     image: docker.io/redis/redis-stack:7.2.0-v6
-    container_name: redis
-    hostname: redis
+    container_name: cache
+    hostname: cache
     volumes:
-      - redis:/data
+      - cache:/data
     ports:
       - 6379:6379
       - 8011:8001
@@ -45,48 +45,48 @@ services:
       default:
         ipv4_address: 192.168.55.20
 
-  postgres:
+  db:
     image: docker.io/postgis/postgis:15-3.3
-    container_name: postgres
-    hostname: postgres
+    container_name: db
+    hostname: db
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_USER: trace
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: trace
       POSTGRES_DB: trace
     volumes:
-      - postgres:/var/lib/postgresql/data/pgdata
+      - db:/var/lib/postgresql/data/pgdata
     ports:
       - 5432:5432
     networks:
       default:
         ipv4_address: 192.168.55.30
 
-  scylla:
-    image: scylladb/scylla:5.4
-    container_name: scylla
-    hostname: scylla
-    ports:
-      - 9042:9042
-      - 9160:9160
-    volumes:
-      - scylla:/var/lib/scylla
-    networks:
-      default:
-        ipv4_address: 192.168.55.40
+  # scylladb:
+  #   image: scylladb/scylla:5.4
+  #   container_name: scylladb
+  #   hostname: scylladb
+  #   ports:
+  #     - 9042:9042
+  #     - 9160:9160
+  #   volumes:
+  #     - scylladb:/var/lib/scylla
+  #   networks:
+  #     default:
+  #       ipv4_address: 192.168.55.40
 
-  traccar:
-    image: ghcr.io/drolx/track:alpine
-    container_name: traccar
-    hostname: traccar
-    ports:
-      - 6000:5000
-      - 6055:5055
-      - 8088:8082
-    volumes:
-      - traccar:/opt/traccar/data:rw
-      - ./traccar.xml:/opt/traccar/traccar.xml:ro
-      - ./logs/:/opt/traccar/logs:rw
-    networks:
-      default:
-        ipv4_address: 192.168.55.50
+  # traccar:
+  #   image: ghcr.io/drolx/track:alpine
+  #   container_name: traccar
+  #   hostname: traccar
+  #   ports:
+  #     - 6000:5000
+  #     - 6055:5055
+  #     - 8088:8082
+  #   volumes:
+  #     - traccar:/opt/traccar/data:rw
+  #     - ./traccar.xml:/opt/traccar/traccar.xml:ro
+  #     - ./logs/:/opt/traccar/logs:rw
+  #   networks:
+  #     default:
+  #       ipv4_address: 192.168.55.50
