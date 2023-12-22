@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <Title>Trace.Frontend</Title>
-    <UseAppHost>true</UseAppHost>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <InvariantGlobalization>true</InvariantGlobalization>
     <UserSecretsId>bd15d7c4-4ab5-4b71-9826-24d28bd2df4b</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ContainerRepository>$(ContainerRepo)/trace-frontend</ContainerRepository>
     <SpaRoot>..\..\client</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>http://localhost:3010</SpaProxyServerUrl>
@@ -15,7 +13,7 @@
   <Import Project="..\Shared.props" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\client\Trace.Frontend.Resources.esproj">
+    <ProjectReference Include="..\..\client\apps\Trace.Frontend.Node.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
