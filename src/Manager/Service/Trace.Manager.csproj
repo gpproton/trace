@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <Title>Trace.Manager</Title>
+    <ContainerRepository>$(ContainerRepo)/trace-manager</ContainerRepository>
     <PublishSingleFile>false</PublishSingleFile>
     <UserSecretsId>aspnet-Trace.Manager-005dbf40-7827-4488-9a6b-e87f5e04cd10</UserSecretsId>
   </PropertyGroup>

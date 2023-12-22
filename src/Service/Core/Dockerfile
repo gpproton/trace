@@ -11,7 +11,7 @@ WORKDIR "/workspace/src/Service/Core"
 RUN dotnet build "Trace.Service.Core.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Trace.Service.Core.csproj" -c Release -o /app/publish /p:UseAppHost=true
+RUN dotnet publish "Trace.Service.Core.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

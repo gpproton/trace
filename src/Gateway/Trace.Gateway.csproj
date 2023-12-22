@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Gateway</Title>
-    <UseAppHost>true</UseAppHost>
+    <ContainerRepository>$(ContainerRepo)/trace-gateway</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>

@@ -17,11 +17,10 @@ builder.Services
     .AddType<GeoJsonPositionType>()
     .AddType<GeoJsonCoordinatesType>();
 builder.Services
-    .AddGraphQL(Nodes.Route)
-    .AddType<GeoJsonPositionType>()
+    .AddGraphQL(Nodes.Routing)
     .AddType<GeoJsonCoordinatesType>();
 builder.Services
-    .AddGraphQL(Nodes.Stream)
+    .AddGraphQL(Nodes.Integration)
     .AddType<GeoJsonPositionType>()
     .AddType<GeoJsonCoordinatesType>();
 

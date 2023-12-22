@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Core</Title>
-    <UseAppHost>true</UseAppHost>
+    <ContainerRepository>$(ContainerRepo)/trace-service-core</ContainerRepository>
   </PropertyGroup>
+
+  <Import Project="..\Shared.props" />
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
   </ItemGroup>
-
-  <Import Project="..\Shared.props" />
 
 </Project>
