@@ -33,6 +33,7 @@ services:
       - 4590:8080
 
   frontend:
+    <<: *app
     image: ${REGISTRY}/trace-frontend:${VERSION}
     build:
       context: .
@@ -43,6 +44,7 @@ services:
       - 4580:8080
 
   gateway:
+    <<: *app
     image: ${REGISTRY}/trace-gateway:${VERSION}
     build:
       context: .
@@ -53,6 +55,7 @@ services:
       - 4570:8080
 
   service-core:
+    <<: *app
     image: ${REGISTRY}/trace-service-core:${VERSION}
     build:
       context: .
@@ -63,6 +66,7 @@ services:
       - 4571:8080
 
   service-integration:
+    <<: *app
     image: ${REGISTRY}/trace-service-integration:${VERSION}
     build:
       context: .
@@ -73,6 +77,7 @@ services:
       - 4572:8080
 
   service-routing:
+    <<: *app
     image: ${REGISTRY}/trace-service-routing:${VERSION}
     build:
       context: .
