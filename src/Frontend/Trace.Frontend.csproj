@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <Title>Trace.Frontend</Title>
-    <InvariantGlobalization>true</InvariantGlobalization>
     <UserSecretsId>bd15d7c4-4ab5-4b71-9826-24d28bd2df4b</UserSecretsId>
     <ContainerRepository>$(ContainerRepo)/trace-frontend</ContainerRepository>
-    <SpaRoot>..\..\client</SpaRoot>
+    <SpaRoot>..\..\client\apps</SpaRoot>
     <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     <SpaProxyServerUrl>http://localhost:3010</SpaProxyServerUrl>
   </PropertyGroup>

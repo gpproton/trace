@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: service-core
-        image: ghcr.io/drolx/trace-service-core:0.0.1-preview.4
+        image: ghcr.io/drolx/trace-service-core:0.0.1-preview.5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
