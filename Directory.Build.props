@@ -21,4 +21,13 @@
     <LangVersion>12</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ContainerRegistry>ghcr.io</ContainerRegistry>
+    <ContainerRepo>ghcr.io/drolx</ContainerRepo>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0-alpine</ContainerBaseImage>
+    <ContainerFamily>alpine</ContainerFamily>
+    <ContainerImageTag>$(Version)</ContainerImageTag>
+  </PropertyGroup>
+
 </Project>
