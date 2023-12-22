@@ -18,8 +18,6 @@ jobs:
             dockerfile: ./src/Frontend/Dockerfile
           - image: 'ghcr.io/drolx/trace-gateway'
             dockerfile: ./src/Gateway/Dockerfile
-          - image: 'ghcr.io/drolx/trace-worker'
-            dockerfile: ./src/Worker/Dockerfile
           - image: 'ghcr.io/drolx/trace-manager'
             dockerfile: ./src/Manager/Service/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-core'
