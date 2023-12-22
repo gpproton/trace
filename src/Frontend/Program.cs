@@ -9,5 +9,6 @@ builder.Services.RegisterDefaultServices();
 var app = builder.Build();
 
 app.RegisterDefaults();
+app.MapFallbackToFile("index.html");
 
 app.Run();
