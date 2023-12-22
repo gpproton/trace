@@ -8,11 +8,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.IO.Compression;
 using System.Reflection;
 using FluentValidation;
 using HotChocolate.AspNetCore;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -62,9 +64,23 @@ public static class DependencyInjection {
 
     public static IServiceCollection RegisterDefaultServices(this IServiceCollection services) {
         services.AddProblemDetails();
-        services.AddCors();
         services.AddAntiforgery();
         services.AddAuthorization();
+        services.AddCors(options => {
+            options.AddDefaultPolicy(
+                policy => {
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });
+        });
+        services.AddResponseCompression(options => {
+            options.Providers.Add<GzipCompressionProvider>();
+        });
+
+        services.Configure<GzipCompressionProviderOptions>(options => {
+            options.Level = CompressionLevel.Fastest;
+        });
 
         return services;
     }
@@ -76,6 +92,7 @@ public static class DependencyInjection {
         app.UseAuthorization();
         app.UseSession();
         app.UseWebSockets();
+        app.UseResponseCompression();
         app.UseCors(o => {
             o.AllowAnyOrigin();
             o.AllowAnyMethod();
