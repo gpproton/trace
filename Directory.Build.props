@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <Title>Trace</Title>
-    <Version>0.0.1-preview.1</Version>
+    <Version>0.0.1-preview.3</Version>
     <Authors>Godwin peter .O</Authors>
     <Description>An end to end logistic crm platform</Description>
     <RepositoryType>git</RepositoryType>
@@ -25,7 +25,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <ContainerRegistry>ghcr.io</ContainerRegistry>
     <ContainerRepo>drolx</ContainerRepo>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/runtime-deps:8.0</ContainerBaseImage>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
     <ContainerFamily>alpine</ContainerFamily>
     <ContainerImageTag>$(Version)</ContainerImageTag>
   </PropertyGroup>

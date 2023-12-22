@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -14,8 +14,6 @@ COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 RUN npm i -g pnpm npm
-
-
 
 WORKDIR /workspace
 COPY . .

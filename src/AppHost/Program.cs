@@ -28,7 +28,7 @@ var routingService = builder.AddProject<Projects.Trace_Service_Routing>("service
     .WithReference(messaging)
     .WithReference(db);
 
-builder.AddProject<Projects.Trace_Gateway>("gateway")
+var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway")
     .WithReference(cache)
     .WithReference(coreService)
     .WithReference(integrationService)
@@ -43,6 +43,7 @@ builder.AddProject<Projects.Trace_Manager>("manager")
 
 builder.AddProject<Projects.Trace_Frontend>("frontend")
     .WithReference(cache)
+    .WithReference(gateway)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
 

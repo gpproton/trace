@@ -19,19 +19,19 @@ services:
       context: .
       dockerfile: src/Gateway/Dockerfile
 
-  trace-service-core:
+  trace.service.core:
     image: ${REGISTRY}/trace-service-core:${VERSION}
     build:
       context: .
       dockerfile: src/Service/Core/Dockerfile
 
-  trace-service-integration:
+  trace.service.integration:
     image: ${REGISTRY}/trace-service-integration:${VERSION}
     build:
       context: .
       dockerfile: src/Service/Integration/Dockerfile
 
-  trace-service-routing:
+  trace.service.routing:
     image: ${REGISTRY}/trace-service-routing:${VERSION}
     build:
       context: .

@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -7,7 +7,6 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 
 WORKDIR /workspace
 COPY . .
-RUN dotnet workload restore "src/Manager/Service/Trace.Manager.csproj"
 RUN dotnet restore "src/Manager/Service/Trace.Manager.csproj"
 WORKDIR "/workspace/src/Manager/Service"
 RUN dotnet build "Trace.Manager.csproj" -c Release -o /app/build
