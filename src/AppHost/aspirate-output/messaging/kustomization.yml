@@ -9,5 +9,5 @@ configMapGenerator:
 - name: messaging-env
   literals:
     - RABBITMQ_DEFAULT_USER=guest
-    - RABBITMQ_DEFAULT_PASS=ZePsC6uDOV
+    - RABBITMQ_DEFAULT_PASS=XAesd9zlDo
 

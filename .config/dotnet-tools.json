@@ -19,6 +19,12 @@
       "commands": [
         "dotnet-ef"
       ]
+    },
+    "aspirate": {
+      "version": "0.1.26-preview",
+      "commands": [
+        "aspirate"
+      ]
     }
   }
 }
