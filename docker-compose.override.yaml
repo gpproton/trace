@@ -1,0 +1,39 @@
+version: '3.9'
+
+services:
+  trace.manager:
+    image: ${REGISTRY}/trace-manager:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Manager/Service/Dockerfile
+
+  trace.frontend:
+    image: ${REGISTRY}/trace-frontend:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Frontend/Dockerfile
+
+  trace.gateway:
+    image: ${REGISTRY}/trace-gateway:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Gateway/Dockerfile
+
+  trace-service-core:
+    image: ${REGISTRY}/trace-service-core:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Service/Core/Dockerfile
+
+  trace-service-integration:
+    image: ${REGISTRY}/trace-service-integration:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Service/Integration/Dockerfile
+
+  trace-service-routing:
+    image: ${REGISTRY}/trace-service-routing:${VERSION}
+    build:
+      context: .
+      dockerfile: src/Service/Routing/Dockerfile
+
