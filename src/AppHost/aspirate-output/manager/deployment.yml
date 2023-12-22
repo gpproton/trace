@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: manager
-        image: manager:latest
+        image: ghcr.io/ghcr.io/drolx/trace-manager:0.0.1-preview.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

@@ -1,5 +1,7 @@
 resources:
 - service-core
+- service-integration
+- service-routing
 - gateway
 - manager
 - frontend

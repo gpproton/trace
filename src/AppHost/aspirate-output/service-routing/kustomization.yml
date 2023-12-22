@@ -6,13 +6,9 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-- name: manager-env
+- name: service-routing-env
   literals:
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES=true
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
-    - services__service-integration__0=http://service-integration:8080
-    - services__service-integration__1=https://service-integration:8443
-    - services__service-routing__0=http://service-routing:8080
-    - services__service-routing__1=https://service-routing:8443
     - ASPNETCORE_URLS=http://+:8080
 

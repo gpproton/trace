@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: gateway
+  name: service-routing
 spec:
   minReadySeconds: 60
   replicas: 1
   selector:
     matchLabels:
-      app: gateway
+      app: service-routing
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -16,15 +16,15 @@ spec:
   template:
     metadata:
       labels:
-        app: gateway
+        app: service-routing
     spec:
       containers:
-      - name: gateway
-        image: ghcr.io/ghcr.io/drolx/trace-gateway:0.0.1-preview.1
+      - name: service-routing
+        image: ghcr.io/ghcr.io/drolx/trace-service-routing:0.0.1-preview.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
-            name: gateway-env
+            name: service-routing-env
       terminationGracePeriodSeconds: 180

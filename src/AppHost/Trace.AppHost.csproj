@@ -10,6 +10,8 @@
     <ProjectReference Include="..\Gateway\Trace.Gateway.csproj" />
     <ProjectReference Include="..\Manager\Service\Trace.Manager.csproj" />
     <ProjectReference Include="..\Service\Core\Trace.Service.Core.csproj" />
+    <ProjectReference Include="..\Service\Integration\Trace.Service.Integration.csproj" />
+    <ProjectReference Include="..\Service\Routing\Trace.Service.Routing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

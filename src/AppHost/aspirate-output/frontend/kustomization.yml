@@ -12,7 +12,7 @@ configMapGenerator:
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
     - services__geocoding=https://nominatim.openstreetmap.org/
     - services__routing=https://valhalla.openstreetmap.de/
-    - services__manager__0=http://manager:8080
-    - services__manager__1=https://manager:8443
+    - services__gateway__0=http://gateway:8080
+    - services__gateway__1=https://gateway:8443
     - ASPNETCORE_URLS=http://+:8080
 

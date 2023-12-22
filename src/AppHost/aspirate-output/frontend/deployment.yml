@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend:latest
+        image: ghcr.io/ghcr.io/drolx/trace-frontend:0.0.1-preview.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
