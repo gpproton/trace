@@ -1,4 +1,7 @@
 resources:
+- cache
+- messaging
+- db
 - service-core
 - service-integration
 - service-routing

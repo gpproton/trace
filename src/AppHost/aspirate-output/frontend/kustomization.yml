@@ -16,3 +16,7 @@ configMapGenerator:
     - services__gateway__1=https://gateway:8443
     - ASPNETCORE_URLS=http://+:8080
 
+secretGenerator:
+- name: frontend-secrets
+  envs:
+  - .frontend.secrets

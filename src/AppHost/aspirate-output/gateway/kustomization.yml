@@ -18,3 +18,7 @@ configMapGenerator:
     - services__service-routing__1=https://service-routing:8443
     - ASPNETCORE_URLS=http://+:8080
 
+secretGenerator:
+- name: gateway-secrets
+  envs:
+  - .gateway.secrets

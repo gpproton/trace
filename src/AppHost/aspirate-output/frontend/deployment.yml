@@ -20,11 +20,13 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/ghcr.io/drolx/trace-frontend:0.0.1-preview.1
+        image: ghcr.io/drolx/trace-frontend:0.0.1-preview.3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
             name: frontend-env
+        - secretRef:
+            name: frontend-secrets
       terminationGracePeriodSeconds: 180

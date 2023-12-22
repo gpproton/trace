@@ -20,11 +20,13 @@ spec:
     spec:
       containers:
       - name: manager
-        image: ghcr.io/ghcr.io/drolx/trace-manager:0.0.1-preview.1
+        image: ghcr.io/drolx/trace-manager:0.0.1-preview.3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
             name: manager-env
+        - secretRef:
+            name: manager-secrets
       terminationGracePeriodSeconds: 180

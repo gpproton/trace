@@ -20,11 +20,13 @@ spec:
     spec:
       containers:
       - name: service-integration
-        image: ghcr.io/ghcr.io/drolx/trace-service-integration:0.0.1-preview.1
+        image: ghcr.io/drolx/trace-service-integration:0.0.1-preview.3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
             name: service-integration-env
+        - secretRef:
+            name: service-integration-secrets
       terminationGracePeriodSeconds: 180

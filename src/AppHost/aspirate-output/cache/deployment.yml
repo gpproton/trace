@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-core
+  name: cache
 spec:
   minReadySeconds: 60
   replicas: 1
   selector:
     matchLabels:
-      app: service-core
+      app: cache
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -16,17 +16,13 @@ spec:
   template:
     metadata:
       labels:
-        app: service-core
+        app: cache
     spec:
       containers:
-      - name: service-core
-        image: ghcr.io/drolx/trace-service-core:0.0.1-preview.3
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
+      - name: cache
+        image: redis:latest
+        imagePullPolicy: 
         envFrom:
         - configMapRef:
-            name: service-core-env
-        - secretRef:
-            name: service-core-secrets
+            name: cache-env
       terminationGracePeriodSeconds: 180

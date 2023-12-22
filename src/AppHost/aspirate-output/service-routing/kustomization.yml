@@ -12,3 +12,7 @@ configMapGenerator:
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
     - ASPNETCORE_URLS=http://+:8080
 
+secretGenerator:
+- name: service-routing-secrets
+  envs:
+  - .service-routing.secrets

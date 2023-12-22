@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-core
+  name: db
 spec:
   minReadySeconds: 60
   replicas: 1
   selector:
     matchLabels:
-      app: service-core
+      app: db
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -16,17 +16,15 @@ spec:
   template:
     metadata:
       labels:
-        app: service-core
+        app: db
     spec:
       containers:
-      - name: service-core
-        image: ghcr.io/drolx/trace-service-core:0.0.1-preview.3
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8080
+      - name: db
+        image: postgis/postgis:15-3.3
+        imagePullPolicy: 
         envFrom:
         - configMapRef:
-            name: service-core-env
+            name: db-env
         - secretRef:
-            name: service-core-secrets
+            name: db-secrets
       terminationGracePeriodSeconds: 180
