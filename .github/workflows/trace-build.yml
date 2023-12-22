@@ -26,5 +26,7 @@ jobs:
           version: 8
       - name: Restore dependencies
         run: dotnet restore
+      - name: Workload Restore
+        run: dotnet workload restore
       - name: Build
         run: dotnet build --no-restore
