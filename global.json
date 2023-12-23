@@ -9,6 +9,7 @@
     "w:restore": "dotnet workload update",
     "lint": "dotnet format ./Trace.sln",
     "k:generate": "cd src/AppHost; dotnet aspirate generate --skip-build",
+    "k:compose": "cd src/AppHost; dotnet aspirate generate --skip-build --output-format compose",
     "k:apply": "cd src/AppHost; dotnet aspirate apply",
     "k:destroy": "cd src/AppHost; dotnet aspirate destroy",
     "k:build": "cd src/AppHost; dotnet aspirate build",
