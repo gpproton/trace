@@ -62,31 +62,31 @@ services:
       default:
         ipv4_address: 192.168.55.30
 
-  # scylladb:
-  #   image: scylladb/scylla:5.4
-  #   container_name: scylladb
-  #   hostname: scylladb
-  #   ports:
-  #     - 9042:9042
-  #     - 9160:9160
-  #   volumes:
-  #     - scylladb:/var/lib/scylla
-  #   networks:
-  #     default:
-  #       ipv4_address: 192.168.55.40
+  scylladb:
+    image: scylladb/scylla:5.4
+    container_name: scylladb
+    hostname: scylladb
+    ports:
+      - 9042:9042
+      - 9160:9160
+    volumes:
+      - scylladb:/var/lib/scylla
+    networks:
+      default:
+        ipv4_address: 192.168.55.40
 
-  # traccar:
-  #   image: ghcr.io/drolx/track:alpine
-  #   container_name: traccar
-  #   hostname: traccar
-  #   ports:
-  #     - 6000:5000
-  #     - 6055:5055
-  #     - 8088:8082
-  #   volumes:
-  #     - traccar:/opt/traccar/data:rw
-  #     - ./traccar.xml:/opt/traccar/traccar.xml:ro
-  #     - ./logs/:/opt/traccar/logs:rw
-  #   networks:
-  #     default:
-  #       ipv4_address: 192.168.55.50
+  traccar:
+    image: ghcr.io/drolx/track:alpine
+    container_name: traccar
+    hostname: traccar
+    ports:
+      - 6000:5000
+      - 6055:5055
+      - 8088:8082
+    volumes:
+      - traccar:/opt/traccar/data:rw
+      - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
+      - ./logs/:/opt/traccar/logs:rw
+    networks:
+      default:
+        ipv4_address: 192.168.55.50
