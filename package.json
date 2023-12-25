@@ -19,7 +19,7 @@
   "scripts": {
     "clean": " pnpm clean:dist && pnpm clean:packages",
     "clean:packages": "rimraf **/node_modules **/yarn* **/package-lock.* **/.pnpm-debug* **/pnpm-lock.yaml",
-    "clean:dist": "rimraf app/**/dist"
+    "clean:dist": "rimraf client/**/dist"
   },
   "devDependencies": {
     "pnpm": "^8.2.0",
