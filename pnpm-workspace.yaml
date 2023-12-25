@@ -1,2 +1,6 @@
 packages:
   - 'client/*'
+  - 'client/packages/*'
+  - 'client/base'
+  - 'client/website'
+  - 'client/apps'
