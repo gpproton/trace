@@ -31,7 +31,11 @@
     "typescript": "^5.0.0"
   },
   "workspaces": [
-    "client/*"
+    "client/*",
+    "client/packages/*",
+    "client/base",
+    "client/website",
+    "client/apps"
   ],
   "engines": {
     "npm": "please-use-pnpm",
