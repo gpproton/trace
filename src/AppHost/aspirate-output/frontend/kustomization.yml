@@ -1,0 +1,22 @@
+resources:
+- deployment.yml
+- service.yml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: frontend-env
+  literals:
+    - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES=true
+    - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
+    - services__geocoding=https://nominatim.openstreetmap.org/
+    - services__routing=https://valhalla.openstreetmap.de/
+    - services__gateway__0=http://gateway:8080
+    - services__gateway__1=https://gateway:8443
+    - ASPNETCORE_URLS=http://+:8080
+
+secretGenerator:
+- name: frontend-secrets
+  envs:
+  - .frontend.secrets

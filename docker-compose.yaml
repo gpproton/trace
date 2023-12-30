@@ -1,80 +1,92 @@
-version: '3.7'
+version: '3.9'
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
+
+volumes:
+  messaging:
+  cache:
+  db:
+  scylladb:
+  traccar:
 
 services:
-  config:
-    image: hyness/spring-cloud-config-server:4.0
-    container_name: config
-    environment:
-      SPRING_PROFILES_ACTIVE: native
-    volumes:
-    - ./config/default:/config
-    - ./config/native-files:/native-files
-    ports:
-      - 8888:8888
-
-  spring-boot-admin:
-    image: slydeveloper/spring-boot-admin
-    container_name: spring-boot-admin
-    environment:
-      SPRING_BOOT_ADMIN_TITLE: Trace
-      SPRING_BOOT_ADMIN_USER_NAME: trace
-      SPRING_BOOT_ADMIN_USER_PASSWORD: trace
-      SPRING_BOOT_ADMIN_SECURITY_ENABLED: 'false'
-    ports:
-      - 1111:1111
-    network_mode: host
-
-  consul:
-    image: hashicorp/consul:1.15
-    container_name: consul
-    ports:
-      - 8500:8500
-
-  rabbitmq:
+  messaging:
     image: rabbitmq:3-management-alpine
-    container_name: rabbitmq
+    container_name: messaging
+    hostname: messaging
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: secret
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
     ports:
       - 5672:5672
       - 8085:15672
     volumes:
-      - ./.docker/rabbitmq:/var/lib/rabbitmq
+      - messaging:/var/lib/rabbitmq
+    networks:
+      default:
+        ipv4_address: 192.168.55.10
 
-  redis:
-    image: docker.io/redis/redis-stack:6.2.6-v6
-    container_name: redis
+  cache:
+    image: docker.io/redis/redis-stack:7.2.0-v6
+    container_name: cache
+    hostname: cache
     volumes:
-      - ./.docker/redis:/data
+      - cache:/data
     ports:
       - 6379:6379
       - 8011:8001
+    networks:
+      default:
+        ipv4_address: 192.168.55.20
 
-  postgres:
+  db:
     image: docker.io/postgis/postgis:15-3.3
-    container_name: postgres
+    container_name: db
+    hostname: db
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_USER: trace
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: trace
       POSTGRES_DB: trace
     volumes:
-      - ./.docker/postgres:/var/lib/postgresql/data/pgdata
+      - db:/var/lib/postgresql/data/pgdata
     ports:
       - 5432:5432
+    networks:
+      default:
+        ipv4_address: 192.168.55.30
 
-  scylla:
-    image: scylladb/scylla:5.1
-    container_name: scylla
+  scylladb:
+    image: scylladb/scylla:5.4
+    container_name: scylladb
+    hostname: scylladb
     ports:
       - 9042:9042
       - 9160:9160
     volumes:
-      - ./.docker/scylla:/var/lib/scylla
+      - scylladb:/var/lib/scylla
+    networks:
+      default:
+        ipv4_address: 192.168.55.40
 
-  zipkin:
-    image: openzipkin/zipkin:2
-    container_name: zipkin
+  traccar:
+    image: ghcr.io/drolx/track:alpine
+    container_name: traccar
+    hostname: traccar
     ports:
-      - 9411:9411
+      - 6000:5000
+      - 6055:5055
+      - 8088:8082
+    volumes:
+      - traccar:/opt/traccar/data:rw
+      - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
+      - ./logs/:/opt/traccar/logs:rw
+    networks:
+      default:
+        ipv4_address: 192.168.55.50

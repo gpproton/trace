@@ -19,66 +19,81 @@ Trace is license under the [Business Source License 1.1](./LICENSE.md) [![Busine
 | Change Date:          | Four years from the date a Licensed version is published                                                                                                                                                  |
 | Change License:       | Reciprocal Public License (RPL-1.5)                                                                                                                                                                       |
 
-## Goals
+## Project Goals
 * Unify all logistics data source
 * Single client UI for logistics processes
 * Combine multiple map data to handle order routing
+* Real-time GPS tracking
+* Travel route analysis
+* Operational task processing
 
 
-## Status
+## Project Status
 This is an experimental platform; however the logic and ideas have been previously tested
 in different forms of disjointed applications.
 
 
 
-## Features
-
-Some of the available features include:
-
-- Real-time GPS tracking
-
-## Modules
+## Project Roadmap
 
 There are a some modules supported. Most of them are configurable via the web
 interface or mobile app. A few of them are:
 
+### Stage 1
+
+- [ ] Tenant
+- [ ] Tags
 - [ ] Asset
-- [ ] Beacon (GPS, RFID, Radio, etc)
+- [ ] Device (GPS, RFID, etc)
+- [ ] Vehicle
+- [ ] Location
+- [ ] Trailer
+
+
+### State 2
+
+- [ ] Schedule
+- [ ] Route
+- [ ] Event
 - [ ] Branch
 - [ ] Contact
 - [ ] Customer
-- [ ] Dashboard
 - [ ] Document
+- [ ] Dashboard State
+
+
+## Stage 3
+
 - [ ] Driver
 - [ ] Driver Group
-- [ ] Employee
-- [ ] Event
-- [ ] Expense
-- [ ] Form
-- [ ] Insurance
-- [ ] Invoice
-- [ ] Location
-- [ ] Maintenance
-- [ ] Order
-- [ ] Payment
-- [ ] Product
-- [ ] Route
-- [ ] Schedule
-- [ ] Shipment
-- [ ] Shortage
-- [ ] Stock
-- [ ] Stock Store
-- [ ] Suppliers
-- [ ] Support
-- [ ] Tags
-- [ ] Tasks
-- [ ] Templates
-- [ ] Tenant
-- [ ] Trailer
+- [ ] Tasks (Basic)
 - [ ] Trip Pass
-- [ ] Vehicle
+- [ ] Shipment
+- [ ] Expense
+- [ ] Shortage
+- [ ] Invoice
+- [ ] Order
+- [ ] Product
+
+### Stage 4
+
+- [ ] Payment
+- [ ] Templates
 - [ ] Warehouse
 - [ ] Waybill
+- [ ] Maintenance
+- [ ] Employee
+
+
+### State 5
+
+- [ ] Support
+- [ ] Form
+- [ ] Insurance
+- [ ] Supplier
+- [ ] Stock
+- [ ] Stock Store
+
 
 
 ## Support

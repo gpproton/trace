@@ -1,0 +1,7 @@
+<Project>
+  <ItemGroup Label="Hangfire">
+    <PackageReference Include="Hangfire.AspNetCore" />
+    <PackageReference Include="Hangfire.Dashboard.Basic.Authentication" />
+    <PackageReference Include="Hangfire.Redis.StackExchange" />
+  </ItemGroup>
+</Project>

@@ -1,20 +1,23 @@
-using Trace.Common.Infrastructure;
-using Trace.Common.Service;
-using Trace.Common.Standard;
-
-var option = new NodeOption {
-    Group = Nodes.GroupName,
-    Name = Nodes.Core,
-    Service = true,
-    Graphql = true,
-    Scheduler = true
-};
+using Trace.Service.Core;
+using Trace.ServiceDefaults;
+using Trace.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddInfrastructure<Program>(option);
-builder.Services.RegisterService();
+
+builder.RegisterDefaults();
+builder.RegisterPersistence();
+builder.Services.RegisterDefaultServices();
+builder.Services.RegisterHangfire(Nodes.Core);
+builder.Services.AddGraphQLServer()
+    .AddGraphqlDefaults(Nodes.Core)
+    .AddQueryType<Query>()
+    .AddQueryableCursorPagingProvider()
+    .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
-app.RegisterInfrastructure(option);
+
+app.RegisterDefaults();
+app.UseHangfireDashboard(Nodes.Core);
+app.RegisterGraphQl();
 
 app.Run();

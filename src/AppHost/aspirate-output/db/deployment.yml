@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgis/postgis:15-3.3
+        imagePullPolicy: 
+        envFrom:
+        - configMapRef:
+            name: db-env
+        - secretRef:
+            name: db-secrets
+      terminationGracePeriodSeconds: 180

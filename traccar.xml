@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!DOCTYPE properties SYSTEM 'http://java.sun.com/dtd/properties.dtd'>
+
+<properties>
+
+    <entry key='config.default'>./conf/default.xml</entry>
+
+    <entry key='logger.level'>all</entry>
+
+    <entry key='database.driver'>org.h2.Driver</entry>
+    <entry key='database.url'>jdbc:h2:./data/database</entry>
+    <entry key='database.user'>sa</entry>
+    <entry key='database.password'></entry>
+
+    <!-- protocols config -->
+    <entry key='osmand.ignoreSessionCache'>true</entry>
+    <entry key='status.ignoreOffline'>osmand</entry>
+
+    <!-- geocoder configuration section -->
+    <entry key='geocoder.enable'>true</entry>
+    <entry key='geocoder.type'>nominatim</entry>
+    <entry key='geocoder.url'>https://geocoder.drolx.com/reverse</entry>
+    <entry key='geocoder.onRequest'>false</entry>
+    <entry key='geocoder.processInvalidPositions'>false</entry>
+    <entry key='geocoder.ignorePositions'>false</entry>
+    <entry key='geocoder.reuseDistance'>10</entry>
+
+    <!-- broadcast config -->
+    <entry key='broadcast.type'>redis</entry>
+    <entry key='broadcast.address'>redis://cache:6379/0</entry>
+
+    <!-- forwarding config -->
+    <entry key='forward.enable'>true</entry>
+    <entry key='forward.type'>amqp</entry>
+    <entry key='forward.url'>amqp://guest:guest@messaging:5672</entry>
+    <entry key='forward.exchange'>traccar</entry>
+    <entry key='forward.topic'>positions</entry>
+    <entry key='forward.retry.enable'>true</entry>
+    <entry key='forward.retry.delay'>3600</entry>
+    <entry key='forward.retry.count'>10</entry>
+    <entry key='forward.retry.limit'>100</entry>
+
+    <!-- event forwarding config -->
+    <entry key='event.forward.type'>amqp</entry>
+    <entry key='event.forward.url'>amqp://guest:guest@messaging:5672</entry>
+    <entry key='event.forward.exchange'>traccar</entry>
+    <entry key='event.forward.topic'>events</entry>
+
+</properties>

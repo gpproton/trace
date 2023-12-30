@@ -1,0 +1,120 @@
+version: "3.8"
+services:
+  cache:
+    container_name: "cache"
+    image: "redis:latest"
+    ports:
+    - target: 6379
+      published: 6379
+    restart: unless-stopped
+  messaging:
+    container_name: "messaging"
+    image: "rabbitmq:3-management"
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: ""
+    ports:
+    - target: 5672
+      published: 5672
+    - target: 15672
+      published: 15672
+    restart: unless-stopped
+  db:
+    container_name: "db"
+    image: "postgis/postgis:15-3.3"
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: "scram-sha-256"
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+      POSTGRES_PASSWORD: ""
+    ports:
+    - target: 5432
+      published: 5432
+    restart: unless-stopped
+  service-core:
+    container_name: "service-core"
+    image: "ghcr.io/drolx/trace-service-core:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      ConnectionStrings__messaging: "amqp://guest:@messaging:15672"
+      ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=;"
+    ports:
+    - target: 8080
+      published: 8080
+    restart: unless-stopped
+  service-integration:
+    container_name: "service-integration"
+    image: "ghcr.io/drolx/trace-service-integration:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      ConnectionStrings__messaging: "amqp://guest:@messaging:15672"
+      ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=;"
+    ports:
+    - target: 8080
+      published: 8081
+    restart: unless-stopped
+  service-routing:
+    container_name: "service-routing"
+    image: "ghcr.io/drolx/trace-service-routing:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      ConnectionStrings__messaging: "amqp://guest:@messaging:15672"
+      ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=;"
+    ports:
+    - target: 8080
+      published: 8082
+    restart: unless-stopped
+  gateway:
+    container_name: "gateway"
+    image: "ghcr.io/drolx/trace-gateway:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      services__service-core__0: "http://service-core:8080"
+      services__service-core__1: "https://service-core:8443"
+      services__service-integration__0: "http://service-integration:8080"
+      services__service-integration__1: "https://service-integration:8443"
+      services__service-routing__0: "http://service-routing:8080"
+      services__service-routing__1: "https://service-routing:8443"
+    ports:
+    - target: 8080
+      published: 8083
+    restart: unless-stopped
+  manager:
+    container_name: "manager"
+    image: "ghcr.io/drolx/trace-manager:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      ConnectionStrings__messaging: "amqp://guest:@messaging:15672"
+      ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=;"
+      services__service-integration__0: "http://service-integration:8080"
+      services__service-integration__1: "https://service-integration:8443"
+      services__service-routing__0: "http://service-routing:8080"
+      services__service-routing__1: "https://service-routing:8443"
+    ports:
+    - target: 8080
+      published: 8084
+    restart: unless-stopped
+  frontend:
+    container_name: "frontend"
+    image: "ghcr.io/drolx/trace-frontend:0.0.1-preview.5"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ConnectionStrings__cache: "cache:6379"
+      services__geocoding: "https://nominatim.openstreetmap.org/"
+      services__routing: "https://valhalla.openstreetmap.de/"
+      services__gateway__0: "http://gateway:8080"
+      services__gateway__1: "https://gateway:8443"
+    ports:
+    - target: 8080
+      published: 8085
+    restart: unless-stopped
