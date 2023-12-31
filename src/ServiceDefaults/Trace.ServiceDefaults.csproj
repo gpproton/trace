@@ -22,15 +22,10 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
   </ItemGroup>
 
-  <ItemGroup Label="MassTransit">
+  <ItemGroup Label="Other">
     <PackageReference Include="MassTransit" />
     <PackageReference Include="MassTransit.RabbitMQ" />
     <PackageReference Include="MassTransit.Hangfire" />
-  </ItemGroup>
-
-  <ItemGroup Label="Other">
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
-    <PackageReference Include="MediatR" />
     <PackageReference Include="Riok.Mapperly" />
   </ItemGroup>
 
