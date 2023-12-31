@@ -39,8 +39,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trace.Shared.Base", "src\Sh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trace.Worker", "src\Worker\Trace.Worker.csproj", "{B986CC3B-9BFE-46B9-B5EF-E7408C091A0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trace.Frontend", "client\Trace.Frontend.esproj", "{F859FBA5-C108-48A8-BE20-DA771681E407}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,10 +104,6 @@ Global
 		{B986CC3B-9BFE-46B9-B5EF-E7408C091A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B986CC3B-9BFE-46B9-B5EF-E7408C091A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B986CC3B-9BFE-46B9-B5EF-E7408C091A0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F859FBA5-C108-48A8-BE20-DA771681E407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F859FBA5-C108-48A8-BE20-DA771681E407}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F859FBA5-C108-48A8-BE20-DA771681E407}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{F859FBA5-C108-48A8-BE20-DA771681E407}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{BE1F813C-828E-48FE-A2F3-F6D06A996132} = {66C945EF-10E6-4A4D-8BA9-2C8C337027DD}
