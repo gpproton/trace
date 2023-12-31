@@ -1,17 +1,17 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-preview-alpine AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-preview-alpine AS build
-WORKDIR /src
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
+WORKDIR /workspace
 COPY . .
 RUN dotnet restore "src/Service/Core/Trace.Service.Core.csproj"
-WORKDIR "/src/src/Service/Core"
+WORKDIR "/workspace/src/Service/Core"
 RUN dotnet build "Trace.Service.Core.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Trace.Service.Core.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Trace.Service.Core.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

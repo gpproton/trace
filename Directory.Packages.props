@@ -1,81 +1,86 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+    <AxolotlVersion>8.0.0</AxolotlVersion>
+    <AspireVersion>8.0.0-preview.3.23619.4</AspireVersion>
+    <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
+    <RuntimeVersion>8.0.0</RuntimeVersion>
+    <EFCoreVersion>8.0.0</EFCoreVersion>
+    <NpgsqlVersion>8.0.0</NpgsqlVersion>
+    <HotChocolateVersion>13.5.1</HotChocolateVersion>
+    <CassandraVersion>3.19.3</CassandraVersion>
+    <MinioVersion>6.0.0</MinioVersion>
+    <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
+    <MassTransitVersion>8.1.2</MassTransitVersion>
+    <FluentUIVersion>4.2.1</FluentUIVersion>
   </PropertyGroup>
 
   <!-- Core packages -->
   <ItemGroup Label="Core">
-    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-    <PackageVersion Include="MediatR" Version="12.1.1" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions"
-      Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions"
-      Version="$(DotnetVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="$(DotnetVersion)" />
-    <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
-    <PackageVersion Include="Redis.OM" Version="0.5.3" />
-    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(RuntimeVersion)" />
   </ItemGroup>
 
   <!-- Axolotl packages -->
   <ItemGroup Label="Axolotl">
     <PackageVersion Include="Axolotl" Version="$(AxolotlVersion)" />
-    <PackageVersion Include="Axolotl.Http" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.AspNet" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.EFCore" Version="$(AxolotlVersion)" />
-    <PackageVersion Include="Axolotl.Razor" Version="$(AxolotlVersion)" />
   </ItemGroup>
 
   <!-- AspNet packages -->
   <ItemGroup Label="AspNetCore">
-    <PackageVersion Include="AspNetCore.SpaYarp" Version="2.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions"
-      Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis"
-      Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis"
-      Version="$(AspCoreVersion)" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="$(SwashbuckleVersion)" />
-    <PackageVersion Include="Swashbuckle.AspNetCore.ReDoc" Version="$(SwashbuckleVersion)" />
-    <PackageVersion Include="Yarp.ReverseProxy" Version="2.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
+    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
   </ItemGroup>
 
-  <!-- Efcore packages -->
+  <!-- EFcore packages -->
   <ItemGroup Label="Efcore">
-    <PackageVersion Include="EFCore.NamingConventions" Version="7.0.2" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EfcoreVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EfcoreVersion)" />
+    <PackageVersion Include="EFCore.NamingConventions" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EFCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlVersion)" />
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite"
-      Version="$(NpgsqlVersion)" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="$(NpgsqlVersion)" />
   </ItemGroup>
 
-
-  <!-- Steeltoe packages -->
-  <ItemGroup Label="Steeltoe">
-    <PackageVersion Include="Steeltoe.Bootstrap.Autoconfig" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Connector.ConnectorCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Discovery.ClientCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Discovery.Consul" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Connector.EFCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Extensions.Configuration.ConfigServerCore"
-      Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Extensions.Configuration.KubernetesCore"
-      Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Extensions.Logging.DynamicSerilogCore"
-      Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Management.EndpointCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Management.KubernetesCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Management.TaskCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Management.TracingCore" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Messaging.RabbitMQ" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Security.DataProtection.RedisCore"
-      Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Stream.Binder.RabbitMQ" Version="$(SteeltoeVersion)" />
-    <PackageVersion Include="Steeltoe.Stream.StreamBase" Version="$(SteeltoeVersion)" />
+  <!-- Aspire packages -->
+  <ItemGroup>
+    <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Npgsql" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.StackExchange.Redis.DistributedCaching" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.StackExchange.Redis.OutputCaching" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.RabbitMQ.Client" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Abstractions" Version="$(AspireVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="$(AspireVersion)" />
+    <!-- Open Telemetry -->
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0-alpha.1" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0-alpha.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.6.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.6.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.5.1" />
   </ItemGroup>
 
   <!-- HotChocolate packages -->
@@ -84,8 +89,7 @@
     <PackageVersion Include="HotChocolate.Data.EntityFramework" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.Spatial" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Diagnostics" Version="$(HotChocolateVersion)" />
-    <PackageVersion Include="HotChocolate.PersistedQueries.InMemory"
-      Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.PersistedQueries.InMemory" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Stitching" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Stitching.Redis" Version="$(HotChocolateVersion)" />
@@ -93,19 +97,31 @@
     <PackageVersion Include="HotChocolate.Types" Version="$(HotChocolateVersion)" />
   </ItemGroup>
 
+  <!-- Hangfire packages -->
+  <ItemGroup Label="Hangfire">
+    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.6" />
+    <PackageVersion Include="Hangfire.Dashboard.Basic.Authentication" Version="7.0.1" />
+    <PackageVersion Include="Hangfire.Redis.StackExchange" Version="1.9.4-beta" />
+  </ItemGroup>
+
+  <!-- MassTransit packages -->
+  <ItemGroup Label="MassTransit">
+    <PackageVersion Include="MassTransit" Version="$(MassTransitVersion)" />
+    <PackageVersion Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
+    <PackageVersion Include="MassTransit.Hangfire" Version="$(MassTransitVersion)" />
+  </ItemGroup>
 
   <!-- Other packages -->
   <ItemGroup Label="Others">
-    <PackageVersion Include="Ardalis.Result" Version="7.1.0" />
-    <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
-    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.5" />
-    <PackageVersion Include="Hangfire.Dashboard.Basic.Authentication" Version="7.0.1" />
-    <PackageVersion Include="Hangfire.Redis.StackExchange" Version="1.9.4-beta" />
-    <PackageVersion Include="Minio" Version="$(MinioVersion)" />
-    <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
-    <PackageVersion Include="NetEscapades.Configuration.Yaml" Version="3.1.0" />
-    <PackageVersion Include="OpenTelemetry.Exporter.Zipkin" Version="1.3.2" />
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.8.1" />
+    <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
+    <PackageVersion Include="Minio" Version="$(MinioVersion)" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+    <PackageVersion Include="MediatR" Version="12.1.1" />
+    <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
+    <PackageVersion Include="Redis.OM" Version="0.5.3" />
+    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
   </ItemGroup>
 
 </Project>

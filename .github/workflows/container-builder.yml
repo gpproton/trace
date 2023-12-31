@@ -14,24 +14,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - image: 'ghcr.io/gpproton/trace-client'
-            dockerfile: ./src/Client/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-gateway'
+          - image: 'ghcr.io/drolx/trace-frontend'
+            dockerfile: ./src/Frontend/Dockerfile
+          - image: 'ghcr.io/drolx/trace-gateway'
             dockerfile: ./src/Gateway/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-worker'
-            dockerfile: ./src/Worker/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-manager'
-            dockerfile: ./src/Manager/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-service-identity'
-            dockerfile: ./src/Service/Identity/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-service-integration'
-            dockerfile: ./src/Service/Integration/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-service-core'
+          - image: 'ghcr.io/drolx/trace-manager'
+            dockerfile: ./src/Manager/Service/Dockerfile
+          - image: 'ghcr.io/drolx/trace-service-core'
             dockerfile: ./src/Service/Core/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-service-route'
-            dockerfile: ./src/Service/Route/Dockerfile
-          - image: 'ghcr.io/gpproton/trace-service-stream'
-            dockerfile: ./src/Service/Stream/Dockerfile
+          - image: 'ghcr.io/drolx/trace-service-routing'
+            dockerfile: ./src/Service/Routing/Dockerfile
+          - image: 'ghcr.io/drolx/trace-service-integration'
+            dockerfile: ./src/Service/Integration/Dockerfile
     permissions:
       contents: read
       packages: write

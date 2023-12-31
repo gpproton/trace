@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <Title>Trace</Title>
-    <Version>0.0.1-alpha.1</Version>
+    <Version>0.0.1-preview.5</Version>
     <Authors>Godwin peter .O</Authors>
     <Description>An end to end logistic crm platform</Description>
     <RepositoryType>git</RepositoryType>
@@ -17,25 +17,17 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <NoWarn>AD0001</NoWarn>
-    <LangVersion>preview</LangVersion>
-    <!-- TODO: Activate when out of preview -->
-    <!-- <UseArtifactsOutput>true</UseArtifactsOutput> -->
+    <NoWarn>$(NoWarn);AD0001;NU1507;</NoWarn>
+    <LangVersion>12</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup>
-    <AxolotlVersion>8.0-preview.20</AxolotlVersion>
-    <AspCoreVersion>8.0.0-rc.1.23421.29</AspCoreVersion>
-    <DotnetVersion>8.0.0-rc.1.23419.4</DotnetVersion>
-    <EfcoreVersion>8.0.0-rc.1.23419.6</EfcoreVersion>
-    <MauiVersion>8.0.0-rc.1.9171</MauiVersion>
-    <NpgsqlVersion>8.0.0-rc.1</NpgsqlVersion>
-    <SwashbuckleVersion>6.5.0</SwashbuckleVersion>
-    <SteeltoeVersion>3.2.4</SteeltoeVersion>
-    <HotChocolateVersion>13.5.1</HotChocolateVersion>
-    <CassandraVersion>3.19.3</CassandraVersion>
-    <MinioVersion>6.0.0</MinioVersion>
-    <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ContainerRegistry>ghcr.io</ContainerRegistry>
+    <ContainerRepo>drolx</ContainerRepo>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
+    <ContainerFamily>alpine</ContainerFamily>
+    <ContainerImageTag>$(Version)</ContainerImageTag>
   </PropertyGroup>
 
 </Project>

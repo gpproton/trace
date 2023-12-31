@@ -1,0 +1,14 @@
+resources:
+- cache
+- messaging
+- db
+- service-core
+- service-integration
+- service-routing
+- gateway
+- manager
+- frontend
+
+generatorOptions:
+  disableNameSuffixHash: true
+

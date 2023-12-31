@@ -1,21 +1,33 @@
-using Trace.Common.Infrastructure;
-using Trace.Common.Service;
-using Trace.Common.Standard;
-
-var option = new NodeOption {
-    Group = Nodes.GroupName,
-    Name = Nodes.Gateway,
-    Graphql = true,
-    Gateway = true,
-    Scheduler = false,
-    Service = false
-};
+using HotChocolate.Types.Spatial;
+using StackExchange.Redis;
+using Trace.ServiceDefaults;
+using Trace.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.AddInfrastructure<Program>(option);
-builder.Services.RegisterService();
+
+builder.RegisterDefaults();
+builder.Services.RegisterDefaultServices();
+builder.Services.RegisterSchemaHttpClients(Nodes.All.ToDictionary(schema => schema,
+    schema => new Uri($"http://service-{schema}/graphql")
+));
+builder.Services
+    .AddGraphQLServer()
+    .AddRemoteSchemasFromRedis(Nodes.GroupName, sp => sp.GetRequiredService<IConnectionMultiplexer>())
+    .AddHttpRequestInterceptor<RequestInterceptor>()
+    .AddType<GeoJsonPositionType>()
+    .AddType<GeoJsonCoordinatesType>();
+builder.Services
+    .AddGraphQL(Nodes.Routing)
+    .AddType<GeoJsonCoordinatesType>();
+builder.Services
+    .AddGraphQL(Nodes.Integration)
+    .AddType<GeoJsonPositionType>()
+    .AddType<GeoJsonCoordinatesType>();
 
 var app = builder.Build();
-app.RegisterInfrastructure(option);
+
+app.RegisterDefaults();
+app.RegisterGraphQl();
+app.MapGet("/", () => "gateway");
 
 app.Run();

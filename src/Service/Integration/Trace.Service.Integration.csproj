@@ -2,20 +2,15 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Integration</Title>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <ContainerRepository>$(ContainerRepo)/trace-service-integration</ContainerRepository>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Common\Domain\Trace.Common.Domain.csproj" />
-    <ProjectReference Include="..\..\Common\Infrastructure\Trace.Common.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\Common\Standard\Trace.Common.Standard.csproj" />
-    <ProjectReference Include="..\..\Common\Service\Trace.Common.Service.csproj" />
-  </ItemGroup>
+  <Import Project="..\Shared.props" />
 
   <ItemGroup>
-    <Content Include="..\..\..\.dockerignore">
-      <Link>.dockerignore</Link>
-    </Content>
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
   </ItemGroup>
 
 </Project>

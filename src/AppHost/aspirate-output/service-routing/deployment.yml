@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-routing
+spec:
+  minReadySeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-routing
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: service-routing
+    spec:
+      containers:
+      - name: service-routing
+        image: ghcr.io/drolx/trace-service-routing:0.0.1-preview.5
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: service-routing-env
+        - secretRef:
+            name: service-routing-secrets
+      terminationGracePeriodSeconds: 180

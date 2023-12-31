@@ -1,4 +1,0 @@
-consul:
-  discovery:
-    register: true
-    healthCheckPath: '/health'
