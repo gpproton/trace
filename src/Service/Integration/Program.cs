@@ -14,6 +14,7 @@ builder.Services.RegisterDefaultServices();
 builder.Services.RegisterHangfire(Nodes.Integration);
 
 builder.Services.AddQueueMessageConsumer<TraccarPositionConsumer, TraccarPositionObject>();
+builder.Services.AddQueueMessageConsumer<TraccarEventConsumer, TraccarEventObject>();
 
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
