@@ -4,4 +4,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup Label="Other">
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MassTransit" />
+    <PackageReference Include="MediatR" />
+  </ItemGroup>
+
 </Project>
