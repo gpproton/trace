@@ -28,14 +28,14 @@
 
     <!-- broadcast config -->
     <entry key='broadcast.type'>redis</entry>
-    <entry key='broadcast.address'>redis://cache:6379/0</entry>
+    <entry key='broadcast.address'>redis://192.168.55.20:6379/0</entry>
 
     <!-- forwarding config -->
     <entry key='forward.enable'>true</entry>
     <entry key='forward.type'>amqp</entry>
-    <entry key='forward.url'>amqp://guest:guest@messaging:5672</entry>
-    <entry key='forward.exchange'>traccar</entry>
-    <entry key='forward.topic'>positions</entry>
+    <entry key='forward.url'>amqp://guest:guest@192.168.55.10:5672</entry>
+    <entry key='forward.exchange'>TraccarPositionObject</entry>
+    <entry key='forward.topic'>TraccarPositionObject</entry>
     <entry key='forward.retry.enable'>true</entry>
     <entry key='forward.retry.delay'>3600</entry>
     <entry key='forward.retry.count'>10</entry>
@@ -43,8 +43,8 @@
 
     <!-- event forwarding config -->
     <entry key='event.forward.type'>amqp</entry>
-    <entry key='event.forward.url'>amqp://guest:guest@messaging:5672</entry>
-    <entry key='event.forward.exchange'>traccar</entry>
-    <entry key='event.forward.topic'>events</entry>
+    <entry key='event.forward.url'>amqp://guest:guest@192.168.55.10:5672</entry>
+    <entry key='event.forward.exchange'>TraccarEventObject</entry>
+    <entry key='event.forward.topic'>TraccarEventObject</entry>
 
 </properties>

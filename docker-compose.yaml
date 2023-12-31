@@ -20,6 +20,7 @@ services:
     image: rabbitmq:3-management-alpine
     container_name: messaging
     hostname: messaging
+    restart: unless-stopped
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
@@ -78,6 +79,7 @@ services:
   traccar:
     image: ghcr.io/drolx/track:alpine
     container_name: traccar
+    restart: unless-stopped
     hostname: traccar
     ports:
       - 6000:5000
@@ -85,7 +87,7 @@ services:
       - 8088:8082
     volumes:
       - traccar:/opt/traccar/data:rw
-      - ./traccar.xml:/opt/traccar/conf/traccar.xml:ro
+      - ./config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
       - ./logs/:/opt/traccar/logs:rw
     networks:
       default:

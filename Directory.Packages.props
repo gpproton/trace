@@ -20,11 +20,10 @@
   <ItemGroup Label="Core">
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-    <PackageVersion Include="MediatR" Version="12.1.1" />
-    <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
-    <PackageVersion Include="Redis.OM" Version="0.5.3" />
-    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(RuntimeVersion)" />
+		<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(RuntimeVersion)" />
   </ItemGroup>
 
   <!-- Axolotl packages -->
@@ -115,8 +114,14 @@
   <!-- Other packages -->
   <ItemGroup Label="Others">
     <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.8.1" />
     <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
+    <PackageVersion Include="MediatR" Version="12.1.1" />
+    <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
+    <PackageVersion Include="Redis.OM" Version="0.5.3" />
+    <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
   </ItemGroup>
 
 </Project>
