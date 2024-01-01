@@ -37,6 +37,7 @@ services:
     image: docker.io/redis/redis-stack:7.2.0-v6
     container_name: cache
     hostname: cache
+    restart: unless-stopped
     volumes:
       - cache:/data
     ports:
@@ -50,6 +51,7 @@ services:
     image: docker.io/postgis/postgis:15-3.3
     container_name: db
     hostname: db
+    restart: unless-stopped
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
@@ -67,6 +69,7 @@ services:
     image: scylladb/scylla:5.4
     container_name: scylladb
     hostname: scylladb
+    restart: unless-stopped
     ports:
       - 9042:9042
       - 9160:9160
