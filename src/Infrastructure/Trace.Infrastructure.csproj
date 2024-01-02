@@ -5,11 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Cassandra/" />
-    <Folder Include="EFCore/" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
   </ItemGroup>
 

@@ -18,6 +18,6 @@
 
 namespace Trace.Infrastructure;
 
-public class DependencyInhection {
+public class DependencyInjection {
 
 }
