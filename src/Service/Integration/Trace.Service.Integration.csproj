@@ -13,4 +13,11 @@
     <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" />
+    <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Google.Protobuf.Tools" />
+  </ItemGroup>
+
 </Project>
