@@ -1,7 +1,8 @@
-﻿using Trace.Common.Queueing.Interfaces;
-using Trace.Service.Integration.TraccarModel;
+﻿using Microsoft.Extensions.Logging;
+using Trace.Common.Queueing.Interfaces;
+using Trace.Infrastructure.Traccar.Model;
 
-namespace Trace.Service.Integration;
+namespace Trace.Infrastructure.Traccar.Queue;
 
 public class TraccarEventConsumer(ILogger<TraccarEventConsumer> logger) : IQueueConsumer<TraccarEventObject> {
     public Task ConsumeAsync(TraccarEventObject message) {

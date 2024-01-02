@@ -17,10 +17,9 @@
 // Modified At: Tue Jan 02 2024
 
 using Trace.Common.Queueing.Extensions;
+using Trace.Infrastructure.Traccar;
 using Trace.Service.Integration;
-using Trace.Service.Integration.Queue;
 using Trace.Service.Integration.Services;
-using Trace.Service.Integration.TraccarModel;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 
@@ -31,10 +30,8 @@ builder.RegisterPersistence();
 builder.AddQueueing();
 builder.Services.RegisterDefaultServices();
 builder.Services.RegisterHangfire(Nodes.Integration);
-
-builder.Services.AddQueueMessageConsumer<TraccarPositionConsumer, TraccarPositionObject>();
-builder.Services.AddQueueMessageConsumer<TraccarEventConsumer, TraccarEventObject>();
 builder.Services.AddGrpc();
+builder.Services.RegisterTraccarInfrastructure();
 
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)

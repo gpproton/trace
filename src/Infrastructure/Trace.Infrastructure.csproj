@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Title>Trace.Infrastructure</Title>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Cassandra/" />
+    <Folder Include="EFCore/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--#if (UseSQLite)-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <!--#endif-->
+    <!--#if (UsePostgres)-->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" />
+    <!--#endif-->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+  </ItemGroup>
+
+</Project>

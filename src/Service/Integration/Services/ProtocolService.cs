@@ -23,7 +23,7 @@ namespace Trace.Service.Integration.Services;
 public class ProtocolService(ILogger<ProtocolService> logger) : Protocol.ProtocolBase {
 
     public override Task<AckResponse> Ping(Google.Protobuf.WellKnownTypes.Empty empty, ServerCallContext context) {
-        logger.LogInformation("Recieved ping");
+        logger.LogInformation("Received ping");
         return Task.FromResult(new AckResponse {
             Completed = true
         });
@@ -37,7 +37,7 @@ public class ProtocolService(ILogger<ProtocolService> logger) : Protocol.Protoco
     }
 
     public override Task<PositionResponse> SendPosition(PositionMessage request, ServerCallContext context) {
-        logger.LogInformation("Recieved position message");
+        logger.LogInformation("Received position message");
         return Task.FromResult(new PositionResponse {
             Status = ResponseCode.Ok
         });
