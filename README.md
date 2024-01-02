@@ -41,78 +41,78 @@ interface or mobile app. A few of them are:
 
 ### Stage 1
 
-| Version | Feature             | Progress | Comments                                                       |
-| ------- | ------------------- | -------- | -------------------------------------------------------------- |
-| v0.0.1  | Protocol endpoint   | [x]      | MQTT, GRPC and HTTP based API ingest for location data         |
-| v0.0.1  | Tenant profile      | [ ]      | basic setting and profile feature fron tenant accounts         |
-| v0.0.1  | Tags                | [ ]      | For authorization ans sharing for features                     |
-| v0.0.1  | Device              | [ ]      | IOT devices with compatible usaage e.g GPS, RFID, Sensors, etc |
-| v0.0.1  | Asset - Vehicle     | [ ]      | Sub module for managing vehicle as asset                       |
-| v0.0.1  | Asset - Trailer     | [ ]      | Sub module for managing trailer as asset                       |
-| v0.0.1  | Asset - Others      | [ ]      | Sub module for managing other asset                            |
-| v0.0.1  | Location management | [ ]      | Location management for POI's and geofences                    |
-| v0.0.1  | Route management    | [ ]      | General management and permission assignment                   |
-| v0.0.1  | Central event       | [ ]      | Architectire for processing all events                         |
-| v0.0.1  | Dashboard           | [ ]      | Standard dashboard for initial features                        |
-| v0.0.1  | Authentication      | [ ]      | Related API and UI for account authentication                  |
-| v0.0.1  | Tenant On-boarding  | [ ]      | Related API and UI for creating new tenants                    |
+| Version | Feature             | Progress    | Comments                                                       |
+| ------- | ------------------- |-------------| -------------------------------------------------------------- |
+| v0.0.1  | Protocol endpoint   | In Progress | MQTT, GRPC and HTTP based API ingest for location data         |
+| v0.0.1  | Tenant profile      | In Progress    | basic setting and profile feature fron tenant accounts         |
+| v0.0.1  | Tags                | In Progress    | For authorization ans sharing for features                     |
+| v0.0.1  | Device              | In Progress    | IOT devices with compatible usaage e.g GPS, RFID, Sensors, etc |
+| v0.0.1  | Asset - Vehicle     | In Progress    | Sub module for managing vehicle as asset                       |
+| v0.0.1  | Asset - Trailer     | In Progress    | Sub module for managing trailer as asset                       |
+| v0.0.1  | Asset - Others      | In Progress    | Sub module for managing other asset                            |
+| v0.0.1  | Location management | In Progress    | Location management for POI's and geofences                    |
+| v0.0.1  | Route management    | In Progress    | General management and permission assignment                   |
+| v0.0.1  | Central event       | In Progress    | Architectire for processing all events                         |
+| v0.0.1  | Dashboard           | In Progress    | Standard dashboard for initial features                        |
+| v0.0.1  | Authentication      | In Progress    | Related API and UI for account authentication                  |
+| v0.0.1  | Tenant On-boarding  | In Progress    | Related API and UI for creating new tenants                    |
 
 
 ### Stage 2
 
 | Version | Feature                 | Progress | Comments                                                          |
 | ------- | ----------------------- | -------- | ----------------------------------------------------------------- |
-| v0.0.2  | Dispatchers             | [ ]      | Dispatchers management                                            |
-| v0.0.2  | Dispatch team           | [ ]      | Dispatch team management                                          |
-| v0.0.2  | Tenant branch           | [ ]      | Branch management for tenant profiles                             |
-| v0.0.2  | Event (Extended)        | [ ]      | Extended event capabilty and integrate with (Novu)                |
-| v0.0.2  | Contact module          | [ ]      | Module for managing organization, customer and users contact      |
-| v0.0.2  | Engagement module       | [ ]      | A central module for viewing and managing all messages and events |
-| v0.0.2  | Organization profile    | [ ]      | Define organization contact information                           |
-| v0.0.2  | Customer module         | [ ]      | Manage customers and and related entities                         |
-| v0.0.2  | Integrated DMS          | [ ]      | Upload and manage files                                           |
-| v0.0.2  | Schedule module         | [ ]      | Manage and view schudules for all features                        |
-| v0.0.2  | Dashboard customization | [ ]      | Allow dashboard customization                                     |
+| v0.0.2  | Dispatchers             | Planning      | Dispatchers management                                            |
+| v0.0.2  | Dispatch team           | Planning      | Dispatch team management                                          |
+| v0.0.2  | Tenant branch           | Planning      | Branch management for tenant profiles                             |
+| v0.0.2  | Event (Extended)        | Planning      | Extended event capabilty and integrate with (Novu)                |
+| v0.0.2  | Contact module          | Planning      | Module for managing organization, customer and users contact      |
+| v0.0.2  | Engagement module       | Planning      | A central module for viewing and managing all messages and events |
+| v0.0.2  | Organization profile    | Planning      | Define organization contact information                           |
+| v0.0.2  | Customer module         | Planning      | Manage customers and and related entities                         |
+| v0.0.2  | Integrated DMS          | Planning      | Upload and manage files                                           |
+| v0.0.2  | Schedule module         | Planning      | Manage and view schudules for all features                        |
+| v0.0.2  | Dashboard customization | Planning      | Allow dashboard customization                                     |
 
 
 ### Stage 3
 
-| Version | Feature                                            | Progress | Comments                                              |
-| ------- | -------------------------------------------------- | -------- | ----------------------------------------------------- |
-| v0.0.3  | Task management & processing                       | [ ]      | Task management                                       |
-| v0.0.3  | Trip Authority                                     | [ ]      | Assign & Authorize task to dispatcher                 |
-| v0.0.3  | Shipment (Courier, Logistics)                      | [ ]      | Create and manage shipments                           |
-| v0.0.3  | Catalogs (Courier, Logistics)            | [ ]      | Manage tenant or customer catalog                     |
-| v0.0.3  | Passenger (Passenger, Logistics)        | [ ]      | Passengers onboarding and mangement                   |
-| v0.0.4  | Finacial module (Courier, Passenger, Logistics)    | [ ]      | Handle Finacial options for users                     |
-| v0.0.4  | Shortages (Courier, Logistics)           | [ ]      |                                                       |
-| v0.0.4  | Invoice management                                 | [ ]      |                                                       |
-| v0.0.4  | Order management                                   | [ ]      |                                                       |
-| v0.0.4  | Expense management (Courier, Passenger, Logistics) | [ ]      | Users and dispatchers expense assignment and analysis |
+| Version | Feature                                           | Progress | Comments                                              |
+| ------- | ------------------------------------------------- | -------- | ----------------------------------------------------- |
+| v0.0.3  | Task management & processing                      | Planning      | Task management                                       |
+| v0.0.3  | Trip Authority                                    | Planning      | Assign & Authorize task to dispatcher                 |
+| v0.0.3  | Shipment (Courier, Logistics)                     | Planning      | Create and manage shipments                           |
+| v0.0.3  | Catalogs (Courier, Logistics)           | Planning      | Manage tenant or customer catalog                     |
+| v0.0.3  | Passenger (Passenger, Logistics)       | Planning      | Passengers onboarding and mangement                   |
+| v0.0.4  | Finacial module   | Planning      | Handle Finacial options for users                     |
+| v0.0.4  | Shortages (Courier, Logistics)          | Planning      |                                                       |
+| v0.0.4  | Invoice management                                | Planning      |                                                       |
+| v0.0.4  | Order management                                  | Planning      |                                                       |
+| v0.0.4  | Expense management  | Planning      | Users and dispatchers expense assignment and analysis |
 
 
 ### Stage 4
 
 | Version | Feature                | Progress | Comments                                                          |
 | ------- | ---------------------- | -------- | ----------------------------------------------------------------- |
-| v0.0.5  | Notification           | [ ]      | Notification settings and mangement                               |
-| v0.0.5  | Notification Templates | [ ]      | Email, Chat and SMS notification templates                        |
-| v0.0.5  | Warehouse              | [ ]      | Manage warehouses                                                 |
-| v0.0.5  | Waybill                | [ ]      | Manage and distribute waybills                                    |
-| v0.0.5  | Equipment maintenance  | [ ]      | Schedule and manage maintenance for vehicles and other equipments |
-| v0.0.5  | Employees              | [ ]      | Manage Employees                                                  |
+| v0.0.5  | Notification           | Planning      | Notification settings and mangement                               |
+| v0.0.5  | Notification Templates | Planning      | Email, Chat and SMS notification templates                        |
+| v0.0.5  | Warehouse              | Planning      | Manage warehouses                                                 |
+| v0.0.5  | Waybill                | Planning      | Manage and distribute waybills                                    |
+| v0.0.5  | Equipment maintenance  | Planning      | Schedule and manage maintenance for vehicles and other equipments |
+| v0.0.5  | Employees              | Planning      | Manage Employees                                                  |
 
 
 ### State 5
 
 | Version | Feature        | Progress | Comments                                 |
-| ------- | -------------- | -------- | ---------------------------------------- |
-| v0.0.6  | Ticket support | [ ]      | Customers ticketing and support module   |
-| v0.0.6  | Insurance      | [ ]      | Manage insurance plans and subscriptions |
-| v0.0.6  | Contracts      | [ ]      | Manage customers contract                |
-| v0.0.6  | Suppliers      | [ ]      | Manage Tenant suppliers                  |
-| v0.0.6  | Stocks         | [ ]      | Manage tenants stocks                    |
-| v0.0.6  | Custom form    | [ ]      | Create and manage custom forms           |
+|---------| -------------- | -------- | ---------------------------------------- |
+| v0.0.6  | Ticket support | Planning      | Customers ticketing and support module   |
+| v0.0.6  | Insurance      | Planning      | Manage insurance plans and subscriptions |
+| v0.0.7  | Contracts      | Planning      | Manage customers contract                |
+| v0.0.7  | Suppliers      | Planning      | Manage Tenant suppliers                  |
+| v0.0.7  | Stocks         | Planning      | Manage tenants stocks                    |
+| v0.0.7  | Custom form    | Planning      | Create and manage custom forms           |
 
 
 ## Support
