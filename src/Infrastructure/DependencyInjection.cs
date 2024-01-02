@@ -16,8 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Tue Jan 02 2024
 
+using Microsoft.Extensions.DependencyInjection;
+
 namespace Trace.Infrastructure;
 
-public class DependencyInjection {
+public static class DependencyInjection {
+    public static IServiceCollection RegisterInfrastructure(this IServiceCollection services) {
 
+        return services;
+    }
 }
