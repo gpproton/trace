@@ -16,9 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Interfaces;
+
 namespace Trace.Application.Core.Interfaces;
 
-public interface ITypedEntity {
+public interface ITypedEntity : IAggregateRoot {
     public bool Default { get; set; }
     public string Name { get; set; }
     public string? Description { get; set; }

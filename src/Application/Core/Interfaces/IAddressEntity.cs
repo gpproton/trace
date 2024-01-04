@@ -16,9 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Interfaces;
+
 namespace Trace.Application.Core.Interfaces;
 
-public interface IAddressEntity {
+public interface IAddressEntity : IAggregateRoot {
     public string? AddressLine1 { get; set; }
 
     public string? AddressLine2 { get; set; }

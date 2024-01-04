@@ -16,9 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Interfaces;
+
 namespace Trace.Application.Core.Interfaces;
 
-public interface IMapSettingEntity {
+public interface IMapSettingEntity : IAggregateRoot {
     public string? MapType { get; set; }
 
     public int? Zoom { get; set; }

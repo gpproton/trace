@@ -16,9 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Interfaces;
+
 namespace Trace.Application.Core.Interfaces;
 
-public interface IPersonEntity {
+public interface IPersonEntity : IAggregateRoot {
     public bool Active { get; set; }
 
     public string Phone { get; set; }

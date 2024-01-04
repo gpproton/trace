@@ -21,7 +21,7 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Server;
 
-public class ServerSettings : IAggregateRoot, ISettingEntity {
+public class ServerSettings : ISettingEntity {
     public string? Token { get; set; }
     public string? Language { get; set; }
     public string? Timezone { get; set; }
