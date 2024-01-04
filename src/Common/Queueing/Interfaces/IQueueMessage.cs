@@ -1,3 +1,3 @@
-﻿namespace Trace.Common.Queueing.Interfaces;
+namespace Trace.Common.Queueing.Interfaces;
 
 public interface IQueueMessage { }

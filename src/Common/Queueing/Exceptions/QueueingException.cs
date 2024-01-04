@@ -1,4 +1,4 @@
-﻿namespace Trace.Common.Queueing;
+namespace Trace.Common.Queueing;
 
 public class QueueingException : Exception {
     public QueueingException(string message, Exception ex) : base(message, ex) { }

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using Trace.Common.Queueing.Interfaces;
 using Trace.Infrastructure.Traccar.Model;
 

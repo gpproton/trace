@@ -1,4 +1,4 @@
-﻿namespace Trace.Common.Queueing.Interfaces;
+namespace Trace.Common.Queueing.Interfaces;
 
 /// <summary>
 /// A channel provider that Declares and Binds a specific queue
