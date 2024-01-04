@@ -22,6 +22,6 @@ public enum DeviceStatus {
     Online,
     Offline,
     Moving,
-    Parked,
+    Stopped,
     Idling
 }

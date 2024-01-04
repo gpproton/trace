@@ -17,36 +17,59 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Base;
+using Cassandra.Mapping;
+using NetTopologySuite.Geometries;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
-public class DevicePosition : BaseEntity<Guid>, ITenantEntity<Guid> {
-    public Guid DeviceId { get; set; }
+public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
+    public const string KeyMotion = "motion";
+    public const string KeyPower = "power"; // volts
+    public const string KeyBattery = "battery"; // volts
+    public const string KeyBatteryLevel = "batteryLevel"; // percentage
+    public const string KeyFuelLevel = "fuel"; // liters
+    public const string KeyFuelUsed = "fuelUsed"; // liters
+    public const string KeyFuelConsumption = "fuelConsumption";
+    public const string KeyIgnition = "ignition";
+    public const string KeyAntenna = "antenna";
+    public const string KeyCharge = "charge";
 
-    public string? Address { get; set; }
-
-    public double Speed { get; set; }
-
-    public double Course { get; set; }
-
-    public double TotalDistance { get; set; }
-
-    public double Altitude { get; set; }
-
-    public double Accuracy { get; set; }
-
-    public int Satellites { get; set; }
-
-    public double? Fuel { get; set; }
-
-    public double? Battery { get; set; }
-
-    public bool Charging { get; set; }
-
-    public DateTimeOffset Time { get; set; }
-
-    public DateTimeOffset ServerTime { get; set; }
-
+    public DevicePosition() { }
     public Guid TenantId { get; set; }
+    public DateTimeOffset Time { get; set; }
+    public DateTimeOffset ServerTime { get; set; }
+    public required Point Point { get; set; }
+    public string? Address { get; set; }
+    public double Speed { get; set; }
+    public double Course { get; set; }
+    public double Distance { get; set; }
+    public double Odometer { get; set; }
+    public double Altitude { get; set; }
+    public int Satellites { get; set; }
+    public double? Fuel { get; set; }
+    public double? Battery { get; set; }
+    public bool Charging { get; set; }
+    public ICollection<Guid>? LocationIds { get; set; }
+
+    public static Map<DevicePosition> GetConfig(string keyspace) {
+        return new Map<DevicePosition>()
+            .KeyspaceName(keyspace)
+            .TableName("positions")
+            .PartitionKey(x => x.Id)
+            .Column(x => x.Id, x => x.WithName("id"))
+            .Column(x => x.TenantId, x => x.WithName("tenant_id"))
+            .Column(x => x.Time, x => x.WithName("time"))
+            .Column(x => x.ServerTime, x => x.WithName("server_time"))
+            .Column(x => x.Point, x => x.WithName("point"))
+            .Column(x => x.Address, x => x.WithName("address"))
+            .Column(x => x.Speed, x => x.WithName("speed"))
+            .Column(x => x.Course, x => x.WithName("course"))
+            .Column(x => x.Distance, x => x.WithName("odometer"))
+            .Column(x => x.Altitude, x => x.WithName("altitude"))
+            .Column(x => x.Satellites, x => x.WithName("satellites"))
+            .Column(x => x.Fuel, x => x.WithName("fuel"))
+            .Column(x => x.Charging, x => x.WithName("charging"))
+            .Column(x => x.LocationIds, x => x.WithName("location_ids"));
+    }
 }

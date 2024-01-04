@@ -16,18 +16,32 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
-using Trace.Application.Core;
+using Axolotl.EFCore.Base;
+using Cassandra.Mapping;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Events;
 
-public class Events : TenantEntity<Guid> {
+public class Events : ExtendedEntity<Guid>, ITenantEntity<Guid> {
+    public Guid TenantId { get; set; }
     public DateTimeOffset Time { get; set; }
-
     public DateTimeOffset ServerTime { get; set; }
-
+    public EventTypes Type { get; set; }
     public Guid? DeviceId { get; set; }
-
     public Guid? PositionId { get; set; }
-
     public Guid? LocationId { get; set; }
+    public static Map<Events> GetConfig(string keyspace) {
+        return new Map<Events>()
+            .KeyspaceName(keyspace)
+            .TableName("events")
+            .PartitionKey(x => x.Id)
+            .Column(x => x.Id, x => x.WithName("id"))
+            .Column(x => x.TenantId, x => x.WithName("tenant_id"))
+            .Column(x => x.Time, x => x.WithName("event_time"))
+            .Column(x => x.ServerTime, x => x.WithName("server_time"))
+            .Column(x => x.Type, x => x.WithName("event_type"))
+            .Column(x => x.DeviceId, x => x.WithName("device_id"))
+            .Column(x => x.PositionId, x => x.WithName("position_id"))
+            .Column(x => x.LocationId, x => x.WithName("location_id"));
+    }
 }

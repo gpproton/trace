@@ -21,15 +21,11 @@ using Trace.Application.Core;
 namespace Trace.Application.Asset;
 
 public abstract class AssetEntity : TenantEntity<Guid> {
-    public string SerialNumber { get; set; } = null!;
+    public string? SerialNumber { get; set; }
 
-    public string Barcode { get; set; } = String.Empty;
+    public string? Barcode { get; set; }
 
-    public string UniqueId { get; set; } = null!;
-
-    public string Color { get; set; } = String.Empty;
-
-    public int? YearManufactured { get; set; }
+    public string? Color { get; set; }
 
     public DateTimeOffset? Deployed { get; set; }
 

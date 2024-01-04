@@ -22,27 +22,15 @@ using Trace.Application.Core.Enums;
 namespace Trace.Application.Vehicle;
 
 public sealed class Vehicle : AssetEntity {
-    public string Name { get; set; } = null!;
-
+    public string Name { get; set; } = string.Empty;
     public VehicleType Type { get; set; }
-
     public string FleetIdentifier { get; set; } = string.Empty;
-
-    public string RegistrationId { get; set; } = null!;
-
+    public string? RegistrationNo { get; set; }
     public long Odometer { get; set; }
-
     public FuelType FuelType { get; set; }
-
     public int FuelCapacity { get; set; }
-
     public int HorsePower { get; set; }
-
-    public string Model { get; set; } = null!;
-
+    public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
-
-    public decimal AxleWeightCapacity { get; set; }
-
     public Guid? TrailerId { get; set; }
 }

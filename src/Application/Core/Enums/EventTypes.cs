@@ -12,20 +12,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Asset;
-using Trace.Application.Core.Enums;
+namespace Trace.Application;
 
-namespace Trace.Application.Device;
-
-public sealed class Device : AssetEntity {
-    public required string UniqueId { get; set; }
-    public Guid? PositionId { get; set; }
-    public DateTimeOffset? LastUpdate { get; set; }
-    public string Phone { get; set; } = string.Empty;
-    public DeviceStatus Status { get; set; }
-    public int SpeedLimit { get; set; }
+public enum EventTypes {
+    DeviceOnline = 0,
+    DeviceOffline = 1,
+    DeviceOverspeed = 2,
+    DeviceBatteryLow = 3
 }

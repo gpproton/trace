@@ -23,16 +23,9 @@ namespace Trace.Application.Trailer;
 
 public sealed class Trailer : AssetEntity {
     public TrailerType Type { get; set; }
-
-    public string FleetIdentifier { get; set; } = String.Empty;
-
+    public string? FleetIdentifier { get; set; }
     public long Odometer { get; set; }
-
     public int HorsePower { get; set; }
-
     public string Model { get; set; } = null!;
-
     public decimal WeightCapacity { get; set; }
-
-    public decimal AxleWeightCapacity { get; set; }
 }
