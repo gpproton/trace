@@ -25,7 +25,7 @@ public class Events : TenantEntity<Guid> {
 
     public DateTimeOffset ServerTime { get; set; }
 
-    public Guid? BeaconId { get; set; }
+    public Guid? DeviceId { get; set; }
 
     public Guid? PositionId { get; set; }
 

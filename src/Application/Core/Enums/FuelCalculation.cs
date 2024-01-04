@@ -20,7 +20,7 @@ namespace Trace.Application.Core.Enums;
 
 public enum FuelCalculation {
     Disabled = 0,
-    Beacon = 1,
+    Device = 1,
     Day = 2,
     Distance = 3,
     Hour = 4,

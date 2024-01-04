@@ -16,11 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using Axolotl.EFCore.Base;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
-public class DevicePosition : TenantEntity<Guid> {
+public class DevicePosition : BaseEntity<Guid>, ITenantEntity<Guid> {
+    public Guid DeviceId { get; set; }
+
     public string? Address { get; set; }
 
     public double Speed { get; set; }
@@ -45,5 +48,5 @@ public class DevicePosition : TenantEntity<Guid> {
 
     public DateTimeOffset ServerTime { get; set; }
 
-    public Guid BeaconId { get; set; }
+    public Guid TenantId { get; set; }
 }
