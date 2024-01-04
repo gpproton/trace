@@ -19,9 +19,9 @@
 using NetTopologySuite.Geometries;
 using Trace.Application.Core;
 
-namespace Trace.Application.Route;
+namespace Trace.Application.Routes;
 
-public class Route : TaggedEntity<Guid> {
+public class Routes : TaggedEntity<Guid> {
     public Guid? ApprovedBy { get; set; }
     public DateTimeOffset ApprovedAt { get; set; }
     public string? Color { get; set; }
