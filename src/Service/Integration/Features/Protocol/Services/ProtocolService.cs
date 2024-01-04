@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@
 
 using Grpc.Core;
 
-namespace Trace.Service.Integration.Services;
+namespace Trace.Service.Integration.Features.Protocol.Services;
 
-public class ProtocolService(ILogger<ProtocolService> logger) : Protocol.ProtocolBase {
+public class ProtocolService(ILogger<ProtocolService> logger) : Integration.Protocol.ProtocolBase {
 
     public override Task<AckResponse> Ping(Google.Protobuf.WellKnownTypes.Empty empty, ServerCallContext context) {
         logger.LogInformation("Received ping");

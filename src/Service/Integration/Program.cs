@@ -19,7 +19,7 @@
 using Trace.Common.Queueing.Extensions;
 using Trace.Infrastructure.Traccar;
 using Trace.Service.Integration;
-using Trace.Service.Integration.Services;
+using Trace.Service.Integration.Features.Protocol.Services;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 
@@ -29,6 +29,8 @@ builder.RegisterDefaults();
 builder.RegisterPersistence();
 builder.AddQueueing();
 builder.Services.RegisterDefaultServices();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
@@ -40,6 +42,11 @@ builder.Services.AddGraphQLServer()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.RegisterDefaults();
 app.UseHangfireDashboard(Nodes.Integration);
