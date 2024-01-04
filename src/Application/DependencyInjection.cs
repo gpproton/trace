@@ -19,14 +19,14 @@ using System.Reflection;
 using FluentValidation;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Trace.Application.Device.Consumers;
+using Trace.Application.Device.Handlers;
 
 namespace Trace.Application;
 
 public static class DependencyInjection {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, Assembly assembly) {
         services.AddMediator(x => {
-            x.AddConsumersFromNamespaceContaining<DevicePositionConsumer>();
+            x.AddConsumersFromNamespaceContaining<DevicePositionHandler>();
         });
         services.AddValidatorsFromAssembly(assembly);
 

@@ -16,16 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using MassTransit.Mediator;
-using Microsoft.Extensions.Logging;
-using Trace.Application.Device.Contracts;
+namespace Trace.Application.Device.Payloads;
 
-namespace Trace.Application.Device.Consumers;
-
-public class DevicePositionConsumer() : MediatorRequestHandler<GetDevicePosition, DevicePositionState> {
-    protected override Task<DevicePositionState> Handle(GetDevicePosition request, CancellationToken cancellationToken) {
-        Console.WriteLine($"Recieved device position {request.Id}");
-
-        return Task.FromResult(new DevicePositionState { Id = request.Id });
-    }
+public class CreatePositionPayload {
+    public required string Id { get; set; }
+    public double Lon { get; set; }
+    public double Lat { get; set; }
+    public double Speed { get; set; }
 }

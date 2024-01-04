@@ -25,6 +25,7 @@ using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
 using Trace.Application.Core;
+using Trace.Service.Integration.Features.Devices;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -57,6 +58,8 @@ app.RegisterDefaults();
 app.UseHangfireDashboard(Nodes.Integration);
 app.RegisterGraphQl();
 app.MapGrpcService<ProtocolService>();
+
+app.MapProtocolEndpoint();
 app.MapDeviceEndpoint();
 
 app.Run();
