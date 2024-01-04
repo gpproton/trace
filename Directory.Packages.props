@@ -44,6 +44,8 @@
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
@@ -122,7 +124,6 @@
     <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-    <PackageVersion Include="MediatR" Version="12.1.1" />
     <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
     <PackageVersion Include="Redis.OM" Version="0.5.3" />
     <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
