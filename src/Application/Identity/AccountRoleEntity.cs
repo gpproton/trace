@@ -14,15 +14,15 @@
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Wednesday, 3rd Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Wed Jan 03 2024
+// Modified At: Thu Jan 04 2024
 
+using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 using Trace.Application.Core.Permission;
-using Trace.Application.Identity;
 
-namespace Trace.Application.Core.Interfaces;
+namespace Trace.Application.Identity;
 
-public interface IAccountEntity {
-    public Contact.Contact Identity { get; set; }
-    public RoleLevel DefaultRole { get; set; }
-    public AccountRoleEntity? Role { get; set; }
+public class AccountRoleEntity : TypedEntity<Guid>, IAccountRoleEntity {
+    public RoleLevel Root { get; set; }
+    public ICollection<AccountPermissionEntity> Permissions { get; set; } = null!;
 }
