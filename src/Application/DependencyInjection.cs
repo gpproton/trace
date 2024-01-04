@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License;
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ namespace Trace.Application;
 
 public static class DependencyInjection {
     public static IServiceCollection RegisterService(this IServiceCollection services, Assembly assembly) {
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+        // services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
         services.AddValidatorsFromAssembly(assembly);
 
         return services;
