@@ -16,10 +16,20 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
+using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Core.Interfaces;
+namespace Trace.Application.Tenant;
 
-public interface ITaggedEntity<T> : IHasKey<T> where T : notnull {
-    public ICollection<Tag.Tags>? Tags { get; set; }
+public class TenantMapOption : TenantEntity<Guid>, IMapOption {
+    public string? MapType { get; set; }
+    public int? Zoom { get; set; }
+    public int? ZoomSelection { get; set; }
+    public bool EnableTrip { get; set; }
+    public bool AutoRoute { get; set; }
+    public bool AutoOrder { get; set; }
+    public bool AutoRouteCost { get; set; }
+    public bool AutoInvoice { get; set; }
+    public bool VerifyOtp { get; set; }
+    public bool AutoZoneOtp { get; set; }
 }

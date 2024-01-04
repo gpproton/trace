@@ -16,10 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
+using Trace.Application.Core;
 
-namespace Trace.Application.Core.Interfaces;
+namespace Trace.Application.Tag;
 
-public interface ITaggedEntity<T> : IHasKey<T> where T : notnull {
-    public ICollection<Tag.Tags>? Tags { get; set; }
+public class Tags : TenantEntity<Guid> {
+    public string? Color { get; set; }
 }

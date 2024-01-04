@@ -16,10 +16,25 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
+using Axolotl.EFCore.Base;
+using Trace.Application.Core.Enums;
 
-namespace Trace.Application.Core.Interfaces;
+namespace Trace.Application.Tenant;
 
-public interface ITaggedEntity<T> : IHasKey<T> where T : notnull {
-    public ICollection<Tag.Tags>? Tags { get; set; }
+public class Tenant : BaseEntity<Guid> {
+    public Guid Token { get; set; }
+
+    public bool Active { get; set; }
+
+    public string FullName { get; set; } = string.Empty;
+
+    public string ShortName { get; set; } = string.Empty;
+
+    public TenantType Type { get; set; } = TenantType.Organization;
+
+    public int UniqueId { get; set; }
+
+    public string Logo { get; set; } = string.Empty;
+
+    public string Background { get; set; } = string.Empty;
 }

@@ -22,7 +22,7 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Core;
 
 public abstract class TaggedEntity<T> : AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
-    public ICollection<Tag.Tag>? Tags { get; set; }
+    public ICollection<Tag.Tags>? Tags { get; set; }
     public T? TagId { get; set; }
     public T? TenantId { get; set; }
 }
