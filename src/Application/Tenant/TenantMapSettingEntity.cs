@@ -19,9 +19,9 @@
 using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Tenant;
 
-public class AccountMapOption : TenantEntity<Guid>, IMapOption {
+public class TenantMapSettingEntity : TenantEntity<Guid>, IMapSettingEntity {
     public string? MapType { get; set; }
     public int? Zoom { get; set; }
     public int? ZoomSelection { get; set; }

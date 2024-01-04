@@ -16,20 +16,26 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Application.Core.Interfaces;
+namespace Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Tenant;
-
-public class TenantMapOption : TenantEntity<Guid>, IMapOption {
+public interface IMapSettingEntity {
     public string? MapType { get; set; }
+
     public int? Zoom { get; set; }
+
     public int? ZoomSelection { get; set; }
+
     public bool EnableTrip { get; set; }
+
     public bool AutoRoute { get; set; }
+
     public bool AutoOrder { get; set; }
+
     public bool AutoRouteCost { get; set; }
+
     public bool AutoInvoice { get; set; }
+
     public bool VerifyOtp { get; set; }
+
     public bool AutoZoneOtp { get; set; }
 }
