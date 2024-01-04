@@ -7,7 +7,8 @@
   <ItemGroup Label="Other">
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MassTransit" />
-    <PackageReference Include="MediatR" />
+    <PackageReference Include="Axolotl.EFCore" />
+    <PackageReference Include="NetTopologySuite" />
   </ItemGroup>
 
 </Project>
