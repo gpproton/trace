@@ -43,19 +43,19 @@ interface or mobile app. A few of them are:
 
 | Version | Feature             | Progress    | Comments                                                       |
 | ------- | ------------------- |-------------| -------------------------------------------------------------- |
-| v0.0.1  | Protocol endpoint   | In Progress | MQTT, GRPC and HTTP based API ingest for location data         |
-| v0.0.1  | Tenant profile      | In Progress    | basic setting and profile feature fron tenant accounts         |
-| v0.0.1  | Tags                | In Progress    | For authorization ans sharing for features                     |
-| v0.0.1  | Device              | In Progress    | IOT devices with compatible usaage e.g GPS, RFID, Sensors, etc |
-| v0.0.1  | Asset - Vehicle     | In Progress    | Sub module for managing vehicle as asset                       |
-| v0.0.1  | Asset - Trailer     | In Progress    | Sub module for managing trailer as asset                       |
-| v0.0.1  | Asset - Others      | In Progress    | Sub module for managing other asset                            |
-| v0.0.1  | Location management | In Progress    | Location management for POI's and geofences                    |
-| v0.0.1  | Route management    | In Progress    | General management and permission assignment                   |
-| v0.0.1  | Central event       | In Progress    | Architectire for processing all events                         |
-| v0.0.1  | Dashboard           | In Progress    | Standard dashboard for initial features                        |
-| v0.0.1  | Authentication      | In Progress    | Related API and UI for account authentication                  |
-| v0.0.1  | Tenant On-boarding  | In Progress    | Related API and UI for creating new tenants                    |
+| v0.0.1  | Protocol endpoint   | Ongoing | MQTT, GRPC and HTTP based API ingest for location data         |
+| v0.0.1  | Tenant profile      | Ongoing    | basic setting and profile feature fron tenant accounts         |
+| v0.0.1  | Tags                | Ongoing    | For authorization ans sharing for features                     |
+| v0.0.1  | Device              | Ongoing    | IOT devices with compatible usaage e.g GPS, RFID, Sensors, etc |
+| v0.0.1  | Asset - Vehicle     | Ongoing    | Sub module for managing vehicle as asset                       |
+| v0.0.1  | Asset - Trailer     | Ongoing    | Sub module for managing trailer as asset                       |
+| v0.0.1  | Asset - Others      | Ongoing    | Sub module for managing other asset                            |
+| v0.0.1  | Location management | Ongoing    | Location management for POI's and geofences                    |
+| v0.0.1  | Route management    | Ongoing    | General management and permission assignment                   |
+| v0.0.1  | Central event       | Ongoing    | Architectire for processing all events                         |
+| v0.0.1  | Dashboard           | Ongoing    | Standard dashboard for initial features                        |
+| v0.0.1  | Authentication      | Ongoing    | Related API and UI for account authentication                  |
+| v0.0.1  | Tenant On-boarding  | Ongoing    | Related API and UI for creating new tenants                    |
 
 
 ### Stage 2
