@@ -41,16 +41,17 @@ public static class DependencyInjection {
         return builder;
     }
 
-    public static WebApplicationBuilder RegisterPersistence(this WebApplicationBuilder builder) {
+    public static WebApplicationBuilder RegisterPersistence(this WebApplicationBuilder builder, Assembly assembly) {
         builder.AddRabbitMQ("messaging");
 
         // TODO: Hook up shared DbContext
         // builder.AddNpgsqlDbContext<OperationContext>("db");
 
         var connectionString = builder.Configuration.GetConnectionString("messaging") ?? "amqp://localhost";
-        builder.Services.AddMassTransit(x => {
-            x.AddHangfireConsumers();
-            x.UsingRabbitMq((context, cfg) => {
+        builder.Services.AddMassTransit(busConfigurator => {
+            busConfigurator.AddConsumers(assembly);
+            busConfigurator.AddHangfireConsumers();
+            busConfigurator.UsingRabbitMq((context, cfg) => {
                 cfg.Host(connectionString, h => {
                     h.Heartbeat(TimeSpan.FromSeconds(1));
                 });

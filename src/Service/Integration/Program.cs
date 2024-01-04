@@ -19,14 +19,18 @@
 using Trace.Common.Queueing.Extensions;
 using Trace.Infrastructure.Traccar;
 using Trace.Service.Integration;
+using Trace.Service.Integration.Features.Protocol;
 using Trace.Service.Integration.Features.Protocol.Services;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
+using Trace.Application;
+using Trace.Application.Core;
 
 var builder = WebApplication.CreateBuilder(args);
+var assembly = typeof(TenantEntity<>).Assembly;
 
 builder.RegisterDefaults();
-builder.RegisterPersistence();
+builder.RegisterPersistence(assembly);
 builder.AddQueueing();
 builder.Services.RegisterDefaultServices();
 builder.Services.AddEndpointsApiExplorer();
@@ -34,6 +38,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
+builder.Services.RegisterApplicationServices(assembly);
 
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
@@ -52,5 +57,6 @@ app.RegisterDefaults();
 app.UseHangfireDashboard(Nodes.Integration);
 app.RegisterGraphQl();
 app.MapGrpcService<ProtocolService>();
+app.MapDeviceEndpoint();
 
 app.Run();

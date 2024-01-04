@@ -12,16 +12,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Tenant;
+namespace Trace.Application.Server;
 
-public class TenantMapSettingEntity : TenantEntity<Guid>, IMapSettingEntity {
+public class MapSettings : IMapSettingEntity {
     public string? MapType { get; set; }
     public int? Zoom { get; set; }
     public int? ZoomSelection { get; set; }

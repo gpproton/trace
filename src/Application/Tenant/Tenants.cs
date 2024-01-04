@@ -16,13 +16,17 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using Axolotl.EFCore.Base;
+using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Tenant;
 
-public class TenantDomain : TenantEntity<Guid> {
-    public string Domain { get; set; } = string.Empty;
-    public string? Registrar { get; set; }
+public class Tenants : BaseEntity<Guid> {
+    public Guid Token { get; set; }
     public bool Active { get; set; }
-    public DateTimeOffset Expiry { get; set; }
+    public string FullName { get; set; } = string.Empty;
+    public string? ShortName { get; set; }
+    public TenantType Type { get; set; } = TenantType.Individual;
+    public int UniqueId { get; set; }
+    public string? Logo { get; set; }
 }

@@ -16,12 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Core;
 
-public class ProfileExtra : TenantEntity<Guid>, IAddressEntity {
+public class ContactExtras : IAddressEntity {
     public DateOnly? BirthDate { get; set; }
     public int NumberOfChildren { get; set; }
     public string? NextKinName { get; set; }

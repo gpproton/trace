@@ -12,17 +12,20 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Base;
-using Trace.Application.Core.Interfaces;
+using MassTransit.Mediator;
+using Microsoft.Extensions.Logging;
+using Trace.Application.Device.Contracts;
 
-namespace Trace.Application.Core;
+namespace Trace.Application.Device.Consumers;
 
-public abstract class TaggedEntity<T> : AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
-    public ICollection<Tags.Tags>? Tags { get; set; }
-    public T? TagId { get; set; }
-    public T? TenantId { get; set; }
+public class DevicePositionConsumer() : MediatorRequestHandler<GetDevicePosition, DevicePositionState> {
+    protected override Task<DevicePositionState> Handle(GetDevicePosition request, CancellationToken cancellationToken) {
+        Console.WriteLine($"Recieved device position {request.Id}");
+
+        return Task.FromResult(new DevicePositionState { Id = request.Id });
+    }
 }

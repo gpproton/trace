@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,24 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Application.Core.Interfaces;
+using MassTransit;
+using MassTransit.Mediator;
+using Microsoft.AspNetCore.Mvc;
+using Trace.Application.Device.Contracts;
 
-namespace Trace.Application.Identity {
-    public class AccountPermission : TenantEntity<Guid>, IAccountPermissionEntity {
-        public AccountRoleEntity? Role { get; set; }
-        public string Feature { get; set; } = String.Empty;
-        public bool[] Actions { get; set; } = null!;
+namespace Trace.Service.Integration.Features.Protocol;
+
+public static class DeviceEndpoint {
+    public static IEndpointRouteBuilder MapDeviceEndpoint(this IEndpointRouteBuilder route) {
+
+        route.MapGet("/api/position/{id}", ([FromRoute] Guid id, [FromServices] IMediator mediator) => {
+            return mediator.SendRequest(new GetDevicePosition { Id = id });
+        });
+
+        return route;
     }
 }

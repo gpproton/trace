@@ -12,6 +12,7 @@
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,10 +25,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features/Protocol/" />
   </ItemGroup>
 
 </Project>

@@ -18,7 +18,7 @@
 
 using Trace.Application.Core;
 
-namespace Trace.Application.Tag;
+namespace Trace.Application.Tags;
 
 public class Tags : TenantEntity<Guid> {
     public string? Color { get; set; }

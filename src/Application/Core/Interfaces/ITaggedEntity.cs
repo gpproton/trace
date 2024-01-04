@@ -21,5 +21,5 @@ using Axolotl.EFCore.Interfaces;
 namespace Trace.Application.Core.Interfaces;
 
 public interface ITaggedEntity<T> : IHasKey<T>, IAggregateRoot where T : notnull {
-    public ICollection<Tag.Tags>? Tags { get; set; }
+    public ICollection<Tags.Tags>? Tags { get; set; }
 }

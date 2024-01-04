@@ -17,9 +17,18 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Tenant;
 
-public class TenantBranch : TypedEntity<Guid> {
-
+public class TenantBranch : TypedEntity<Guid>, IAddressEntity {
+    public string? AddressLine1 { get; set; }
+    public string? AddressLine2 { get; set; }
+    public string? AddressCity { get; set; }
+    public string? AddressCounty { get; set; }
+    public string? AddressState { get; set; }
+    public string? AddressZip { get; set; }
+    public string? AddressCountry { get; set; }
+    public string? HomePhone { get; set; }
+    public string? MobilePhone { get; set; }
 }

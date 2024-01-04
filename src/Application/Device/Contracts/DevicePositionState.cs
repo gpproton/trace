@@ -12,24 +12,12 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Application.Core.Interfaces;
+namespace Trace.Application.Device.Contracts;
 
-namespace Trace.Application.Identity;
-
-public class AccountMapSettingEntity : TenantEntity<Guid>, IMapSettingEntity {
-    public string? MapType { get; set; }
-    public int? Zoom { get; set; }
-    public int? ZoomSelection { get; set; }
-    public bool EnableTrip { get; set; }
-    public bool AutoRoute { get; set; }
-    public bool AutoOrder { get; set; }
-    public bool AutoRouteCost { get; set; }
-    public bool AutoInvoice { get; set; }
-    public bool VerifyOtp { get; set; }
-    public bool AutoZoneOtp { get; set; }
+public class DevicePositionState {
+    public Guid Id { get; set; }
 }

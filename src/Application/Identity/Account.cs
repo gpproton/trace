@@ -23,7 +23,8 @@ using Trace.Application.Core.Permission;
 namespace Trace.Application.Identity;
 
 public class Account : TenantEntity<Guid>, IAccountEntity {
-    public Contact.Contact Identity { get; set; } = default!;
+    public required Contact.Contact Identity { get; set; }
+    public Guid? ContactId { get; set; }
     public RoleLevel DefaultRole { get; set; }
     public AccountRoleEntity? Role { get; set; }
 }

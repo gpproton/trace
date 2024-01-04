@@ -30,9 +30,10 @@ public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public string FirstName { get; set; } = string.Empty;
     public string MiddleName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
+    public ContactExtras? ExtraInformation { get; set; }
     [NotMapped]
     public string FullName => $"{FirstName} {MiddleName} {LastName}";
     public DateTimeOffset? Expiry { get; set; }
     public DateTimeOffset? LastActive { get; set; }
-    public ICollection<Tag.Tags>? Tags { get; set; }
+    public ICollection<Tags.Tags>? Tags { get; set; }
 }

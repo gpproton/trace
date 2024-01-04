@@ -18,7 +18,7 @@
 
 using Trace.Application.Core;
 
-namespace Trace.Application.Tag;
+namespace Trace.Application.Tags;
 
 public class TagMembers : TenantEntity<Guid> {
     public DateTimeOffset? Expiry { get; set; }

@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,13 +16,23 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Base;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Core;
+namespace Trace.Application.Identity;
 
-public abstract class TaggedEntity<T> : AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
-    public ICollection<Tags.Tags>? Tags { get; set; }
-    public T? TagId { get; set; }
-    public T? TenantId { get; set; }
+public class AccountSettings : TenantEntity<Guid>, ISettingEntity {
+    public string? Token { get; set; }
+    public string? Language { get; set; }
+    public string? Timezone { get; set; }
+    public bool Hour24Time { get; set; }
+    public string? UnitDistance { get; set; }
+    public string? UnitVolume { get; set; }
+    public string? UnitWeight { get; set; }
+    public string? UnitTemperature { get; set; }
+    public string? UnitSpeed { get; set; }
+    public string? UnitPower { get; set; }
+    public string? UnitPressure { get; set; }
+    public string? UnitForce { get; set; }
+    public string? UnitArea { get; set; }
 }

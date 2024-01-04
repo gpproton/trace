@@ -17,13 +17,17 @@
 
 using System.Reflection;
 using FluentValidation;
+using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
+using Trace.Application.Device.Consumers;
 
 namespace Trace.Application;
 
 public static class DependencyInjection {
-    public static IServiceCollection RegisterService(this IServiceCollection services, Assembly assembly) {
-        // services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+    public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, Assembly assembly) {
+        services.AddMediator(x => {
+            x.AddConsumersFromNamespaceContaining<DevicePositionConsumer>();
+        });
         services.AddValidatorsFromAssembly(assembly);
 
         return services;

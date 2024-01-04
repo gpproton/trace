@@ -16,25 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Base;
-using Trace.Application.Core.Enums;
+using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Tenant;
-
-public class Tenant : BaseEntity<Guid> {
-    public Guid Token { get; set; }
-
-    public bool Active { get; set; }
-
-    public string FullName { get; set; } = string.Empty;
-
-    public string ShortName { get; set; } = string.Empty;
-
-    public TenantType Type { get; set; } = TenantType.Organization;
-
-    public int UniqueId { get; set; }
-
-    public string Logo { get; set; } = string.Empty;
-
-    public string Background { get; set; } = string.Empty;
+namespace Trace.Application.Identity {
+    public class AccountPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
+        public AccountRoleEntity? Role { get; set; }
+        public string Feature { get; set; } = String.Empty;
+        public bool[] Actions { get; set; } = null!;
+    }
 }

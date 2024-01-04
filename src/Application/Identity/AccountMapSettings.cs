@@ -21,18 +21,15 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Identity;
 
-public class AccountSetting : TenantEntity<Guid>, ISettingEntity {
-    public string? Token { get; set; }
-    public string? Language { get; set; }
-    public string? Timezone { get; set; }
-    public bool Hour24Time { get; set; }
-    public string? UnitDistance { get; set; }
-    public string? UnitVolume { get; set; }
-    public string? UnitWeight { get; set; }
-    public string? UnitTemperature { get; set; }
-    public string? UnitSpeed { get; set; }
-    public string? UnitPower { get; set; }
-    public string? UnitPressure { get; set; }
-    public string? UnitForce { get; set; }
-    public string? UnitArea { get; set; }
+public class AccountMapSettings : TenantEntity<Guid>, IMapSettingEntity {
+    public string? MapType { get; set; }
+    public int? Zoom { get; set; }
+    public int? ZoomSelection { get; set; }
+    public bool EnableTrip { get; set; }
+    public bool AutoRoute { get; set; }
+    public bool AutoOrder { get; set; }
+    public bool AutoRouteCost { get; set; }
+    public bool AutoInvoice { get; set; }
+    public bool VerifyOtp { get; set; }
+    public bool AutoZoneOtp { get; set; }
 }
