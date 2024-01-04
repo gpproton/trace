@@ -31,5 +31,5 @@ public class Route : TaggedEntity<Guid> {
     public int? CompletedRate { get; set; }
     public Point Source { get; set; } = null!;
     public Point Destination { get; set; } = null!;
-    public Polygon? Path { get; set; }
+    public LineString? Path { get; set; }
 }
