@@ -1,4 +1,4 @@
-## Reciprocal Public License (RPL-1.5)
+# Reciprocal Public License (RPL-1.5)
 
 Version 1.5, July 15, 2007
 
@@ -7,7 +7,7 @@ Technical Pursuit Inc.,
 All Rights Reserved. 
 
 
-PREAMBLE
+## PREAMBLE
 
 The Reciprocal Public License (RPL) is based on the concept of reciprocity or,
 if you prefer, fairness.
@@ -45,7 +45,7 @@ The specific terms and conditions of the license are defined in the remainder
 of this document.
 
 
-LICENSE TERMS 
+## LICENSE TERMS
 
 1.0 General; Applicability & Definitions. This Reciprocal Public License
 Version 1.5 ("License") applies to any programs or other works as well as any
@@ -520,7 +520,7 @@ drafter shall not apply to this License.
 13.9 Entire Agreement. This License constitutes the entire agreement between
 the parties with respect to the subject matter hereof. 
 
-EXHIBIT A 
+## EXHIBIT A
 
 The License Notice below must appear in each file of the Source Code of any
 copy You distribute of the Licensed Software or any Extensions thereto:
@@ -540,7 +540,7 @@ copy You distribute of the Licensed Software or any Extensions thereto:
 
 
 
-EXHIBIT B
+## EXHIBIT B
 
 The User-Visible Attribution Notice below, when provided, must appear in each
 user-visible display as defined in Section 6.4 (d):

@@ -1,26 +1,26 @@
 # Trace [Experimental]
 
-Trace is an end to end logistics B2C platform, for handling all processes in the logistics process,
-manages the entire logistics cycle from procurement and distribution to transport,
+Trace is an end to end trasport and logistics CRM platform, for handling all processes in the trasportation process,
+manages the entire trasportation cycle from procurement and distribution to transport,
 delivery to the customer and ending with return logistics.
 
 ## License
 
-Trace is license under the [Business Source License 1.1](./LICENSE.md) [![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE.md)
+Trace is license under the [Trace License 1.0](./LICENSE.md) and [Business Source License 1.1](./LICENSE\(BSL\).md) [![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE\(BSL\).md)
 
-- Agboola Solomon ([agboolas@outlook.com](mailto:agboolas@outlook.com))
+- Agboola Solomon ([abiodun@drolx.com](mailto:abiodun@drolx.com))
 - Godwin peter .O ([me@godwin.dev](mailto:me@godwin.dev))
 
-|                       |                                                                                                                                                                                                           |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Licensor:             | drolx Solutions.                                                                                                                                                                                          |
-| Licensed Work:        | The Licensed Work is (c) 2023 drolx Solutions.                                                                                                                                                            |
+|                       |                               |
+| --------------------- | ----------------------------- |
+| Licensor:             | drolx Solutions. |
+| Licensed Work:        | The Licensed Work is (c) 2024 Trace |
 | Additional Use Grant: | You may make production use of the Licensed Work, provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with drolx's products |
-| Change Date:          | Four years from the date a Licensed version is published                                                                                                                                                  |
-| Change License:       | Reciprocal Public License (RPL-1.5)                                                                                                                                                                       |
+| Change Date:          | Four years from the date a Licensed version is |
+| Change License:       | [Reciprocal Public License \(RPL-1.5\)](./LICENSE\(Change\).md) |
 
 ## Core Project Goals
-* Unify all logistics data source
+* Unify all transportation and logistics data source
 * Single client UI for logistics processes
 * Combine multiple map data to handle order routing
 * Real-time GPS tracking
@@ -41,12 +41,13 @@ interface or mobile app. A few of them are:
 
 ### Stage 1
 
-| Version | Feature             | Progress    | Comments                                                       |
-| ------- | ------------------- |-------------| -------------------------------------------------------------- |
-| v0.0.1  | Protocol endpoint   | Ongoing | MQTT, GRPC and HTTP based API ingest for location data         |
+| Version | Feature             | Progress    | Comments                                                      |
+| ------- | ------------------- |-------------| ------------------------------------------------------------- |
+| v0.0.1  | Protocol endpoint   | Ongoing      | MQTT, GRPC and HTTP based API ingest for location data       |
 | v0.0.1  | Tenant profile      | Ongoing    | basic setting and profile feature fron tenant accounts         |
 | v0.0.1  | Tags                | Ongoing    | For authorization ans sharing for features                     |
 | v0.0.1  | Device              | Ongoing    | IOT devices with compatible usaage e.g GPS, RFID, Sensors, etc |
+| v0.0.1  | Position handler    | Ongoing    | Handling data processing for GPS tracking devicea              |
 | v0.0.1  | Asset - Vehicle     | Ongoing    | Sub module for managing vehicle as asset                       |
 | v0.0.1  | Asset - Trailer     | Ongoing    | Sub module for managing trailer as asset                       |
 | v0.0.1  | Asset - Others      | Ongoing    | Sub module for managing other asset                            |
