@@ -1,4 +1,4 @@
-namespace Trace.Service.Routing;
+namespace Trace.Service.Navigation;
 
 public class Query {
     public int GetCheck() => 1;

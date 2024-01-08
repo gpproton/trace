@@ -2,13 +2,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-routing
+  name: service-navigation
 spec:
   minReadySeconds: 60
   replicas: 1
   selector:
     matchLabels:
-      app: service-routing
+      app: service-navigation
   strategy:
     rollingUpdate:
       maxUnavailable: 0
@@ -16,17 +16,17 @@ spec:
   template:
     metadata:
       labels:
-        app: service-routing
+        app: service-navigation
     spec:
       containers:
-      - name: service-routing
-        image: ghcr.io/drolx/trace-service-routing:0.0.1-preview.5
+      - name: service-navigation
+        image: ghcr.io/drolx/trace-service-navigation:0.0.1-preview.5
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
         envFrom:
         - configMapRef:
-            name: service-routing-env
+            name: service-navigation-env
         - secretRef:
-            name: service-routing-secrets
+            name: service-navigation-secrets
       terminationGracePeriodSeconds: 180

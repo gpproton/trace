@@ -1,5 +1,5 @@
 // Copyright (c) 2023 - 2024 drolx Solutions
-// 
+//
 // Licensed under the Business Source License 1.1 and Trace License;
 // you may not use this file except in compliance with the License.
 //     https://mariadb.com/bsl11
@@ -9,7 +9,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Sunday, 31st Dec 2023
 // Modified By: Godwin peter .O
@@ -23,7 +23,7 @@ public static class Nodes {
     public static readonly IReadOnlyList<string> All = new List<string> {
         Core,
         Integration,
-        Routing
+        Navigation
     };
 
     // Services
@@ -31,7 +31,7 @@ public static class Nodes {
     public const string Client = nameof(Client);
     public const string Integration = nameof(Integration);
     public const string Core = nameof(Core);
-    public const string Routing = nameof(Routing);
+    public const string Navigation = nameof(Navigation);
     public const string Manager = nameof(Manager);
     public const string Worker = nameof(Worker);
 }

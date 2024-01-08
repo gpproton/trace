@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <Title>Trace.Service.Routing</Title>
-    <ContainerRepository>$(ContainerRepo)/trace-service-routing</ContainerRepository>
+    <Title>Trace.Service.Navigation</Title>
+    <ContainerRepository>$(ContainerRepo)/trace-service-navigation</ContainerRepository>
   </PropertyGroup>
 
   <Import Project="..\Shared.props" />

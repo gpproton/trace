@@ -14,8 +14,8 @@ configMapGenerator:
     - services__service-core__1=https://service-core:8443
     - services__service-integration__0=http://service-integration:8080
     - services__service-integration__1=https://service-integration:8443
-    - services__service-routing__0=http://service-routing:8080
-    - services__service-routing__1=https://service-routing:8443
+    - services__service-navigation__0=http://service-navigation:8080
+    - services__service-navigation__1=https://service-navigation:8443
     - ASPNETCORE_URLS=http://+:8080
 
 secretGenerator:

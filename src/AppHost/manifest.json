@@ -126,7 +126,7 @@
         }
       }
     },
-    "service-routing": {
+    "service-navigation": {
       "type": "project.v0",
       "path": "../Service/Routing/Trace.Service.Routing.csproj",
       "env": {
@@ -160,8 +160,8 @@
         "services__service-core__1": "{service-core.bindings.https.url}",
         "services__service-integration__0": "{service-integration.bindings.http.url}",
         "services__service-integration__1": "{service-integration.bindings.https.url}",
-        "services__service-routing__0": "{service-routing.bindings.http.url}",
-        "services__service-routing__1": "{service-routing.bindings.https.url}"
+        "services__service-navigation__0": "{service-navigation.bindings.http.url}",
+        "services__service-navigation__1": "{service-navigation.bindings.https.url}"
       },
       "bindings": {
         "http": {
@@ -187,8 +187,8 @@
         "ConnectionStrings__trace": "{trace.connectionString}",
         "services__service-integration__0": "{service-integration.bindings.http.url}",
         "services__service-integration__1": "{service-integration.bindings.https.url}",
-        "services__service-routing__0": "{service-routing.bindings.http.url}",
-        "services__service-routing__1": "{service-routing.bindings.https.url}"
+        "services__service-navigation__0": "{service-navigation.bindings.http.url}",
+        "services__service-navigation__1": "{service-navigation.bindings.https.url}"
       },
       "bindings": {
         "http": {

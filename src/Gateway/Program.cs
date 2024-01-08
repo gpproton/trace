@@ -17,7 +17,7 @@ builder.Services
     .AddType<GeoJsonPositionType>()
     .AddType<GeoJsonCoordinatesType>();
 builder.Services
-    .AddGraphQL(Nodes.Routing)
+    .AddGraphQL(Nodes.Navigation)
     .AddType<GeoJsonCoordinatesType>();
 builder.Services
     .AddGraphQL(Nodes.Integration)

@@ -17,7 +17,7 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Core;
-using Trace.Service.Routing;
+using Trace.Service.Navigation;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 
@@ -28,9 +28,9 @@ var assembly = typeof(TenantEntity<>).Assembly;
 builder.RegisterDefaults();
 builder.RegisterPersistence(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterHangfire(Nodes.Routing);
+builder.Services.RegisterHangfire(Nodes.Navigation);
 builder.Services.AddGraphQLServer()
-    .AddGraphqlDefaults(Nodes.Routing)
+    .AddGraphqlDefaults(Nodes.Navigation)
     .AddQueryType<Query>()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
@@ -38,7 +38,7 @@ builder.Services.AddGraphQLServer()
 var app = builder.Build();
 
 app.RegisterDefaults();
-app.UseHangfireDashboard(Nodes.Routing);
+app.UseHangfireDashboard(Nodes.Navigation);
 app.RegisterGraphQl();
 
 app.Run();
