@@ -78,6 +78,7 @@
         "markdown",
         "json",
         "jsonc",
+        "yaml",
         "shellscript",
         "xml",
         "dockerfile",
