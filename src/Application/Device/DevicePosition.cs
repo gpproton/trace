@@ -18,7 +18,6 @@
 
 using Axolotl.EFCore.Base;
 using Cassandra.Mapping;
-using NetTopologySuite.Geometries;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
@@ -39,7 +38,8 @@ public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
     public Guid TenantId { get; set; }
     public DateTimeOffset Time { get; set; }
     public DateTimeOffset ServerTime { get; set; }
-    public required Point Point { get; set; }
+    public decimal Longitude { get; set; }
+    public decimal Latitude { get; set; }
     public string? Address { get; set; }
     public double Speed { get; set; }
     public double Course { get; set; }
@@ -61,11 +61,13 @@ public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
             .Column(x => x.TenantId, x => x.WithName("tenant_id"))
             .Column(x => x.Time, x => x.WithName("time"))
             .Column(x => x.ServerTime, x => x.WithName("server_time"))
-            .Column(x => x.Point, x => x.WithName("point"))
+            .Column(x => x.Longitude, x => x.WithName("longitude"))
+            .Column(x => x.Latitude, x => x.WithName("latitude"))
             .Column(x => x.Address, x => x.WithName("address"))
             .Column(x => x.Speed, x => x.WithName("speed"))
             .Column(x => x.Course, x => x.WithName("course"))
-            .Column(x => x.Distance, x => x.WithName("odometer"))
+            .Column(x => x.Distance, x => x.WithName("distance"))
+            .Column(x => x.Odometer, x => x.WithName("odometer"))
             .Column(x => x.Altitude, x => x.WithName("altitude"))
             .Column(x => x.Satellites, x => x.WithName("satellites"))
             .Column(x => x.Fuel, x => x.WithName("fuel"))
