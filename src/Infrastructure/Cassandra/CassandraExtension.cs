@@ -18,6 +18,7 @@
 
 using Cassandra;
 using Cassandra.Mapping;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -28,23 +29,22 @@ using Trace.Infrastructure.Cassandra.Interfaces;
 namespace Trace.Infrastructure.Cassandra;
 
 public static class CassandraExtension {
-    public static IServiceCollection RegisterCassandraInfrastructure(this IServiceCollection services) {
+    public static WebApplicationBuilder AddCassandra(this WebApplicationBuilder builder) {
         const string keyspace = CanssandraConst.Keyspace;
 
-        // Registers entities mapping
-        services.AddSingleton(_ => new CassandraOptions {
+        builder.Services.AddSingleton(_ => new CassandraOptions {
             Keyspace = keyspace,
             Config = [
                 DevicePosition.GetConfig(keyspace),
             ]
         });
 
-        var scope = services.BuildServiceProvider();
-        var config = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+        var scope = builder.Services.BuildServiceProvider();
+        var config = builder.Services.BuildServiceProvider().GetRequiredService<IConfiguration>();
         var cassandraOptions = scope.GetRequiredService<CassandraOptions>();
 
-        services.AddOptions<CassandraConfig>().Bind(config.GetSection(CassandraConfig.Key));
-        services.AddSingleton<ICluster>(provider => {
+        builder.Services.AddOptions<CassandraConfig>().Bind(config.GetSection(CassandraConfig.Key));
+        builder.Services.AddSingleton<ICluster>(provider => {
             var conf = provider.GetRequiredService<IOptions<CassandraConfig>>();
             var queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.One);
 
@@ -57,11 +57,11 @@ public static class CassandraExtension {
                 .WithRetryPolicy(new LoggingRetryPolicy(new DefaultRetryPolicy()))
                 .Build();
         });
-        services.AddScoped<ICassandraProvider, CassandraProvider>();
+        builder.Services.AddScoped<ICassandraProvider, CassandraProvider>();
 
         MappingConfiguration.Global.Define(cassandraOptions.Config);
-        services.AddHostedService<CassandraHostedService>();
+        builder.Services.AddHostedService<CassandraHostedService>();
 
-        return services;
+        return builder;
     }
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,23 +12,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
-using Trace.Application.Core.Interfaces;
 using Trace.Application.Tenant;
 
-namespace Trace.Infrastructure.EFCore;
+namespace Trace.Infrastructure;
 
-public partial class ServiceContext : DbContext {
-    public ServiceContext(DbContextOptions options) : base(options) {
-    }
-
-    protected override void OnModelCreating(ModelBuilder builder) {
-        builder.ApplyConfigurationsFromAssembly(typeof(ITenantEntity<>).Assembly);
-
-        base.OnModelCreating(builder);
-    }
+public partial class ServiceContext {
+    public DbSet<Tenants> Tenants { get; set; } = default!;
 }

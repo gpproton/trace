@@ -7,7 +7,7 @@
     <IsAspireSharedProject>true</IsAspireSharedProject>
   </PropertyGroup>
 
-  <ItemGroup Label="Aspire">
+  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
@@ -22,9 +22,8 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
   </ItemGroup>
 
-  <ItemGroup Label="Other">
+  <ItemGroup Label="Others">
     <PackageReference Include="MassTransit" />
-    <PackageReference Include="MassTransit.RabbitMQ" />
     <PackageReference Include="Riok.Mapperly" />
   </ItemGroup>
 

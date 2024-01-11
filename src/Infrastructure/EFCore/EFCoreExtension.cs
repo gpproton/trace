@@ -12,17 +12,25 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
 
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Trace.Infrastructure.EFCore;
 
 public static class EFCoreExtension {
-    public static IServiceCollection RegisterEFCoreInfrastructure(this IServiceCollection services) {
+    public static WebApplicationBuilder RegisterEFCoreInfrastructure(this WebApplicationBuilder builder) {
+        var dbConnectionString = builder.Configuration.GetConnectionString("db");
 
-        return services;
+        builder.AddNpgsqlDbContext<ServiceContext>("db", options => {
+            options.HealthChecks = true;
+            options.ConnectionString = dbConnectionString;
+        });
+
+        return builder;
     }
 }

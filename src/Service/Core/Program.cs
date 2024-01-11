@@ -20,16 +20,14 @@ using Trace.Application.Core;
 using Trace.Service.Core;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
-using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var assembly = typeof(TenantEntity<>).Assembly;
 
 builder.RegisterDefaults();
-builder.RegisterPersistence(assembly);
+builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterCassandraInfrastructure();
 builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)

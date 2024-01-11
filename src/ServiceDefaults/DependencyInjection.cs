@@ -19,7 +19,6 @@
 using System.IO.Compression;
 using System.Reflection;
 using HotChocolate.AspNetCore;
-using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
@@ -45,26 +44,6 @@ public static class DependencyInjection {
         builder.AddRedisDistributedCache("cache");
         builder.AddServiceDefaults();
         builder.RegisterSharedArchitecture();
-
-        return builder;
-    }
-
-    public static WebApplicationBuilder RegisterPersistence(this WebApplicationBuilder builder, Assembly assembly) {
-        builder.AddRabbitMQ("messaging");
-
-        // TODO: Hook up shared DbContext
-        // builder.AddNpgsqlDbContext<OperationContext>("db");
-
-        builder.Services.AddMassTransit(busConfigurator => {
-            busConfigurator.AddConsumers(assembly);
-            busConfigurator.UsingRabbitMq((context, cfg) => {
-                var config = context.GetRequiredService<IConfiguration>();
-                cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {
-                    h.Heartbeat(TimeSpan.FromSeconds(1));
-                });
-                cfg.ConfigureEndpoints(context);
-            });
-        });
 
         return builder;
     }

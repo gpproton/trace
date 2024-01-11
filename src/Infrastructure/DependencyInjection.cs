@@ -16,13 +16,33 @@
 // Modified By: Godwin peter .O
 // Modified At: Tue Jan 02 2024
 
+using System.Reflection;
+using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Trace.Infrastructure.EFCore;
+using Trace.Infrastructure.Cassandra;
 
 namespace Trace.Infrastructure;
 
 public static class DependencyInjection {
-    public static IServiceCollection RegisterInfrastructure(this IServiceCollection services) {
+    public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
+        builder.AddRabbitMQ("messaging");
+        builder.AddCassandra();
+        builder.RegisterEFCoreInfrastructure();
+        builder.Services.AddMassTransit(busConfigurator => {
+            busConfigurator.AddConsumers(consumerSAsembly);
+            busConfigurator.UsingRabbitMq((context, cfg) => {
+                var config = context.GetRequiredService<IConfiguration>();
+                cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {
+                    h.Heartbeat(TimeSpan.FromSeconds(1));
+                });
+                cfg.ConfigureEndpoints(context);
+            });
+        });
 
-        return services;
+        return builder;
     }
 }

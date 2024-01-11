@@ -25,23 +25,22 @@ using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
 using Trace.Application.Core;
-using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure;
 using Trace.Service.Integration.Features.Devices;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
 
 builder.RegisterDefaults();
-builder.RegisterPersistence(assembly);
+builder.RegisterInfrastructure(assembly);
 builder.Services.AddQueueing();
-builder.Services.RegisterCassandraInfrastructure();
-builder.Services.RegisterDefaultServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.AddGrpc();
+builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.RegisterTraccarInfrastructure();
 builder.Services.RegisterApplicationServices(assembly);
+builder.Services.RegisterDefaultServices();
 
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)

@@ -20,6 +20,8 @@
     <ProjectReference Include="..\Client\Trace.Manager.Client.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" />
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
   </ItemGroup>

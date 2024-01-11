@@ -5,8 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
     <ProjectReference Include="..\Application\Trace.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Aspire">
+    <PackageReference Include="Aspire.RabbitMQ.Client" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +31,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
     <PackageReference Include="CassandraCSharpDriver" />
+    <PackageReference Include="MassTransit.RabbitMQ" />
   </ItemGroup>
 
 </Project>
