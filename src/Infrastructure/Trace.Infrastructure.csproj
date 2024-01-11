@@ -6,32 +6,23 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
     <ProjectReference Include="..\Application\Trace.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup Label="Aspire">
-    <PackageReference Include="Aspire.RabbitMQ.Client" />
-    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
-  </ItemGroup>
-
   <ItemGroup>
+  <PackageReference Include="Aspire.RabbitMQ.Client" />
+    <PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
-    <!--#if (UseSQLite)-->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
-    <!--#endif-->
-    <!--#if (UsePostgres)-->
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" />
-    <!--#endif-->
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+    <PackageReference Include="EFCore.NamingConventions" />
     <PackageReference Include="CassandraCSharpDriver" />
     <PackageReference Include="MassTransit.RabbitMQ" />
+    <PackageReference Include="Redis.OM" />
   </ItemGroup>
 
 </Project>

@@ -17,6 +17,7 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
@@ -24,12 +25,24 @@ namespace Trace.Infrastructure.EFCore;
 
 public static class EFCoreExtension {
     public static WebApplicationBuilder RegisterEFCoreInfrastructure(this WebApplicationBuilder builder) {
-        var dbConnectionString = builder.Configuration.GetConnectionString("db");
+        var connectionString = builder.Configuration.GetConnectionString("db");
 
-        builder.AddNpgsqlDbContext<ServiceContext>("db", options => {
-            options.HealthChecks = true;
-            options.ConnectionString = dbConnectionString;
+        builder.AddNpgsqlDbContext<ServiceContext>("db",
+        configureSettings => {
+            configureSettings.HealthChecks = true;
+            configureSettings.ConnectionString = connectionString;
+        },
+        options => {
+            options.UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString, b => b
+            .MigrationsAssembly(typeof(ServiceContext).Assembly.FullName)
+            .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
+            .UseNetTopologySuite());
         });
+
+        // TODO: Apply generic repo after axolotl review
+        // builder.Sservices.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+        // builder.Sservices.AddScoped(typeof(IReadRepository<>), typeof(GenericRepository<>));
 
         return builder;
     }
