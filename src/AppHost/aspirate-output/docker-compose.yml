@@ -56,9 +56,9 @@ services:
     - target: 8080
       published: 8081
     restart: unless-stopped
-  service-routing:
-    container_name: "service-routing"
-    image: "ghcr.io/drolx/trace-service-routing:0.0.1-preview.5"
+  service-navigation:
+    container_name: "service-navigation"
+    image: "ghcr.io/drolx/trace-service-navigation:0.0.1-preview.5"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -80,8 +80,8 @@ services:
       services__service-core__1: "https://service-core:8443"
       services__service-integration__0: "http://service-integration:8080"
       services__service-integration__1: "https://service-integration:8443"
-      services__service-routing__0: "http://service-routing:8080"
-      services__service-routing__1: "https://service-routing:8443"
+      services__service-navigation__0: "http://service-navigation:8080"
+      services__service-navigation__1: "https://service-navigation:8443"
     ports:
     - target: 8080
       published: 8083
@@ -97,8 +97,8 @@ services:
       ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=;"
       services__service-integration__0: "http://service-integration:8080"
       services__service-integration__1: "https://service-integration:8443"
-      services__service-routing__0: "http://service-routing:8080"
-      services__service-routing__1: "https://service-routing:8443"
+      services__service-navigation__0: "http://service-navigation:8080"
+      services__service-navigation__1: "https://service-navigation:8443"
     ports:
     - target: 8080
       published: 8084

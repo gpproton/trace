@@ -1,63 +1,56 @@
-# Trace Business Source License (BSL 1.1)
 
-License text copyright (c) 2020 MariaDB Corporation Ab, All Rights Reserved.
-“Business Source License” is a trademark of MariaDB Corporation Ab.
+# Trace License
 
-## Parameters
+This license agreement is between drolx Solutions, a logistics and transportation CRM software as a service project (the “Licensor”), and the person or entity who receives a copy of the software (the “Licensee”). The Licensee agrees to be bound by the terms of this license by installing, copying, or using the software.
 
-```
-Licensor: drolx Solutions
-Licensed Work: Trace 0.1-alpha. The Licensed Work is (c) 2023 drolx Solutions.
-Additional Use Grant: You may make production use of the Licensed Work,
-provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with drolx's products.
-Change Date: Four years from the date the Licensed Work is published.
-Change License:  Reciprocal Public License (RPL-1.5)
-```
 
-For information about alternative licensing arrangements for the Licensed Work,
-please contact dev@drolx.com.
+## 1. Definitions
 
-Notice
+“Software” means drolx Solutions’s software and all its components, documentation, and examples included by drolx Solutions.
 
-## Business Source License 1.1
+“Modified Version” means the Software as modified by the Licensee, including, but not limited to, changes in the source code, functionality, output, and/or documentation, or any portion thereof.
 
-### Terms
+“Original License” means this license as given by drolx Solutions, in its current version or as it may be modified by drolx Solutions from time to time.
 
-The Licensor hereby grants you the right to copy, modify, create derivative
-works, redistribute, and make non-production use of the Licensed Work. The
-Licensor may make an Additional Use Grant, above, permitting limited production use.
+“Source Code” means the human-readable form of the Software and related documentation that can be used to modify the Software.
 
-Effective on the Change Date, or the fourth anniversary of the first publicly
-available distribution of a specific version of the Licensed Work under this
-License, whichever comes first, the Licensor hereby grants you rights under
-the terms of the Change License, and the rights granted in the paragraph
-above terminate.
+“Change Date” means the date four years from the date of the initial distribution of the Software by drolx Solutions.
 
-If your use of the Licensed Work does not comply with the requirements
-currently in effect as described in this License, you must purchase a
-commercial license from the Licensor, its affiliated entities, or authorized
-resellers, or you must refrain from using the Licensed Work.
 
-All copies of the original and modified Licensed Work, and derivative works
-of the Licensed Work, are subject to this License. This License applies
-separately for each version of the Licensed Work and the Change Date may vary
-for each version of the Licensed Work released by Licensor.
+## 2. Grant of License
 
-You must conspicuously display this License on each original or modified copy
-of the Licensed Work. If you receive the Licensed Work in original or
-modified form from a third party, the terms and conditions set forth in this
-License apply to your use of that work.
+Subject to the terms and conditions of this license, drolx Solutions grants the Licensee a non-exclusive, worldwide, royalty-free license to use, reproduce, modify, and distribute the Software or its Modified Version, in any form, for any purpose, except as prohibited under Section 3.
 
-Any use of the Licensed Work in violation of this License will automatically
-terminate your rights under this License for the current and all other
-versions of the Licensed Work.
 
-This License does not grant you any right in any trademark or logo of
-Licensor or its affiliates (provided that you may use a trademark or logo of
-Licensor as expressly required by this License).
+## 3. Restrictions
 
-TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE LICENSED WORK IS PROVIDED ON
-AN “AS IS” BASIS. LICENSOR HEREBY DISCLAIMS ALL WARRANTIES AND CONDITIONS,
-EXPRESS OR IMPLIED, INCLUDING (WITHOUT LIMITATION) WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND
-TITLE.
+The license granted in Section 2 is subject to the following restrictions:
+
+The Licensee shall not use the Software or its Modified Version to offer a competing service that uses the Software.
+The Licensee shall publish the Source Code of the Modified Version under the Reciprocal Public License 1.5 (the “RPL”), available at 1, and make it available to anyone who receives a copy of the Modified Version.
+The Licensee shall include a copy of the Original License and this license along with the Software or its Modified Version.
+
+
+## 4. Termination
+
+This license will terminate automatically if the Licensee fails to comply with any of the terms and conditions of this license. Upon termination, the Licensee shall cease all use of the Software or its Modified Version and destroy all copies thereof.
+
+
+## 5. Conversion
+
+This license will automatically convert to the RPL on the Change Date, unless drolx Solutions has released a new version of the Software under a different license before that date. Upon conversion, the Licensee shall comply with the terms and conditions of the RPL for any further use of the Software or its Modified Version.
+
+
+## 6. Disclaimer of Warranty
+
+The Software is provided “AS IS”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall drolx Solutions be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
+
+
+## 7. Limitation of Liability
+
+In no event shall drolx Solutions be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of the Software or its Modified Version, even if advised of the possibility of such damage.
+
+
+## 8. General
+
+This license is governed by the laws of the jurisdiction specified by drolx Solutions, without regard to the conflicts of law rules thereof. Any dispute arising out of or relating to this license shall be subject to the exclusive jurisdiction of the courts of that jurisdiction. This license constitutes the entire agreement between the parties with respect to the subject matter hereof. It supersedes all prior or contemporaneous communications and proposals, whether electronic, oral, or written, between the parties with respect to the Software. If any provision of this license is held to be unenforceable, that provision shall be enforced to the maximum extent permissible so as to give effect to the intent of the parties, and the remainder of this license shall continue in full force and effect. drolx Solutions may assign or transfer this license at any time without the consent of the Licensee. The Licensee may not assign or transfer this license without the prior written consent of drolx Solutions. Any attempt to do so shall be null and void. drolx Solutions reserves the right to change the terms and conditions of this license at any time by posting a new version of the license on its website. The Licensee is responsible for checking the website for updates. The Licensee’s continued use of the Software or its Modified Version after such changes shall constitute the Licensee’s acceptance of the new license.

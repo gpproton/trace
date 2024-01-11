@@ -11,6 +11,20 @@
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" />
+    <PackageReference Include="Grpc.AspNetCore" />
+    <PackageReference Include="Google.Protobuf" />
+    <PackageReference Include="Google.Protobuf.Tools" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
 </Project>

@@ -6,13 +6,13 @@ generatorOptions:
   disableNameSuffixHash: true
 
 configMapGenerator:
-- name: service-routing-env
+- name: service-navigation-env
   literals:
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES=true
     - OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES=true
     - ASPNETCORE_URLS=http://+:8080
 
 secretGenerator:
-- name: service-routing-secrets
+- name: service-navigation-secrets
   envs:
-  - .service-routing.secrets
+  - .service-navigation.secrets

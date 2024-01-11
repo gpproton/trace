@@ -1,4 +1,4 @@
-﻿using RabbitMQ.Client;
+using RabbitMQ.Client;
 using Trace.Common.Queueing.Interfaces;
 
 namespace Trace.Common.Queueing.Implementation;

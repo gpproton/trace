@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Title>Trace.Service.Navigation</Title>
+    <ContainerRepository>$(ContainerRepo)/trace-service-navigation</ContainerRepository>
+  </PropertyGroup>
+
+  <Import Project="..\Shared.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

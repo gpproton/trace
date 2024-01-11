@@ -22,7 +22,7 @@ var integrationService = builder.AddProject<Projects.Trace_Service_Integration>(
 // .WithReference(messaging)
 // .WithReference(db);
 
-var routingService = builder.AddProject<Projects.Trace_Service_Routing>("service-routing");
+var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation");
 // .WithReference(cache)
 // .WithReference(messaging)
 // .WithReference(db);

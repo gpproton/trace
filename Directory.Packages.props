@@ -19,6 +19,8 @@
   <!-- Core packages -->
   <ItemGroup Label="Core">
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
 		<PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(RuntimeVersion)" />
@@ -44,10 +46,15 @@
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.59.0" />
     <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
+    <PackageVersion Include="Google.Protobuf" Version="3.25.1" />
+    <PackageVersion Include="Google.Protobuf.Tools" Version="3.25.1" />
   </ItemGroup>
 
   <!-- EFcore packages -->
@@ -57,6 +64,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(EFCoreVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(NpgsqlVersion)" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="$(NpgsqlVersion)" />
   </ItemGroup>
@@ -108,7 +116,6 @@
   <ItemGroup Label="MassTransit">
     <PackageVersion Include="MassTransit" Version="$(MassTransitVersion)" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
-    <PackageVersion Include="MassTransit.Hangfire" Version="$(MassTransitVersion)" />
   </ItemGroup>
 
   <!-- Other packages -->
@@ -118,7 +125,6 @@
     <PackageVersion Include="CassandraCSharpDriver" Version="$(CassandraVersion)" />
     <PackageVersion Include="Minio" Version="$(MinioVersion)" />
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.7.1" />
-    <PackageVersion Include="MediatR" Version="12.1.1" />
     <PackageVersion Include="NetTopologySuite" Version="2.5.0" />
     <PackageVersion Include="Redis.OM" Version="0.5.3" />
     <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />

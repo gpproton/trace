@@ -1,0 +1,122 @@
+{
+  "folders": [
+    {
+      "name": "project",
+      "path": "."
+    },
+    {
+      "path": "proxy"
+    },
+    {
+      "name": "helm-charts",
+      "path": "charts"
+    },
+    {
+      "name": "ui",
+      "path": "client"
+    }
+  ],
+  "settings": {
+    "window.zoomLevel": -1,
+    "files.autoSave": "afterDelay",
+    "dotnet.defaultSolution": "Trace.sln",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.formatOnSave": true,
+    "dotnet.preferVisualStudioCodeFileSystemWatcher": true,
+    "nuget.autoOpenOutputWindowOnRestore": "off",
+    "files.watcherExclude": {
+      "**/.git/objects/**": true,
+      "**/.git/subtree-cache/**": true,
+      "**/node_modules/*/**": true,
+      "**/bin/*/**": true,
+      "**/obj/*/**": true,
+      "**/.output/*/**": true,
+    },
+    "psi-header.config": {
+      "forceToTop": true,
+      "blankLinesAfter": 1,
+      "spacesBetweenYears": true,
+      "license": "BSL 1.1",
+      "initials": "GP",
+      "company": "drolx Solutions",
+      "creationDateZero": "asIs",
+      "hostname": "trace.ng"
+    },
+    "psi-header.templates": [
+      {
+        "language": "*",
+        "template": [
+          "Copyright (c) <<yeartoyear(2023,now)>> <<company>>",
+          "",
+          "Licensed under the Business Source License 1.1 and Trace License",
+          "you may not use this file except in compliance with the License.",
+          "Change License: Reciprocal Public License 1.5",
+          "    https://mariadb.com/bsl11",
+          "    https://opensource.org/license/rpl-1-5",
+          "Unless required by applicable law or agreed to in writing, software",
+          "distributed under the License is distributed on an \"AS IS\" BASIS,",
+          "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+          "See the License for the specific language governing permissions and",
+          "limitations under the License.",
+          "",
+          "Author: <<author>> (<<authorEmail>>)",
+          "Created At: <<filecreated('dddd, Do MMM YYYY')>>",
+          "Modified By: <<author>>",
+          "Modified At: <<date>>"
+        ]
+      }
+    ],
+    "psi-header.changes-tracking": {
+      "isActive": true,
+      "modAuthor": "Modified By:",
+      "modDate": "Modified At:",
+      "modDateFormat": "dddd, Do MMM YYYY",
+      "include": [],
+      "includeGlob": [],
+      "exclude": [
+        "markdown",
+        "json",
+        "jsonc",
+        "shellscript",
+        "xml",
+        "dockerfile",
+        "dockercompose",
+        "ini"
+      ],
+      "excludeGlob": [
+        "./**/*/.gitignore"
+      ],
+      "autoHeader": "autoSave",
+      "enforceHeader": true,
+      "updateLicenseVariables": false
+    },
+    "psi-header.lang-config": [
+      {
+        "language": "csharp",
+        "begin": "",
+        "prefix": "// ",
+        "suffix": "",
+        "end": "",
+        "forceToTop": true
+      }
+    ],
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-dotnettools.vscodeintellicode-csharp",
+      "editorconfig.editorconfig",
+      "ms-dotnettools.csharp",
+      "wayou.vscode-todo-highlight",
+      "vscode-icons-team.vscode-icons",
+      "gruntfuggly.todo-tree",
+      "jacokok.csharp-stretch"
+    ],
+    "unwantedRecommendations": [
+      "octref.vetur",
+      "hookyqr.beautify",
+      "dbaeumer.jshint",
+      "ms-vscode.vscode-typescript-tslint-plugin"
+    ]
+  },
+}

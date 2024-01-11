@@ -4,7 +4,7 @@ resources:
 - db
 - service-core
 - service-integration
-- service-routing
+- service-navigation
 - gateway
 - manager
 - frontend
