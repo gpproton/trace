@@ -17,14 +17,14 @@
 // Modified At: Thu Jan 04 2024
 
 using MassTransit.Mediator;
-using Trace.Application.Device.Contracts;
+using Trace.Application.Device.Dtos;
 using Trace.Application.Device.Query;
 
 namespace Trace.Application.Device.Consumers;
 
-public class GetDeviceConsumer : MediatorRequestHandler<GetDeviceQuery, DeviceResponse> {
-    protected override Task<DeviceResponse> Handle(GetDeviceQuery request, CancellationToken cancellationToken) {
+public class GetDeviceConsumer : MediatorRequestHandler<GetDeviceQuery, DeviceDto> {
+    protected override Task<DeviceDto> Handle(GetDeviceQuery request, CancellationToken cancellationToken) {
 
-        return Task.FromResult(new DeviceResponse { Id = Guid.NewGuid(), Name = "test"});
+        return Task.FromResult(new DeviceDto { Id = Guid.NewGuid(), Name = "test"});
     }
 }

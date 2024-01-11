@@ -20,14 +20,13 @@ using MassTransit;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Trace.Application.Device.Commands;
-using Trace.Application.Device.Contracts;
 using Trace.Application.Device.Dtos;
 
 namespace Trace.Service.Integration.Features.Protocol;
 
 public static class ProtocolEndpoint {
     public static IEndpointRouteBuilder MapProtocolEndpoint(this IEndpointRouteBuilder route) {
-        route.MapPost("/api/protocol", (CreatePositionDto payload, [FromServices] IMediator mediator) => {
+        route.MapPost("/api/protocol", (PositionDto payload, [FromServices] IMediator mediator) => {
             return mediator.SendRequest(new CreateDevicePositionCommand { Payload = payload });
         });
 

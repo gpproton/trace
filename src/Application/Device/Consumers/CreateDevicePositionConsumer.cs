@@ -19,14 +19,14 @@
 using MassTransit.Mediator;
 using Microsoft.Extensions.Logging;
 using Trace.Application.Device.Commands;
-using Trace.Application.Device.Contracts;
+using Trace.Application.Device.Dtos;
 
 namespace Trace.Application.Device.Consumers;
 
-public class CreateDevicePositionConsumer(ILogger<CreateDevicePositionConsumer> logger) : MediatorRequestHandler<CreateDevicePositionCommand, DevicePositionResponse> {
-    protected override Task<DevicePositionResponse> Handle(CreateDevicePositionCommand request, CancellationToken cancellationToken) {
+public class CreateDevicePositionConsumer(ILogger<CreateDevicePositionConsumer> logger) : MediatorRequestHandler<CreateDevicePositionCommand, DevicePositionDto> {
+    protected override Task<DevicePositionDto> Handle(CreateDevicePositionCommand request, CancellationToken cancellationToken) {
         logger.LogInformation($"Received position for device : {request.Payload?.Id}");
 
-        return Task.FromResult(new DevicePositionResponse { Id = Guid.NewGuid(), Status = "Created" });
+        return Task.FromResult(new DevicePositionDto { Id = Guid.NewGuid(), Status = "Created" });
     }
 }

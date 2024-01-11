@@ -17,12 +17,11 @@
 // Modified At: Thu Jan 04 2024
 
 using MassTransit.Mediator;
-using Trace.Application.Device.Contracts;
 using Trace.Application.Device.Dtos;
 
 namespace Trace.Application.Device.Commands;
 
-public class CreateDevicePositionCommand : Request<DevicePositionResponse> {
+public class CreateDevicePositionCommand : Request<DevicePositionDto> {
     public Guid Id { get; set; }
-    public CreatePositionDto? Payload { get; set; }
+    public PositionDto? Payload { get; set; }
 }

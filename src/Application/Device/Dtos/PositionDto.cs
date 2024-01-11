@@ -18,7 +18,7 @@
 
 namespace Trace.Application.Device.Dtos;
 
-public class CreatePositionDto {
+public class PositionDto {
     public required string Id { get; set; }
     public double Lon { get; set; }
     public double Lat { get; set; }

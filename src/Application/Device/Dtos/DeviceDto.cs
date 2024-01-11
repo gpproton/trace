@@ -16,9 +16,9 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-namespace Trace.Application.Device.Contracts;
+namespace Trace.Application.Device.Dtos;
 
-public class DevicePositionResponse {
+public class DeviceDto {
     public Guid Id { get; set; }
-    public string? Status { get; set; }
+    public string Name { get; set; } = null!;
 }
