@@ -17,9 +17,10 @@
 // Modified At: Thu Jan 04 2024
 
 using MassTransit.Mediator;
+using Trace.Application.Device.Contracts;
 
-namespace Trace.Application.Device.Contracts;
+namespace Trace.Application.Device.Query;
 
-public class GetDevice : Request<DeviceResponse> {
+public class GetDeviceQuery : Request<DeviceResponse> {
     public Guid Id { get; set; }
 }

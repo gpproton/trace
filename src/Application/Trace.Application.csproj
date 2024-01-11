@@ -12,4 +12,12 @@
     <PackageReference Include="CassandraCSharpDriver" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Boarding/" />
+    <Folder Include="Boarding/Commands/" />
+    <Folder Include="Boarding/Consumers/" />
+    <Folder Include="Boarding/Queries/" />
+    <Folder Include="Boarding/Responses/" />
+  </ItemGroup>
+
 </Project>

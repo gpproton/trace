@@ -1,5 +1,5 @@
 // Copyright (c) 2023 - 2024 drolx Solutions
-// 
+//
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
 // Change License: Reciprocal Public License 1.5
@@ -10,7 +10,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
@@ -19,15 +19,13 @@
 using MassTransit;
 using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
-using Trace.Application.Device.Contracts;
+using Trace.Application.Device.Query;
 
 namespace Trace.Service.Integration.Features.Devices;
 
 public static class DeviceEndpoint {
     public static IEndpointRouteBuilder MapDeviceEndpoint(this IEndpointRouteBuilder route) {
-        route.MapGet("/api/devices/{id}", ([FromQuery] Guid id, [FromServices] IMediator mediator) => {
-            return mediator.SendRequest(new GetDevice { Id = id });
-        });
+        route.MapGet("/api/devices/{id}", ([FromQuery] Guid id, [FromServices] IMediator mediator) => mediator.SendRequest(new GetDeviceQuery { Id = id }));
 
         return route;
     }

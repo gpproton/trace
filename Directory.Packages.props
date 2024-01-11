@@ -114,7 +114,6 @@
   <ItemGroup Label="MassTransit">
     <PackageVersion Include="MassTransit" Version="$(MassTransitVersion)" />
     <PackageVersion Include="MassTransit.RabbitMQ" Version="$(MassTransitVersion)" />
-    <PackageVersion Include="MassTransit.Hangfire" Version="$(MassTransitVersion)" />
   </ItemGroup>
 
   <!-- Other packages -->

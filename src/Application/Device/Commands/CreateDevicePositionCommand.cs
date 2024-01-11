@@ -18,12 +18,11 @@
 
 using MassTransit.Mediator;
 using Trace.Application.Device.Contracts;
+using Trace.Application.Device.Dtos;
 
-namespace Trace.Application.Device.Handlers;
+namespace Trace.Application.Device.Commands;
 
-public class GetDeviceHandler : MediatorRequestHandler<GetDevice, DeviceResponse> {
-    protected override Task<DeviceResponse> Handle(GetDevice request, CancellationToken cancellationToken) {
-
-        return Task.FromResult(new DeviceResponse { Id = Guid.NewGuid(), Name = "test"});
-    }
+public class CreateDevicePositionCommand : Request<DevicePositionResponse> {
+    public Guid Id { get; set; }
+    public CreatePositionDto? Payload { get; set; }
 }

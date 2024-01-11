@@ -16,12 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using MassTransit.Mediator;
-using Trace.Application.Device.Payloads;
+namespace Trace.Application.Device.Dtos;
 
-namespace Trace.Application.Device.Contracts;
-
-public class CreateDevicePosition : Request<DevicePositionResponse> {
-    public Guid Id { get; set; }
-    public CreatePositionPayload? Payload { get; set; }
+public class CreatePositionDto {
+    public required string Id { get; set; }
+    public double Lon { get; set; }
+    public double Lat { get; set; }
+    public double Speed { get; set; }
 }

@@ -25,7 +25,6 @@
   <ItemGroup Label="Other">
     <PackageReference Include="MassTransit" />
     <PackageReference Include="MassTransit.RabbitMQ" />
-    <PackageReference Include="MassTransit.Hangfire" />
     <PackageReference Include="Riok.Mapperly" />
   </ItemGroup>
 
