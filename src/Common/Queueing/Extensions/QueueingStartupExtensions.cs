@@ -26,11 +26,12 @@ using Trace.Common.Queueing.Interfaces;
 namespace Trace.Common.Queueing.Extensions;
 
 public static class QueueingStartupExtensions {
-    public static void AddQueueing(this IHostApplicationBuilder builder) {
-        var config = builder.Configuration.GetConnectionString("messaging");
+    public static void AddQueueing(this IServiceCollection services) {
+        var scope = services.BuildServiceProvider();
+        var config = scope.GetRequiredService<IConfiguration>().GetConnectionString("messaging");
         var uri = new Uri(config ?? "amqp://guest:guest@localhost:5672");
 
-        builder.Services.AddSingleton<IAsyncConnectionFactory>(provider => {
+        services.AddSingleton<IAsyncConnectionFactory>(provider => {
             var factory = new ConnectionFactory {
                 Uri = uri,
                 DispatchConsumersAsync = true,
@@ -41,10 +42,10 @@ public static class QueueingStartupExtensions {
             return factory;
         });
 
-        builder.Services.AddSingleton<IConnectionProvider, ConnectionProvider>();
-        builder.Services.AddScoped<IChannelProvider, ChannelProvider>();
-        builder.Services.AddScoped(typeof(IQueueChannelProvider<>), typeof(QueueChannelProvider<>));
-        builder.Services.AddScoped(typeof(IQueueProducer<>), typeof(QueueProducer<>));
+        services.AddSingleton<IConnectionProvider, ConnectionProvider>();
+        services.AddScoped<IChannelProvider, ChannelProvider>();
+        services.AddScoped(typeof(IQueueChannelProvider<>), typeof(QueueChannelProvider<>));
+        services.AddScoped(typeof(IQueueProducer<>), typeof(QueueProducer<>));
     }
 
     public static void AddQueueMessageConsumer<TMessageConsumer, TQueueMessage>(this IServiceCollection services) where TMessageConsumer : IQueueConsumer<TQueueMessage> where TQueueMessage : class, IQueueMessage {
