@@ -27,6 +27,8 @@ using Trace.Application;
 using Trace.Application.Core;
 using Trace.Infrastructure;
 using Trace.Service.Integration.Features.Devices;
+using Trace.Infrastructure.EFCore;
+using HotChocolate.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -44,6 +46,7 @@ builder.Services.RegisterDefaultServices();
 
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
+    .RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
     .AddQueryType<Query>()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);

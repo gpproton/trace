@@ -12,13 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
+
 
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
-using Trace.Application.Tenant;
 
 namespace Trace.Infrastructure.EFCore;
 

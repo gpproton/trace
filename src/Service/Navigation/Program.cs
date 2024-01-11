@@ -21,6 +21,8 @@ using Trace.Service.Navigation;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
+using Trace.Infrastructure.EFCore;
+using HotChocolate.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +34,7 @@ builder.Services.RegisterDefaultServices();
 builder.Services.RegisterHangfire(Nodes.Navigation);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Navigation)
+    .RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
     .AddQueryType<Query>()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);

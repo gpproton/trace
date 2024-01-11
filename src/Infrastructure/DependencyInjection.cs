@@ -12,9 +12,9 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
 
 using System.Reflection;
 using MassTransit;
@@ -37,7 +37,7 @@ public static class DependencyInjection {
             busConfigurator.UsingRabbitMq((context, cfg) => {
                 var config = context.GetRequiredService<IConfiguration>();
                 cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {
-                    h.Heartbeat(TimeSpan.FromSeconds(1));
+                    h.Heartbeat(TimeSpan.FromSeconds(3));
                 });
                 cfg.ConfigureEndpoints(context);
             });

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Tenant;
 
-namespace Trace.Infrastructure;
+namespace Trace.Infrastructure.EFCore;
 
-public partial class ServiceContext {
+public partial class ServiceContext : DbContext {
     public DbSet<Tenants> Tenants { get; set; } = default!;
 }
