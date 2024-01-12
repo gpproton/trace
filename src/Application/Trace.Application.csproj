@@ -11,6 +11,7 @@
     <PackageReference Include="NetTopologySuite" />
     <PackageReference Include="CassandraCSharpDriver" />
     <PackageReference Include="HotChocolate.Types" />
+    <PackageReference Include="Redis.OM" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <Folder Include="Boarding/Consumers/" />
     <Folder Include="Boarding/Queries/" />
     <Folder Include="Boarding/Responses/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
   </ItemGroup>
 
 </Project>

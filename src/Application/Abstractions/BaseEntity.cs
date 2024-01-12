@@ -12,17 +12,29 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Axolotl.EFCore.Base;
-using Trace.Application.Core.Interfaces;
+using Axolotl.EFCore.Interfaces;
+using Redis.OM.Modeling;
 
-namespace Trace.Application.Core;
+namespace Trace.Application.Abstractions;
 
-public abstract class TypedEntity<T> : AuditableEntity<T>, ITypedEntity where T : notnull {
-    public bool Default { get; set; }
-    public string Name { get; set; } = string.Empty;
-    public string? Description { get; set; }
+public abstract class BaseEntity<TKey> : CoreEntity, IHasKey<TKey> where TKey : notnull {
+    [Key]
+    [RedisIdField]
+    [Indexed]
+    [Column(Order=1)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Display(AutoGenerateField = false)]
+    public TKey Id { get; set; } = default!;
+
+    object IHasKey.Id {
+        get => Id;
+        set => Id = (TKey)value;
+    }
 }

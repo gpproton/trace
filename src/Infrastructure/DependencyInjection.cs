@@ -24,6 +24,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Trace.Infrastructure.EFCore;
 using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure.CacheManager;
 
 namespace Trace.Infrastructure;
 
@@ -32,6 +33,7 @@ public static class DependencyInjection {
         builder.AddRabbitMQ("messaging");
         builder.AddCassandra();
         builder.RegisterEFCoreInfrastructure();
+        builder.Services.RegisterCacheManager();
         builder.Services.AddMassTransit(busConfigurator => {
             busConfigurator.AddConsumers(consumerSAsembly);
             busConfigurator.UsingRabbitMq((context, cfg) => {

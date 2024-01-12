@@ -17,6 +17,7 @@
 // Modified At: Thu Jan 11 2024
 
 using Microsoft.FluentUI.AspNetCore.Components;
+using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Manager.Client.Pages;
 using Trace.Manager.Components;

@@ -16,16 +16,22 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Asset;
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Device;
 
-public sealed class Device : AssetEntity {
+[Document(StorageType = StorageType.Json, Prefixes = ["Devices"])]
+public sealed class Device : BaseEntity<Guid> {
+    [Indexed]
     public required string UniqueId { get; set; }
+    [Indexed]
     public Guid? PositionId { get; set; }
+    [Indexed]
     public DateTimeOffset? LastUpdate { get; set; }
     public string Phone { get; set; } = string.Empty;
+    [Indexed]
     public DeviceStatus Status { get; set; }
     public int SpeedLimit { get; set; }
 }

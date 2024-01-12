@@ -16,11 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Asset;
+namespace Trace.Application.Abstractions;
 
-public sealed class AssetCategory : TypedEntity<Guid> {
-    public string? Color { get; set; }
+public abstract class TypedEntity<T> : Axolotl.EFCore.Base.AuditableEntity<T>, ITypedEntity where T : notnull {
+    public bool Default { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; }
 }

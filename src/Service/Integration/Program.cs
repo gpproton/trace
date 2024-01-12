@@ -29,6 +29,7 @@ using Trace.Infrastructure;
 using Trace.Service.Integration.Features.Devices;
 using Trace.Infrastructure.EFCore;
 using HotChocolate.Data;
+using Trace.Application.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;

@@ -23,6 +23,7 @@ using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
 using Trace.Infrastructure.EFCore;
 using HotChocolate.Data;
+using Trace.Application.Abstractions;
 
 var builder = WebApplication.CreateBuilder(args);
 

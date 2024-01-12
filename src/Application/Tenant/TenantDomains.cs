@@ -16,13 +16,19 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core;
 
 namespace Trace.Application.Tenant;
 
+[Document(StorageType = StorageType.Json, Prefixes = ["Domains"])]
 public class TenantDomains : TenantEntity<Guid> {
+    [Indexed]
     public string Domain { get; set; } = string.Empty;
     public string? Registrar { get; set; }
+    [Indexed]
     public bool Active { get; set; }
+    [Indexed]
     public DateTimeOffset Expiry { get; set; }
 }

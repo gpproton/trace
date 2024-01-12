@@ -17,6 +17,7 @@
 // Modified At: Thu Jan 04 2024
 
 using NetTopologySuite.Geometries;
+using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Application.Core.Enums;
 
