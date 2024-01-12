@@ -16,11 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Trace.Application.Identity;
 using Trace.Application.Tenant;
 
-namespace Trace.Infrastructure.EFCore;
+namespace Trace.Application;
 
-public partial class ServiceContext : DbContext {
+public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     public DbSet<Tenants> Tenants { get; set; } = default!;
 }

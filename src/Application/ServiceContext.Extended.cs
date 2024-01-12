@@ -12,23 +12,26 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 11th Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Trace.Application.Identity;
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application.Core.Interfaces;
+namespace Trace.Application;
 
-namespace Trace.Infrastructure.EFCore;
-
-public partial class ServiceContext : DbContext {
-    public ServiceContext(DbContextOptions options) : base(options) {
+public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
+    public override int SaveChanges(bool acceptAllChangesOnSuccess) {
+        OnBeforeSaving();
+        return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
-    protected override void OnModelCreating(ModelBuilder builder) {
-        builder.ApplyConfigurationsFromAssembly(typeof(ITenantEntity<>).Assembly);
-
-        base.OnModelCreating(builder);
+    public override Task<int> SaveChangesAsync(
+        bool acceptAllChangesOnSuccess,
+        CancellationToken cancellationToken = default
+    ) {
+        OnBeforeSaving();
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 }

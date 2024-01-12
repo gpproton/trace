@@ -33,7 +33,7 @@ public static class DependencyInjection {
     public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
         builder.AddRabbitMQ("messaging");
         builder.AddCassandra();
-        builder.RegisterEFCoreInfrastructure();
+        builder.RegisterEfCoreInfrastructure();
         builder.Services.RegisterCacheManager();
         builder.Services.AddMassTransit(busConfigurator => {
             busConfigurator.AddConsumers(consumerSAsembly);
