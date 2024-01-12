@@ -25,6 +25,7 @@ using Microsoft.Extensions.Hosting;
 using Trace.Infrastructure.EFCore;
 using Trace.Infrastructure.Cassandra;
 using Trace.Infrastructure.CacheManager;
+using Trace.Infrastructure.Providers;
 
 namespace Trace.Infrastructure;
 
@@ -44,6 +45,8 @@ public static class DependencyInjection {
                 cfg.ConfigureEndpoints(context);
             });
         });
+
+        builder.Services.AddScoped<ITenantProvider, TenantProvider>();
 
         return builder;
     }
