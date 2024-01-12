@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup Label="Other">
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MassTransit" />
     <PackageReference Include="Axolotl.EFCore" />
@@ -12,6 +13,7 @@
     <PackageReference Include="CassandraCSharpDriver" />
     <PackageReference Include="HotChocolate.Types" />
     <PackageReference Include="Redis.OM" />
+    <PackageReference Include="Scrutor" />
   </ItemGroup>
 
   <ItemGroup>
