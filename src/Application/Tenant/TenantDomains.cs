@@ -21,7 +21,7 @@ using Trace.Application.Abstractions;
 
 namespace Trace.Application.Tenant;
 
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(TenantDomains)])]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(TenantDomains)])]
 public class TenantDomains : TenantEntity<Guid> {
     [Indexed]
     public string Domain { get; set; } = string.Empty;

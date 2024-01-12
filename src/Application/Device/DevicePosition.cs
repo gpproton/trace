@@ -24,7 +24,7 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(DevicePosition)])]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(DevicePosition)])]
 public class DevicePosition : ExtendedEntity, ITenantEntity<Guid> {
     public const string KeyMotion = "motion";
     public const string KeyPower = "power"; // volts

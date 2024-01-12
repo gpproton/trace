@@ -19,18 +19,14 @@
 using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Identity;
-
-public class AccountMapSettings : TenantEntity<Guid>, IMapSettingEntity {
-    public string? MapType { get; set; }
-    public int? Zoom { get; set; }
-    public int? ZoomSelection { get; set; }
-    public bool EnableTrip { get; set; }
-    public bool AutoRoute { get; set; }
-    public bool AutoOrder { get; set; }
-    public bool AutoRouteCost { get; set; }
-    public bool AutoInvoice { get; set; }
-    public bool VerifyOtp { get; set; }
-    public bool AutoZoneOtp { get; set; }
+namespace Trace.Application.Identity {
+    public class UserPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
+        public UserRole Role { get; set; }
+        public Guid? RoleId { get; set; }
+        public string? Module { get; set; }
+        public string? Feature { get; set; }
+        public CrudAction Actions { get; set; } = default!;
+    }
 }

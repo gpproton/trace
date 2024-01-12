@@ -16,14 +16,22 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Identity {
-    public class AccountPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
-        public AccountRoleEntity? Role { get; set; }
-        public string Feature { get; set; } = String.Empty;
-        public bool[] Actions { get; set; } = null!;
-    }
+namespace Trace.Application.Identity;
+
+[Index(nameof(Email))]
+[Index(nameof(UserName))]
+[Index(nameof(TenantId))]
+[Index(nameof(ContactId))]
+public class UserAccount : IdentityUser<Guid>, ITenantEntity<Guid>, IAccountEntity {
+    public required Contact.Contact Contact { get; set; }
+    public Guid? ContactId { get; set; }
+    public RoleLevel DefaultRole { get; set; }
+    public Guid? RoleId { get; set; }
+    public UserRole? Role { get; set; }
+    public Guid TenantId { get; set; }
 }

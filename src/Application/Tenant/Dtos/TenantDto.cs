@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,18 +12,20 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
-using Trace.Application.Core.Interfaces;
-using Trace.Application.Core.Permission;
+using Trace.Application.Core.Enums;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Tenant.Dtos;
 
-public class AccountRoleEntity : TypedEntity<Guid>, IAccountRoleEntity {
-    public RoleLevel Root { get; set; }
-    public ICollection<AccountPermissionEntity> Permissions { get; set; } = null!;
+public class TenantDto {
+     public Guid Token { get; set; }
+    public bool Active { get; set; }
+    public string? FullName { get; set; }
+    public string? ShortName { get; set; }
+    public TenantType Type { get; set; }
+    public int UniqueId { get; set; }
+    public string? Logo { get; set; }
 }

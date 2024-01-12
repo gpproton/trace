@@ -16,13 +16,16 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Identity;
 
+[Index(nameof(TenantId))]
+[Index(nameof(UserId))]
 public class AccountNotification : TenantEntity<Guid> {
+    public Guid? UserId { get; set; }
     public NotificationType[] Types { get; set; } = null!;
     public bool Schedule { get; set; }
 }

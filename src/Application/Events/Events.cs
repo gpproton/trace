@@ -18,6 +18,7 @@
 
 using Axolotl.EFCore.Base;
 using Cassandra.Mapping;
+using Trace.Application.Core.Enums;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Events;

@@ -16,7 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-namespace Trace.Application;
+namespace Trace.Application.Core.Enums;
 
 public enum EventTypes {
     DeviceOnline = 0,

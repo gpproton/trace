@@ -23,7 +23,7 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Location;
 
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(Location)])]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
 public class Location : TaggedEntity<Guid> {
     [Indexed]
     public bool Default { get; set; }

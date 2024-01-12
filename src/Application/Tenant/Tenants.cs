@@ -17,19 +17,21 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Base;
+using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Tenant;
 
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(Tenants)])]
+[Index(nameof(UniqueId))]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenants)])]
 public class Tenants : BaseEntity<Guid> {
     [Indexed]
     public Guid Token { get; set; }
     [Indexed]
     public bool Active { get; set; }
     [Indexed]
-    public string FullName { get; set; } = string.Empty;
+    public string FullName { get; set; }
     [Indexed]
     public string? ShortName { get; set; }
     [Indexed]

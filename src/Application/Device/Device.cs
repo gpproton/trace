@@ -22,7 +22,7 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Device;
 
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(Device)])]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Device)])]
 public sealed class Device : BaseEntity<Guid> {
     [Indexed]
     public required string UniqueId { get; set; }

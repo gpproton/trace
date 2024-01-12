@@ -16,16 +16,24 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
-using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Identity;
 
-public class Account : TenantEntity<Guid>, IAccountEntity {
-    public required Contact.Contact Identity { get; set; }
-    public Guid? ContactId { get; set; }
-    public RoleLevel DefaultRole { get; set; }
-    public AccountRoleEntity? Role { get; set; }
+[Index(nameof(TenantId))]
+[Index(nameof(UserId))]
+public class AccountMapOption : TenantEntity<Guid>, IMapSettingEntity {
+    public Guid? UserId { get; set; }
+    public string? MapType { get; set; }
+    public int? Zoom { get; set; }
+    public int? ZoomSelection { get; set; }
+    public bool EnableTrip { get; set; }
+    public bool AutoRoute { get; set; }
+    public bool AutoOrder { get; set; }
+    public bool AutoRouteCost { get; set; }
+    public bool AutoInvoice { get; set; }
+    public bool VerifyOtp { get; set; }
+    public bool AutoZoneOtp { get; set; }
 }
