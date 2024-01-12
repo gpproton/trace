@@ -24,7 +24,6 @@ using Trace.Service.Integration.Features.Protocol.Services;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
-using Trace.Application.Core;
 using Trace.Infrastructure;
 using Trace.Service.Integration.Features.Devices;
 using Trace.Infrastructure.EFCore;
@@ -40,7 +39,6 @@ builder.Services.AddQueueing();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
-builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.RegisterTraccarInfrastructure();
 builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterDefaultServices();
@@ -59,7 +57,6 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.RegisterDefaults();
-app.UseHangfireDashboard(Nodes.Integration);
 app.RegisterGraphQl();
 app.MapGrpcService<ProtocolService>();
 

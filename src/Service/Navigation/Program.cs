@@ -16,7 +16,6 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
 using Trace.Service.Navigation;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
@@ -32,7 +31,6 @@ var assembly = typeof(TenantEntity<>).Assembly;
 builder.RegisterDefaults();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterHangfire(Nodes.Navigation);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Navigation)
     .RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
@@ -43,7 +41,6 @@ builder.Services.AddGraphQLServer()
 var app = builder.Build();
 
 app.RegisterDefaults();
-app.UseHangfireDashboard(Nodes.Navigation);
 app.RegisterGraphQl();
 
 app.Run();
