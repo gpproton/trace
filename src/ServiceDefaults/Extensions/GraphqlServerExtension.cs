@@ -1,5 +1,6 @@
 using HotChocolate.Execution.Configuration;
 using HotChocolate.Types;
+using HotChocolate.Types.Pagination;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 
@@ -15,11 +16,14 @@ public static class GraphqlServerExtension {
         .AddType<UploadType>()
         .UseAutomaticPersistedQueryPipeline()
         .AddRedisQueryStorage(sp => sp.GetRequiredService<IConnectionMultiplexer>().GetDatabase())
-        // TODO: Hook up DbContext for GraphQL
-        // .RegisterDbContext<OperationContext>(DbContextKind.Pooled)
         .AddApolloTracing()
         .AddMutationConventions(applyToAllMutations: true)
         .AddRedisSubscriptions(sp => sp.GetRequiredService<IConnectionMultiplexer>())
+        .SetPagingOptions(new PagingOptions {
+            MaxPageSize = 1000,
+            DefaultPageSize = 50,
+            IncludeTotalCount = true
+        })
         .ModifyRequestOptions(opt => {
             opt.Complexity.ApplyDefaults = true;
             opt.Complexity.DefaultComplexity = 1;
