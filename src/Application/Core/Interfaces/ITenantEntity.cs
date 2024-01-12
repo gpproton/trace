@@ -20,6 +20,6 @@ using Axolotl.EFCore.Interfaces;
 
 namespace Trace.Application.Core.Interfaces;
 
-public interface ITenantEntity<T> : IHasKey<T>, IAggregateRoot where T : notnull {
+public interface ITenantEntity<T> : Abstractions.IHasKey<T>, IAggregateRoot where T : notnull {
     public T? TenantId { get; set; }
 }
