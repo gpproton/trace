@@ -16,30 +16,35 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Service.Core;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
-using HotChocolate.Data;
 using Trace.Application.Abstractions;
 using Trace.Infrastructure.EFCore;
+using Trace.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
 
 builder.RegisterDefaults();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
 builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)
-    .RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
-    .AddQueryType<Query>()
+    .RegisterDbContext<ServiceContext>()
+    .AddQueryType<QueryRoot>()
+    .AddMutationType<MutationRoot>()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.RegisterDefaults();
 app.UseHangfireDashboard(Nodes.Core);
