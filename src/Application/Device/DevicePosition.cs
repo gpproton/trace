@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using System.ComponentModel.DataAnnotations;
 using Cassandra.Mapping;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
@@ -37,6 +38,7 @@ public class DevicePosition : ExtendedEntity, ITenantEntity<Guid> {
     public const string KeyCharge = "charge";
 
     [Indexed]
+    [Key]
     public Guid Id { get; set; }
     [Indexed]
     public Guid TenantId { get; set; }

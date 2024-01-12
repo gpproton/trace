@@ -21,58 +21,57 @@ using Axolotl.EFCore.Base;
 namespace Trace.Application.Abstractions;
 
 public abstract class ExtendedEntity: CoreEntity {
-    public Dictionary<string, object> Attributes;
-    protected ExtendedEntity() {
-        Attributes = [];
-    }
+    private Dictionary<string, object> _attributes = [];
+    public string? Attributes;
 
-    public bool HasAttribute(string key) => Attributes.ContainsKey(key);
-    public Dictionary<string, object> GetAttributes() => Attributes;
-    public void SetAttributes(Dictionary<string, object> attributes) => Attributes = attributes;
-    public void Set(string key, bool value) => Attributes.TryAdd(key, value);
-    public void Set(string key, byte value) => Attributes.TryAdd(key, value);
-    public void Set(string key, int value) => Attributes.TryAdd(key, value);
-    public void Set(string key, decimal value) => Attributes.TryAdd(key, value);
-    public void Set(string key, double value) => Attributes.TryAdd(key, value);
-    public void Set(string key, float value) => Attributes.TryAdd(key, value);
-    public void Set(string key, string value) => Attributes.TryAdd(key, value);
-    public void Set<TKey>(string key, TKey value) where TKey : notnull => Attributes.TryAdd(key, value);
+    // TODO: Use json serializer for persistence
+    public bool HasAttribute(string key) => _attributes.ContainsKey(key);
+    public Dictionary<string, object> GetAttributes() => _attributes;
+    public void SetAttributes(Dictionary<string, object> attributes) => _attributes = attributes;
+    public void Set(string key, bool value) => _attributes.TryAdd(key, value);
+    public void Set(string key, byte value) => _attributes.TryAdd(key, value);
+    public void Set(string key, int value) => _attributes.TryAdd(key, value);
+    public void Set(string key, decimal value) => _attributes.TryAdd(key, value);
+    public void Set(string key, double value) => _attributes.TryAdd(key, value);
+    public void Set(string key, float value) => _attributes.TryAdd(key, value);
+    public void Set(string key, string value) => _attributes.TryAdd(key, value);
+    public void Set<TKey>(string key, TKey value) where TKey : notnull => _attributes.TryAdd(key, value);
 
     public TValue? GetAny<TValue>(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         return (TValue)value!;
     }
 
     public string GetString(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         return (string)value!;
     }
 
     public bool GetBoolean(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         return value is true;
     }
 
     public decimal GetDecimal(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         if (value is decimal d) return d;
         return 0;
     }
 
     public double GetDouble(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         if (value is double d) return d;
         return 0.0;
     }
 
     public int GetInteger(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         if (value is int i) return i;
         return 0;
     }
 
     public float GetFloat(string key) {
-        Attributes.TryGetValue(key, out var value);
+        _attributes.TryGetValue(key, out var value);
         if (value is float i) return i;
         return 0;
     }

@@ -29,6 +29,7 @@ public class IndexCreationService(RedisConnectionProvider provider) : IHostedSer
         await provider.Connection.CreateIndexAsync(typeof(Tenants));
         await provider.Connection.CreateIndexAsync(typeof(TenantDomains));
         await provider.Connection.CreateIndexAsync(typeof(Device));
+        await provider.Connection.CreateIndexAsync(typeof(DevicePosition));
         await provider.Connection.CreateIndexAsync(typeof(Location));
     }
 

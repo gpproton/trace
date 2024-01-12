@@ -36,5 +36,5 @@ public sealed class Device : BaseEntity<Guid> {
     [Indexed]
     public DeviceStatus Status { get; set; }
     public int SpeedLimit { get; set; }
-    public DateTimeOffset Expiry { get; set; }
+    public DateTimeOffset? Expiry { get; set; }
 }
