@@ -12,9 +12,9 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
@@ -22,7 +22,7 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Device;
 
-[Document(StorageType = StorageType.Json, Prefixes = ["Devices"])]
+[Document(StorageType = StorageType.Json, Prefixes = [nameof(Device)])]
 public sealed class Device : BaseEntity<Guid> {
     [Indexed]
     public required string UniqueId { get; set; }
@@ -30,8 +30,11 @@ public sealed class Device : BaseEntity<Guid> {
     public Guid? PositionId { get; set; }
     [Indexed]
     public DateTimeOffset? LastUpdate { get; set; }
+    public DateTimeOffset? LastMoved { get; set; }
+    [Indexed]
     public string Phone { get; set; } = string.Empty;
     [Indexed]
     public DeviceStatus Status { get; set; }
     public int SpeedLimit { get; set; }
+    public DateTimeOffset Expiry { get; set; }
 }

@@ -16,9 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Axolotl.EFCore.Base;
+
 namespace Trace.Application.Abstractions;
 
-public abstract class ExtendedEntity<T> : BaseEntity<T> where T : notnull {
+public abstract class ExtendedEntity: CoreEntity {
     public Dictionary<string, object> Attributes;
     protected ExtendedEntity() {
         Attributes = [];

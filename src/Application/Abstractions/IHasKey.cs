@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,23 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
-using Redis.OM.Modeling;
-using Trace.Application.Abstractions;
+namespace Trace.Application;
 
-namespace Trace.Application.Tenant;
-
-[Document(StorageType = StorageType.Json, Prefixes = [nameof(TenantDomains)])]
-public class TenantDomains : TenantEntity<Guid> {
-    [Indexed]
-    public string Domain { get; set; } = string.Empty;
-    [Indexed]
-    public string? Registrar { get; set; }
-    [Indexed]
-    public bool Active { get; set; }
-    [Indexed]
-    public DateTimeOffset Expiry { get; set; }
+public interface IHasKey<TKey> where TKey : notnull
+{
+    public TKey Id { get; set; }
 }

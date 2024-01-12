@@ -12,28 +12,39 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
 using NetTopologySuite.Geometries;
+using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Location;
 
+[Document(StorageType = StorageType.Json, Prefixes = [nameof(Location)])]
 public class Location : TaggedEntity<Guid> {
-    public string? OsmId { get; set; }
+    [Indexed]
     public bool Default { get; set; }
-    public bool Custom { get; set; }
+    [Indexed]
     public required string Name { get; set; }
+    [Indexed]
     public string? Address { get; set; }
     public DateTimeOffset? ApprovedAt { get; set; }
     public string? ApprovedBy { get; set; }
+    [Indexed]
     public LocationType? Type { get; set; }
+    [Indexed(CascadeDepth = 1)]
     public LocationCategory? Category { get; set; }
+    [Indexed]
     public Guid? CategoryId { get; set; }
+    [Indexed]
+    public double? Longitude { get; set; }
+    [Indexed]
+    public double? Latitude { get; set; }
+    [Indexed(CascadeDepth = 1)]
     public Geometry Geometry { get; set; } = null!;
+    [Indexed]
     public string? Description { get; set; }
 }

@@ -12,17 +12,19 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Base;
 using Cassandra.Mapping;
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
-public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
+[Document(StorageType = StorageType.Json, Prefixes = [nameof(DevicePosition)])]
+public class DevicePosition : ExtendedEntity, ITenantEntity<Guid> {
     public const string KeyMotion = "motion";
     public const string KeyPower = "power"; // volts
     public const string KeyBattery = "battery"; // volts
@@ -34,22 +36,41 @@ public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
     public const string KeyAntenna = "antenna";
     public const string KeyCharge = "charge";
 
-    public DevicePosition() { }
+    [Indexed]
+    public Guid Id { get; set; }
+    [Indexed]
     public Guid TenantId { get; set; }
+    [Indexed]
+    [RedisIdField]
+    public Guid DeviceId { get; set; }
+    [Indexed]
     public DateTimeOffset Time { get; set; }
+    [Indexed]
     public DateTimeOffset ServerTime { get; set; }
-    public decimal Longitude { get; set; }
-    public decimal Latitude { get; set; }
+    [Indexed]
+    public double Longitude { get; set; }
+    [Indexed]
+    public double Latitude { get; set; }
+    [Indexed]
     public string? Address { get; set; }
+    [Indexed]
     public double Speed { get; set; }
+    [Indexed]
     public double Course { get; set; }
+    [Indexed]
     public double Distance { get; set; }
+    [Indexed]
     public double Odometer { get; set; }
+    [Indexed]
     public double Altitude { get; set; }
+    [Indexed]
     public int Satellites { get; set; }
+    [Indexed]
     public double? Fuel { get; set; }
+    [Indexed]
     public double? Battery { get; set; }
     public bool Charging { get; set; }
+    [Indexed]
     public ICollection<Guid>? LocationIds { get; set; }
 
     public static Map<DevicePosition> GetConfig(string keyspace) {
@@ -59,6 +80,7 @@ public class DevicePosition : ExtendedEntity<Guid>, ITenantEntity<Guid> {
             .PartitionKey(x => x.Id)
             .Column(x => x.Id, x => x.WithName("id"))
             .Column(x => x.TenantId, x => x.WithName("tenant_id"))
+            .Column(x => x.DeviceId, x => x.WithName("device_id"))
             .Column(x => x.Time, x => x.WithName("time"))
             .Column(x => x.ServerTime, x => x.WithName("server_time"))
             .Column(x => x.Longitude, x => x.WithName("longitude"))

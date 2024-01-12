@@ -22,8 +22,9 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Tenant;
 
-[Document(StorageType = StorageType.Json, Prefixes = ["Tenants"])]
+[Document(StorageType = StorageType.Json, Prefixes = [nameof(Tenants)])]
 public class Tenants : BaseEntity<Guid> {
+    [Indexed]
     public Guid Token { get; set; }
     [Indexed]
     public bool Active { get; set; }
@@ -31,6 +32,7 @@ public class Tenants : BaseEntity<Guid> {
     public string FullName { get; set; } = string.Empty;
     [Indexed]
     public string? ShortName { get; set; }
+    [Indexed]
     public TenantType Type { get; set; } = TenantType.Individual;
     [Indexed]
     public int UniqueId { get; set; }

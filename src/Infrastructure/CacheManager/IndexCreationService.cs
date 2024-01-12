@@ -19,6 +19,7 @@
 using Microsoft.Extensions.Hosting;
 using Redis.OM;
 using Trace.Application.Device;
+using Trace.Application.Location;
 using Trace.Application.Tenant;
 
 namespace Trace.Infrastructure.CacheManager;
@@ -28,6 +29,7 @@ public class IndexCreationService(RedisConnectionProvider provider) : IHostedSer
         await provider.Connection.CreateIndexAsync(typeof(Tenants));
         await provider.Connection.CreateIndexAsync(typeof(TenantDomains));
         await provider.Connection.CreateIndexAsync(typeof(Device));
+        await provider.Connection.CreateIndexAsync(typeof(Location));
     }
 
     public Task StopAsync(CancellationToken cancellationToken) {

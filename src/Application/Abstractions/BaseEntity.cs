@@ -19,7 +19,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Axolotl.EFCore.Base;
-using Axolotl.EFCore.Interfaces;
 using Redis.OM.Modeling;
 
 namespace Trace.Application.Abstractions;
@@ -32,9 +31,4 @@ public abstract class BaseEntity<TKey> : CoreEntity, IHasKey<TKey> where TKey : 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Display(AutoGenerateField = false)]
     public TKey Id { get; set; } = default!;
-
-    object IHasKey.Id {
-        get => Id;
-        set => Id = (TKey)value;
-    }
 }
