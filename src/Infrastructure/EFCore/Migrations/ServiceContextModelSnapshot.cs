@@ -10,7 +10,7 @@ using Trace.Application;
 
 #nullable disable
 
-namespace Trace.Infrastructure.Migrations
+namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
     partial class ServiceContextModelSnapshot : ModelSnapshot
@@ -155,6 +155,422 @@ namespace Trace.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Account.AccountNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<bool>("Schedule")
+                        .HasColumnType("boolean")
+                        .HasColumnName("schedule");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<int[]>("Types")
+                        .IsRequired()
+                        .HasColumnType("integer[]")
+                        .HasColumnName("types");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id")
+                        .HasName("pk_account_notification");
+
+                    b.HasIndex("AccountId")
+                        .HasDatabaseName("ix_account_notification_account_id");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("ix_account_notification_deleted_at");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_account_notification_tenant_id");
+
+                    b.ToTable("account_notification", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("access_failed_count");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<int>("DefaultRole")
+                        .HasColumnType("integer")
+                        .HasColumnName("default_role");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockout_enabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockout_end");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_email");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_user_name");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("phone_number_confirmed");
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("role_id");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text")
+                        .HasColumnName("security_stamp");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("two_factor_enabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("user_name");
+
+                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Account.UserAccount.MapOption#MapOption", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("AutoInvoice")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_invoice");
+
+                            b1.Property<bool>("AutoOrder")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_order");
+
+                            b1.Property<bool>("AutoRoute")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route");
+
+                            b1.Property<bool>("AutoRouteCost")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route_cost");
+
+                            b1.Property<bool>("AutoZoneOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_zone_otp");
+
+                            b1.Property<string>("BingApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_bing_api_key");
+
+                            b1.Property<bool>("EnableTrip")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_enable_trip");
+
+                            b1.Property<string>("GoogleApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_google_api_key");
+
+                            b1.Property<string>("MapBoxApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_box_api_key");
+
+                            b1.Property<string>("MapType")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_type");
+
+                            b1.Property<bool>("VerifyOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_verify_otp");
+
+                            b1.Property<int?>("Zoom")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom");
+
+                            b1.Property<int?>("ZoomSelection")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom_selection");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Account.UserAccount.ProfileSetting#ProfileSetting", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("Hour24Time")
+                                .HasColumnType("boolean")
+                                .HasColumnName("profile_setting_hour24time");
+
+                            b1.Property<string>("Language")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_language");
+
+                            b1.Property<string>("Timezone")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_timezone");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_token");
+
+                            b1.Property<string>("UnitArea")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_area");
+
+                            b1.Property<string>("UnitDistance")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_distance");
+
+                            b1.Property<string>("UnitForce")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_force");
+
+                            b1.Property<string>("UnitPower")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_power");
+
+                            b1.Property<string>("UnitPressure")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_pressure");
+
+                            b1.Property<string>("UnitSpeed")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_speed");
+
+                            b1.Property<string>("UnitTemperature")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_temperature");
+
+                            b1.Property<string>("UnitVolume")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_volume");
+
+                            b1.Property<string>("UnitWeight")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_weight");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_users");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_asp_net_users_contact_id");
+
+                    b.HasIndex("Email")
+                        .HasDatabaseName("ix_asp_net_users_email");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_asp_net_users_role_id");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_asp_net_users_tenant_id");
+
+                    b.HasIndex("UserName")
+                        .HasDatabaseName("ix_asp_net_users_user_name");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.UserPermissions", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("Feature")
+                        .HasColumnType("text")
+                        .HasColumnName("feature");
+
+                    b.Property<string>("Module")
+                        .HasColumnType("text")
+                        .HasColumnName("module");
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("role_id");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("updated_by");
+
+                    b.ComplexProperty<Dictionary<string, object>>("Actions", "Trace.Application.Account.UserPermissions.Actions#CrudAction", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("Create")
+                                .HasColumnType("boolean")
+                                .HasColumnName("actions_create");
+
+                            b1.Property<bool>("Delete")
+                                .HasColumnType("boolean")
+                                .HasColumnName("actions_delete");
+
+                            b1.Property<bool>("Read")
+                                .HasColumnType("boolean")
+                                .HasColumnName("actions_read");
+
+                            b1.Property<bool>("Update")
+                                .HasColumnType("boolean")
+                                .HasColumnName("actions_update");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_user_permissions");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("ix_user_permissions_deleted_at");
+
+                    b.HasIndex("Feature")
+                        .HasDatabaseName("ix_user_permissions_feature");
+
+                    b.HasIndex("Module")
+                        .HasDatabaseName("ix_user_permissions_module");
+
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_user_permissions_role_id");
+
+                    b.ToTable("user_permissions", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.UserRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_name");
+
+                    b.Property<int>("Root")
+                        .HasColumnType("integer")
+                        .HasColumnName("root");
+
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_roles");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_asp_net_roles_name");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Asset.Asset", b =>
                 {
                     b.Property<Guid>("Id")
@@ -253,7 +669,6 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -261,152 +676,6 @@ namespace Trace.Infrastructure.Migrations
                         .HasName("pk_asset_category");
 
                     b.ToTable("asset_category", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Contact.Contact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean")
-                        .HasColumnName("active");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("email");
-
-                    b.Property<DateTimeOffset?>("Expiry")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("expiry");
-
-                    b.Property<Guid?>("ExtraInformationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("extra_information_id");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("first_name");
-
-                    b.Property<DateTimeOffset?>("LastActive")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_active");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("last_name");
-
-                    b.Property<string>("MiddleName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("middle_name");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("phone");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("username");
-
-                    b.HasKey("Id")
-                        .HasName("pk_contact");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_contact_deleted_at");
-
-                    b.HasIndex("ExtraInformationId")
-                        .HasDatabaseName("ix_contact_extra_information_id");
-
-                    b.ToTable("contact", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Contact.Lead", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<Guid?>("ContactId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("contact_id");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tag_id");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.HasKey("Id")
-                        .HasName("pk_lead");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_lead_contact_id");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_lead_deleted_at");
-
-                    b.ToTable("lead", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Core.ContactObject", b =>
@@ -564,98 +833,19 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnName("messages");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
                         .HasName("pk_device_command");
 
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_device_command_name");
+
                     b.ToTable("device_command", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Device.DevicePosition", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("text")
-                        .HasColumnName("address");
-
-                    b.Property<double>("Altitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("altitude");
-
-                    b.Property<double?>("Battery")
-                        .HasColumnType("double precision")
-                        .HasColumnName("battery");
-
-                    b.Property<bool>("Charging")
-                        .HasColumnType("boolean")
-                        .HasColumnName("charging");
-
-                    b.Property<double>("Course")
-                        .HasColumnType("double precision")
-                        .HasColumnName("course");
-
-                    b.Property<Guid>("DeviceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("device_id");
-
-                    b.Property<double>("Distance")
-                        .HasColumnType("double precision")
-                        .HasColumnName("distance");
-
-                    b.Property<double?>("Fuel")
-                        .HasColumnType("double precision")
-                        .HasColumnName("fuel");
-
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("latitude");
-
-                    b.Property<Guid[]>("LocationIds")
-                        .HasColumnType("uuid[]")
-                        .HasColumnName("location_ids");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("longitude");
-
-                    b.Property<double>("Odometer")
-                        .HasColumnType("double precision")
-                        .HasColumnName("odometer");
-
-                    b.Property<int>("Satellites")
-                        .HasColumnType("integer")
-                        .HasColumnName("satellites");
-
-                    b.Property<DateTimeOffset>("ServerTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("server_time");
-
-                    b.Property<double>("Speed")
-                        .HasColumnType("double precision")
-                        .HasColumnName("speed");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<DateTimeOffset>("Time")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("time");
-
-                    b.HasKey("Id")
-                        .HasName("pk_device_position");
-
-                    b.ToTable("device_position", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Events.Events", b =>
+            modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -663,67 +853,9 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(1);
 
-                    b.Property<Guid?>("DeviceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("device_id");
-
-                    b.Property<Guid?>("LocationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("location_id");
-
-                    b.Property<Guid?>("PositionId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("position_id");
-
-                    b.Property<DateTimeOffset>("ServerTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("server_time");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<DateTimeOffset>("Time")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("time");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer")
-                        .HasColumnName("type");
-
-                    b.HasKey("Id")
-                        .HasName("pk_events");
-
-                    b.ToTable("events", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.AccountMapOption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("AutoInvoice")
+                    b.Property<bool>("Active")
                         .HasColumnType("boolean")
-                        .HasColumnName("auto_invoice");
-
-                    b.Property<bool>("AutoOrder")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_order");
-
-                    b.Property<bool>("AutoRoute")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_route");
-
-                    b.Property<bool>("AutoRouteCost")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_route_cost");
-
-                    b.Property<bool>("AutoZoneOtp")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_zone_otp");
+                        .HasColumnName("active");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -741,93 +873,46 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
 
-                    b.Property<bool>("EnableTrip")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enable_trip");
-
-                    b.Property<string>("MapType")
-                        .HasColumnType("text")
-                        .HasColumnName("map_type");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.Property<bool>("VerifyOtp")
-                        .HasColumnType("boolean")
-                        .HasColumnName("verify_otp");
-
-                    b.Property<int?>("Zoom")
-                        .HasColumnType("integer")
-                        .HasColumnName("zoom");
-
-                    b.Property<int?>("ZoomSelection")
-                        .HasColumnType("integer")
-                        .HasColumnName("zoom_selection");
-
-                    b.HasKey("Id")
-                        .HasName("pk_account_map_option");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_account_map_option_deleted_at");
-
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_account_map_option_tenant_id");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_account_map_option_user_id");
-
-                    b.ToTable("account_map_option", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.AccountNotification", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<bool>("Schedule")
-                        .HasColumnType("boolean")
-                        .HasColumnName("schedule");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<int[]>("Types")
+                    b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("integer[]")
-                        .HasColumnName("types");
+                        .HasColumnType("text")
+                        .HasColumnName("email");
+
+                    b.Property<DateTimeOffset?>("Expiry")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("expiry");
+
+                    b.Property<Guid?>("ExtraInformationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("extra_information_id");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
+
+                    b.Property<DateTimeOffset?>("LastActive")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_active");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
+
+                    b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("middle_name");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("phone");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -837,252 +922,35 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
 
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("username");
 
                     b.HasKey("Id")
-                        .HasName("pk_account_notification");
+                        .HasName("pk_contact");
 
                     b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_account_notification_deleted_at");
+                        .HasDatabaseName("ix_contact_deleted_at");
 
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_account_notification_tenant_id");
+                    b.HasIndex("ExtraInformationId")
+                        .HasDatabaseName("ix_contact_extra_information_id");
 
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_account_notification_user_id");
-
-                    b.ToTable("account_notification", (string)null);
+                    b.ToTable("contact", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Identity.AccountSettings", b =>
+            modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id")
                         .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<bool>("Hour24Time")
-                        .HasColumnType("boolean")
-                        .HasColumnName("hour24time");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("text")
-                        .HasColumnName("language");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<string>("Timezone")
-                        .HasColumnType("text")
-                        .HasColumnName("timezone");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("text")
-                        .HasColumnName("token");
-
-                    b.Property<string>("UnitArea")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_area");
-
-                    b.Property<string>("UnitDistance")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_distance");
-
-                    b.Property<string>("UnitForce")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_force");
-
-                    b.Property<string>("UnitPower")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_power");
-
-                    b.Property<string>("UnitPressure")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_pressure");
-
-                    b.Property<string>("UnitSpeed")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_speed");
-
-                    b.Property<string>("UnitTemperature")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_temperature");
-
-                    b.Property<string>("UnitVolume")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_volume");
-
-                    b.Property<string>("UnitWeight")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_weight");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_account_settings");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_account_settings_deleted_at");
-
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_account_settings_tenant_id");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_account_settings_user_id");
-
-                    b.ToTable("account_settings", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserAccount", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
 
                     b.Property<Guid?>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contact_id");
 
-                    b.Property<int>("DefaultRole")
-                        .HasColumnType("integer")
-                        .HasColumnName("default_role");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("email");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_email");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_user_name");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
-
-                    b.Property<Guid?>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("role_id");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("user_name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_asp_net_users");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_asp_net_users_contact_id");
-
-                    b.HasIndex("Email")
-                        .HasDatabaseName("ix_asp_net_users_email");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_asp_net_users_role_id");
-
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_asp_net_users_tenant_id");
-
-                    b.HasIndex("UserName")
-                        .HasDatabaseName("ix_asp_net_users_user_name");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserPermissions", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_at");
@@ -1099,21 +967,9 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
 
-                    b.Property<string>("Feature")
-                        .HasColumnType("text")
-                        .HasColumnName("feature");
-
-                    b.Property<string>("Module")
-                        .HasColumnType("text")
-                        .HasColumnName("module");
-
-                    b.Property<Guid?>("RoleId")
+                    b.Property<Guid>("TagId")
                         .HasColumnType("uuid")
-                        .HasColumnName("role_id");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
+                        .HasColumnName("tag_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -1123,73 +979,16 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Actions", "Trace.Application.Identity.UserPermissions.Actions#CrudAction", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<bool>("Create")
-                                .HasColumnType("boolean")
-                                .HasColumnName("actions_create");
-
-                            b1.Property<bool>("Delete")
-                                .HasColumnType("boolean")
-                                .HasColumnName("actions_delete");
-
-                            b1.Property<bool>("Read")
-                                .HasColumnType("boolean")
-                                .HasColumnName("actions_read");
-
-                            b1.Property<bool>("Update")
-                                .HasColumnType("boolean")
-                                .HasColumnName("actions_update");
-                        });
-
                     b.HasKey("Id")
-                        .HasName("pk_user_permissions");
+                        .HasName("pk_lead");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_lead_contact_id");
 
                     b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_user_permissions_deleted_at");
+                        .HasDatabaseName("ix_lead_deleted_at");
 
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_user_permissions_role_id");
-
-                    b.ToTable("user_permissions", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_name");
-
-                    b.Property<int>("Root")
-                        .HasColumnType("integer")
-                        .HasColumnName("root");
-
-                    b.HasKey("Id")
-                        .HasName("pk_asp_net_roles");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.ToTable("lead", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Location.Location", b =>
@@ -1277,11 +1076,17 @@ namespace Trace.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_location");
 
+                    b.HasIndex("Address")
+                        .HasDatabaseName("ix_location_address");
+
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_location_category_id");
 
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_location_deleted_at");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_location_name");
 
                     b.ToTable("location", (string)null);
                 });
@@ -1308,12 +1113,14 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnName("icon");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.HasKey("Id")
                         .HasName("pk_location_category");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_location_category_name");
 
                     b.ToTable("location_category", (string)null);
                 });
@@ -1342,26 +1149,22 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("completed_rate");
 
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
+                    b.Property<bool>("Default")
+                        .HasColumnType("boolean")
+                        .HasColumnName("default");
 
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<Point>("Destination")
                         .IsRequired()
                         .HasColumnType("geometry")
                         .HasColumnName("destination");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<LineString>("Path")
                         .HasColumnType("geometry")
@@ -1380,29 +1183,160 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("speed_limit");
 
-                    b.Property<Guid>("TagId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tag_id");
-
                     b.Property<decimal>("ToleranceDuration")
                         .HasColumnType("numeric")
                         .HasColumnName("tolerance_duration");
 
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
                     b.HasKey("Id")
                         .HasName("pk_routes");
 
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_routes_deleted_at");
+                    b.HasIndex("Description")
+                        .HasDatabaseName("ix_routes_description");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_routes_name");
 
                     b.ToTable("routes", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Server.ServerSettings", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("ApiKeyGoogle")
+                        .HasColumnType("text")
+                        .HasColumnName("api_key_google");
+
+                    b.Property<string>("ApiKeyMicrosoft")
+                        .HasColumnType("text")
+                        .HasColumnName("api_key_microsoft");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Server.ServerSettings.MapOption#MapOption", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("AutoInvoice")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_invoice");
+
+                            b1.Property<bool>("AutoOrder")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_order");
+
+                            b1.Property<bool>("AutoRoute")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route");
+
+                            b1.Property<bool>("AutoRouteCost")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route_cost");
+
+                            b1.Property<bool>("AutoZoneOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_zone_otp");
+
+                            b1.Property<string>("BingApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_bing_api_key");
+
+                            b1.Property<bool>("EnableTrip")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_enable_trip");
+
+                            b1.Property<string>("GoogleApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_google_api_key");
+
+                            b1.Property<string>("MapBoxApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_box_api_key");
+
+                            b1.Property<string>("MapType")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_type");
+
+                            b1.Property<bool>("VerifyOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_verify_otp");
+
+                            b1.Property<int?>("Zoom")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom");
+
+                            b1.Property<int?>("ZoomSelection")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom_selection");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Server.ServerSettings.ProfileSetting#ProfileSetting", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("Hour24Time")
+                                .HasColumnType("boolean")
+                                .HasColumnName("profile_setting_hour24time");
+
+                            b1.Property<string>("Language")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_language");
+
+                            b1.Property<string>("Timezone")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_timezone");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_token");
+
+                            b1.Property<string>("UnitArea")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_area");
+
+                            b1.Property<string>("UnitDistance")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_distance");
+
+                            b1.Property<string>("UnitForce")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_force");
+
+                            b1.Property<string>("UnitPower")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_power");
+
+                            b1.Property<string>("UnitPressure")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_pressure");
+
+                            b1.Property<string>("UnitSpeed")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_speed");
+
+                            b1.Property<string>("UnitTemperature")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_temperature");
+
+                            b1.Property<string>("UnitVolume")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_volume");
+
+                            b1.Property<string>("UnitWeight")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_weight");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_server_settings");
+
+                    b.ToTable("server_settings", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Tags.TagMembers", b =>
@@ -1412,6 +1346,10 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id")
                         .HasColumnOrder(1);
+
+                    b.Property<Guid?>("AccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -1433,6 +1371,10 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("expiry");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
@@ -1448,8 +1390,14 @@ namespace Trace.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_tag_members");
 
+                    b.HasIndex("AccountId")
+                        .HasDatabaseName("ix_tag_members_account_id");
+
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_tag_members_deleted_at");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_tag_members_name");
 
                     b.ToTable("tag_members", (string)null);
                 });
@@ -1494,6 +1442,10 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("location_id");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
                     b.Property<Guid?>("RoutesId")
                         .HasColumnType("uuid")
                         .HasColumnName("routes_id");
@@ -1524,6 +1476,9 @@ namespace Trace.Infrastructure.Migrations
 
                     b.HasIndex("LocationId")
                         .HasDatabaseName("ix_tags_location_id");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_tags_name");
 
                     b.HasIndex("RoutesId")
                         .HasDatabaseName("ix_tags_routes_id");
@@ -1584,7 +1539,6 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnName("mobile_phone");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
@@ -1592,8 +1546,18 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
+                    b.Property<Guid?>("TenantsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenants_id");
+
                     b.HasKey("Id")
                         .HasName("pk_tenant_branch");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_tenant_branch_name");
+
+                    b.HasIndex("TenantsId")
+                        .HasDatabaseName("ix_tenant_branch_tenants_id");
 
                     b.ToTable("tenant_branch", (string)null);
                 });
@@ -1643,6 +1607,10 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
+                    b.Property<Guid?>("TenantsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenants_id");
+
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
@@ -1663,189 +1631,10 @@ namespace Trace.Infrastructure.Migrations
                     b.HasIndex("Expiry")
                         .HasDatabaseName("ix_tenant_domains_expiry");
 
+                    b.HasIndex("TenantsId")
+                        .HasDatabaseName("ix_tenant_domains_tenants_id");
+
                     b.ToTable("tenant_domains", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Tenant.TenantMapOption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("AutoInvoice")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_invoice");
-
-                    b.Property<bool>("AutoOrder")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_order");
-
-                    b.Property<bool>("AutoRoute")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_route");
-
-                    b.Property<bool>("AutoRouteCost")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_route_cost");
-
-                    b.Property<bool>("AutoZoneOtp")
-                        .HasColumnType("boolean")
-                        .HasColumnName("auto_zone_otp");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<bool>("EnableTrip")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enable_trip");
-
-                    b.Property<string>("MapType")
-                        .HasColumnType("text")
-                        .HasColumnName("map_type");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.Property<bool>("VerifyOtp")
-                        .HasColumnType("boolean")
-                        .HasColumnName("verify_otp");
-
-                    b.Property<int?>("Zoom")
-                        .HasColumnType("integer")
-                        .HasColumnName("zoom");
-
-                    b.Property<int?>("ZoomSelection")
-                        .HasColumnType("integer")
-                        .HasColumnName("zoom_selection");
-
-                    b.HasKey("Id")
-                        .HasName("pk_tenant_map_option");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_tenant_map_option_deleted_at");
-
-                    b.ToTable("tenant_map_option", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Tenant.TenantSettings", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<Guid>("CreatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTimeOffset?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deleted_at");
-
-                    b.Property<Guid>("DeletedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("deleted_by");
-
-                    b.Property<bool>("Hour24Time")
-                        .HasColumnType("boolean")
-                        .HasColumnName("hour24time");
-
-                    b.Property<string>("Language")
-                        .HasColumnType("text")
-                        .HasColumnName("language");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.Property<string>("Timezone")
-                        .HasColumnType("text")
-                        .HasColumnName("timezone");
-
-                    b.Property<string>("Token")
-                        .HasColumnType("text")
-                        .HasColumnName("token");
-
-                    b.Property<string>("UnitArea")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_area");
-
-                    b.Property<string>("UnitDistance")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_distance");
-
-                    b.Property<string>("UnitForce")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_force");
-
-                    b.Property<string>("UnitPower")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_power");
-
-                    b.Property<string>("UnitPressure")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_pressure");
-
-                    b.Property<string>("UnitSpeed")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_speed");
-
-                    b.Property<string>("UnitTemperature")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_temperature");
-
-                    b.Property<string>("UnitVolume")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_volume");
-
-                    b.Property<string>("UnitWeight")
-                        .HasColumnType("text")
-                        .HasColumnName("unit_weight");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_at");
-
-                    b.Property<Guid>("UpdatedBy")
-                        .HasColumnType("uuid")
-                        .HasColumnName("updated_by");
-
-                    b.HasKey("Id")
-                        .HasName("pk_tenant_settings");
-
-                    b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_tenant_settings_deleted_at");
-
-                    b.ToTable("tenant_settings", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Tenant.Tenants", b =>
@@ -1885,8 +1674,128 @@ namespace Trace.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("unique_id");
 
+                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Tenant.Tenants.MapOption#MapOption", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("AutoInvoice")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_invoice");
+
+                            b1.Property<bool>("AutoOrder")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_order");
+
+                            b1.Property<bool>("AutoRoute")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route");
+
+                            b1.Property<bool>("AutoRouteCost")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_route_cost");
+
+                            b1.Property<bool>("AutoZoneOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_auto_zone_otp");
+
+                            b1.Property<string>("BingApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_bing_api_key");
+
+                            b1.Property<bool>("EnableTrip")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_enable_trip");
+
+                            b1.Property<string>("GoogleApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_google_api_key");
+
+                            b1.Property<string>("MapBoxApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_box_api_key");
+
+                            b1.Property<string>("MapType")
+                                .HasColumnType("text")
+                                .HasColumnName("map_option_map_type");
+
+                            b1.Property<bool>("VerifyOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_option_verify_otp");
+
+                            b1.Property<int?>("Zoom")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom");
+
+                            b1.Property<int?>("ZoomSelection")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_option_zoom_selection");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Tenant.Tenants.ProfileSetting#ProfileSetting", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("Hour24Time")
+                                .HasColumnType("boolean")
+                                .HasColumnName("profile_setting_hour24time");
+
+                            b1.Property<string>("Language")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_language");
+
+                            b1.Property<string>("Timezone")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_timezone");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_token");
+
+                            b1.Property<string>("UnitArea")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_area");
+
+                            b1.Property<string>("UnitDistance")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_distance");
+
+                            b1.Property<string>("UnitForce")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_force");
+
+                            b1.Property<string>("UnitPower")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_power");
+
+                            b1.Property<string>("UnitPressure")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_pressure");
+
+                            b1.Property<string>("UnitSpeed")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_speed");
+
+                            b1.Property<string>("UnitTemperature")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_temperature");
+
+                            b1.Property<string>("UnitVolume")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_volume");
+
+                            b1.Property<string>("UnitWeight")
+                                .HasColumnType("text")
+                                .HasColumnName("profile_setting_unit_weight");
+                        });
+
                     b.HasKey("Id")
                         .HasName("pk_tenants");
+
+                    b.HasIndex("FullName")
+                        .HasDatabaseName("ix_tenants_full_name");
+
+                    b.HasIndex("ShortName")
+                        .HasDatabaseName("ix_tenants_short_name");
 
                     b.HasIndex("UniqueId")
                         .HasDatabaseName("ix_tenants_unique_id");
@@ -1987,6 +1896,12 @@ namespace Trace.Infrastructure.Migrations
 
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_trailer_deleted_at");
+
+                    b.HasIndex("FleetIdentifier")
+                        .HasDatabaseName("ix_trailer_fleet_identifier");
+
+                    b.HasIndex("SerialNumber")
+                        .HasDatabaseName("ix_trailer_serial_number");
 
                     b.ToTable("trailer", (string)null);
                 });
@@ -2106,12 +2021,21 @@ namespace Trace.Infrastructure.Migrations
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_vehicle_deleted_at");
 
+                    b.HasIndex("FleetIdentifier")
+                        .HasDatabaseName("ix_vehicle_fleet_identifier");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_vehicle_name");
+
+                    b.HasIndex("RegistrationNo")
+                        .HasDatabaseName("ix_vehicle_registration_no");
+
                     b.ToTable("vehicle", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Trace.Application.Identity.UserRole", null)
+                    b.HasOne("Trace.Application.Account.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2121,7 +2045,7 @@ namespace Trace.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Trace.Application.Identity.UserAccount", null)
+                    b.HasOne("Trace.Application.Account.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2131,7 +2055,7 @@ namespace Trace.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("Trace.Application.Identity.UserAccount", null)
+                    b.HasOne("Trace.Application.Account.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2141,14 +2065,14 @@ namespace Trace.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Trace.Application.Identity.UserRole", null)
+                    b.HasOne("Trace.Application.Account.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_asp_net_user_roles_asp_net_roles_role_id");
 
-                    b.HasOne("Trace.Application.Identity.UserAccount", null)
+                    b.HasOne("Trace.Application.Account.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2158,12 +2082,49 @@ namespace Trace.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("Trace.Application.Identity.UserAccount", null)
+                    b.HasOne("Trace.Application.Account.UserAccount", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id");
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.AccountNotification", b =>
+                {
+                    b.HasOne("Trace.Application.Account.UserAccount", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .HasConstraintName("fk_account_notification_asp_net_users_account_id");
+
+                    b.Navigation("Account");
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
+                {
+                    b.HasOne("Trace.Application.Engagement.Contact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .HasConstraintName("fk_asp_net_users_contact_contact_id");
+
+                    b.HasOne("Trace.Application.Account.UserRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_asp_net_users_user_role_role_id");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.UserPermissions", b =>
+                {
+                    b.HasOne("Trace.Application.Account.UserRole", "Role")
+                        .WithMany("Permissions")
+                        .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_user_permissions_user_role_role_id");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Trace.Application.Asset.Asset", b =>
@@ -2178,7 +2139,7 @@ namespace Trace.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Trace.Application.Contact.Contact", b =>
+            modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
                 {
                     b.HasOne("Trace.Application.Core.ContactObject", "ExtraInformation")
                         .WithMany()
@@ -2188,41 +2149,14 @@ namespace Trace.Infrastructure.Migrations
                     b.Navigation("ExtraInformation");
                 });
 
-            modelBuilder.Entity("Trace.Application.Contact.Lead", b =>
+            modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
                 {
-                    b.HasOne("Trace.Application.Contact.Contact", "Contact")
+                    b.HasOne("Trace.Application.Engagement.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
                         .HasConstraintName("fk_lead_contact_contact_id");
 
                     b.Navigation("Contact");
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserAccount", b =>
-                {
-                    b.HasOne("Trace.Application.Contact.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .HasConstraintName("fk_asp_net_users_contact_contact_id");
-
-                    b.HasOne("Trace.Application.Identity.UserRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_asp_net_users_user_role_role_id");
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserPermissions", b =>
-                {
-                    b.HasOne("Trace.Application.Identity.UserRole", "Role")
-                        .WithMany("Permissions")
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("fk_user_permissions_user_role_role_id");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Trace.Application.Location.Location", b =>
@@ -2235,14 +2169,24 @@ namespace Trace.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Trace.Application.Tags.TagMembers", b =>
+                {
+                    b.HasOne("Trace.Application.Account.UserAccount", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .HasConstraintName("fk_tag_members_asp_net_users_account_id");
+
+                    b.Navigation("Account");
+                });
+
             modelBuilder.Entity("Trace.Application.Tags.Tags", b =>
                 {
-                    b.HasOne("Trace.Application.Contact.Contact", null)
+                    b.HasOne("Trace.Application.Engagement.Contact", null)
                         .WithMany("Tags")
                         .HasForeignKey("ContactId")
                         .HasConstraintName("fk_tags_contact_contact_id");
 
-                    b.HasOne("Trace.Application.Contact.Lead", null)
+                    b.HasOne("Trace.Application.Engagement.Lead", null)
                         .WithMany("Tags")
                         .HasForeignKey("LeadId")
                         .HasConstraintName("fk_tags_lead_lead_id");
@@ -2256,6 +2200,22 @@ namespace Trace.Infrastructure.Migrations
                         .WithMany("Tags")
                         .HasForeignKey("RoutesId")
                         .HasConstraintName("fk_tags_routes_routes_id");
+                });
+
+            modelBuilder.Entity("Trace.Application.Tenant.TenantBranch", b =>
+                {
+                    b.HasOne("Trace.Application.Tenant.Tenants", null)
+                        .WithMany("Branches")
+                        .HasForeignKey("TenantsId")
+                        .HasConstraintName("fk_tenant_branch_tenants_tenants_id");
+                });
+
+            modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
+                {
+                    b.HasOne("Trace.Application.Tenant.Tenants", null)
+                        .WithMany("Domains")
+                        .HasForeignKey("TenantsId")
+                        .HasConstraintName("fk_tenant_domains_tenants_tenants_id");
                 });
 
             modelBuilder.Entity("Trace.Application.Trailer.Trailer", b =>
@@ -2282,19 +2242,19 @@ namespace Trace.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Trace.Application.Contact.Contact", b =>
-                {
-                    b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("Trace.Application.Contact.Lead", b =>
-                {
-                    b.Navigation("Tags");
-                });
-
-            modelBuilder.Entity("Trace.Application.Identity.UserRole", b =>
+            modelBuilder.Entity("Trace.Application.Account.UserRole", b =>
                 {
                     b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
+                {
+                    b.Navigation("Tags");
                 });
 
             modelBuilder.Entity("Trace.Application.Location.Location", b =>
@@ -2305,6 +2265,13 @@ namespace Trace.Infrastructure.Migrations
             modelBuilder.Entity("Trace.Application.Routes.Routes", b =>
                 {
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Trace.Application.Tenant.Tenants", b =>
+                {
+                    b.Navigation("Branches");
+
+                    b.Navigation("Domains");
                 });
 #pragma warning restore 612, 618
         }

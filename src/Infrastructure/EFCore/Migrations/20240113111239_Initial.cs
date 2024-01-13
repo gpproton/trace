@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Trace.Infrastructure.Migrations
+namespace Trace.Infrastructure.EFCore.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration
@@ -15,88 +15,6 @@ namespace Trace.Infrastructure.Migrations
         {
             migrationBuilder.AlterDatabase()
                 .Annotation("Npgsql:PostgresExtension:postgis", ",,");
-
-            migrationBuilder.CreateTable(
-                name: "account_map_option",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    map_type = table.Column<string>(type: "text", nullable: true),
-                    zoom = table.Column<int>(type: "integer", nullable: true),
-                    zoom_selection = table.Column<int>(type: "integer", nullable: true),
-                    enable_trip = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_route = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_order = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
-                    verify_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_account_map_option", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "account_notification",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    types = table.Column<int[]>(type: "integer[]", nullable: false),
-                    schedule = table.Column<bool>(type: "boolean", nullable: false),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_account_notification", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "account_settings",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    token = table.Column<string>(type: "text", nullable: true),
-                    language = table.Column<string>(type: "text", nullable: true),
-                    timezone = table.Column<string>(type: "text", nullable: true),
-                    hour24time = table.Column<bool>(type: "boolean", nullable: false),
-                    unit_distance = table.Column<string>(type: "text", nullable: true),
-                    unit_volume = table.Column<string>(type: "text", nullable: true),
-                    unit_weight = table.Column<string>(type: "text", nullable: true),
-                    unit_temperature = table.Column<string>(type: "text", nullable: true),
-                    unit_speed = table.Column<string>(type: "text", nullable: true),
-                    unit_power = table.Column<string>(type: "text", nullable: true),
-                    unit_pressure = table.Column<string>(type: "text", nullable: true),
-                    unit_force = table.Column<string>(type: "text", nullable: true),
-                    unit_area = table.Column<string>(type: "text", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_account_settings", x => x.id);
-                });
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -120,7 +38,7 @@ namespace Trace.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     color = table.Column<string>(type: "text", nullable: true),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -183,58 +101,12 @@ namespace Trace.Infrastructure.Migrations
                     delay = table.Column<int>(type: "integer", nullable: false),
                     messages = table.Column<string>(type: "text", nullable: false),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_device_command", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "device_position",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    device_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    server_time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    longitude = table.Column<double>(type: "double precision", nullable: false),
-                    latitude = table.Column<double>(type: "double precision", nullable: false),
-                    address = table.Column<string>(type: "text", nullable: true),
-                    speed = table.Column<double>(type: "double precision", nullable: false),
-                    course = table.Column<double>(type: "double precision", nullable: false),
-                    distance = table.Column<double>(type: "double precision", nullable: false),
-                    odometer = table.Column<double>(type: "double precision", nullable: false),
-                    altitude = table.Column<double>(type: "double precision", nullable: false),
-                    satellites = table.Column<int>(type: "integer", nullable: false),
-                    fuel = table.Column<double>(type: "double precision", nullable: true),
-                    battery = table.Column<double>(type: "double precision", nullable: true),
-                    charging = table.Column<bool>(type: "boolean", nullable: false),
-                    location_ids = table.Column<Guid[]>(type: "uuid[]", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_device_position", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "events",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    server_time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    type = table.Column<int>(type: "integer", nullable: false),
-                    device_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    position_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    location_id = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_events", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -244,7 +116,7 @@ namespace Trace.Infrastructure.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     icon = table.Column<string>(type: "text", nullable: false),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -267,13 +139,9 @@ namespace Trace.Infrastructure.Migrations
                     source = table.Column<Point>(type: "geometry", nullable: false),
                     destination = table.Column<Point>(type: "geometry", nullable: false),
                     path = table.Column<LineString>(type: "geometry", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tag_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -281,127 +149,43 @@ namespace Trace.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tag_members",
+                name: "server_settings",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    name = table.Column<string>(type: "text", nullable: true),
+                    api_key_google = table.Column<string>(type: "text", nullable: true),
+                    api_key_microsoft = table.Column<string>(type: "text", nullable: true),
+                    map_option_auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_order = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_google_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_box_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_option_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_zoom = table.Column<int>(type: "integer", nullable: true),
+                    map_option_zoom_selection = table.Column<int>(type: "integer", nullable: true),
+                    profile_setting_hour24time = table.Column<bool>(type: "boolean", nullable: false),
+                    profile_setting_language = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_timezone = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_token = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_area = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_distance = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_force = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_power = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_pressure = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_speed = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_temperature = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_volume = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_weight = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_tag_members", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tenant_branch",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    address_line1 = table.Column<string>(type: "text", nullable: true),
-                    address_line2 = table.Column<string>(type: "text", nullable: true),
-                    address_city = table.Column<string>(type: "text", nullable: true),
-                    address_county = table.Column<string>(type: "text", nullable: true),
-                    address_state = table.Column<string>(type: "text", nullable: true),
-                    address_zip = table.Column<string>(type: "text", nullable: true),
-                    address_country = table.Column<string>(type: "text", nullable: true),
-                    home_phone = table.Column<string>(type: "text", nullable: true),
-                    mobile_phone = table.Column<string>(type: "text", nullable: true),
-                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_branch", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tenant_domains",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    domain = table.Column<string>(type: "text", nullable: false),
-                    registrar = table.Column<string>(type: "text", nullable: true),
-                    active = table.Column<bool>(type: "boolean", nullable: false),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_domains", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tenant_map_option",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    map_type = table.Column<string>(type: "text", nullable: true),
-                    zoom = table.Column<int>(type: "integer", nullable: true),
-                    zoom_selection = table.Column<int>(type: "integer", nullable: true),
-                    enable_trip = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_route = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_order = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
-                    verify_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_map_option", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tenant_settings",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    token = table.Column<string>(type: "text", nullable: true),
-                    language = table.Column<string>(type: "text", nullable: true),
-                    timezone = table.Column<string>(type: "text", nullable: true),
-                    hour24time = table.Column<bool>(type: "boolean", nullable: false),
-                    unit_distance = table.Column<string>(type: "text", nullable: true),
-                    unit_volume = table.Column<string>(type: "text", nullable: true),
-                    unit_weight = table.Column<string>(type: "text", nullable: true),
-                    unit_temperature = table.Column<string>(type: "text", nullable: true),
-                    unit_speed = table.Column<string>(type: "text", nullable: true),
-                    unit_power = table.Column<string>(type: "text", nullable: true),
-                    unit_pressure = table.Column<string>(type: "text", nullable: true),
-                    unit_force = table.Column<string>(type: "text", nullable: true),
-                    unit_area = table.Column<string>(type: "text", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_settings", x => x.id);
+                    table.PrimaryKey("pk_server_settings", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -415,7 +199,33 @@ namespace Trace.Infrastructure.Migrations
                     short_name = table.Column<string>(type: "text", nullable: true),
                     type = table.Column<int>(type: "integer", nullable: false),
                     unique_id = table.Column<int>(type: "integer", nullable: false),
-                    logo = table.Column<string>(type: "text", nullable: true)
+                    logo = table.Column<string>(type: "text", nullable: true),
+                    map_option_auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_order = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_google_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_box_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_option_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_zoom = table.Column<int>(type: "integer", nullable: true),
+                    map_option_zoom_selection = table.Column<int>(type: "integer", nullable: true),
+                    profile_setting_hour24time = table.Column<bool>(type: "boolean", nullable: false),
+                    profile_setting_language = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_timezone = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_token = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_area = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_distance = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_force = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_power = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_pressure = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_speed = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_temperature = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_volume = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_weight = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -649,6 +459,64 @@ namespace Trace.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tenant_branch",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    address_line1 = table.Column<string>(type: "text", nullable: true),
+                    address_line2 = table.Column<string>(type: "text", nullable: true),
+                    address_city = table.Column<string>(type: "text", nullable: true),
+                    address_county = table.Column<string>(type: "text", nullable: true),
+                    address_state = table.Column<string>(type: "text", nullable: true),
+                    address_zip = table.Column<string>(type: "text", nullable: true),
+                    address_country = table.Column<string>(type: "text", nullable: true),
+                    home_phone = table.Column<string>(type: "text", nullable: true),
+                    mobile_phone = table.Column<string>(type: "text", nullable: true),
+                    tenants_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tenant_branch", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_tenant_branch_tenants_tenants_id",
+                        column: x => x.tenants_id,
+                        principalTable: "tenants",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tenant_domains",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    domain = table.Column<string>(type: "text", nullable: false),
+                    registrar = table.Column<string>(type: "text", nullable: true),
+                    active = table.Column<bool>(type: "boolean", nullable: false),
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    tenants_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tenant_domains", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_tenant_domains_tenants_tenants_id",
+                        column: x => x.tenants_id,
+                        principalTable: "tenants",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -657,6 +525,32 @@ namespace Trace.Infrastructure.Migrations
                     default_role = table.Column<int>(type: "integer", nullable: false),
                     role_id = table.Column<Guid>(type: "uuid", nullable: true),
                     tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    map_option_auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_order = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_google_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_box_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_option_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_option_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_option_zoom = table.Column<int>(type: "integer", nullable: true),
+                    map_option_zoom_selection = table.Column<int>(type: "integer", nullable: true),
+                    profile_setting_hour24time = table.Column<bool>(type: "boolean", nullable: false),
+                    profile_setting_language = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_timezone = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_token = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_area = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_distance = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_force = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_power = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_pressure = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_speed = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_temperature = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_volume = table.Column<string>(type: "text", nullable: true),
+                    profile_setting_unit_weight = table.Column<string>(type: "text", nullable: true),
                     user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -708,6 +602,32 @@ namespace Trace.Infrastructure.Migrations
                         name: "fk_lead_contact_contact_id",
                         column: x => x.contact_id,
                         principalTable: "contact",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "account_notification",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    account_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    types = table.Column<int[]>(type: "integer[]", nullable: false),
+                    schedule = table.Column<bool>(type: "boolean", nullable: false),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_account_notification", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_account_notification_asp_net_users_account_id",
+                        column: x => x.account_id,
+                        principalTable: "AspNetUsers",
                         principalColumn: "id");
                 });
 
@@ -797,10 +717,37 @@ namespace Trace.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tag_members",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
+                    account_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tag_members", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_tag_members_asp_net_users_account_id",
+                        column: x => x.account_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tags",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: true),
                     color = table.Column<string>(type: "text", nullable: true),
                     contact_id = table.Column<Guid>(type: "uuid", nullable: true),
                     lead_id = table.Column<Guid>(type: "uuid", nullable: true),
@@ -840,19 +787,9 @@ namespace Trace.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_account_map_option_deleted_at",
-                table: "account_map_option",
-                column: "deleted_at");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_map_option_tenant_id",
-                table: "account_map_option",
-                column: "tenant_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_map_option_user_id",
-                table: "account_map_option",
-                column: "user_id");
+                name: "ix_account_notification_account_id",
+                table: "account_notification",
+                column: "account_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_account_notification_deleted_at",
@@ -865,29 +802,14 @@ namespace Trace.Infrastructure.Migrations
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_account_notification_user_id",
-                table: "account_notification",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_settings_deleted_at",
-                table: "account_settings",
-                column: "deleted_at");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_settings_tenant_id",
-                table: "account_settings",
-                column: "tenant_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_account_settings_user_id",
-                table: "account_settings",
-                column: "user_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_asp_net_role_claims_role_id",
                 table: "AspNetRoleClaims",
                 column: "role_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_asp_net_roles_name",
+                table: "AspNetRoles",
+                column: "name");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -967,6 +889,11 @@ namespace Trace.Infrastructure.Migrations
                 column: "extra_information_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_device_command_name",
+                table: "device_command",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_lead_contact_id",
                 table: "lead",
                 column: "contact_id");
@@ -975,6 +902,11 @@ namespace Trace.Infrastructure.Migrations
                 name: "ix_lead_deleted_at",
                 table: "lead",
                 column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_location_address",
+                table: "location",
+                column: "address");
 
             migrationBuilder.CreateIndex(
                 name: "ix_location_category_id",
@@ -987,14 +919,39 @@ namespace Trace.Infrastructure.Migrations
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
-                name: "ix_routes_deleted_at",
+                name: "ix_location_name",
+                table: "location",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_location_category_name",
+                table: "location_category",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_routes_description",
                 table: "routes",
-                column: "deleted_at");
+                column: "description");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_routes_name",
+                table: "routes",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tag_members_account_id",
+                table: "tag_members",
+                column: "account_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tag_members_deleted_at",
                 table: "tag_members",
                 column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tag_members_name",
+                table: "tag_members",
+                column: "name");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tags_contact_id",
@@ -1017,9 +974,24 @@ namespace Trace.Infrastructure.Migrations
                 column: "location_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_tags_name",
+                table: "tags",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_tags_routes_id",
                 table: "tags",
                 column: "routes_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tenant_branch_name",
+                table: "tenant_branch",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tenant_branch_tenants_id",
+                table: "tenant_branch",
+                column: "tenants_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tenant_domains_deleted_at",
@@ -1037,14 +1009,19 @@ namespace Trace.Infrastructure.Migrations
                 column: "expiry");
 
             migrationBuilder.CreateIndex(
-                name: "ix_tenant_map_option_deleted_at",
-                table: "tenant_map_option",
-                column: "deleted_at");
+                name: "ix_tenant_domains_tenants_id",
+                table: "tenant_domains",
+                column: "tenants_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_tenant_settings_deleted_at",
-                table: "tenant_settings",
-                column: "deleted_at");
+                name: "ix_tenants_full_name",
+                table: "tenants",
+                column: "full_name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tenants_short_name",
+                table: "tenants",
+                column: "short_name");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tenants_unique_id",
@@ -1062,9 +1039,29 @@ namespace Trace.Infrastructure.Migrations
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
+                name: "ix_trailer_fleet_identifier",
+                table: "trailer",
+                column: "fleet_identifier");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_trailer_serial_number",
+                table: "trailer",
+                column: "serial_number");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_user_permissions_deleted_at",
                 table: "user_permissions",
                 column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_user_permissions_feature",
+                table: "user_permissions",
+                column: "feature");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_user_permissions_module",
+                table: "user_permissions",
+                column: "module");
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_permissions_role_id",
@@ -1080,19 +1077,28 @@ namespace Trace.Infrastructure.Migrations
                 name: "ix_vehicle_deleted_at",
                 table: "vehicle",
                 column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehicle_fleet_identifier",
+                table: "vehicle",
+                column: "fleet_identifier");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehicle_name",
+                table: "vehicle",
+                column: "name");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehicle_registration_no",
+                table: "vehicle",
+                column: "registration_no");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "account_map_option");
-
-            migrationBuilder.DropTable(
                 name: "account_notification");
-
-            migrationBuilder.DropTable(
-                name: "account_settings");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -1119,10 +1125,7 @@ namespace Trace.Infrastructure.Migrations
                 name: "device_command");
 
             migrationBuilder.DropTable(
-                name: "device_position");
-
-            migrationBuilder.DropTable(
-                name: "events");
+                name: "server_settings");
 
             migrationBuilder.DropTable(
                 name: "tag_members");
@@ -1135,15 +1138,6 @@ namespace Trace.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "tenant_domains");
-
-            migrationBuilder.DropTable(
-                name: "tenant_map_option");
-
-            migrationBuilder.DropTable(
-                name: "tenant_settings");
-
-            migrationBuilder.DropTable(
-                name: "tenants");
 
             migrationBuilder.DropTable(
                 name: "trailer");
@@ -1165,6 +1159,9 @@ namespace Trace.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "routes");
+
+            migrationBuilder.DropTable(
+                name: "tenants");
 
             migrationBuilder.DropTable(
                 name: "asset_category");

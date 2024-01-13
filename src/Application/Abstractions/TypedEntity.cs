@@ -23,6 +23,6 @@ namespace Trace.Application.Abstractions;
 
 public abstract class TypedEntity<TKey> : BaseEntity<TKey>, ITypedEntity where TKey : notnull {
     public bool Default { get; set; }
-    public string Name { get; set; } = string.Empty;
+    public string? Name { get; set; }
     public string? Description { get; set; }
 }
