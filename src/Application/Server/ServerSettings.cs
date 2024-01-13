@@ -16,15 +16,17 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using Axolotl.EFCore.Base;
 using Trace.Application.Core;
 
 namespace Trace.Application.Server;
 
 public class ServerSettings : BaseEntity<Guid> {
+    [MaxLength(50)]
     public string? Name { get; set; }
     public string? ApiKeyGoogle { get; set; }
     public string? ApiKeyMicrosoft { get; set; }
-    public required ProfileSetting Setting { get; set; }
+    public required ProfileOption Setting { get; set; }
     public required MapOption Map { get; set; }
 }

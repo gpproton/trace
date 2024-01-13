@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Trace.Application.Abstractions;
 using Trace.Application.Core;
@@ -25,13 +26,19 @@ namespace Trace.Application.Engagement;
 
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public bool Active { get; set; }
+    [MaxLength(13)]
     public string Phone { get; set; } = string.Empty;
+    [MaxLength(256)]
     public string Email { get; set; } = string.Empty;
+    [MaxLength(256)]
     public string Username { get; set; } = string.Empty;
+    [MaxLength(256)]
     public string FirstName { get; set; } = string.Empty;
+    [MaxLength(256)]
     public string MiddleName { get; set; } = string.Empty;
+    [MaxLength(256)]
     public string LastName { get; set; } = string.Empty;
-    public required ContactObject Address { get; set; }
+    public required ContactExtraObject Address { get; set; }
     [NotMapped]
     public string FullName => $"{FirstName} {MiddleName} {LastName}";
     public DateTimeOffset? Expiry { get; set; }

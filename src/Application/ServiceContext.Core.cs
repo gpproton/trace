@@ -24,7 +24,7 @@ using Trace.Application.Tenant;
 namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
-    public DbSet<Tenants> Tenants { get; set; } = default!;
+    public DbSet<Tenant.Tenant> Tenants { get; set; } = default!;
     public DbSet<TenantDomains> TenantDomains { get; set; } = default!;
     public DbSet<TenantBranch> TenantBranches { get; set; } = default!;
 

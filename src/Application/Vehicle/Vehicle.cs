@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
@@ -26,14 +27,18 @@ namespace Trace.Application.Vehicle;
 [Index(nameof(FleetIdentifier))]
 [Index(nameof(RegistrationNo))]
 public sealed class Vehicle : AssetEntity {
+    [MaxLength(256)]
     public string Name { get; set; } = string.Empty;
     public VehicleType Type { get; set; }
-    public string FleetIdentifier { get; set; } = string.Empty;
+    [MaxLength(52)]
+    public string? FleetIdentifier { get; set; }
+    [MaxLength(72)]
     public string? RegistrationNo { get; set; }
     public long Odometer { get; set; }
     public FuelType FuelType { get; set; }
     public int FuelCapacity { get; set; }
     public int HorsePower { get; set; }
+    [MaxLength(256)]
     public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
     public Guid? TrailerId { get; set; }

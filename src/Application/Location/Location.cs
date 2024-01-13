@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Redis.OM.Modeling;
@@ -32,23 +33,22 @@ public class Location : TaggedEntity<Guid> {
     [Indexed]
     public bool Default { get; set; }
     [Indexed]
+    [MaxLength(256)]
     public required string Name { get; set; }
     [Indexed]
+    [MaxLength(512)]
     public string? Address { get; set; }
     public DateTimeOffset? ApprovedAt { get; set; }
-    public string? ApprovedBy { get; set; }
+    public Guid? ApprovedBy { get; set; }
     [Indexed]
     public LocationType? Type { get; set; }
     [Indexed(CascadeDepth = 1)]
     public LocationCategory? Category { get; set; }
     [Indexed]
     public Guid? CategoryId { get; set; }
-    [Indexed]
-    public double? Longitude { get; set; }
-    [Indexed]
-    public double? Latitude { get; set; }
     [Indexed(CascadeDepth = 1)]
     public Geometry Geometry { get; set; } = null!;
     [Indexed]
+    [MaxLength(256)]
     public string? Description { get; set; }
 }

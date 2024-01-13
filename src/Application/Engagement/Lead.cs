@@ -16,10 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using Trace.Application.Abstractions;
 
 namespace Trace.Application.Engagement;
 
 public class Lead : TaggedEntity<Guid> {
     public Engagement.Contact? Contact { get; set; }
+    public DateTimeOffset Time { get; set; }
+    [MaxLength(256)]
+    public string? Source { get; set; }
 }

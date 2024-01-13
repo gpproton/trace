@@ -12,14 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Sat Jan 13 2024
 
 using Axolotl.EFCore.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Core.Permission;
 
@@ -36,6 +35,5 @@ public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid
     public Guid? RoleId { get; set; }
     public UserRole? Role { get; set; }
     public Guid? TenantId { get; set; }
-    public required ProfileSetting Setting { get; set; }
-    public required MapOption Map { get; set; }
+    public Guid? AccountSettingId { get; set; }
 }

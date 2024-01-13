@@ -19,4 +19,4 @@
 namespace Trace.Application.Tenant;
 
 public class TenantRepository(ServiceContext context)
-    : GenericRepository<Tenants, Guid>(context), ITenantRepository;
+    : GenericRepository<Tenant, Guid>(context), ITenantRepository;

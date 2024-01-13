@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,21 +12,21 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Saturday, 13th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Sat Jan 13 2024
 
+using Axolotl.EFCore.Base;
 using Microsoft.EntityFrameworkCore;
-using Trace.Application.Abstractions;
-using Trace.Application.Core.Enums;
+using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Account;
 
 [Index(nameof(TenantId))]
-[Index(nameof(AccountId))]
-public class AccountNotification : TenantEntity<Guid> {
-    public Guid? AccountId { get; set; }
-    public UserAccount? Account { get; set; }
-    public NotificationType[] Types { get; set; } = null!;
-    public bool Schedule { get; set; }
+public class AccountSetting : BaseEntity<Guid>, ITenantEntity<Guid?> {
+    public UserAccount? UserAccount { get; set; }
+    public required ProfileOption Option { get; set; }
+    public required MapOption Map { get; set; }
+    public Guid? TenantId { get; set; }
 }

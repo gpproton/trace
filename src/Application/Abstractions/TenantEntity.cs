@@ -17,10 +17,12 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Base;
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Abstractions;
 
+[Index(nameof(TenantId))]
 public abstract class TenantEntity<TKey> : AuditableEntity<TKey>, ITenantEntity<TKey?>
     where TKey : notnull {
     public TKey? TenantId { get; set; }

@@ -12,14 +12,17 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Saturday, 13th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Sat Jan 13 2024
 
-using Axolotl.EFCore.Repository;
+using Axolotl.EFCore.Base;
+using Trace.Application.Core;
 
 namespace Trace.Application.Tenant;
 
-public interface ITenantRepository : IRepository<Tenant, Guid> {
-
+public class TenantSetting : BaseEntity<Guid> {
+    public Tenant? Tenant { get; set; }
+    public required ProfileOption Option { get; set; }
+    public required MapOption Map { get; set; }
 }

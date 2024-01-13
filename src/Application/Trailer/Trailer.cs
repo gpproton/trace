@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
@@ -26,9 +27,11 @@ namespace Trace.Application.Trailer;
 [Index(nameof(SerialNumber))]
 public sealed class Trailer : AssetEntity {
     public TrailerType Type { get; set; }
+    [MaxLength(256)]
     public string? FleetIdentifier { get; set; }
     public long Odometer { get; set; }
     public int HorsePower { get; set; }
-    public string Model { get; set; } = null!;
+    [MaxLength(256)]
+    public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
 }

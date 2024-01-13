@@ -22,6 +22,6 @@ namespace Trace.Application.Core.Interfaces;
 
 public interface ITypedEntity : IAggregateRoot {
     public bool Default { get; set; }
-    public string Name { get; set; }
+    public string? Name { get; set; }
     public string? Description { get; set; }
 }

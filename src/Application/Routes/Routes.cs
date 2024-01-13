@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Trace.Application.Abstractions;
@@ -28,6 +29,7 @@ namespace Trace.Application.Routes;
 public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid> {
     public Guid? ApprovedBy { get; set; }
     public DateTimeOffset ApprovedAt { get; set; }
+    [MaxLength(12)]
     public string? Color { get; set; }
     public int? SpeedLimit { get; set; }
     public decimal RestDuration { get; set; }

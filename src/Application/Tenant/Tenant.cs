@@ -16,35 +16,37 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations;
 using Axolotl.EFCore.Base;
 using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
-using Trace.Application.Core;
 using Trace.Application.Core.Enums;
+using Trace.Application.Engagement;
 
 namespace Trace.Application.Tenant;
 
 [Index(nameof(UniqueId))]
-[Index(nameof(FullName))]
-[Index(nameof(ShortName))]
-[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenants)])]
-public class Tenants : BaseEntity<Guid> {
+[Index(nameof(Name))]
+[Index(nameof(TenantSettingId))]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenant)])]
+public class Tenant : BaseEntity<Guid> {
     [Indexed]
     public Guid Token { get; set; }
     [Indexed]
     public bool Active { get; set; }
     [Indexed]
-    public string FullName { get; set; } = string.Empty;
-    [Indexed]
-    public string? ShortName { get; set; }
+    [MaxLength(256)]
+    public string? Name { get; set; }
     [Indexed]
     public TenantType Type { get; set; } = TenantType.Individual;
     [Indexed]
     public int UniqueId { get; set; }
     [Indexed]
+    [MaxLength(1024)]
     public string? Logo { get; set; }
-    public required MapOption MapOption { get; set; }
-    public required ProfileSetting ProfileSetting { get; set; }
+    public Organization? Profile { get; set; }
+    [Indexed]
+    public Guid? TenantSettingId { get; set; }
     public ICollection<TenantBranch>? Branches { get; set; }
     public ICollection<TenantDomains>? Domains { get; set; }
 }

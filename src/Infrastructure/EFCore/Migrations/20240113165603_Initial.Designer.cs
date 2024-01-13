@@ -14,7 +14,7 @@ using Trace.Application;
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240113113340_Initial")]
+    [Migration("20240113165603_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -222,6 +222,141 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("account_notification", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Account.AccountSetting.Map#MapOption", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("AutoInvoice")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_auto_invoice");
+
+                            b1.Property<bool>("AutoOrder")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_auto_order");
+
+                            b1.Property<bool>("AutoRoute")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_auto_route");
+
+                            b1.Property<bool>("AutoRouteCost")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_auto_route_cost");
+
+                            b1.Property<bool>("AutoZoneOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_auto_zone_otp");
+
+                            b1.Property<string>("BingApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_bing_api_key");
+
+                            b1.Property<bool>("EnableTrip")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_enable_trip");
+
+                            b1.Property<string>("GoogleApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_google_api_key");
+
+                            b1.Property<string>("MapBoxApiKey")
+                                .HasColumnType("text")
+                                .HasColumnName("map_map_box_api_key");
+
+                            b1.Property<string>("MapType")
+                                .HasColumnType("text")
+                                .HasColumnName("map_map_type");
+
+                            b1.Property<bool>("VerifyOtp")
+                                .HasColumnType("boolean")
+                                .HasColumnName("map_verify_otp");
+
+                            b1.Property<int?>("Zoom")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_zoom");
+
+                            b1.Property<int?>("ZoomSelection")
+                                .HasColumnType("integer")
+                                .HasColumnName("map_zoom_selection");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Option", "Trace.Application.Account.AccountSetting.Option#ProfileOption", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<bool>("Hour24Time")
+                                .HasColumnType("boolean")
+                                .HasColumnName("option_hour24time");
+
+                            b1.Property<string>("Language")
+                                .HasColumnType("text")
+                                .HasColumnName("option_language");
+
+                            b1.Property<string>("Timezone")
+                                .HasColumnType("text")
+                                .HasColumnName("option_timezone");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("text")
+                                .HasColumnName("option_token");
+
+                            b1.Property<string>("UnitArea")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_area");
+
+                            b1.Property<string>("UnitDistance")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_distance");
+
+                            b1.Property<string>("UnitForce")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_force");
+
+                            b1.Property<string>("UnitPower")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_power");
+
+                            b1.Property<string>("UnitPressure")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_pressure");
+
+                            b1.Property<string>("UnitSpeed")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_speed");
+
+                            b1.Property<string>("UnitTemperature")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_temperature");
+
+                            b1.Property<string>("UnitVolume")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_volume");
+
+                            b1.Property<string>("UnitWeight")
+                                .HasColumnType("text")
+                                .HasColumnName("option_unit_weight");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_account_setting");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_account_setting_tenant_id");
+
+                    b.ToTable("account_setting", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
                 {
                     b.Property<Guid>("Id")
@@ -232,6 +367,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
+
+                    b.Property<Guid?>("AccountSettingId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("account_setting_id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -306,122 +445,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("user_name");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Account.UserAccount.Map#MapOption", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<bool>("AutoInvoice")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_auto_invoice");
-
-                            b1.Property<bool>("AutoOrder")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_auto_order");
-
-                            b1.Property<bool>("AutoRoute")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_auto_route");
-
-                            b1.Property<bool>("AutoRouteCost")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_auto_route_cost");
-
-                            b1.Property<bool>("AutoZoneOtp")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_auto_zone_otp");
-
-                            b1.Property<string>("BingApiKey")
-                                .HasColumnType("text")
-                                .HasColumnName("map_bing_api_key");
-
-                            b1.Property<bool>("EnableTrip")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_enable_trip");
-
-                            b1.Property<string>("GoogleApiKey")
-                                .HasColumnType("text")
-                                .HasColumnName("map_google_api_key");
-
-                            b1.Property<string>("MapBoxApiKey")
-                                .HasColumnType("text")
-                                .HasColumnName("map_map_box_api_key");
-
-                            b1.Property<string>("MapType")
-                                .HasColumnType("text")
-                                .HasColumnName("map_map_type");
-
-                            b1.Property<bool>("VerifyOtp")
-                                .HasColumnType("boolean")
-                                .HasColumnName("map_verify_otp");
-
-                            b1.Property<int?>("Zoom")
-                                .HasColumnType("integer")
-                                .HasColumnName("map_zoom");
-
-                            b1.Property<int?>("ZoomSelection")
-                                .HasColumnType("integer")
-                                .HasColumnName("map_zoom_selection");
-                        });
-
-                    b.ComplexProperty<Dictionary<string, object>>("Setting", "Trace.Application.Account.UserAccount.Setting#ProfileSetting", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<bool>("Hour24Time")
-                                .HasColumnType("boolean")
-                                .HasColumnName("setting_hour24time");
-
-                            b1.Property<string>("Language")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_language");
-
-                            b1.Property<string>("Timezone")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_timezone");
-
-                            b1.Property<string>("Token")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_token");
-
-                            b1.Property<string>("UnitArea")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_area");
-
-                            b1.Property<string>("UnitDistance")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_distance");
-
-                            b1.Property<string>("UnitForce")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_force");
-
-                            b1.Property<string>("UnitPower")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_power");
-
-                            b1.Property<string>("UnitPressure")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_pressure");
-
-                            b1.Property<string>("UnitSpeed")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_speed");
-
-                            b1.Property<string>("UnitTemperature")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_temperature");
-
-                            b1.Property<string>("UnitVolume")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_volume");
-
-                            b1.Property<string>("UnitWeight")
-                                .HasColumnType("text")
-                                .HasColumnName("setting_unit_weight");
-                        });
-
                     b.HasKey("Id")
                         .HasName("pk_asp_net_users");
+
+                    b.HasIndex("AccountSettingId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_asp_net_users_account_setting_id");
 
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_asp_net_users_contact_id");
@@ -583,15 +612,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
                     b.Property<Guid>("CategoryId")
+                        .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<string>("Color")
-                        .HasColumnType("text")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("color");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -624,7 +656,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("SerialNumber")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
 
                     b.Property<Guid>("TenantId")
@@ -797,7 +830,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("email");
 
                     b.Property<DateTimeOffset?>("Expiry")
@@ -806,7 +840,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("first_name");
 
                     b.Property<DateTimeOffset?>("LastActive")
@@ -815,17 +850,20 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("last_name");
 
                     b.Property<string>("MiddleName")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("middle_name");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)")
                         .HasColumnName("phone");
 
                     b.Property<Guid>("TenantId")
@@ -842,10 +880,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("username");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Contact.Address#ContactObject", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Contact.Address#ContactExtraObject", b1 =>
                         {
                             b1.IsRequired();
 
@@ -858,51 +897,63 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("address_children_count");
 
                             b1.Property<string>("City")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_city");
 
                             b1.Property<string>("Country")
-                                .HasColumnType("text")
+                                .HasMaxLength(25)
+                                .HasColumnType("character varying(25)")
                                 .HasColumnName("address_country");
 
                             b1.Property<string>("County")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_county");
 
                             b1.Property<string>("GuarantorEmail")
-                                .HasColumnType("text")
+                                .HasMaxLength(256)
+                                .HasColumnType("character varying(256)")
                                 .HasColumnName("address_guarantor_email");
 
                             b1.Property<string>("GuarantorName")
-                                .HasColumnType("text")
+                                .HasMaxLength(256)
+                                .HasColumnType("character varying(256)")
                                 .HasColumnName("address_guarantor_name");
 
                             b1.Property<string>("GuarantorPhone")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_guarantor_phone");
 
                             b1.Property<string>("HomePhone")
-                                .HasColumnType("text")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
                                 .HasColumnName("address_home_phone");
 
                             b1.Property<string>("KinEmail")
-                                .HasColumnType("text")
+                                .HasMaxLength(256)
+                                .HasColumnType("character varying(256)")
                                 .HasColumnName("address_kin_email");
 
                             b1.Property<string>("KinName")
-                                .HasColumnType("text")
+                                .HasMaxLength(256)
+                                .HasColumnType("character varying(256)")
                                 .HasColumnName("address_kin_name");
 
                             b1.Property<string>("KinPhone")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_kin_phone");
 
                             b1.Property<string>("Line1")
-                                .HasColumnType("text")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
                                 .HasColumnName("address_line1");
 
                             b1.Property<string>("Line2")
-                                .HasColumnType("text")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
                                 .HasColumnName("address_line2");
 
                             b1.Property<bool>("Married")
@@ -910,15 +961,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("address_married");
 
                             b1.Property<string>("Phone")
-                                .HasColumnType("text")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
                                 .HasColumnName("address_phone");
 
                             b1.Property<string>("State")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_state");
 
                             b1.Property<string>("Zip")
-                                .HasColumnType("text")
+                                .HasMaxLength(10)
+                                .HasColumnType("character varying(10)")
                                 .HasColumnName("address_zip");
                         });
 
@@ -959,9 +1013,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("deleted_by");
 
+                    b.Property<string>("Source")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("source");
+
                     b.Property<Guid>("TagId")
                         .HasColumnType("uuid")
                         .HasColumnName("tag_id");
+
+                    b.Property<DateTimeOffset>("Time")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("time");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -983,6 +1046,93 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("lead", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Engagement.Organization", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("boolean")
+                        .HasColumnName("default");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("full_name");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Organization.Address#ContactObject", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("City")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
+                                .HasColumnName("address_city");
+
+                            b1.Property<string>("Country")
+                                .HasMaxLength(25)
+                                .HasColumnType("character varying(25)")
+                                .HasColumnName("address_country");
+
+                            b1.Property<string>("County")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
+                                .HasColumnName("address_county");
+
+                            b1.Property<string>("HomePhone")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
+                                .HasColumnName("address_home_phone");
+
+                            b1.Property<string>("Line1")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
+                                .HasColumnName("address_line1");
+
+                            b1.Property<string>("Line2")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
+                                .HasColumnName("address_line2");
+
+                            b1.Property<string>("Phone")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
+                                .HasColumnName("address_phone");
+
+                            b1.Property<string>("State")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
+                                .HasColumnName("address_state");
+
+                            b1.Property<string>("Zip")
+                                .HasMaxLength(10)
+                                .HasColumnType("character varying(10)")
+                                .HasColumnName("address_zip");
+                        });
+
+                    b.HasKey("Id")
+                        .HasName("pk_organization");
+
+                    b.HasIndex("FullName")
+                        .HasDatabaseName("ix_organization_full_name");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_organization_name");
+
+                    b.ToTable("organization", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Location.Location", b =>
                 {
                     b.Property<Guid>("Id")
@@ -992,15 +1142,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<string>("Address")
-                        .HasColumnType("text")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
                         .HasColumnName("address");
 
                     b.Property<DateTimeOffset?>("ApprovedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("approved_at");
 
-                    b.Property<string>("ApprovedBy")
-                        .HasColumnType("text")
+                    b.Property<Guid?>("ApprovedBy")
+                        .HasColumnType("uuid")
                         .HasColumnName("approved_by");
 
                     b.Property<Guid?>("CategoryId")
@@ -1028,7 +1179,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("deleted_by");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("description");
 
                     b.Property<Geometry>("Geometry")
@@ -1036,17 +1188,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("geometry")
                         .HasColumnName("geometry");
 
-                    b.Property<double?>("Latitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("latitude");
-
-                    b.Property<double?>("Longitude")
-                        .HasColumnType("double precision")
-                        .HasColumnName("longitude");
-
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
                     b.Property<Guid>("TagId")
@@ -1134,7 +1279,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("approved_by");
 
                     b.Property<string>("Color")
-                        .HasColumnType("text")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("color");
 
                     b.Property<int?>("CompletedRate")
@@ -1208,7 +1354,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("api_key_microsoft");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("name");
 
                     b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Server.ServerSettings.Map#MapOption", b1 =>
@@ -1268,7 +1415,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("map_zoom_selection");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("Setting", "Trace.Application.Server.ServerSettings.Setting#ProfileSetting", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Setting", "Trace.Application.Server.ServerSettings.Setting#ProfileOption", b1 =>
                         {
                             b1.IsRequired();
 
@@ -1364,7 +1511,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("expiry");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
                     b.Property<Guid>("TenantId")
@@ -1403,7 +1551,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<string>("Color")
-                        .HasColumnType("text")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("color");
 
                     b.Property<Guid?>("ContactId")
@@ -1435,7 +1584,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("location_id");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("RoutesId")
@@ -1478,6 +1628,67 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("tags", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean")
+                        .HasColumnName("active");
+
+                    b.Property<string>("Logo")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)")
+                        .HasColumnName("logo");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("name");
+
+                    b.Property<Guid?>("ProfileId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("profile_id");
+
+                    b.Property<Guid?>("TenantSettingId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_setting_id");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("uuid")
+                        .HasColumnName("token");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<int>("UniqueId")
+                        .HasColumnType("integer")
+                        .HasColumnName("unique_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_tenant");
+
+                    b.HasIndex("Name")
+                        .HasDatabaseName("ix_tenant_name");
+
+                    b.HasIndex("ProfileId")
+                        .HasDatabaseName("ix_tenant_profile_id");
+
+                    b.HasIndex("TenantSettingId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_tenant_tenant_setting_id");
+
+                    b.HasIndex("UniqueId")
+                        .HasDatabaseName("ix_tenant_unique_id");
+
+                    b.ToTable("tenant", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Tenant.TenantBranch", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1502,84 +1713,53 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
-                    b.Property<Guid?>("TenantsId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenants_id");
-
                     b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Tenant.TenantBranch.Address#ContactObject", b1 =>
                         {
                             b1.IsRequired();
 
-                            b1.Property<DateOnly?>("BirthDate")
-                                .HasColumnType("date")
-                                .HasColumnName("address_birth_date");
-
-                            b1.Property<int>("ChildrenCount")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_children_count");
-
                             b1.Property<string>("City")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_city");
 
                             b1.Property<string>("Country")
-                                .HasColumnType("text")
+                                .HasMaxLength(25)
+                                .HasColumnType("character varying(25)")
                                 .HasColumnName("address_country");
 
                             b1.Property<string>("County")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_county");
 
-                            b1.Property<string>("GuarantorEmail")
-                                .HasColumnType("text")
-                                .HasColumnName("address_guarantor_email");
-
-                            b1.Property<string>("GuarantorName")
-                                .HasColumnType("text")
-                                .HasColumnName("address_guarantor_name");
-
-                            b1.Property<string>("GuarantorPhone")
-                                .HasColumnType("text")
-                                .HasColumnName("address_guarantor_phone");
-
                             b1.Property<string>("HomePhone")
-                                .HasColumnType("text")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
                                 .HasColumnName("address_home_phone");
 
-                            b1.Property<string>("KinEmail")
-                                .HasColumnType("text")
-                                .HasColumnName("address_kin_email");
-
-                            b1.Property<string>("KinName")
-                                .HasColumnType("text")
-                                .HasColumnName("address_kin_name");
-
-                            b1.Property<string>("KinPhone")
-                                .HasColumnType("text")
-                                .HasColumnName("address_kin_phone");
-
                             b1.Property<string>("Line1")
-                                .HasColumnType("text")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
                                 .HasColumnName("address_line1");
 
                             b1.Property<string>("Line2")
-                                .HasColumnType("text")
+                                .HasMaxLength(512)
+                                .HasColumnType("character varying(512)")
                                 .HasColumnName("address_line2");
 
-                            b1.Property<bool>("Married")
-                                .HasColumnType("boolean")
-                                .HasColumnName("address_married");
-
                             b1.Property<string>("Phone")
-                                .HasColumnType("text")
+                                .HasMaxLength(12)
+                                .HasColumnType("character varying(12)")
                                 .HasColumnName("address_phone");
 
                             b1.Property<string>("State")
-                                .HasColumnType("text")
+                                .HasMaxLength(50)
+                                .HasColumnType("character varying(50)")
                                 .HasColumnName("address_state");
 
                             b1.Property<string>("Zip")
-                                .HasColumnType("text")
+                                .HasMaxLength(10)
+                                .HasColumnType("character varying(10)")
                                 .HasColumnName("address_zip");
                         });
 
@@ -1589,8 +1769,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("Name")
                         .HasDatabaseName("ix_tenant_branch_name");
 
-                    b.HasIndex("TenantsId")
-                        .HasDatabaseName("ix_tenant_branch_tenants_id");
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_tenant_branch_tenant_id");
 
                     b.ToTable("tenant_branch", (string)null);
                 });
@@ -1625,7 +1805,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.Property<string>("Domain")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("domain");
 
                     b.Property<DateTimeOffset>("Expiry")
@@ -1633,16 +1814,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("expiry");
 
                     b.Property<string>("Registrar")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("registrar");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
-
-                    b.Property<Guid?>("TenantsId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenants_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -1664,13 +1842,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("Expiry")
                         .HasDatabaseName("ix_tenant_domains_expiry");
 
-                    b.HasIndex("TenantsId")
-                        .HasDatabaseName("ix_tenant_domains_tenants_id");
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_tenant_domains_tenant_id");
 
                     b.ToTable("tenant_domains", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Tenant.Tenants", b =>
+            modelBuilder.Entity("Trace.Application.Tenant.TenantSetting", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1678,162 +1856,124 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(1);
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("boolean")
-                        .HasColumnName("active");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("full_name");
-
-                    b.Property<string>("Logo")
-                        .HasColumnType("text")
-                        .HasColumnName("logo");
-
-                    b.Property<string>("ShortName")
-                        .HasColumnType("text")
-                        .HasColumnName("short_name");
-
-                    b.Property<Guid>("Token")
-                        .HasColumnType("uuid")
-                        .HasColumnName("token");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer")
-                        .HasColumnName("type");
-
-                    b.Property<int>("UniqueId")
-                        .HasColumnType("integer")
-                        .HasColumnName("unique_id");
-
-                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Tenant.Tenants.MapOption#MapOption", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Tenant.TenantSetting.Map#MapOption", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("AutoInvoice")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_invoice");
+                                .HasColumnName("map_auto_invoice");
 
                             b1.Property<bool>("AutoOrder")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_order");
+                                .HasColumnName("map_auto_order");
 
                             b1.Property<bool>("AutoRoute")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route");
+                                .HasColumnName("map_auto_route");
 
                             b1.Property<bool>("AutoRouteCost")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route_cost");
+                                .HasColumnName("map_auto_route_cost");
 
                             b1.Property<bool>("AutoZoneOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_zone_otp");
+                                .HasColumnName("map_auto_zone_otp");
 
                             b1.Property<string>("BingApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_bing_api_key");
+                                .HasColumnName("map_bing_api_key");
 
                             b1.Property<bool>("EnableTrip")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_enable_trip");
+                                .HasColumnName("map_enable_trip");
 
                             b1.Property<string>("GoogleApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_google_api_key");
+                                .HasColumnName("map_google_api_key");
 
                             b1.Property<string>("MapBoxApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_box_api_key");
+                                .HasColumnName("map_map_box_api_key");
 
                             b1.Property<string>("MapType")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_type");
+                                .HasColumnName("map_map_type");
 
                             b1.Property<bool>("VerifyOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_verify_otp");
+                                .HasColumnName("map_verify_otp");
 
                             b1.Property<int?>("Zoom")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom");
+                                .HasColumnName("map_zoom");
 
                             b1.Property<int?>("ZoomSelection")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom_selection");
+                                .HasColumnName("map_zoom_selection");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Tenant.Tenants.ProfileSetting#ProfileSetting", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Option", "Trace.Application.Tenant.TenantSetting.Option#ProfileOption", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("Hour24Time")
                                 .HasColumnType("boolean")
-                                .HasColumnName("profile_setting_hour24time");
+                                .HasColumnName("option_hour24time");
 
                             b1.Property<string>("Language")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_language");
+                                .HasColumnName("option_language");
 
                             b1.Property<string>("Timezone")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_timezone");
+                                .HasColumnName("option_timezone");
 
                             b1.Property<string>("Token")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_token");
+                                .HasColumnName("option_token");
 
                             b1.Property<string>("UnitArea")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_area");
+                                .HasColumnName("option_unit_area");
 
                             b1.Property<string>("UnitDistance")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_distance");
+                                .HasColumnName("option_unit_distance");
 
                             b1.Property<string>("UnitForce")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_force");
+                                .HasColumnName("option_unit_force");
 
                             b1.Property<string>("UnitPower")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_power");
+                                .HasColumnName("option_unit_power");
 
                             b1.Property<string>("UnitPressure")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_pressure");
+                                .HasColumnName("option_unit_pressure");
 
                             b1.Property<string>("UnitSpeed")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_speed");
+                                .HasColumnName("option_unit_speed");
 
                             b1.Property<string>("UnitTemperature")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_temperature");
+                                .HasColumnName("option_unit_temperature");
 
                             b1.Property<string>("UnitVolume")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_volume");
+                                .HasColumnName("option_unit_volume");
 
                             b1.Property<string>("UnitWeight")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_weight");
+                                .HasColumnName("option_unit_weight");
                         });
 
                     b.HasKey("Id")
-                        .HasName("pk_tenants");
+                        .HasName("pk_tenant_setting");
 
-                    b.HasIndex("FullName")
-                        .HasDatabaseName("ix_tenants_full_name");
-
-                    b.HasIndex("ShortName")
-                        .HasDatabaseName("ix_tenants_short_name");
-
-                    b.HasIndex("UniqueId")
-                        .HasDatabaseName("ix_tenants_unique_id");
-
-                    b.ToTable("tenants", (string)null);
+                    b.ToTable("tenant_setting", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Trailer.Trailer", b =>
@@ -1845,15 +1985,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
                     b.Property<Guid>("CategoryId")
+                        .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<string>("Color")
-                        .HasColumnType("text")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("color");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -1881,7 +2024,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("deployed");
 
                     b.Property<string>("FleetIdentifier")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("fleet_identifier");
 
                     b.Property<int>("HorsePower")
@@ -1889,8 +2033,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("horse_power");
 
                     b.Property<string>("Model")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("model");
 
                     b.Property<long>("Odometer")
@@ -1898,7 +2042,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("odometer");
 
                     b.Property<string>("SerialNumber")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
 
                     b.Property<Guid>("TenantId")
@@ -1948,15 +2093,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
                     b.Property<Guid>("CategoryId")
+                        .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
 
                     b.Property<string>("Color")
-                        .HasColumnType("text")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
                         .HasColumnName("color");
 
                     b.Property<DateTimeOffset>("CreatedAt")
@@ -1984,8 +2132,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("deployed");
 
                     b.Property<string>("FleetIdentifier")
-                        .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(52)
+                        .HasColumnType("character varying(52)")
                         .HasColumnName("fleet_identifier");
 
                     b.Property<int>("FuelCapacity")
@@ -2001,12 +2149,14 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("horse_power");
 
                     b.Property<string>("Model")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("model");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
                     b.Property<long>("Odometer")
@@ -2014,11 +2164,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("odometer");
 
                     b.Property<string>("RegistrationNo")
-                        .HasColumnType("text")
+                        .HasMaxLength(72)
+                        .HasColumnType("character varying(72)")
                         .HasColumnName("registration_no");
 
                     b.Property<string>("SerialNumber")
-                        .HasColumnType("text")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
 
                     b.Property<Guid>("TenantId")
@@ -2135,6 +2287,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
                 {
+                    b.HasOne("Trace.Application.Account.AccountSetting", null)
+                        .WithOne("UserAccount")
+                        .HasForeignKey("Trace.Application.Account.UserAccount", "AccountSettingId")
+                        .HasConstraintName("fk_asp_net_users_account_setting_account_setting_id");
+
                     b.HasOne("Trace.Application.Engagement.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
@@ -2225,20 +2382,41 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasConstraintName("fk_tags_routes_routes_id");
                 });
 
+            modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>
+                {
+                    b.HasOne("Trace.Application.Engagement.Organization", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileId")
+                        .HasConstraintName("fk_tenant_organization_profile_id");
+
+                    b.HasOne("Trace.Application.Tenant.TenantSetting", null)
+                        .WithOne("Tenant")
+                        .HasForeignKey("Trace.Application.Tenant.Tenant", "TenantSettingId")
+                        .HasConstraintName("fk_tenant_tenant_setting_tenant_setting_id");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Trace.Application.Tenant.TenantBranch", b =>
                 {
-                    b.HasOne("Trace.Application.Tenant.Tenants", null)
+                    b.HasOne("Trace.Application.Tenant.Tenant", "Tenant")
                         .WithMany("Branches")
-                        .HasForeignKey("TenantsId")
-                        .HasConstraintName("fk_tenant_branch_tenants_tenants_id");
+                        .HasForeignKey("TenantId")
+                        .HasConstraintName("fk_tenant_branch_tenant_tenant_id");
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
                 {
-                    b.HasOne("Trace.Application.Tenant.Tenants", null)
+                    b.HasOne("Trace.Application.Tenant.Tenant", "Tenant")
                         .WithMany("Domains")
-                        .HasForeignKey("TenantsId")
-                        .HasConstraintName("fk_tenant_domains_tenants_tenants_id");
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_tenant_domains_tenant_tenant_id");
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("Trace.Application.Trailer.Trailer", b =>
@@ -2263,6 +2441,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasConstraintName("fk_vehicle_asset_category_category_id");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
+                {
+                    b.Navigation("UserAccount");
                 });
 
             modelBuilder.Entity("Trace.Application.Account.UserRole", b =>
@@ -2290,11 +2473,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Tags");
                 });
 
-            modelBuilder.Entity("Trace.Application.Tenant.Tenants", b =>
+            modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>
                 {
                     b.Navigation("Branches");
 
                     b.Navigation("Domains");
+                });
+
+            modelBuilder.Entity("Trace.Application.Tenant.TenantSetting", b =>
+                {
+                    b.Navigation("Tenant");
                 });
 #pragma warning restore 612, 618
         }
