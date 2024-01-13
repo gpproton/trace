@@ -18,9 +18,9 @@
 
 using Grpc.Core;
 
-namespace Trace.Service.Integration.Features.Protocol.Services;
+namespace Trace.Service.Integration.Protocol.Services;
 
-public class ProtocolService(ILogger<ProtocolService> logger) : Integration.Protocol.ProtocolBase {
+public class ProtocolService(ILogger<ProtocolService> logger) : Protocol.ProtocolBase {
 
     public override Task<AckResponse> Ping(Google.Protobuf.WellKnownTypes.Empty empty, ServerCallContext context) {
         logger.LogInformation("Received ping");

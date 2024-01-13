@@ -20,7 +20,7 @@
 
 syntax = "proto3";
 
-option csharp_namespace = "Trace.Service.Integration";
+option csharp_namespace = "Trace.Service.Integration.Protocol";
 
 package Integration;
 

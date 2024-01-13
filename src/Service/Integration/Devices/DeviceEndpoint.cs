@@ -21,7 +21,7 @@ using MassTransit.Mediator;
 using Microsoft.AspNetCore.Mvc;
 using Trace.Application.Device.Query;
 
-namespace Trace.Service.Integration.Features.Devices;
+namespace Trace.Service.Integration.Devices;
 
 public static class DeviceEndpoint {
     public static IEndpointRouteBuilder MapDeviceEndpoint(this IEndpointRouteBuilder route) {

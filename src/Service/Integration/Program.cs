@@ -19,15 +19,14 @@
 using Trace.Common.Queueing.Extensions;
 using Trace.Infrastructure.Traccar;
 using Trace.Service.Integration;
-using Trace.Service.Integration.Features.Protocol;
-using Trace.Service.Integration.Features.Protocol.Services;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
 using Trace.Infrastructure;
-using Trace.Service.Integration.Features.Devices;
-using Trace.Infrastructure.EFCore;
 using Trace.Application.Abstractions;
+using Trace.Service.Integration.Devices;
+using Trace.Service.Integration.Protocol;
+using Trace.Service.Integration.Protocol.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;

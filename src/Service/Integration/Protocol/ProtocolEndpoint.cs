@@ -22,7 +22,7 @@ using Microsoft.AspNetCore.Mvc;
 using Trace.Application.Device.Commands;
 using Trace.Application.Device.Dtos;
 
-namespace Trace.Service.Integration.Features.Protocol;
+namespace Trace.Service.Integration.Protocol;
 
 public static class ProtocolEndpoint {
     public static IEndpointRouteBuilder MapProtocolEndpoint(this IEndpointRouteBuilder route) {
