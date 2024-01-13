@@ -19,12 +19,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Trace.Application;
 
 namespace Trace.Infrastructure.EFCore;
 
-public static class EFCoreExtension {
+public static class EfCoreExtension {
     public static WebApplicationBuilder RegisterEfCoreInfrastructure(this WebApplicationBuilder builder) {
         var connectionString = builder.Configuration.GetConnectionString("db");
 
@@ -40,6 +41,7 @@ public static class EFCoreExtension {
             .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
             .UseNetTopologySuite());
         });
+        builder.Services.AddHostedService<EfMigrationWorker>();
 
         return builder;
     }
