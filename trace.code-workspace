@@ -111,7 +111,8 @@
       "wayou.vscode-todo-highlight",
       "vscode-icons-team.vscode-icons",
       "gruntfuggly.todo-tree",
-      "jacokok.csharp-stretch"
+      "jacokok.csharp-stretch",
+      "psioniq.psi-header"
     ],
     "unwantedRecommendations": [
       "octref.vetur",
