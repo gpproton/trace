@@ -25,4 +25,14 @@ namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     public DbSet<Tenants> Tenants { get; set; } = default!;
+    public DbSet<TenantDomains> TenantDomains { get; set; } = default!;
+    public DbSet<TenantBranch> TenantBranches { get; set; } = default!;
+
+    public DbSet<Vehicle.Vehicle> Vehicles { get; set; } = default!;
+    public DbSet<Trailer.Trailer> Trailers { get; set; } = default!;
+    public DbSet<Asset.Asset> Assets { get; set; } = default!;
+    public DbSet<Device.Device> Devices { get; set; } = default!;
+
+    public DbSet<Location.Location> Locations { get; set; } = default!;
+    public DbSet<Routes.Routes> Routes { get; set; } = default!;
 }

@@ -1,5 +1,5 @@
 // Copyright (c) 2023 - 2024 drolx Solutions
-// 
+//
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
 // Change License: Reciprocal Public License 1.5
@@ -10,16 +10,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-// 
+//
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Wednesday, 3rd Jan 2024
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Base;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Abstractions;
 
-public abstract class TenantEntity<T> : Axolotl.EFCore.Base.AuditableEntity<T>, ITenantEntity<T> where T : notnull {
-    public T? TenantId { get; set; }
+public abstract class TenantEntity<TKey> : AuditableEntity<TKey>, ITenantEntity<TKey?>
+    where TKey : notnull {
+    public TKey? TenantId { get; set; }
 }

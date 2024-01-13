@@ -17,12 +17,11 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Tenant;
 
-public class TenantMapSettings : TenantEntity<Guid>, IMapSettingEntity {
+public class TenantMapOption : TenantEntity<Guid>, IMapSettingEntity {
     public string? MapType { get; set; }
     public int? Zoom { get; set; }
     public int? ZoomSelection { get; set; }

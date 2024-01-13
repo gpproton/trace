@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -16,19 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Axolotl.EFCore.Base;
-using Redis.OM.Modeling;
+using Axolotl.EFCore.Repository;
 
-namespace Trace.Application.Abstractions;
+namespace Trace.Application.Trailer;
 
-public abstract class BaseEntity<TKey> : CoreEntity, IHasKey<TKey> where TKey : notnull {
-    [Key]
-    [RedisIdField]
-    [Indexed]
-    [Column(Order=1)]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Display(AutoGenerateField = false)]
-    public TKey Id { get; set; } = default!;
+public interface ITrailerRepository : IRepository<Trailer, Guid> {
+
 }

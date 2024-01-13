@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Boarding/" />
     <Folder Include="Boarding/Commands/" />
     <Folder Include="Boarding/Consumers/" />
     <Folder Include="Boarding/Queries/" />

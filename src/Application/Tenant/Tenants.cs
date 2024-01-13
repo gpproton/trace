@@ -31,7 +31,7 @@ public class Tenants : BaseEntity<Guid> {
     [Indexed]
     public bool Active { get; set; }
     [Indexed]
-    public string FullName { get; set; }
+    public string FullName { get; set; } = string.Empty;
     [Indexed]
     public string? ShortName { get; set; }
     [Indexed]

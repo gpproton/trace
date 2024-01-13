@@ -16,11 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Base;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Abstractions;
 
-public abstract class TypedEntity<T> : Axolotl.EFCore.Base.AuditableEntity<T>, ITypedEntity where T : notnull {
+public abstract class TypedEntity<TKey> : BaseEntity<TKey>, ITypedEntity where TKey : notnull {
     public bool Default { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }

@@ -16,12 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Base;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Abstractions;
 
-public abstract class TaggedEntity<T> : Axolotl.EFCore.Base.AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
+public abstract class TaggedEntity<T> : AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
     public ICollection<Tags.Tags>? Tags { get; set; }
     public T? TagId { get; set; }
-    public T? TenantId { get; set; }
 }

@@ -12,16 +12,26 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Thursday, 4th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
-using Axolotl.EFCore.Repository;
+using Trace.Application.Asset;
 
-namespace Trace.Application;
+namespace Trace.Application.Abstractions;
 
-public class GenericRepository<TEntity, TKey>(ServiceContext context)
-    : GenericBaseRepository<TEntity, ServiceContext, TKey>(context)
-    where TEntity : class, IAggregateRoot, IHasKey<TKey>
-    where TKey : notnull;
+public abstract class AssetEntity : TenantEntity<Guid> {
+    public string? SerialNumber { get; set; }
+
+    public string? Barcode { get; set; }
+
+    public string? Color { get; set; }
+
+    public DateTimeOffset? Deployed { get; set; }
+
+    public DateTimeOffset? Decommissioned { get; set; }
+
+    public virtual AssetCategory? Category { get; set; }
+
+    public Guid CategoryId { get; set; }
+}

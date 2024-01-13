@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
+using Trace.Application.Abstractions;
 using Trace.Application.Asset;
 using Trace.Application.Core.Enums;
 

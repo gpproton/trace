@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Axolotl.EFCore.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
@@ -27,11 +28,11 @@ namespace Trace.Application.Identity;
 [Index(nameof(UserName))]
 [Index(nameof(TenantId))]
 [Index(nameof(ContactId))]
-public class UserAccount : IdentityUser<Guid>, ITenantEntity<Guid>, IAccountEntity {
+public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid?>, IAccountEntity {
     public required Contact.Contact Contact { get; set; }
     public Guid? ContactId { get; set; }
     public RoleLevel DefaultRole { get; set; }
     public Guid? RoleId { get; set; }
     public UserRole? Role { get; set; }
-    public Guid TenantId { get; set; }
+    public Guid? TenantId { get; set; }
 }

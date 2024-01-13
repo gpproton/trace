@@ -29,12 +29,11 @@ public static class DependencyInjection {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, Assembly assembly) {
         services.AddMediator();
         services.AddValidatorsFromAssembly(assembly);
-        services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
-        services.AddScoped(typeof(IReadRepository<>), typeof(GenericRepository<>));
+        services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
         services.Scan(selector =>
             selector
             .FromCallingAssembly()
-            .AddClasses(classSelector => classSelector.AssignableTo(typeof(IRepository<>)))
+            .AddClasses(classSelector => classSelector.AssignableTo(typeof(IRepository<,>)))
             .UsingRegistrationStrategy(RegistrationStrategy.Skip)
             .AsImplementedInterfaces()
             .WithTransientLifetime()

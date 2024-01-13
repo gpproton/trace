@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,27 +12,14 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 4th Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Axolotl.EFCore.Repository;
 
-namespace Trace.Application.Asset;
+namespace Trace.Application.Routes;
 
-public abstract class AssetEntity : TenantEntity<Guid> {
-    public string? SerialNumber { get; set; }
+public interface IRouteRepository : IRepository<Routes, Guid> {
 
-    public string? Barcode { get; set; }
-
-    public string? Color { get; set; }
-
-    public DateTimeOffset? Deployed { get; set; }
-
-    public DateTimeOffset? Decommissioned { get; set; }
-
-    public virtual AssetCategory? Category { get; set; }
-
-    public Guid CategoryId { get; set; }
 }

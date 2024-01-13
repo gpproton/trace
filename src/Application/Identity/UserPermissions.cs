@@ -17,13 +17,12 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Identity {
     public class UserPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
-        public UserRole Role { get; set; }
+        public UserRole? Role { get; set; }
         public Guid? RoleId { get; set; }
         public string? Module { get; set; }
         public string? Feature { get; set; }

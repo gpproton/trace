@@ -17,12 +17,12 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Tenant;
 
-public class TenantBranch : TypedEntity<Guid>, IAddressEntity {
+public class TenantBranch : TypedEntity<Guid>, ITenantEntity<Guid?>, IAddressEntity {
+    public Guid? TenantId { get; set; }
     public string? AddressLine1 { get; set; }
     public string? AddressLine2 { get; set; }
     public string? AddressCity { get; set; }

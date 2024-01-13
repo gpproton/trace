@@ -16,11 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
 
 namespace Trace.Application.Tenant;
 
+[Index(nameof(Domain))]
+[Index(nameof(Expiry))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(TenantDomains)])]
 public class TenantDomains : TenantEntity<Guid> {
     [Indexed]

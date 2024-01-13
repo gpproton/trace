@@ -23,8 +23,8 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Events;
 
-public class Events : ExtendedEntity<Guid>, ITenantEntity<Guid> {
-    public Guid TenantId { get; set; }
+public class Events : ExtendedEntity<Guid>, ITenantEntity<Guid?> {
+    public Guid? TenantId { get; set; }
     public DateTimeOffset Time { get; set; }
     public DateTimeOffset ServerTime { get; set; }
     public EventTypes Type { get; set; }

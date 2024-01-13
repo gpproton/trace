@@ -25,7 +25,7 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Device;
 
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(DevicePosition)])]
-public class DevicePosition : ExtendedEntity, ITenantEntity<Guid> {
+public class DevicePosition : ExtendedEntity, ITenantEntity<Guid?> {
     public const string KeyMotion = "motion";
     public const string KeyPower = "power"; // volts
     public const string KeyBattery = "battery"; // volts
@@ -41,7 +41,7 @@ public class DevicePosition : ExtendedEntity, ITenantEntity<Guid> {
     [Key]
     public Guid Id { get; set; }
     [Indexed]
-    public Guid TenantId { get; set; }
+    public Guid? TenantId { get; set; }
     [Indexed]
     [RedisIdField]
     public Guid DeviceId { get; set; }
