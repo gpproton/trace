@@ -18,7 +18,7 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Trace.Application.Identity;
+using Trace.Application.Account;
 using Trace.Application.Tenant;
 
 namespace Trace.Application;

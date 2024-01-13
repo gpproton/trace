@@ -17,7 +17,7 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Trace.Application.Identity;
+using Trace.Application.Account;
 
 namespace Trace.Application;
 

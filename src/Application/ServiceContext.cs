@@ -20,8 +20,8 @@ using Axolotl.EFCore.Base;
 using Axolotl.EFCore.Context;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Trace.Application.Account;
 using Trace.Application.Core.Interfaces;
-using Trace.Application.Identity;
 
 namespace Trace.Application;
 

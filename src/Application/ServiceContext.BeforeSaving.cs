@@ -19,7 +19,7 @@
 using Axolotl.EFCore.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Trace.Application.Identity;
+using Trace.Application.Account;
 
 namespace Trace.Application;
 
