@@ -16,12 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Asset;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Trailer;
 
+[Index(nameof(FleetIdentifier))]
+[Index(nameof(SerialNumber))]
 public sealed class Trailer : AssetEntity {
     public TrailerType Type { get; set; }
     public string? FleetIdentifier { get; set; }

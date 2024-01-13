@@ -16,11 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 
 namespace Trace.Application.Location;
 
+[Index(nameof(Name))]
 public class LocationCategory : TypedEntity<Guid> {
     public string Icon { get; set; } = string.Empty;
 }

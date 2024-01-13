@@ -16,20 +16,15 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Tenant;
 
-public class TenantBranch : TypedEntity<Guid>, ITenantEntity<Guid?>, IAddressEntity {
+[Index(nameof(Name))]
+public class TenantBranch : TypedEntity<Guid>, ITenantEntity<Guid?> {
     public Guid? TenantId { get; set; }
-    public string? AddressLine1 { get; set; }
-    public string? AddressLine2 { get; set; }
-    public string? AddressCity { get; set; }
-    public string? AddressCounty { get; set; }
-    public string? AddressState { get; set; }
-    public string? AddressZip { get; set; }
-    public string? AddressCountry { get; set; }
-    public string? HomePhone { get; set; }
-    public string? MobilePhone { get; set; }
+    public required ContactObject Address { get; set; }
 }

@@ -16,7 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Account;
 
 public class AccountRepository(ServiceContext context) : GenericRepository<UserAccount, Guid>(context), IAccountRepository {
 

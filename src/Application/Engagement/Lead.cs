@@ -17,10 +17,9 @@
 // Modified At: Thu Jan 04 2024
 
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 
-namespace Trace.Application.Contact;
+namespace Trace.Application.Engagement;
 
 public class Lead : TaggedEntity<Guid> {
-    public Contact? Contact { get; set; }
+    public Engagement.Contact? Contact { get; set; }
 }

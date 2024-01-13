@@ -19,11 +19,14 @@
 using Axolotl.EFCore.Base;
 using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
+using Trace.Application.Core;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Tenant;
 
 [Index(nameof(UniqueId))]
+[Index(nameof(FullName))]
+[Index(nameof(ShortName))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenants)])]
 public class Tenants : BaseEntity<Guid> {
     [Indexed]
@@ -40,4 +43,8 @@ public class Tenants : BaseEntity<Guid> {
     public int UniqueId { get; set; }
     [Indexed]
     public string? Logo { get; set; }
+    public required MapOption MapOption { get; set; }
+    public required ProfileSetting ProfileSetting { get; set; }
+    public ICollection<TenantBranch>? Branches { get; set; }
+    public ICollection<TenantDomains>? Domains { get; set; }
 }

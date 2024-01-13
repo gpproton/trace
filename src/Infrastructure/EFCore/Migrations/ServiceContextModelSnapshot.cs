@@ -303,118 +303,118 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("user_name");
 
-                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Account.UserAccount.MapOption#MapOption", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Account.UserAccount.Map#MapOption", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("AutoInvoice")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_invoice");
+                                .HasColumnName("map_auto_invoice");
 
                             b1.Property<bool>("AutoOrder")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_order");
+                                .HasColumnName("map_auto_order");
 
                             b1.Property<bool>("AutoRoute")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route");
+                                .HasColumnName("map_auto_route");
 
                             b1.Property<bool>("AutoRouteCost")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route_cost");
+                                .HasColumnName("map_auto_route_cost");
 
                             b1.Property<bool>("AutoZoneOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_zone_otp");
+                                .HasColumnName("map_auto_zone_otp");
 
                             b1.Property<string>("BingApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_bing_api_key");
+                                .HasColumnName("map_bing_api_key");
 
                             b1.Property<bool>("EnableTrip")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_enable_trip");
+                                .HasColumnName("map_enable_trip");
 
                             b1.Property<string>("GoogleApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_google_api_key");
+                                .HasColumnName("map_google_api_key");
 
                             b1.Property<string>("MapBoxApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_box_api_key");
+                                .HasColumnName("map_map_box_api_key");
 
                             b1.Property<string>("MapType")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_type");
+                                .HasColumnName("map_map_type");
 
                             b1.Property<bool>("VerifyOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_verify_otp");
+                                .HasColumnName("map_verify_otp");
 
                             b1.Property<int?>("Zoom")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom");
+                                .HasColumnName("map_zoom");
 
                             b1.Property<int?>("ZoomSelection")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom_selection");
+                                .HasColumnName("map_zoom_selection");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Account.UserAccount.ProfileSetting#ProfileSetting", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Setting", "Trace.Application.Account.UserAccount.Setting#ProfileSetting", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("Hour24Time")
                                 .HasColumnType("boolean")
-                                .HasColumnName("profile_setting_hour24time");
+                                .HasColumnName("setting_hour24time");
 
                             b1.Property<string>("Language")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_language");
+                                .HasColumnName("setting_language");
 
                             b1.Property<string>("Timezone")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_timezone");
+                                .HasColumnName("setting_timezone");
 
                             b1.Property<string>("Token")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_token");
+                                .HasColumnName("setting_token");
 
                             b1.Property<string>("UnitArea")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_area");
+                                .HasColumnName("setting_unit_area");
 
                             b1.Property<string>("UnitDistance")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_distance");
+                                .HasColumnName("setting_unit_distance");
 
                             b1.Property<string>("UnitForce")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_force");
+                                .HasColumnName("setting_unit_force");
 
                             b1.Property<string>("UnitPower")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_power");
+                                .HasColumnName("setting_unit_power");
 
                             b1.Property<string>("UnitPressure")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_pressure");
+                                .HasColumnName("setting_unit_pressure");
 
                             b1.Property<string>("UnitSpeed")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_speed");
+                                .HasColumnName("setting_unit_speed");
 
                             b1.Property<string>("UnitTemperature")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_temperature");
+                                .HasColumnName("setting_unit_temperature");
 
                             b1.Property<string>("UnitVolume")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_volume");
+                                .HasColumnName("setting_unit_volume");
 
                             b1.Property<string>("UnitWeight")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_weight");
+                                .HasColumnName("setting_unit_weight");
                         });
 
                     b.HasKey("Id")
@@ -678,87 +678,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("asset_category", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Core.ContactObject", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("AddressCity")
-                        .HasColumnType("text")
-                        .HasColumnName("address_city");
-
-                    b.Property<string>("AddressCountry")
-                        .HasColumnType("text")
-                        .HasColumnName("address_country");
-
-                    b.Property<string>("AddressCounty")
-                        .HasColumnType("text")
-                        .HasColumnName("address_county");
-
-                    b.Property<string>("AddressLine1")
-                        .HasColumnType("text")
-                        .HasColumnName("address_line1");
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("text")
-                        .HasColumnName("address_line2");
-
-                    b.Property<string>("AddressState")
-                        .HasColumnType("text")
-                        .HasColumnName("address_state");
-
-                    b.Property<string>("AddressZip")
-                        .HasColumnType("text")
-                        .HasColumnName("address_zip");
-
-                    b.Property<DateOnly?>("BirthDate")
-                        .HasColumnType("date")
-                        .HasColumnName("birth_date");
-
-                    b.Property<string>("GuarantorEmail")
-                        .HasColumnType("text")
-                        .HasColumnName("guarantor_email");
-
-                    b.Property<string>("GuarantorName")
-                        .HasColumnType("text")
-                        .HasColumnName("guarantor_name");
-
-                    b.Property<string>("GuarantorPhone")
-                        .HasColumnType("text")
-                        .HasColumnName("guarantor_phone");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("text")
-                        .HasColumnName("home_phone");
-
-                    b.Property<string>("MobilePhone")
-                        .HasColumnType("text")
-                        .HasColumnName("mobile_phone");
-
-                    b.Property<string>("NextKinEmail")
-                        .HasColumnType("text")
-                        .HasColumnName("next_kin_email");
-
-                    b.Property<string>("NextKinName")
-                        .HasColumnType("text")
-                        .HasColumnName("next_kin_name");
-
-                    b.Property<string>("NextKinPhone")
-                        .HasColumnType("text")
-                        .HasColumnName("next_kin_phone");
-
-                    b.Property<int>("NumberOfChildren")
-                        .HasColumnType("integer")
-                        .HasColumnName("number_of_children");
-
-                    b.HasKey("Id")
-                        .HasName("pk_contact_object");
-
-                    b.ToTable("contact_object", (string)null);
-                });
-
             modelBuilder.Entity("Trace.Application.Device.Device", b =>
                 {
                     b.Property<Guid>("Id")
@@ -882,10 +801,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("expiry");
 
-                    b.Property<Guid?>("ExtraInformationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("extra_information_id");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -927,14 +842,88 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("text")
                         .HasColumnName("username");
 
+                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Contact.Address#ContactObject", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<DateOnly?>("BirthDate")
+                                .HasColumnType("date")
+                                .HasColumnName("address_birth_date");
+
+                            b1.Property<int>("ChildrenCount")
+                                .HasColumnType("integer")
+                                .HasColumnName("address_children_count");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("text")
+                                .HasColumnName("address_city");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("text")
+                                .HasColumnName("address_country");
+
+                            b1.Property<string>("County")
+                                .HasColumnType("text")
+                                .HasColumnName("address_county");
+
+                            b1.Property<string>("GuarantorEmail")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_email");
+
+                            b1.Property<string>("GuarantorName")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_name");
+
+                            b1.Property<string>("GuarantorPhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_phone");
+
+                            b1.Property<string>("HomePhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_home_phone");
+
+                            b1.Property<string>("KinEmail")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_email");
+
+                            b1.Property<string>("KinName")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_name");
+
+                            b1.Property<string>("KinPhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_phone");
+
+                            b1.Property<string>("Line1")
+                                .HasColumnType("text")
+                                .HasColumnName("address_line1");
+
+                            b1.Property<string>("Line2")
+                                .HasColumnType("text")
+                                .HasColumnName("address_line2");
+
+                            b1.Property<bool>("Married")
+                                .HasColumnType("boolean")
+                                .HasColumnName("address_married");
+
+                            b1.Property<string>("Phone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_phone");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("text")
+                                .HasColumnName("address_state");
+
+                            b1.Property<string>("Zip")
+                                .HasColumnType("text")
+                                .HasColumnName("address_zip");
+                        });
+
                     b.HasKey("Id")
                         .HasName("pk_contact");
 
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_contact_deleted_at");
-
-                    b.HasIndex("ExtraInformationId")
-                        .HasDatabaseName("ix_contact_extra_information_id");
 
                     b.ToTable("contact", (string)null);
                 });
@@ -1219,118 +1208,118 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.ComplexProperty<Dictionary<string, object>>("MapOption", "Trace.Application.Server.ServerSettings.MapOption#MapOption", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Server.ServerSettings.Map#MapOption", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("AutoInvoice")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_invoice");
+                                .HasColumnName("map_auto_invoice");
 
                             b1.Property<bool>("AutoOrder")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_order");
+                                .HasColumnName("map_auto_order");
 
                             b1.Property<bool>("AutoRoute")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route");
+                                .HasColumnName("map_auto_route");
 
                             b1.Property<bool>("AutoRouteCost")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_route_cost");
+                                .HasColumnName("map_auto_route_cost");
 
                             b1.Property<bool>("AutoZoneOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_auto_zone_otp");
+                                .HasColumnName("map_auto_zone_otp");
 
                             b1.Property<string>("BingApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_bing_api_key");
+                                .HasColumnName("map_bing_api_key");
 
                             b1.Property<bool>("EnableTrip")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_enable_trip");
+                                .HasColumnName("map_enable_trip");
 
                             b1.Property<string>("GoogleApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_google_api_key");
+                                .HasColumnName("map_google_api_key");
 
                             b1.Property<string>("MapBoxApiKey")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_box_api_key");
+                                .HasColumnName("map_map_box_api_key");
 
                             b1.Property<string>("MapType")
                                 .HasColumnType("text")
-                                .HasColumnName("map_option_map_type");
+                                .HasColumnName("map_map_type");
 
                             b1.Property<bool>("VerifyOtp")
                                 .HasColumnType("boolean")
-                                .HasColumnName("map_option_verify_otp");
+                                .HasColumnName("map_verify_otp");
 
                             b1.Property<int?>("Zoom")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom");
+                                .HasColumnName("map_zoom");
 
                             b1.Property<int?>("ZoomSelection")
                                 .HasColumnType("integer")
-                                .HasColumnName("map_option_zoom_selection");
+                                .HasColumnName("map_zoom_selection");
                         });
 
-                    b.ComplexProperty<Dictionary<string, object>>("ProfileSetting", "Trace.Application.Server.ServerSettings.ProfileSetting#ProfileSetting", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("Setting", "Trace.Application.Server.ServerSettings.Setting#ProfileSetting", b1 =>
                         {
                             b1.IsRequired();
 
                             b1.Property<bool>("Hour24Time")
                                 .HasColumnType("boolean")
-                                .HasColumnName("profile_setting_hour24time");
+                                .HasColumnName("setting_hour24time");
 
                             b1.Property<string>("Language")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_language");
+                                .HasColumnName("setting_language");
 
                             b1.Property<string>("Timezone")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_timezone");
+                                .HasColumnName("setting_timezone");
 
                             b1.Property<string>("Token")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_token");
+                                .HasColumnName("setting_token");
 
                             b1.Property<string>("UnitArea")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_area");
+                                .HasColumnName("setting_unit_area");
 
                             b1.Property<string>("UnitDistance")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_distance");
+                                .HasColumnName("setting_unit_distance");
 
                             b1.Property<string>("UnitForce")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_force");
+                                .HasColumnName("setting_unit_force");
 
                             b1.Property<string>("UnitPower")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_power");
+                                .HasColumnName("setting_unit_power");
 
                             b1.Property<string>("UnitPressure")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_pressure");
+                                .HasColumnName("setting_unit_pressure");
 
                             b1.Property<string>("UnitSpeed")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_speed");
+                                .HasColumnName("setting_unit_speed");
 
                             b1.Property<string>("UnitTemperature")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_temperature");
+                                .HasColumnName("setting_unit_temperature");
 
                             b1.Property<string>("UnitVolume")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_volume");
+                                .HasColumnName("setting_unit_volume");
 
                             b1.Property<string>("UnitWeight")
                                 .HasColumnType("text")
-                                .HasColumnName("profile_setting_unit_weight");
+                                .HasColumnName("setting_unit_weight");
                         });
 
                     b.HasKey("Id")
@@ -1494,34 +1483,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(1);
 
-                    b.Property<string>("AddressCity")
-                        .HasColumnType("text")
-                        .HasColumnName("address_city");
-
-                    b.Property<string>("AddressCountry")
-                        .HasColumnType("text")
-                        .HasColumnName("address_country");
-
-                    b.Property<string>("AddressCounty")
-                        .HasColumnType("text")
-                        .HasColumnName("address_county");
-
-                    b.Property<string>("AddressLine1")
-                        .HasColumnType("text")
-                        .HasColumnName("address_line1");
-
-                    b.Property<string>("AddressLine2")
-                        .HasColumnType("text")
-                        .HasColumnName("address_line2");
-
-                    b.Property<string>("AddressState")
-                        .HasColumnType("text")
-                        .HasColumnName("address_state");
-
-                    b.Property<string>("AddressZip")
-                        .HasColumnType("text")
-                        .HasColumnName("address_zip");
-
                     b.Property<bool>("Default")
                         .HasColumnType("boolean")
                         .HasColumnName("default");
@@ -1529,14 +1490,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
-
-                    b.Property<string>("HomePhone")
-                        .HasColumnType("text")
-                        .HasColumnName("home_phone");
-
-                    b.Property<string>("MobilePhone")
-                        .HasColumnType("text")
-                        .HasColumnName("mobile_phone");
 
                     b.Property<string>("Name")
                         .HasColumnType("text")
@@ -1549,6 +1502,83 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<Guid?>("TenantsId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenants_id");
+
+                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Tenant.TenantBranch.Address#ContactObject", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<DateOnly?>("BirthDate")
+                                .HasColumnType("date")
+                                .HasColumnName("address_birth_date");
+
+                            b1.Property<int>("ChildrenCount")
+                                .HasColumnType("integer")
+                                .HasColumnName("address_children_count");
+
+                            b1.Property<string>("City")
+                                .HasColumnType("text")
+                                .HasColumnName("address_city");
+
+                            b1.Property<string>("Country")
+                                .HasColumnType("text")
+                                .HasColumnName("address_country");
+
+                            b1.Property<string>("County")
+                                .HasColumnType("text")
+                                .HasColumnName("address_county");
+
+                            b1.Property<string>("GuarantorEmail")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_email");
+
+                            b1.Property<string>("GuarantorName")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_name");
+
+                            b1.Property<string>("GuarantorPhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_guarantor_phone");
+
+                            b1.Property<string>("HomePhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_home_phone");
+
+                            b1.Property<string>("KinEmail")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_email");
+
+                            b1.Property<string>("KinName")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_name");
+
+                            b1.Property<string>("KinPhone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_kin_phone");
+
+                            b1.Property<string>("Line1")
+                                .HasColumnType("text")
+                                .HasColumnName("address_line1");
+
+                            b1.Property<string>("Line2")
+                                .HasColumnType("text")
+                                .HasColumnName("address_line2");
+
+                            b1.Property<bool>("Married")
+                                .HasColumnType("boolean")
+                                .HasColumnName("address_married");
+
+                            b1.Property<string>("Phone")
+                                .HasColumnType("text")
+                                .HasColumnName("address_phone");
+
+                            b1.Property<string>("State")
+                                .HasColumnType("text")
+                                .HasColumnName("address_state");
+
+                            b1.Property<string>("Zip")
+                                .HasColumnType("text")
+                                .HasColumnName("address_zip");
+                        });
 
                     b.HasKey("Id")
                         .HasName("pk_tenant_branch");
@@ -2137,16 +2167,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasConstraintName("fk_asset_asset_category_category_id");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
-                {
-                    b.HasOne("Trace.Application.Core.ContactObject", "ExtraInformation")
-                        .WithMany()
-                        .HasForeignKey("ExtraInformationId")
-                        .HasConstraintName("fk_contact_contact_object_extra_information_id");
-
-                    b.Navigation("ExtraInformation");
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>

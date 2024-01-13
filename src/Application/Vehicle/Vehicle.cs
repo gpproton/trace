@@ -16,12 +16,15 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Asset;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Vehicle;
 
+[Index(nameof(Name))]
+[Index(nameof(FleetIdentifier))]
+[Index(nameof(RegistrationNo))]
 public sealed class Vehicle : AssetEntity {
     public string Name { get; set; } = string.Empty;
     public VehicleType Type { get; set; }

@@ -16,16 +16,20 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Identity {
-    public class UserPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
-        public UserRole? Role { get; set; }
-        public Guid? RoleId { get; set; }
-        public string? Module { get; set; }
-        public string? Feature { get; set; }
-        public CrudAction Actions { get; set; } = default!;
-    }
+namespace Trace.Application.Account;
+
+[Index(nameof(Module))]
+[Index(nameof(Feature))]
+[Index(nameof(RoleId))]
+public class UserPermissions : TenantEntity<Guid>, IAccountPermissionEntity {
+    public UserRole? Role { get; set; }
+    public Guid? RoleId { get; set; }
+    public string? Module { get; set; }
+    public string? Feature { get; set; }
+    public CrudAction Actions { get; set; } = default!;
 }

@@ -16,11 +16,15 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Trace.Application.Account;
 
 namespace Trace.Application.Tags;
 
+[Index(nameof(Name))]
 public class TagMembers : TenantEntity<Guid> {
+    public string? Name { get; set; }
+    public UserAccount? Account { get; set; }
     public DateTimeOffset? Expiry { get; set; }
 }

@@ -16,14 +16,16 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
-using Axolotl.EFCore.Base;
+using Axolotl.EFCore.Interfaces;
 using Cassandra.Mapping;
 using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Events;
 
-public class Events : ExtendedEntity<Guid>, ITenantEntity<Guid?> {
+public class Events : ExtendedEntity, IHasKey<Guid>, ITenantEntity<Guid?> {
+    public Guid Id { get; set; }
     public Guid? TenantId { get; set; }
     public DateTimeOffset Time { get; set; }
     public DateTimeOffset ServerTime { get; set; }

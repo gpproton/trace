@@ -18,7 +18,7 @@
 
 using Axolotl.EFCore.Repository;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Account;
 
 public interface IAccountRepository : IRepository<UserAccount, Guid> {
 

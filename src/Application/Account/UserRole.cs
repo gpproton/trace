@@ -16,11 +16,13 @@
 // Last Modified: 2024-1-12 18:45
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Account;
 
+[Index(nameof(Name))]
 public class UserRole : IdentityRole<Guid>, IAccountRoleEntity {
     public RoleLevel Root { get; set; }
     public ICollection<UserPermissions>? Permissions { get; set; }

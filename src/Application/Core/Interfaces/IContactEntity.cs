@@ -16,23 +16,25 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Trace.Application.Core.Interfaces;
-using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Identity;
+namespace Trace.Application.Core.Interfaces;
 
-[Index(nameof(Email))]
-[Index(nameof(UserName))]
-[Index(nameof(TenantId))]
-[Index(nameof(ContactId))]
-public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid?>, IAccountEntity {
-    public required Contact.Contact Contact { get; set; }
-    public Guid? ContactId { get; set; }
-    public RoleLevel DefaultRole { get; set; }
-    public Guid? RoleId { get; set; }
-    public UserRole? Role { get; set; }
-    public Guid? TenantId { get; set; }
+public interface IContactEntity {
+    public string? Line1 { get; set; }
+
+    public string? Line2 { get; set; }
+
+    public string? City { get; set; }
+
+    public string? County { get; set; }
+
+    public string? State { get; set; }
+
+    public string? Zip { get; set; }
+
+    public string? Country { get; set; }
+
+    public string? HomePhone { get; set; }
+
+    public string? Phone { get; set; }
 }

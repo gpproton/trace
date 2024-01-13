@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
@@ -23,6 +24,9 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Location;
 
+[Index(nameof(Name))]
+[Index(nameof(CategoryId))]
+[Index(nameof(Address))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
 public class Location : TaggedEntity<Guid> {
     [Indexed]

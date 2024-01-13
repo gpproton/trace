@@ -16,20 +16,26 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Abstractions;
+using Axolotl.EFCore.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Core.Permission;
 
-namespace Trace.Application.Tenant;
+namespace Trace.Application.Account;
 
-public class TenantMapOption : TenantEntity<Guid>, IMapSettingEntity {
-    public string? MapType { get; set; }
-    public int? Zoom { get; set; }
-    public int? ZoomSelection { get; set; }
-    public bool EnableTrip { get; set; }
-    public bool AutoRoute { get; set; }
-    public bool AutoOrder { get; set; }
-    public bool AutoRouteCost { get; set; }
-    public bool AutoInvoice { get; set; }
-    public bool VerifyOtp { get; set; }
-    public bool AutoZoneOtp { get; set; }
+[Index(nameof(Email))]
+[Index(nameof(UserName))]
+[Index(nameof(TenantId))]
+[Index(nameof(ContactId))]
+public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid?>, IAccountEntity {
+    public required Engagement.Contact Contact { get; set; }
+    public Guid? ContactId { get; set; }
+    public RoleLevel DefaultRole { get; set; }
+    public Guid? RoleId { get; set; }
+    public UserRole? Role { get; set; }
+    public Guid? TenantId { get; set; }
+    public required ProfileSetting Setting { get; set; }
+    public required MapOption Map { get; set; }
 }

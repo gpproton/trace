@@ -16,27 +16,29 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Core;
 
-public class ContactObject : IAddressEntity {
+[ComplexType]
+public class ContactObject : IContactEntity {
     public DateOnly? BirthDate { get; set; }
-    public int NumberOfChildren { get; set; }
-    public string? NextKinName { get; set; }
-    public string? NextKinPhone { get; set; }
-    public string? NextKinEmail { get; set; }
+    public bool Married { get; set; }
+    public int ChildrenCount { get; set; }
+    public string? KinName { get; set; }
+    public string? KinPhone { get; set; }
+    public string? KinEmail { get; set; }
     public string? GuarantorName { get; set; }
     public string? GuarantorPhone { get; set; }
     public string? GuarantorEmail { get; set; }
-    public string? AddressLine1 { get; set; }
-    public string? AddressLine2 { get; set; }
-    public string? AddressCity { get; set; }
-    public string? AddressCounty { get; set; }
-    public string? AddressState { get; set; }
-    public string? AddressZip { get; set; }
-    public string? AddressCountry { get; set; }
+    public string? Line1 { get; set; }
+    public string? Line2 { get; set; }
+    public string? City { get; set; }
+    public string? County { get; set; }
+    public string? State { get; set; }
+    public string? Zip { get; set; }
+    public string? Country { get; set; }
     public string? HomePhone { get; set; }
-    public string? MobilePhone { get; set; }
-    public Guid Id { get; set; }
+    public string? Phone { get; set; }
 }

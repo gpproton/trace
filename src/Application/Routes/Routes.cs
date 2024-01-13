@@ -16,13 +16,16 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Routes;
 
-public class Routes : TaggedEntity<Guid> {
+[Index(nameof(Name))]
+[Index(nameof(Description))]
+public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid> {
     public Guid? ApprovedBy { get; set; }
     public DateTimeOffset ApprovedAt { get; set; }
     public string? Color { get; set; }
@@ -33,4 +36,5 @@ public class Routes : TaggedEntity<Guid> {
     public Point Source { get; set; } = null!;
     public Point Destination { get; set; } = null!;
     public LineString? Path { get; set; }
+    public ICollection<Tags.Tags>? Tags { get; set; }
 }

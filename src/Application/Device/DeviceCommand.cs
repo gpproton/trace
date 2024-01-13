@@ -16,11 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core;
 
 namespace Trace.Application.Device;
 
+[Index(nameof(Name))]
 public class DeviceCommand : TypedEntity<Guid> {
     public int Delay { get; set; }
 

@@ -16,11 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 
 namespace Trace.Application.Tags;
 
+[Index(nameof(Name))]
 public class Tags : TenantEntity<Guid> {
+    public string? Name { get; set; }
     public string? Color { get; set; }
 }

@@ -21,7 +21,7 @@ using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application.Contact;
+namespace Trace.Application.Engagement;
 
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public bool Active { get; set; }
@@ -31,7 +31,7 @@ public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public string FirstName { get; set; } = string.Empty;
     public string MiddleName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
-    public ContactObject? ExtraInformation { get; set; }
+    public required ContactObject Address { get; set; }
     [NotMapped]
     public string FullName => $"{FirstName} {MiddleName} {LastName}";
     public DateTimeOffset? Expiry { get; set; }

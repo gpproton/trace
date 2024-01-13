@@ -17,8 +17,8 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Interfaces;
+using Trace.Application.Account;
 using Trace.Application.Core.Permission;
-using Trace.Application.Identity;
 
 namespace Trace.Application.Core.Interfaces;
 
