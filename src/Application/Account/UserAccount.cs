@@ -24,10 +24,9 @@ using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Account;
 
-[Index(nameof(Email))]
 [Index(nameof(UserName))]
-[Index(nameof(TenantId))]
 [Index(nameof(ContactId))]
+[PrimaryKey(nameof(TenantId), nameof(Email))]
 public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid?>, IAccountEntity {
     public required Engagement.Contact Contact { get; set; }
     public Guid? ContactId { get; set; }

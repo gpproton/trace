@@ -155,7 +155,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Account.AccountNotification", b =>
+            modelBuilder.Entity("Trace.Application.Account.AccountAlert", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -205,18 +205,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("updated_by");
 
                     b.HasKey("Id")
-                        .HasName("pk_account_notification");
+                        .HasName("pk_account_alert");
 
                     b.HasIndex("AccountId")
-                        .HasDatabaseName("ix_account_notification_account_id");
+                        .HasDatabaseName("ix_account_alert_account_id");
 
                     b.HasIndex("DeletedAt")
-                        .HasDatabaseName("ix_account_notification_deleted_at");
+                        .HasDatabaseName("ix_account_alert_deleted_at");
 
                     b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_account_notification_tenant_id");
+                        .HasDatabaseName("ix_account_alert_tenant_id");
 
-                    b.ToTable("account_notification", (string)null);
+                    b.ToTable("account_alert", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
@@ -452,9 +452,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_asp_net_users_contact_id");
 
-                    b.HasIndex("Email")
-                        .HasDatabaseName("ix_asp_net_users_email");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -464,9 +461,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_asp_net_users_role_id");
-
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_asp_net_users_tenant_id");
 
                     b.HasIndex("UserName")
                         .HasDatabaseName("ix_asp_net_users_user_name");
@@ -557,6 +551,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("RoleId")
                         .HasDatabaseName("ix_user_permissions_role_id");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_user_permissions_tenant_id");
 
                     b.ToTable("user_permissions", (string)null);
                 });
@@ -677,6 +674,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_asset_deleted_at");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_asset_tenant_id");
 
                     b.ToTable("asset", (string)null);
                 });
@@ -978,6 +978,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_contact_deleted_at");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_contact_tenant_id");
 
                     b.ToTable("contact", (string)null);
                 });
@@ -1536,6 +1539,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("Name")
                         .HasDatabaseName("ix_tag_members_name");
 
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_tag_members_tenant_id");
+
                     b.ToTable("tag_members", (string)null);
                 });
 
@@ -1621,6 +1627,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("RoutesId")
                         .HasDatabaseName("ix_tags_routes_id");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_tags_tenant_id");
 
                     b.ToTable("tags", (string)null);
                 });
@@ -2078,6 +2087,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("SerialNumber")
                         .HasDatabaseName("ix_trailer_serial_number");
 
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_trailer_tenant_id");
+
                     b.ToTable("trailer", (string)null);
                 });
 
@@ -2212,6 +2224,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("RegistrationNo")
                         .HasDatabaseName("ix_vehicle_registration_no");
 
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_vehicle_tenant_id");
+
                     b.ToTable("vehicle", (string)null);
                 });
 
@@ -2272,12 +2287,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id");
                 });
 
-            modelBuilder.Entity("Trace.Application.Account.AccountNotification", b =>
+            modelBuilder.Entity("Trace.Application.Account.AccountAlert", b =>
                 {
                     b.HasOne("Trace.Application.Account.UserAccount", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId")
-                        .HasConstraintName("fk_account_notification_asp_net_users_account_id");
+                        .HasConstraintName("fk_account_alert_asp_net_users_account_id");
 
                     b.Navigation("Account");
                 });

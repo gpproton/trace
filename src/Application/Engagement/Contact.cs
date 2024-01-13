@@ -18,12 +18,14 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Cassandra.Mapping;
 using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Engagement;
 
+[PrimaryKey(nameof(TenantId), nameof(Email))]
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public bool Active { get; set; }
     [MaxLength(13)]

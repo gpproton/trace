@@ -596,7 +596,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "account_notification",
+                name: "account_alert",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -613,9 +613,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_account_notification", x => x.id);
+                    table.PrimaryKey("pk_account_alert", x => x.id);
                     table.ForeignKey(
-                        name: "fk_account_notification_asp_net_users_account_id",
+                        name: "fk_account_alert_asp_net_users_account_id",
                         column: x => x.account_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "id");
@@ -834,18 +834,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_account_notification_account_id",
-                table: "account_notification",
+                name: "ix_account_alert_account_id",
+                table: "account_alert",
                 column: "account_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_account_notification_deleted_at",
-                table: "account_notification",
+                name: "ix_account_alert_deleted_at",
+                table: "account_alert",
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
-                name: "ix_account_notification_tenant_id",
-                table: "account_notification",
+                name: "ix_account_alert_tenant_id",
+                table: "account_alert",
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
@@ -901,19 +901,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "contact_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_asp_net_users_email",
-                table: "AspNetUsers",
-                column: "email");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_asp_net_users_role_id",
                 table: "AspNetUsers",
                 column: "role_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_asp_net_users_tenant_id",
-                table: "AspNetUsers",
-                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_asp_net_users_user_name",
@@ -937,9 +927,19 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
+                name: "ix_asset_tenant_id",
+                table: "asset",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_contact_deleted_at",
                 table: "contact",
                 column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_contact_tenant_id",
+                table: "contact",
+                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_device_command_name",
@@ -1017,6 +1017,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
+                name: "ix_tag_members_tenant_id",
+                table: "tag_members",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_tags_contact_id",
                 table: "tags",
                 column: "contact_id");
@@ -1045,6 +1050,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "ix_tags_routes_id",
                 table: "tags",
                 column: "routes_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_tags_tenant_id",
+                table: "tags",
+                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tenant_name",
@@ -1118,6 +1128,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "serial_number");
 
             migrationBuilder.CreateIndex(
+                name: "ix_trailer_tenant_id",
+                table: "trailer",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_user_permissions_deleted_at",
                 table: "user_permissions",
                 column: "deleted_at");
@@ -1136,6 +1151,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "ix_user_permissions_role_id",
                 table: "user_permissions",
                 column: "role_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_user_permissions_tenant_id",
+                table: "user_permissions",
+                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_vehicle_category_id",
@@ -1161,13 +1181,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "ix_vehicle_registration_no",
                 table: "vehicle",
                 column: "registration_no");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehicle_tenant_id",
+                table: "vehicle",
+                column: "tenant_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "account_notification");
+                name: "account_alert");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
