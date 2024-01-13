@@ -73,7 +73,6 @@ public static class DependencyInjection {
 
     public static WebApplication RegisterDefaults(this WebApplication app) {
         app.UseRouting();
-        app.UseStaticFiles();
         app.UseAntiforgery();
         app.UseAuthorization();
         app.UseSession();
