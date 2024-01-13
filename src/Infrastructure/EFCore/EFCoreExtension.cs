@@ -37,11 +37,10 @@ public static class EfCoreExtension {
         options => {
             options.UseSnakeCaseNamingConvention();
             options.UseNpgsql(connectionString, b => b
-            .MigrationsAssembly(typeof(ServiceContext).Assembly.FullName)
+            .MigrationsAssembly(typeof(ServiceContextFactory).Assembly.FullName)
             .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
             .UseNetTopologySuite());
         });
-        builder.Services.AddHostedService<EfMigrationWorker>();
 
         return builder;
     }

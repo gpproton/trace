@@ -20,7 +20,7 @@ using Axolotl.EFCore.Interfaces;
 
 namespace Trace.Application.Core.Interfaces;
 
-public interface IAddressEntity : IAggregateRoot {
+public interface IAddressEntity : IAggregateRoot, IHasKey<Guid> {
     public string? AddressLine1 { get; set; }
 
     public string? AddressLine2 { get; set; }

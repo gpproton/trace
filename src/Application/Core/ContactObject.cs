@@ -38,4 +38,5 @@ public class ContactObject : IAddressEntity {
     public string? AddressCountry { get; set; }
     public string? HomePhone { get; set; }
     public string? MobilePhone { get; set; }
+    public Guid Id { get; set; }
 }

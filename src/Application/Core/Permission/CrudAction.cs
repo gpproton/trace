@@ -15,6 +15,15 @@
 // Modified By: Godwin peter .O
 // Last Modified: 2024-1-12 19:13
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Trace.Application.Core.Permission;
 
-public record CrudAction(bool Read = true, bool Create = true, bool Update = true, bool Delete = true);
+[ComplexType]
+public class CrudAction(bool read = true, bool create = true, bool update = true, bool delete = true) {
+    public bool Read { get; init; } = read;
+    public bool Create { get; init; } = create;
+    public bool Update { get; init; } = update;
+    public bool Delete { get; init; } = delete;
+
+}
