@@ -93,10 +93,12 @@
 
   <!-- HotChocolate packages -->
   <ItemGroup Label="HotChocolate">
+    <PackageVersion Include="HotChocolate.Abstractions" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.EntityFramework" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.Spatial" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Diagnostics" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Execution" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.InMemory" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Stitching" Version="$(HotChocolateVersion)" />
