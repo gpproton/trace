@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  messaging:
+
+services:
+  messaging:
+    image: rabbitmq:3-management-alpine
+    container_name: messaging
+    hostname: messaging
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - 5672:5672
+      - 8085:15672
+    volumes:
+      - messaging:/var/lib/rabbitmq
+    networks:
+      default:
+        ipv4_address: 192.168.55.10
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:15672"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

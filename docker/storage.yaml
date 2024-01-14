@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   server:
@@ -21,23 +21,17 @@ services:
         - 'traefik.http.routers.minio.rule=Host(`storage.${DOMAIN}`) || Host(`staging.${DOMAIN}`) && PathPrefix(`/service/storage`)'
         - 'traefik.http.routers.minio.service=minio'
         - 'traefik.http.routers.minio.middlewares=minio-strip'
-        ## Storage admin interface
-        - 'traefik.http.services.minio-admin.loadbalancer.server.port=9001'
-        - 'traefik.http.routers.minio-admin.entrypoints=web-secure'
-        - 'traefik.http.routers.minio-admin.rule=Host(`manage-storage.${DOMAIN}`)'
-        - 'traefik.http.routers.minio-admin.service=minio-admin'
     volumes:
       - '/etc/localtime:/etc/localtime:ro'
       - '/etc/timezone:/etc/timezone:ro'
       - '${STORE_ROOT}/minio:/data'
+    ports:
+      - 9001:9001
     environment:
       MINIO_UPDATE: 'off'
       MINIO_ROOT_USER: trace
       MINIO_ROOT_PASSWORD: trace@1234
-      MINIO_SITE_NAME: trace-cdn-00
-      MINIO_DOMAIN: 'storage.${DOMAIN},manage.${DOMAIN},manage-storage.${DOMAIN}'
-      MINIO_BROWSER_REDIRECT_URL: 'https://manage-storage.${DOMAIN}'
-      # MINIO_SERVER_URL: 'https://storage.${DOMAIN}'
+      MINIO_SITE_NAME: trace-00
     command: server --address 0.0.0.0:9000 --console-address ":9001" /data
     healthcheck:
       test: ['CMD', 'curl', '-f', 'http://localhost:9000/minio/health/live']

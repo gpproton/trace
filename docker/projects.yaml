@@ -1,6 +1,5 @@
 version: '3'
 
-
 x-app: &app
   environment: &app-env
     ASPNETCORE_URLS: "http://+:8080"

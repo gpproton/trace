@@ -1,0 +1,24 @@
+version: '3'
+
+volumes:
+  traccar:
+
+services:
+  traccar:
+    image: ghcr.io/drolx/track:alpine
+    container_name: traccar
+    restart: unless-stopped
+    hostname: traccar
+    ports:
+      - 6055:5055
+      - 8082:8082
+    volumes:
+      - traccar:/opt/traccar/data:rw
+      - ./config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
+      - ./logs/:/opt/traccar/logs:rw
+    networks:
+      default:
+        ipv4_address: 192.168.55.50
+    depends_on:
+      - messaging
+      - cache
