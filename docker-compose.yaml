@@ -85,9 +85,8 @@ services:
     restart: unless-stopped
     hostname: traccar
     ports:
-      - 6000:5000
       - 6055:5055
-      - 8088:8082
+      - 8082:8082
     volumes:
       - traccar:/opt/traccar/data:rw
       - ./config/traccar.xml:/opt/traccar/conf/traccar.xml:ro
