@@ -16,13 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Sun Jan 14 2024
 
-using HotChocolate.Data;
 using HotChocolate.Execution.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Trace.Application.Abstractions;
 using Trace.Application.Core;
 using Trace.Application.Device.Types;
 using Trace.Application.Engagement.Types;
+using Trace.Application.Tags.Types;
 
 namespace Trace.Application;
 
@@ -46,6 +46,9 @@ public static class ApplicationTypes {
         services.AddType<OrganizationType>();
         services.AddType<OpportunityType>();
         services.AddType<LeadType>();
+        // Tag types
+        services.AddType<TagsType>();
+        services.AddType<TagMembersType>();
         // Device types
         services.AddType<DeviceType>();
         services.AddType<DeviceCommandType>();

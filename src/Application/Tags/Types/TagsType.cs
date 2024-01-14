@@ -22,6 +22,6 @@ namespace Trace.Application.Tags.Types;
 
 public class TagsType : ObjectType<Tags> {
     protected override void Configure(IObjectTypeDescriptor<Tags> descriptor) {
-
+        descriptor.Description("Tags for binding most entities");
     }
 }

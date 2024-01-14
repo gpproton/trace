@@ -20,11 +20,11 @@ namespace Trace.ServiceDefaults;
 public static class Nodes {
     public const string GroupName = "Trace";
 
-    public static readonly IReadOnlyList<string> All = new List<string> {
+    public static readonly IReadOnlyList<string> All = [
         Core,
         Integration,
         Navigation
-    };
+    ];
 
     // Services
     public const string Gateway = nameof(Gateway);
@@ -33,5 +33,4 @@ public static class Nodes {
     public const string Core = nameof(Core);
     public const string Navigation = nameof(Navigation);
     public const string Manager = nameof(Manager);
-    public const string Worker = nameof(Worker);
 }

@@ -21,6 +21,9 @@ using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
 using Trace.Application;
 using Trace.Application.Abstractions;
+using HotChocolate;
+using NetTopologySuite.Geometries;
+using HotChocolate.Types.Spatial;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -35,6 +38,10 @@ builder.Services.AddGraphQLServer()
     .AddRequestOptions(isDevelopment)
     .AddContexConfig()
     .AddQueryableCursorPagingProvider()
+    .AddSpatialTypes()
+    .AddSpatialFiltering()
+    .AddSpatialProjections()
+    .BindRuntimeType<Geometry, GeoJsonInterfaceType>()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();

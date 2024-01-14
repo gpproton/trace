@@ -22,6 +22,6 @@ namespace Trace.Application.Tags.Types;
 
 public class TagMembersType : ObjectType<TagMembers> {
     protected override void Configure(IObjectTypeDescriptor<TagMembers> descriptor) {
-
+        descriptor.Description("user attached to tag");
     }
 }

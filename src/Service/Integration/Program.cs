@@ -26,6 +26,7 @@ using Trace.Application.Abstractions;
 using Trace.Service.Integration.Devices;
 using Trace.Service.Integration.Protocol;
 using Trace.Service.Integration.Protocol.Services;
+using HotChocolate;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -44,6 +45,9 @@ builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
     .AddRequestOptions(isDevelopment)
     .AddContexConfig()
+    .AddSpatialTypes()
+    .AddSpatialFiltering()
+    .AddSpatialProjections()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
