@@ -34,7 +34,7 @@ public static class DependencyInjection {
             selector
             .FromCallingAssembly()
             .AddClasses(filter => filter.Where(x => x.Name.EndsWith("Repository")), publicOnly: false)
-            .UsingRegistrationStrategy(RegistrationStrategy.Append)
+            .UsingRegistrationStrategy(RegistrationStrategy.Skip)
             .AsMatchingInterface()
             .WithScopedLifetime()
         );

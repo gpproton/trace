@@ -38,8 +38,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
-builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterDefaultServices();
+builder.Services.RegisterApplicationServices(assembly);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
     .AddRequestOptions(isDevelopment)

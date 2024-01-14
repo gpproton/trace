@@ -20,7 +20,9 @@ using HotChocolate.Data;
 using HotChocolate.Execution.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Trace.Application.Abstractions;
+using Trace.Application.Core;
 using Trace.Application.Device.Types;
+using Trace.Application.Engagement.Types;
 
 namespace Trace.Application;
 
@@ -36,6 +38,15 @@ public static class ApplicationTypes {
     }
 
     public static IRequestExecutorBuilder AddApplicationTypes(this IRequestExecutorBuilder services) {
+        // Core Types
+        services.AddType<ContactObject>();
+        services.AddType<ContactExtraObject>();
+        // Engagement types
+        services.AddType<ContactType>();
+        services.AddType<OrganizationType>();
+        services.AddType<OpportunityType>();
+        services.AddType<LeadType>();
+        // Device types
         services.AddType<DeviceType>();
         services.AddType<DeviceCommandType>();
 

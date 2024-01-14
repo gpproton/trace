@@ -29,6 +29,7 @@ var isDevelopment = builder.Environment.IsDevelopment();
 builder.RegisterDefaults();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
+builder.Services.RegisterApplicationServices(assembly);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Navigation)
     .AddRequestOptions(isDevelopment)

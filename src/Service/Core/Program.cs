@@ -32,6 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
+builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddHostedService<EfMigrationWorker>();
 builder.Services.AddGraphQLServer()
