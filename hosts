@@ -1,4 +1,6 @@
 ## public endpoints
+127.0.0.1 *.trace.ng
+127.0.0.1 staging.trace.ng
 127.0.0.1 control.trace.ng
 127.0.0.1 control-iot.trace.ng
 
@@ -14,6 +16,8 @@
 127.0.0.1 routing-server
 127.0.0.1 geocoding-server
 
+## Public website & boarding
+# https://staging.trace.ng
 
 ## GraphQL federation proxy
 # https://*.trace.ng/graphql
