@@ -22,14 +22,18 @@ using NetTopologySuite.Geometries;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Location;
 
-[Index(nameof(Name))]
 [Index(nameof(CategoryId))]
 [Index(nameof(Address))]
+[PrimaryKey(nameof(Name), nameof(TenantId))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
-public class Location : TaggedEntity<Guid> {
+public class Location : TaggedEntity<Guid>, ITenantEntity<Guid?> {
+    [Indexed]
+    public Guid? TenantId { get; set; }
+
     [Indexed]
     public bool Default { get; set; }
     [Indexed]

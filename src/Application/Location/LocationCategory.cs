@@ -18,10 +18,12 @@
 
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Location;
 
-[Index(nameof(Name))]
-public class LocationCategory : TypedEntity<Guid> {
+[PrimaryKey(nameof(Name), nameof(TenantId))]
+public class LocationCategory : TypedEntity<Guid>, ITenantEntity<Guid?> {
     public string Icon { get; set; } = string.Empty;
+    public Guid? TenantId { get; set; }
 }

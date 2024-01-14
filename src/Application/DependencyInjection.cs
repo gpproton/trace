@@ -33,10 +33,10 @@ public static class DependencyInjection {
         services.Scan(selector =>
             selector
             .FromCallingAssembly()
-            .AddClasses(classSelector => classSelector.AssignableTo(typeof(IRepository<,>)))
-            .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-            .AsImplementedInterfaces()
-            .WithTransientLifetime()
+            .AddClasses(filter => filter.Where(x => x.Name.EndsWith("Repository")), publicOnly: false)
+            .UsingRegistrationStrategy(RegistrationStrategy.Append)
+            .AsMatchingInterface()
+            .WithScopedLifetime()
         );
 
         return services;

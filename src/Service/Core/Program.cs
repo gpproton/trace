@@ -21,11 +21,11 @@ using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
 using Trace.Application.Abstractions;
 using Trace.Application;
-using Trace.Application.Tenant;
 using Trace.Infrastructure.EFCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
 builder.Services.AddEndpointsApiExplorer();
@@ -36,10 +36,8 @@ builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddHostedService<EfMigrationWorker>();
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)
-    .RegisterDbContext<ServiceContext>()
-    .AddQueryType<QueryRoot>()
-    .AddMutationType<MutationRoot>()
-    .RegisterService<TenantRepository>()
+    .AddRequestOptions(isDevelopment)
+    .AddContexConfig()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 

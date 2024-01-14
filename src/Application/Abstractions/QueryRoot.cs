@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -16,10 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Repository;
+namespace Trace.Application.Abstractions;
 
-namespace Trace.Application.Device;
-
-public interface IDeviceRepository : IRepository<Device, Guid> {
-
+/// <summary>
+/// This entity acts as our root node, from here we hang each of entities off it via queries
+/// </summary>
+public class QueryRoot {
+    public string Version => "Trace";
 }

@@ -24,9 +24,10 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Routes;
 
-[Index(nameof(Name))]
 [Index(nameof(Description))]
-public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid> {
+[PrimaryKey(nameof(Name), nameof(TenantId))]
+public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid>, ITenantEntity<Guid?> {
+    public Guid? TenantId { get; set; }
     public Guid? ApprovedBy { get; set; }
     public DateTimeOffset ApprovedAt { get; set; }
     [MaxLength(12)]

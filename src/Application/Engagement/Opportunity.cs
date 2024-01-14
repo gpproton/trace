@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,16 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Saturday, 13th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Sat Jan 13 2024
 
-namespace Trace.ServiceDefaults;
+using System.ComponentModel.DataAnnotations;
+using Trace.Application.Abstractions;
 
-/// <summary>
-/// This entity acts as our root node, from here we hang each of entities off it via queries
-/// </summary>
-public class QueryRoot {
-    public string Version => "Trace";
+namespace Trace.Application.Engagement;
+
+public class Opportunity : TenantEntity<Guid> {
+    [MaxLength(1024)]
+    public string? Description { get; set; }
 }

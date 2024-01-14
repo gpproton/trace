@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,14 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Base;
-using HotChocolate;
-using Microsoft.EntityFrameworkCore;
-using Trace.Application.Core.Interfaces;
+using Axolotl.EFCore.Repository;
 
-namespace Trace.Application.Abstractions;
+namespace Trace.Application.Device.Repositories;
 
-[Index(nameof(TenantId))]
-public abstract class TenantEntity<TKey> : AuditableEntity<TKey>, ITenantEntity<TKey?>
-    where TKey : notnull {
-    [GraphQLIgnore]
-    public TKey? TenantId { get; set; }
+public interface IDeviceRepository : IRepository<Device, Guid> {
+
 }

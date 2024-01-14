@@ -141,7 +141,14 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     phone = table.Column<string>(type: "text", nullable: false),
                     status = table.Column<int>(type: "integer", nullable: false),
                     speed_limit = table.Column<int>(type: "integer", nullable: false),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,6 +160,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     delay = table.Column<int>(type: "integer", nullable: false),
                     messages = table.Column<string>(type: "text", nullable: false),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
@@ -161,7 +169,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_device_command", x => x.id);
+                    table.PrimaryKey("pk_device_command", x => new { x.id, x.tenant_id });
                 });
 
             migrationBuilder.CreateTable(
@@ -169,14 +177,34 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     icon = table.Column<string>(type: "text", nullable: false),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_location_category", x => x.id);
+                    table.PrimaryKey("pk_location_category", x => new { x.name, x.tenant_id });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "opportunity",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    description = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_opportunity", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,6 +236,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     approved_by = table.Column<Guid>(type: "uuid", nullable: true),
                     approved_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
@@ -219,12 +249,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     destination = table.Column<Point>(type: "geometry", nullable: false),
                     path = table.Column<LineString>(type: "geometry", nullable: true),
                     @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_routes", x => x.id);
+                    table.PrimaryKey("pk_routes", x => new { x.name, x.tenant_id });
                 });
 
             migrationBuilder.CreateTable(
@@ -391,6 +420,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     type = table.Column<int>(type: "integer", nullable: false),
                     fleet_identifier = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     odometer = table.Column<long>(type: "bigint", nullable: false),
@@ -403,7 +434,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
@@ -413,7 +443,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_trailer", x => x.id);
+                    table.PrimaryKey("pk_trailer", x => new { x.name, x.tenant_id });
                     table.ForeignKey(
                         name: "fk_trailer_asset_category_category_id",
                         column: x => x.category_id,
@@ -427,10 +457,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    registration_no = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
                     type = table.Column<int>(type: "integer", nullable: false),
-                    fleet_identifier = table.Column<string>(type: "character varying(52)", maxLength: 52, nullable: true),
-                    registration_no = table.Column<string>(type: "character varying(72)", maxLength: 72, nullable: true),
+                    fleet_identifier = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
                     odometer = table.Column<long>(type: "bigint", nullable: false),
                     fuel_type = table.Column<int>(type: "integer", nullable: false),
                     fuel_capacity = table.Column<int>(type: "integer", nullable: false),
@@ -444,7 +474,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
@@ -454,7 +483,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vehicle", x => x.id);
+                    table.PrimaryKey("pk_vehicle", x => new { x.registration_no, x.tenant_id });
                     table.ForeignKey(
                         name: "fk_vehicle_asset_category_category_id",
                         column: x => x.category_id,
@@ -539,12 +568,15 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
                     address = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
                     approved_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     approved_by = table.Column<Guid>(type: "uuid", nullable: true),
                     type = table.Column<int>(type: "integer", nullable: true),
+                    category_name = table.Column<string>(type: "text", nullable: true),
+                    category_tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
                     category_id = table.Column<Guid>(type: "uuid", nullable: true),
                     geometry = table.Column<Geometry>(type: "geometry", nullable: false),
                     description = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -558,12 +590,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_location", x => x.id);
+                    table.PrimaryKey("pk_location", x => new { x.name, x.tenant_id });
                     table.ForeignKey(
-                        name: "fk_location_location_category_category_id",
-                        column: x => x.category_id,
+                        name: "fk_location_location_category_category_name_category_tenant_id",
+                        columns: x => new { x.category_name, x.category_tenant_id },
                         principalTable: "location_category",
-                        principalColumn: "id");
+                        principalColumns: new[] { "name", "tenant_id" });
                 });
 
             migrationBuilder.CreateTable(
@@ -741,8 +773,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
                     contact_id = table.Column<Guid>(type: "uuid", nullable: true),
                     lead_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    location_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    routes_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    location_name = table.Column<string>(type: "character varying(256)", nullable: true),
+                    location_tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    routes_name = table.Column<string>(type: "text", nullable: true),
+                    routes_tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated_by = table.Column<Guid>(type: "uuid", nullable: false),
@@ -765,15 +799,15 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         principalTable: "lead",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_tags_location_location_id",
-                        column: x => x.location_id,
+                        name: "fk_tags_location_location_name_location_tenant_id",
+                        columns: x => new { x.location_name, x.location_tenant_id },
                         principalTable: "location",
-                        principalColumn: "id");
+                        principalColumns: new[] { "name", "tenant_id" });
                     table.ForeignKey(
-                        name: "fk_tags_routes_routes_id",
-                        column: x => x.routes_id,
+                        name: "fk_tags_routes_routes_name_routes_tenant_id",
+                        columns: x => new { x.routes_name, x.routes_tenant_id },
                         principalTable: "routes",
-                        principalColumn: "id");
+                        principalColumns: new[] { "name", "tenant_id" });
                 });
 
             migrationBuilder.CreateTable(
@@ -942,6 +976,37 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_device_deleted_at",
+                table: "device",
+                column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_last_update",
+                table: "device",
+                column: "last_update");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_position_id",
+                table: "device",
+                column: "position_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_status",
+                table: "device",
+                column: "status");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_tenant_id",
+                table: "device",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_unique_id",
+                table: "device",
+                column: "unique_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_device_command_name",
                 table: "device_command",
                 column: "name");
@@ -967,19 +1032,24 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "category_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_location_category_name_category_tenant_id",
+                table: "location",
+                columns: new[] { "category_name", "category_tenant_id" });
+
+            migrationBuilder.CreateIndex(
                 name: "ix_location_deleted_at",
                 table: "location",
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
-                name: "ix_location_name",
-                table: "location",
-                column: "name");
+                name: "ix_opportunity_deleted_at",
+                table: "opportunity",
+                column: "deleted_at");
 
             migrationBuilder.CreateIndex(
-                name: "ix_location_category_name",
-                table: "location_category",
-                column: "name");
+                name: "ix_opportunity_tenant_id",
+                table: "opportunity",
+                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_organization_full_name",
@@ -995,11 +1065,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "ix_routes_description",
                 table: "routes",
                 column: "description");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_routes_name",
-                table: "routes",
-                column: "name");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tag_members_account_id",
@@ -1037,9 +1102,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "lead_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_tags_location_id",
+                name: "ix_tags_location_name_location_tenant_id",
                 table: "tags",
-                column: "location_id");
+                columns: new[] { "location_name", "location_tenant_id" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_tags_name",
@@ -1047,9 +1112,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
-                name: "ix_tags_routes_id",
+                name: "ix_tags_routes_name_routes_tenant_id",
                 table: "tags",
-                column: "routes_id");
+                columns: new[] { "routes_name", "routes_tenant_id" });
 
             migrationBuilder.CreateIndex(
                 name: "ix_tags_tenant_id",
@@ -1125,7 +1190,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_trailer_serial_number",
                 table: "trailer",
-                column: "serial_number");
+                column: "serial_number",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_trailer_tenant_id",
@@ -1170,17 +1236,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_vehicle_fleet_identifier",
                 table: "vehicle",
-                column: "fleet_identifier");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicle_name",
-                table: "vehicle",
-                column: "name");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicle_registration_no",
-                table: "vehicle",
-                column: "registration_no");
+                column: "fleet_identifier",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_vehicle_tenant_id",
@@ -1217,6 +1274,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "device_command");
+
+            migrationBuilder.DropTable(
+                name: "opportunity");
 
             migrationBuilder.DropTable(
                 name: "server_settings");

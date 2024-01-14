@@ -18,13 +18,14 @@
 
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
 [Index(nameof(Name))]
-public class DeviceCommand : TypedEntity<Guid> {
+[PrimaryKey(nameof(Id), nameof(TenantId))]
+public class DeviceCommand : TypedEntity<Guid>, ITenantEntity<Guid?> {
+    public Guid? TenantId { get; set; }
     public int Delay { get; set; }
-
     public string Messages { get; set; } = string.Empty;
 }

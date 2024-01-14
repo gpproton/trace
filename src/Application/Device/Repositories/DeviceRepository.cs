@@ -16,7 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-namespace Trace.Application.Device;
+namespace Trace.Application.Device.Repositories;
 
 public class DeviceRepository(ServiceContext context) : GenericRepository<Device, Guid>(context), IDeviceRepository {
 

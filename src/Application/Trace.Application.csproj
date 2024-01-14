@@ -12,6 +12,9 @@
     <PackageReference Include="NetTopologySuite" />
     <PackageReference Include="CassandraCSharpDriver" />
     <PackageReference Include="HotChocolate.Types" />
+    <PackageReference Include="HotChocolate.Abstractions" />
+    <PackageReference Include="HotChocolate.Data.EntityFramework" />
+    <PackageReference Include="HotChocolate.Execution" />
     <PackageReference Include="Redis.OM" />
     <PackageReference Include="Scrutor" />
   </ItemGroup>

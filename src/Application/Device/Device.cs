@@ -16,14 +16,19 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Base;
+using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Device;
 
+[Index(nameof(UniqueId), IsUnique = true)]
+[Index(nameof(PositionId))]
+[Index(nameof(LastUpdate))]
+[Index(nameof(Status))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Device)])]
-public sealed class Device : BaseEntity<Guid> {
+public sealed class Device : TenantEntity<Guid> {
     [Indexed]
     public required string UniqueId { get; set; }
     [Indexed]

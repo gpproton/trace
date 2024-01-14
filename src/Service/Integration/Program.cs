@@ -18,7 +18,6 @@
 
 using Trace.Common.Queueing.Extensions;
 using Trace.Infrastructure.Traccar;
-using Trace.Service.Integration;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
@@ -30,6 +29,7 @@ using Trace.Service.Integration.Protocol.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
 builder.RegisterInfrastructure(assembly);
@@ -40,11 +40,10 @@ builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
 builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterDefaultServices();
-
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
-    .RegisterDbContext<ServiceContext>()
-    .AddQueryType<Query>()
+    .AddRequestOptions(isDevelopment)
+    .AddContexConfig()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
