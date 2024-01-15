@@ -22,6 +22,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Account;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Engagement;
+using Trace.Application.Tenant;
 
 namespace Trace.Application;
 
@@ -31,10 +33,21 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
 
-        var assembly = typeof (ITenantEntity<>).Assembly;
+        var assembly = typeof(ITenantEntity<>).Assembly;
 
         modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         modelBuilder.RegisterAllEntities<CoreEntity>(assembly);
         modelBuilder.RegisterSoftDeleteFilter();
     }
+
+    public DbSet<Tenant.Tenant> Tenants { get; set; }
+    public DbSet<TenantDomains> TenantDomains { get; set; }
+    public DbSet<TenantBranch> TenantBranches { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Vehicle.Vehicle> Vehicles { get; set; }
+    public DbSet<Trailer.Trailer> Trailers { get; set; }
+    public DbSet<Asset.Asset> Assets { get; set; }
+    public DbSet<Device.Device> Devices { get; set; }
+    public DbSet<Location.Location> Locations { get; set; }
+    public DbSet<Routes.Routes> Routes { get; set; }
 }

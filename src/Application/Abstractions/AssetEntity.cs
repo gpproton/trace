@@ -25,14 +25,14 @@ namespace Trace.Application.Abstractions;
 [Index(nameof(CategoryId))]
 public abstract class AssetEntity : TenantEntity<Guid> {
     [MaxLength(256)]
-    public string? SerialNumber { get; set; }
+    public string SerialNumber { get; set; } = null!;
     [MaxLength(256)]
     public string? Barcode { get; set; }
     [MaxLength(12)]
     public string? Color { get; set; }
     public DateTimeOffset? Deployed { get; set; }
     public DateTimeOffset? Decommissioned { get; set; }
-    public virtual AssetCategory? Category { get; set; }
+    public AssetCategory? Category { get; set; }
     [MaxLength(256)]
-    public Guid CategoryId { get; set; }
+    public Guid? CategoryId { get; set; }
 }

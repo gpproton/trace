@@ -24,13 +24,12 @@ using Trace.Application.Core.Enums;
 namespace Trace.Application.Vehicle;
 
 [PrimaryKey(nameof(RegistrationNo), nameof(TenantId))]
-[Index(nameof(FleetIdentifier), IsUnique = true)]
 public sealed class Vehicle : AssetEntity {
-    public VehicleType Type { get; set; }
+    public VehicleType Type { get; set; } = VehicleType.Car;
     [MaxLength(64)]
-    public string? FleetIdentifier { get; set; }
+    public string FleetIdentifier { get; set; } = null!;
     [MaxLength(64)]
-    public string? RegistrationNo { get; set; }
+    public string RegistrationNo { get; set; } = null!;
     public long Odometer { get; set; }
     public FuelType FuelType { get; set; }
     public int FuelCapacity { get; set; }
@@ -39,4 +38,6 @@ public sealed class Vehicle : AssetEntity {
     public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
     public Guid? TrailerId { get; set; }
+    public Device.Device? Device { get; set; }
+    public Guid? DeviceId { get; set; }
 }

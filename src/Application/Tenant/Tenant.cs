@@ -25,22 +25,19 @@ using Trace.Application.Engagement;
 
 namespace Trace.Application.Tenant;
 
-[Index(nameof(UniqueId))]
 [Index(nameof(Name))]
 [Index(nameof(TenantSettingId))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenant)])]
 public class Tenant : BaseEntity<Guid> {
     [Indexed]
-    public Guid Token { get; set; }
+    public Guid? Token { get; set; }
     [Indexed]
     public bool Active { get; set; }
     [Indexed]
     [MaxLength(256)]
-    public string? Name { get; set; }
+    public string Name { get; set; } = null!;
     [Indexed]
     public TenantType Type { get; set; } = TenantType.Individual;
-    [Indexed]
-    public int UniqueId { get; set; }
     [Indexed]
     [MaxLength(1024)]
     public string? Logo { get; set; }

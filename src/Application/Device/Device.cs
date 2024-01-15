@@ -37,9 +37,9 @@ public sealed class Device : TenantEntity<Guid> {
     public DateTimeOffset? LastUpdate { get; set; }
     public DateTimeOffset? LastMoved { get; set; }
     [Indexed]
-    public string Phone { get; set; } = string.Empty;
+    public string? Phone { get; set; }
     [Indexed]
-    public DeviceStatus Status { get; set; }
+    public DeviceStatus Status { get; set; } = DeviceStatus.Offline;
     public int SpeedLimit { get; set; }
     public DateTimeOffset? Expiry { get; set; }
 }

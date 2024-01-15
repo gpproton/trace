@@ -90,12 +90,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     active = table.Column<bool>(type: "boolean", nullable: false),
-                    phone = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
+                    phone = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    username = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     first_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    middle_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    last_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    middle_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    last_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     last_active = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     address_birth_date = table.Column<DateOnly>(type: "date", nullable: true),
@@ -138,7 +137,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     position_id = table.Column<Guid>(type: "uuid", nullable: true),
                     last_update = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     last_moved = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    phone = table.Column<string>(type: "text", nullable: false),
+                    phone = table.Column<string>(type: "text", nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false),
                     speed_limit = table.Column<int>(type: "integer", nullable: false),
                     expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
@@ -397,12 +396,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
                     deployed = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     decommissioned = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: false)
+                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -411,8 +410,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         name: "fk_asset_asset_category_category_id",
                         column: x => x.category_id,
                         principalTable: "asset_category",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -434,12 +432,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
                     deployed = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     decommissioned = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: false)
+                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -448,48 +446,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         name: "fk_trailer_asset_category_category_id",
                         column: x => x.category_id,
                         principalTable: "asset_category",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "vehicle",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    registration_no = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
-                    type = table.Column<int>(type: "integer", nullable: false),
-                    fleet_identifier = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
-                    odometer = table.Column<long>(type: "bigint", nullable: false),
-                    fuel_type = table.Column<int>(type: "integer", nullable: false),
-                    fuel_capacity = table.Column<int>(type: "integer", nullable: false),
-                    horse_power = table.Column<int>(type: "integer", nullable: false),
-                    model = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    weight_capacity = table.Column<decimal>(type: "numeric", nullable: false),
-                    trailer_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    deployed = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    decommissioned = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_vehicle", x => new { x.registration_no, x.tenant_id });
-                    table.ForeignKey(
-                        name: "fk_vehicle_asset_category_category_id",
-                        column: x => x.category_id,
-                        principalTable: "asset_category",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -564,6 +521,51 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "vehicle",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    registration_no = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    type = table.Column<int>(type: "integer", nullable: false),
+                    fleet_identifier = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: false),
+                    odometer = table.Column<long>(type: "bigint", nullable: false),
+                    fuel_type = table.Column<int>(type: "integer", nullable: false),
+                    fuel_capacity = table.Column<int>(type: "integer", nullable: false),
+                    horse_power = table.Column<int>(type: "integer", nullable: false),
+                    model = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    weight_capacity = table.Column<decimal>(type: "numeric", nullable: false),
+                    trailer_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    device_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
+                    deployed = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    decommissioned = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    category_id = table.Column<Guid>(type: "uuid", maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_vehicle", x => new { x.registration_no, x.tenant_id });
+                    table.ForeignKey(
+                        name: "fk_vehicle_asset_category_category_id",
+                        column: x => x.category_id,
+                        principalTable: "asset_category",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_vehicle_device_device_id",
+                        column: x => x.device_id,
+                        principalTable: "device",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "location",
                 columns: table => new
                 {
@@ -603,11 +605,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    token = table.Column<Guid>(type: "uuid", nullable: false),
+                    token = table.Column<Guid>(type: "uuid", nullable: true),
                     active = table.Column<bool>(type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     type = table.Column<int>(type: "integer", nullable: false),
-                    unique_id = table.Column<int>(type: "integer", nullable: false),
                     logo = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
                     profile_id = table.Column<Guid>(type: "uuid", nullable: true),
                     tenant_setting_id = table.Column<Guid>(type: "uuid", nullable: true)
@@ -847,7 +848,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     domain = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     registrar = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     active = table.Column<bool>(type: "boolean", nullable: false),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     created_by = table.Column<Guid>(type: "uuid", nullable: false),
                     created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     updated_by = table.Column<Guid>(type: "uuid", nullable: false),
@@ -1138,11 +1139,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_tenant_unique_id",
-                table: "tenant",
-                column: "unique_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_tenant_branch_name",
                 table: "tenant_branch",
                 column: "name");
@@ -1234,10 +1230,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "deleted_at");
 
             migrationBuilder.CreateIndex(
-                name: "ix_vehicle_fleet_identifier",
+                name: "ix_vehicle_device_id",
                 table: "vehicle",
-                column: "fleet_identifier",
-                unique: true);
+                column: "device_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_vehicle_tenant_id",
@@ -1268,9 +1263,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "asset");
-
-            migrationBuilder.DropTable(
-                name: "device");
 
             migrationBuilder.DropTable(
                 name: "device_command");
@@ -1319,6 +1311,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "asset_category");
+
+            migrationBuilder.DropTable(
+                name: "device");
 
             migrationBuilder.DropTable(
                 name: "account_setting");

@@ -26,7 +26,7 @@ public class TraccarDevice {
     public long Id { get; set; }
 
     [JsonPropertyName("attributes")]
-    public JsonObject Attributes { get; set; } = default!;
+    public JsonObject? Attributes { get; set; }
 
     [JsonPropertyName("groupId")]
     public long GroupId { get; set; }
@@ -35,13 +35,13 @@ public class TraccarDevice {
     public long CalendarId { get; set; }
 
     [JsonPropertyName("name")]
-    public string Name { get; set; } = string.Empty;
+    public string Name { get; set; } = null!;
 
     [JsonPropertyName("uniqueId")]
-    public string UniqueId { get; set; } = string.Empty;
+    public string UniqueId { get; set; } = null!;
 
     [JsonPropertyName("status")]
-    public string Status { get; set; } = string.Empty;
+    public string? Status { get; set; }
 
     [JsonPropertyName("lastUpdate")]
     public DateTimeOffset? LastUpdate { get; set; }
@@ -50,16 +50,16 @@ public class TraccarDevice {
     public long PositionId { get; set; }
 
     [JsonPropertyName("phone")]
-    public string? Phone { get; set; } = string.Empty;
+    public string? Phone { get; set; }
 
     [JsonPropertyName("model")]
-    public string? Model { get; set; } = string.Empty;
+    public string? Model { get; set; }
 
     [JsonPropertyName("contact")]
-    public string? Contact { get; set; } = string.Empty;
+    public string? Contact { get; set; }
 
     [JsonPropertyName("category")]
-    public string? Category { get; set; } = string.Empty;
+    public string? Category { get; set; }
 
     [JsonPropertyName("disabled")]
     public bool Disabled { get; set; }

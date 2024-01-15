@@ -30,12 +30,12 @@ public class TenantDomains : TenantEntity<Guid> {
     public Tenant? Tenant { get; set; }
     [Indexed]
     [MaxLength(256)]
-    public string Domain { get; set; } = string.Empty;
+    public string Domain { get; set; } = null!;
     [Indexed]
     [MaxLength(256)]
     public string? Registrar { get; set; }
     [Indexed]
     public bool Active { get; set; }
     [Indexed]
-    public DateTimeOffset Expiry { get; set; }
+    public DateTimeOffset? Expiry { get; set; }
 }

@@ -16,6 +16,7 @@
 // Last Modified: 2024-1-13 19:6
 
 using HotChocolate;
+using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application.Abstractions;
 using Trace.Application.Tags;
@@ -24,5 +25,8 @@ namespace Trace.Service.Core.Tags;
 
 [ExtendObjectType(typeof(QueryRoot))]
 public class TagQuery {
+    [UsePaging]
+    [UseFiltering]
+    [GraphQLDescription("Query Tags")]
     public IQueryable<Application.Tags.Tags> GetTags([Service(ServiceKind.Synchronized)] ITagRepository tagRepository) => tagRepository.GetAll();
 }

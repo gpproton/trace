@@ -14,7 +14,7 @@ using Trace.Application;
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240114123748_Initial")]
+    [Migration("20240115025012_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -613,7 +613,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
@@ -653,6 +653,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("name");
 
                     b.Property<string>("SerialNumber")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
@@ -751,7 +752,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("last_update");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("phone");
 
@@ -900,19 +900,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("last_active");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("last_name");
 
                     b.Property<string>("MiddleName")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("middle_name");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasMaxLength(13)
                         .HasColumnType("character varying(13)")
                         .HasColumnName("phone");
@@ -928,12 +925,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<Guid>("UpdatedBy")
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("username");
 
                     b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Contact.Address#ContactExtraObject", b1 =>
                         {
@@ -1780,6 +1771,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("logo");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("name");
@@ -1792,17 +1784,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_setting_id");
 
-                    b.Property<Guid>("Token")
+                    b.Property<Guid?>("Token")
                         .HasColumnType("uuid")
                         .HasColumnName("token");
 
                     b.Property<int>("Type")
                         .HasColumnType("integer")
                         .HasColumnName("type");
-
-                    b.Property<int>("UniqueId")
-                        .HasColumnType("integer")
-                        .HasColumnName("unique_id");
 
                     b.HasKey("Id")
                         .HasName("pk_tenant");
@@ -1816,9 +1804,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("TenantSettingId")
                         .IsUnique()
                         .HasDatabaseName("ix_tenant_tenant_setting_id");
-
-                    b.HasIndex("UniqueId")
-                        .HasDatabaseName("ix_tenant_unique_id");
 
                     b.ToTable("tenant", (string)null);
                 });
@@ -1943,7 +1928,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("domain");
 
-                    b.Property<DateTimeOffset>("Expiry")
+                    b.Property<DateTimeOffset?>("Expiry")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("expiry");
 
@@ -2126,7 +2111,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
@@ -2185,6 +2170,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("odometer");
 
                     b.Property<string>("SerialNumber")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
@@ -2243,7 +2229,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("barcode");
 
-                    b.Property<Guid>("CategoryId")
+                    b.Property<Guid?>("CategoryId")
                         .HasMaxLength(256)
                         .HasColumnType("uuid")
                         .HasColumnName("category_id");
@@ -2277,7 +2263,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("deployed");
 
+                    b.Property<Guid?>("DeviceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("device_id");
+
                     b.Property<string>("FleetIdentifier")
+                        .IsRequired()
                         .HasMaxLength(64)
                         .HasColumnType("character varying(64)")
                         .HasColumnName("fleet_identifier");
@@ -2310,6 +2301,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("odometer");
 
                     b.Property<string>("SerialNumber")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
@@ -2343,9 +2335,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("DeletedAt")
                         .HasDatabaseName("ix_vehicle_deleted_at");
 
-                    b.HasIndex("FleetIdentifier")
-                        .IsUnique()
-                        .HasDatabaseName("ix_vehicle_fleet_identifier");
+                    b.HasIndex("DeviceId")
+                        .HasDatabaseName("ix_vehicle_device_id");
 
                     b.HasIndex("TenantId")
                         .HasDatabaseName("ix_vehicle_tenant_id");
@@ -2457,8 +2448,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasOne("Trace.Application.Asset.AssetCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_asset_asset_category_category_id");
 
                     b.Navigation("Category");
@@ -2559,8 +2548,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasOne("Trace.Application.Asset.AssetCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_trailer_asset_category_category_id");
 
                     b.Navigation("Category");
@@ -2571,11 +2558,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasOne("Trace.Application.Asset.AssetCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_vehicle_asset_category_category_id");
 
+                    b.HasOne("Trace.Application.Device.Device", "Device")
+                        .WithMany()
+                        .HasForeignKey("DeviceId")
+                        .HasConstraintName("fk_vehicle_device_device_id");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Device");
                 });
 
             modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
