@@ -26,6 +26,9 @@ using Trace.Application.Engagement;
 using Trace.Application.Tags;
 using Trace.Application.Tenant;
 using Trace.Application.Vehicle;
+using Trace.Application.Core.Enums;
+using NetTopologySuite.Geometries;
+using Location = Trace.Application.Location.Location;
 
 namespace Trace.Infrastructure.EFCore;
 
@@ -39,13 +42,15 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
         logger.LogInformation("Started seeding data...");
 
-        var dataSeeded = await _context.Set<Tenant>().AnyAsync(stoppingToken);
+        var dataSeeded = await _context.Tenants.AnyAsync(stoppingToken);
+        var tenantId = Guid.NewGuid();
         if (!dataSeeded) {
             // Seed Tenants
-            await _context.Set<Tenant>().AddAsync(new Tenant {
-                Active = true ,
+            await _context.Tenants.AddAsync(new Tenant {
+                Id = tenantId,
+                Active = true,
                 Name = "Local Corp",
-                Domains = [ new TenantDomains {  Domain = "localhost" }],
+                Domains = [new TenantDomains { Domain = "localhost" }],
                 Profile = new Organization {
                     FullName = "Local Corporation",
                     Name = "Local Corp",
@@ -60,6 +65,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
             // Seed Contact
             await _context.Set<Contact>().AddAsync(new Contact {
+                TenantId = tenantId,
                 Email = "john.doe@email.com",
                 FirstName = "John",
                 LastName = "Doe",
@@ -69,6 +75,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
             // Seed Vehicles
             await _context.Set<Vehicle>().AddAsync(new Vehicle {
                 Id = Guid.NewGuid(),
+                TenantId = tenantId,
                 SerialNumber = "0001",
                 RegistrationNo = "XX 123 XXX",
                 FleetIdentifier = "fleet-001",
@@ -77,6 +84,17 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                     UniqueId = "123456",
                     Phone = "+2345678901234"
                 }
+            }, stoppingToken);
+
+            // Seed Location
+            await _context.Set<Location>().AddAsync(new Location {
+                Id = Guid.NewGuid(),
+                TenantId = tenantId,
+                Name = "Test-00",
+                Address = "Test",
+                Type = LocationType.Custom,
+                Geometry = new Point(6.243, 3.3431),
+                Description = "A sample location"
             }, stoppingToken);
 
             await _context.SaveChangesAsync(stoppingToken);

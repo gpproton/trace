@@ -28,4 +28,5 @@ public class Tags : TenantEntity<Guid> {
     public string? Name { get; set; }
     [MaxLength(12)]
     public string? Color { get; set; }
+    public ICollection<TagMembers>? Members { get; set; }
 }

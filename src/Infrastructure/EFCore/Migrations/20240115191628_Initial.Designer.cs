@@ -14,7 +14,7 @@ using Trace.Application;
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240115025012_Initial")]
+    [Migration("20240115191628_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -1626,6 +1626,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
+                    b.Property<Guid?>("TagId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tag_id");
+
                     b.Property<Guid>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
@@ -1649,6 +1653,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
                     b.HasIndex("Name")
                         .HasDatabaseName("ix_tag_members_name");
+
+                    b.HasIndex("TagId")
+                        .HasDatabaseName("ix_tag_members_tag_id");
 
                     b.HasIndex("TenantId")
                         .HasDatabaseName("ix_tag_members_tenant_id");
@@ -2478,9 +2485,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasOne("Trace.Application.Account.UserAccount", "Account")
                         .WithMany()
                         .HasForeignKey("AccountId")
-                        .HasConstraintName("fk_tag_members_asp_net_users_account_id");
+                        .HasConstraintName("fk_tag_members_user_account_account_id");
+
+                    b.HasOne("Trace.Application.Tags.Tags", "Tag")
+                        .WithMany("Members")
+                        .HasForeignKey("TagId")
+                        .HasConstraintName("fk_tag_members_tags_tag_id");
 
                     b.Navigation("Account");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("Trace.Application.Tags.Tags", b =>
@@ -2598,6 +2612,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
             modelBuilder.Entity("Trace.Application.Routes.Routes", b =>
                 {
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Trace.Application.Tags.Tags", b =>
+                {
+                    b.Navigation("Members");
                 });
 
             modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>

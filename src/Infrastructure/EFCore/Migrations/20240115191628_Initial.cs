@@ -740,32 +740,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tag_members",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    account_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tag_members", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_tag_members_asp_net_users_account_id",
-                        column: x => x.account_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tags",
                 columns: table => new
                 {
@@ -866,6 +840,38 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         principalTable: "tenant",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tag_members",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tag_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    account_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tag_members", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_tag_members_tags_tag_id",
+                        column: x => x.tag_id,
+                        principalTable: "tags",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_tag_members_user_account_account_id",
+                        column: x => x.account_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -1083,6 +1089,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
+                name: "ix_tag_members_tag_id",
+                table: "tag_members",
+                column: "tag_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_tag_members_tenant_id",
                 table: "tag_members",
                 column: "tenant_id");
@@ -1277,9 +1288,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "tag_members");
 
             migrationBuilder.DropTable(
-                name: "tags");
-
-            migrationBuilder.DropTable(
                 name: "tenant_branch");
 
             migrationBuilder.DropTable(
@@ -1295,16 +1303,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "vehicle");
 
             migrationBuilder.DropTable(
+                name: "tags");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "lead");
-
-            migrationBuilder.DropTable(
-                name: "location");
-
-            migrationBuilder.DropTable(
-                name: "routes");
 
             migrationBuilder.DropTable(
                 name: "tenant");
@@ -1316,22 +1318,31 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "device");
 
             migrationBuilder.DropTable(
+                name: "lead");
+
+            migrationBuilder.DropTable(
+                name: "location");
+
+            migrationBuilder.DropTable(
+                name: "routes");
+
+            migrationBuilder.DropTable(
                 name: "account_setting");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "contact");
-
-            migrationBuilder.DropTable(
-                name: "location_category");
-
-            migrationBuilder.DropTable(
                 name: "organization");
 
             migrationBuilder.DropTable(
                 name: "tenant_setting");
+
+            migrationBuilder.DropTable(
+                name: "contact");
+
+            migrationBuilder.DropTable(
+                name: "location_category");
         }
     }
 }

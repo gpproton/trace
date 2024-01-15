@@ -25,6 +25,8 @@ namespace Trace.Application.Tags;
 
 [Index(nameof(Name))]
 public class TagMembers : TenantEntity<Guid> {
+    public Tags Tag { get; set; } = null!;
+    public Guid? TagId { get; set; }
     [MaxLength(256)]
     public string? Name { get; set; }
     public UserAccount? Account { get; set; }
