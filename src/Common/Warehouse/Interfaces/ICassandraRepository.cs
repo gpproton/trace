@@ -12,16 +12,17 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 11th Jan 2024
+// Created At: Monday, 15th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 11 2024
+// Modified At: Mon Jan 15 2024
 
-namespace Trace.Infrastructure.Cassandra;
+namespace Trace.Common.Warehouse.Interfaces;
 
-public class CassandraConfig {
-    public const string Key = "Cassandra";
-    public string? Host { get; set; }
-    public int Port { get; set; }
-    public string? Username { get; set; }
-    public string? Password { get; set; }
+public interface ICassandraRepository<TEntity, TKey> where TEntity : ICassandraEntity<TKey> where TKey : notnull {
+    public IQueryable<TEntity> GetAll();
+    public Task<TEntity?> FindAsync();
+    public Task<TEntity?> GetByIdAsync();
+    public Task<TEntity> UpdateAsync();
+    public Task<TEntity> AddAsync();
+    public Task<TEntity> DeleteAsync();
 }

@@ -18,9 +18,10 @@
 
 using Cassandra;
 using Microsoft.Extensions.Logging;
-using Trace.Infrastructure.Cassandra.Interfaces;
+using Trace.Common.Warehouse.Configs;
+using Trace.Common.Warehouse.Interfaces;
 
-namespace Trace.Infrastructure.Cassandra.Implementation;
+namespace Trace.Common.Warehouse.Implementation;
 
 public class CassandraProvider : ICassandraProvider, IAsyncDisposable {
     private readonly ILogger<CassandraProvider> _logger;

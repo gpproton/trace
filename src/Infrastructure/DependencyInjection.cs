@@ -23,8 +23,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Trace.Infrastructure.EFCore;
-using Trace.Infrastructure.Cassandra;
 using Trace.Infrastructure.CacheManager;
+using Trace.Infrastructure.Cassandra;
 using Trace.Infrastructure.Providers;
 
 namespace Trace.Infrastructure;
@@ -32,7 +32,7 @@ namespace Trace.Infrastructure;
 public static class DependencyInjection {
     public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
         builder.AddRabbitMQ("messaging");
-        builder.AddCassandra();
+        builder.RegisterCassandraInfrastructure();
         builder.RegisterEfCoreInfrastructure();
         builder.Services.RegisterCacheManager();
         builder.Services.AddMassTransit(busConfigurator => {

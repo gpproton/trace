@@ -12,15 +12,12 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 11th Jan 2024
+// Created At: Monday, 15th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 11 2024
+// Modified At: Mon Jan 15 2024
 
-using Cassandra.Mapping;
+namespace Trace.Infrastructure.EFCore.Seeds;
 
-namespace Trace.Infrastructure.Cassandra;
+public class TenantSeed {
 
-public class CassandraOptions {
-    public string? Keyspace { get; set; }
-    public ITypeDefinition[]? Config { get; set; }
 }

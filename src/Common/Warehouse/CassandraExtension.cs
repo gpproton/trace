@@ -22,21 +22,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using Trace.Application.Device;
-using Trace.Infrastructure.Cassandra.Implementation;
-using Trace.Infrastructure.Cassandra.Interfaces;
+using Trace.Common.Warehouse.Configs;
+using Trace.Common.Warehouse.Constants;
+using Trace.Common.Warehouse.Implementation;
+using Trace.Common.Warehouse.Interfaces;
 
-namespace Trace.Infrastructure.Cassandra;
+namespace Trace.Common.Warehouse;
 
 public static class CassandraExtension {
-    public static WebApplicationBuilder AddCassandra(this WebApplicationBuilder builder) {
+    public static WebApplicationBuilder AddCassandra(this WebApplicationBuilder builder, ITypeDefinition[] configs) {
         const string keyspace = CanssandraConst.Keyspace;
 
         builder.Services.AddSingleton(_ => new CassandraOptions {
             Keyspace = keyspace,
-            Config = [
-                DevicePosition.GetConfig(keyspace),
-            ]
+            Config = configs
         });
 
         var scope = builder.Services.BuildServiceProvider();
@@ -60,7 +59,6 @@ public static class CassandraExtension {
         builder.Services.AddScoped<ICassandraProvider, CassandraProvider>();
 
         MappingConfiguration.Global.Define(cassandraOptions.Config);
-        builder.Services.AddHostedService<CassandraHostedService>();
 
         return builder;
     }

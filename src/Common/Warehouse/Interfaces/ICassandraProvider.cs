@@ -16,7 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 11 2024
 
-namespace Trace.Infrastructure.Cassandra.Interfaces;
+namespace Trace.Common.Warehouse.Interfaces;
 
 public interface ICassandraProvider {
     IClusterSession GetSession();

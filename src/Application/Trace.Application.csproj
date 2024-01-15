@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\Common\Warehouse\Trace.Common.Warehouse.csproj" />
   </ItemGroup>
 
 </Project>
