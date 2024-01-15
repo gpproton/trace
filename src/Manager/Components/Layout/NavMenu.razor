@@ -1,0 +1,78 @@
+﻿@rendermode InteractiveServer
+
+@implements IDisposable
+
+@inject NavigationManager NavigationManager
+
+<div class="navmenu">
+    <input type="checkbox" title="Menu expand/collapse toggle" id="navmenu-toggle" class="navmenu-icon" />
+    <label for="navmenu-toggle" class="navmenu-icon"><FluentIcon Value="@(new Icons.Regular.Size20.Navigation())" Color="Color.Fill" /></label>
+    <nav class="sitenav" aria-labelledby="main-menu" onclick="document.getElementById('navmenu-toggle').click();">
+        <FluentNavMenu Id="main-menu" Collapsible="true" Width="250" Title="Navigation menu" @bind-Expanded="expanded">
+            <FluentNavLink Href="auth" Icon="@(new Icons.Regular.Size24.Password())" IconColor="Color.Accent">Auth Required</FluentNavLink>
+            <AuthorizeView>
+                <Authorized>
+                    <FluentNavLink Href="Account/Manage">@context.User.Identity?.Name</FluentNavLink>
+                    <form action="Account/Logout" method="post">
+                        <AntiforgeryToken />
+                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
+                        <FluentButton IconEnd="@(new Icons.Regular.Size24.SignOut())" Type="ButtonType.Submit" Style="width: 100%;">Logout</FluentButton>
+                    </form>
+                </Authorized>
+                <NotAuthorized>
+                    <FluentNavLink Icon="@(new Icons.Regular.Size24.LockClosedKey())" Href="Account/Register">Register</FluentNavLink>
+                    <FluentNavLink Icon="@(new Icons.Regular.Size24.LockClosedKey())" Href="Account/Login">Login</FluentNavLink>
+                </NotAuthorized>
+            </AuthorizeView>
+
+            <!-- Application links -->
+            <FluentNavLink Href="/" Match="NavLinkMatch.All" Icon="@(new Icons.Regular.Size20.Home())" IconColor="Color.Accent">Overview</FluentNavLink>
+            <FluentNavGroup Title="Tenants" Icon="@(new Icons.Regular.Size24.SlideText())" Expanded="true" Gap="10px 0;" Tooltip="Accounts">
+                <FluentNavLink Href="/tenants" Icon="@(new Icons.Regular.Size24.Building())" IconColor="Color.Accent">Profiles</FluentNavLink>
+                <FluentNavLink Href="/tenants/branches" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Branches</FluentNavLink>
+                <FluentNavLink Href="/tenants/archive" Icon="@(new Icons.Regular.Size24.Archive())" IconColor="Color.Accent">Archive</FluentNavLink>
+                <FluentNavLink Href="/tenants/contacts" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Contacts</FluentNavLink>
+                <FluentNavLink Href="/tenants/organizations" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Organization</FluentNavLink>
+                <FluentNavLink Href="/tenants/customers" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Customers</FluentNavLink>
+                <FluentNavLink Href="/tenants/tags" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Tags</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavGroup Title="Accounts" Icon="@(new Icons.Regular.Size24.BuildingPeople())" Expanded="true" Gap="10px 0;" Tooltip="Accounts">
+                <FluentNavLink Href="/accounts" Icon="@(new Icons.Regular.Size24.PeopleAudience())" IconColor="Color.Accent">Profiles</FluentNavLink>
+                <FluentNavLink Href="/accounts/archive" Icon="@(new Icons.Regular.Size24.Archive())" IconColor="Color.Accent">Archive</FluentNavLink>
+            </FluentNavGroup>
+            <FluentNavLink Href="/vehicles" Icon="@(new Icons.Regular.Size24.VehicleTruckProfile())" IconColor="Color.Accent">Vehicles</FluentNavLink>
+            <FluentNavLink Href="/trailers" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Trailers</FluentNavLink>
+            <FluentNavLink Href="/devices" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Devices</FluentNavLink>
+
+            <FluentNavLink Href="/assets" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Assets</FluentNavLink>
+            <FluentNavLink Href="/locations" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Locations</FluentNavLink>
+            <FluentNavLink Href="/routes" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Routes</FluentNavLink>
+            <FluentNavLink Href="/reports" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Reports</FluentNavLink>
+            <FluentNavLink Href="/devices" Icon="@(new Icons.Regular.Size24.LocationLive())" IconColor="Color.Accent">Devices</FluentNavLink>
+        </FluentNavMenu>
+    </nav>
+</div>
+
+@code {
+    private bool expanded = true;
+
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+}
+

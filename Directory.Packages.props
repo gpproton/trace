@@ -13,7 +13,7 @@
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
     <MassTransitVersion>8.1.2</MassTransitVersion>
-    <FluentUIVersion>4.2.1</FluentUIVersion>
+    <FluentUIVersion>4.3.1</FluentUIVersion>
   </PropertyGroup>
 
   <!-- Core packages -->
