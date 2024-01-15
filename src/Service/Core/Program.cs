@@ -22,6 +22,7 @@ using Trace.Infrastructure;
 using Trace.Application.Abstractions;
 using Trace.Application;
 using Trace.Infrastructure.EFCore;
+using Trace.Infrastructure.Cassandra;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -35,6 +36,7 @@ builder.Services.RegisterDefaultServices();
 builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddHostedService<EfMigrationWorker>();
+builder.Services.AddHostedService<CassandraHostedService>();
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)
     .AddRequestOptions(isDevelopment)
