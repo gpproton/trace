@@ -1,8 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0</TargetFrameworks>
-    
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -13,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PipesFilters\Trace.Common.PipeHandlers.csproj" />
+    <ProjectReference Include="..\PipeHandlers\Trace.Common.PipeHandlers.csproj" />
   </ItemGroup>
-  
+
 </Project>
