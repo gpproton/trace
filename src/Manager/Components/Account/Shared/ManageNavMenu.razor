@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using Trace.Manager.Data
+@using Trace.Application.Account
 
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<UserAccount> SignInManager
 
 <FluentNavMenu Collapse="false">
     <FluentNavLink Href="Account/Manage" Match="NavLinkMatch.All">Profile</FluentNavLink>

@@ -3,9 +3,9 @@
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Identity
-@using Trace.Manager.Data
+@using Trace.Application.Account
 
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<UserAccount> SignInManager
 @inject ILogger<Login> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager
