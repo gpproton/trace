@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Common\PipesFilters\Trace.Common.PipeHandlers.csproj" />
     <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
     <ProjectReference Include="..\Application\Trace.Application.csproj" />
     <ProjectReference Include="..\Common\Warehouse\Trace.Common.Warehouse.csproj" />
