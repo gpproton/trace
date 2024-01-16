@@ -21,29 +21,36 @@ using Trace.Common.PipeHandlers.Interfaces;
 
 namespace Trace.Common.PipeHandlers;
 
-public abstract class Pipeline<T>(IServiceScopeFactory factory) : IPipeline<T> {
-    private readonly List<IAsyncHandler<T>> _handlers = [];
+public abstract class Pipeline<TClass, TInput>(IServiceScopeFactory factory) : IPipeline<TClass, TInput> where TClass : class {
+    private readonly List<IAsyncHandler<TInput>> _handlers = [];
     private readonly IServiceProvider _serviceProvider = factory.CreateScope().ServiceProvider;
 
-    public Pipeline<T> Add(IAsyncHandler<T> handler) {
+    public Pipeline<TClass, TInput> Add(IAsyncHandler<TInput> handler) {
         if (handler == null) throw new ArgumentNullException(nameof(handler));
 
         _handlers.Add(handler);
         return this;
     }
 
-    public Pipeline<T> Add<TFilter>() where TFilter : IAsyncHandler<T> {
+    public Pipeline<TClass, TInput> Add<TFilter>() where TFilter : IAsyncHandler<TInput> {
         var service = _serviceProvider.GetRequiredService<TFilter>() ??
                       throw new ArgumentNullException(nameof(_serviceProvider));
         return Add(service);
     }
 
-    public async Task<T> ProcessAsync(T input, CancellationToken cancellationToken = default) {
-        T currentValue = input;
+    public async Task<TInput> ProcessAsync(TInput input, CancellationToken cancellationToken = default) {
+        TInput currentValue = input;
         foreach (var handler in _handlers) {
             currentValue = await handler.ProcessAsync(currentValue, cancellationToken);
         }
 
         return currentValue;
+    }
+
+    public static void RegisterHandlers(IServiceCollection services, params Type[] handlers) {
+        services.AddScoped(typeof(TClass));
+        foreach (var handler in handlers) {
+            services.AddScoped(handler);
+        }
     }
 }

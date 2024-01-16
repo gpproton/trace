@@ -19,4 +19,4 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Trace.Common.PipeHandlers.Tests;
 
-public class SamplePipeline(IServiceScopeFactory factory) : Pipeline<string>(factory) { }
+public class SamplePipeline(IServiceScopeFactory factory) : Pipeline<SamplePipeline, string>(factory) { }

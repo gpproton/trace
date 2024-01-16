@@ -26,10 +26,10 @@ public class PipelineTests {
     [Test]
     public async Task test_pipeline_execution() {
         var services = new ServiceCollection();
-        services.AddScoped<SamplePipeline>();
-        services.AddScoped(typeof(HandlerOne));
-        services.AddScoped(typeof(HandlerTwo));
-
+        SamplePipeline.RegisterHandlers(services, [
+            typeof(HandlerOne),
+            typeof(HandlerTwo)
+        ]);
         var scope = services.BuildServiceProvider();
         var samplePipeline = scope.GetRequiredService<SamplePipeline>();
 

@@ -9,7 +9,6 @@
     <ProjectReference Include="..\Common\Queueing\Trace.Common.Queueing.csproj" />
     <ProjectReference Include="..\Application\Trace.Application.csproj" />
     <ProjectReference Include="..\Common\Warehouse\Trace.Common.Warehouse.csproj" />
-    <ProjectReference Include="..\Common\PipeHandlers\Trace.Common.PipeHandlers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

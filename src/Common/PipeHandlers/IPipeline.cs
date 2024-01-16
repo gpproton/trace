@@ -20,8 +20,8 @@ using Trace.Common.PipeHandlers.Interfaces;
 
 namespace Trace.Common.PipeHandlers;
 
-public interface IPipeline<T> : IAsyncHandler<T>
+public interface IPipeline<TClass, T> : IAsyncHandler<T> where TClass : class
 {
-    Pipeline<T> Add(IAsyncHandler<T> handler);
-    Pipeline<T> Add<TFilter>() where TFilter : IAsyncHandler<T>;
+    Pipeline<TClass, T> Add(IAsyncHandler<T> handler);
+    Pipeline<TClass, T> Add<TFilter>() where TFilter : IAsyncHandler<T>;
 }
