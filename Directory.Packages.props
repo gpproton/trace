@@ -125,5 +125,6 @@
     <PackageVersion Include="Redis.OM" Version="0.5.3" />
     <PackageVersion Include="Riok.Mapperly" Version="3.2.0" />
     <PackageVersion Include="Scrutor" Version="4.2.2" />
+    <PackageVersion Include="Bogus" Version="35.4.0" />
   </ItemGroup>
 </Project>
