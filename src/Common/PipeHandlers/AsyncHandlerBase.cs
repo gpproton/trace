@@ -21,7 +21,7 @@ using Trace.Common.PipeHandlers.Interfaces;
 namespace Trace.Common.PipeHandlers;
 
 public abstract class AsyncHandlerBase<T> : IAsyncHandler<T> {
-    public async Task<T> ExecuteAsync(T input, CancellationToken cancellationToken) {
+    public async Task<T> ProcessAsync(T input, CancellationToken cancellationToken) {
         if (cancellationToken.IsCancellationRequested) {
             return await Task.FromCanceled<T>(cancellationToken);
         }

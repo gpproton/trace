@@ -38,10 +38,10 @@ public abstract class Pipeline<T>(IServiceScopeFactory factory) : IPipeline<T> {
         return Add(service);
     }
 
-    public async Task<T> ExecuteAsync(T input, CancellationToken cancellationToken = default) {
+    public async Task<T> ProcessAsync(T input, CancellationToken cancellationToken = default) {
         T currentValue = input;
         foreach (var handler in _handlers) {
-            currentValue = await handler.ExecuteAsync(currentValue, cancellationToken);
+            currentValue = await handler.ProcessAsync(currentValue, cancellationToken);
         }
 
         return currentValue;

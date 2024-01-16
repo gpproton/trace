@@ -11,19 +11,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created Date: 2024-1-16 0:41
+// Created Date: 2024-1-16 0:55
 // Modified By: Godwin peter .O
-// Last Modified: 2024-1-16 0:41
+// Last Modified: 2024-1-16 0:55
 
-using NUnit.Framework;
+namespace Trace.Common.PipeHandlers.Tests.Handlers;
 
-namespace Trace.Common.PipeHandlers.Tests;
-
-[TestFixture]
-public class PipelineTest {
-
-    [Test]
-    public void test_pipeline_execution() {
-
+public class HandlerOne : AsyncHandlerBase<string> {
+    protected override Task<string> OnExecuteAsync(string input, CancellationToken cancellationToken) {
+        Console.WriteLine(input);
+        return Task.FromResult(input + "-1");
     }
 }
