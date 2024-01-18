@@ -85,6 +85,8 @@ interface or mobile app. A few of them are:
 | v0.2    | Customer Portal bootstrap | Planned   | Manage customers and and related entities                     |
 | v0.2    | Dispatchers               | Planned   | Dispatchers management                                        |
 | v0.2    | Dispatch team             | Planned   | Dispatch team management                                      |
+| v0.2    | Tag linking               | Planned   | UI and API query to link tags to entities that require it     |
+| v0.2    | Authorization resolver    | Planned   | Authorization resolver by evaluating roles, tags, etc         |
 
 
 ### Stage 3
