@@ -27,12 +27,12 @@ namespace Trace.Application.Account;
 [Index(nameof(UserName))]
 [Index(nameof(ContactId))]
 [PrimaryKey(nameof(TenantId), nameof(Email))]
-public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity<Guid?>, IAccountEntity {
+public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity, IAccountEntity, IAggregateRoot {
     public required Engagement.Contact Contact { get; set; }
     public Guid? ContactId { get; set; }
     public RoleLevel DefaultRole { get; set; }
     public Guid? RoleId { get; set; }
     public UserRole? Role { get; set; }
     public Guid? TenantId { get; set; }
-    public Guid? AccountSettingId { get; set; }
+    public AccountSetting? AccountSetting { get; set; }
 }

@@ -20,28 +20,33 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Cassandra.Mapping;
 using Trace.Application.Abstractions;
-using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Engagement.Enums;
 
 namespace Trace.Application.Engagement;
 
 [PrimaryKey(nameof(TenantId), nameof(Email))]
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
+    public ContactVariant Type { get; set; } = ContactVariant.Contact;
     public bool Active { get; set; }
-    [MaxLength(13)]
+    [MaxLength(15)]
     public string? Phone { get; set; }
     [MaxLength(256)]
-    public string Email { get; set; } = null!;
+    public required string Email { get; set; }
+    public string? Website { get; set; }
     [MaxLength(256)]
+    [NotMapped]
     public string FirstName { get; set; } = null!;
     [MaxLength(256)]
+    [NotMapped]
     public string? MiddleName { get; set; }
     [MaxLength(256)]
-    public string? LastName { get; set; }
-    public required ContactExtraObject Address { get; set; }
     [NotMapped]
-    public string FullName => $"{FirstName} {MiddleName} {LastName}";
-    public DateTimeOffset? Expiry { get; set; }
-    public DateTimeOffset? LastActive { get; set; }
+    public string? LastName { get; set; }
+    public bool Married { get; set; }
+    public string? FullName { get; set; }
+    public DateOnly? BirthDate { get; set; }
+    public ICollection<Address>? Addresses { get; set; }
+    public ICollection<ContactRelation>? Relations { get; set; }
     public ICollection<Tags.Tags>? Tags { get; set; }
 }

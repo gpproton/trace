@@ -24,7 +24,7 @@ namespace Trace.Application.Device;
 
 [Index(nameof(Name))]
 [PrimaryKey(nameof(Id), nameof(TenantId))]
-public class DeviceCommand : TypedEntity<Guid>, ITenantEntity<Guid?> {
+public class DeviceCommand : TypedEntity<Guid>, ITenantEntity {
     public Guid? TenantId { get; set; }
     public int Delay { get; set; }
     public string Messages { get; set; } = string.Empty;

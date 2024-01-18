@@ -17,9 +17,8 @@
 // Modified At: Sun Jan 14 2024
 
 using HotChocolate.Types;
-using Trace.Application.Engagement;
 
-namespace Trace.Application;
+namespace Trace.Application.Engagement.Types;
 
 public class OpportunityType : ObjectType<Opportunity> {
     protected override void Configure(IObjectTypeDescriptor<Opportunity> descriptor) {

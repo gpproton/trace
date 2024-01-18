@@ -187,7 +187,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("schedule");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -230,6 +230,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
+
+                    b.Property<Guid?>("UserAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_account_id");
 
                     b.ComplexProperty<Dictionary<string, object>>("Map", "Trace.Application.Account.AccountSetting.Map#MapOption", b1 =>
                         {
@@ -351,6 +355,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("TenantId")
                         .HasDatabaseName("ix_account_setting_tenant_id");
 
+                    b.HasIndex("UserAccountId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_account_setting_user_account_id");
+
                     b.ToTable("account_setting", (string)null);
                 });
 
@@ -364,10 +372,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
-
-                    b.Property<Guid?>("AccountSettingId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("account_setting_id");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -445,10 +449,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasKey("Id")
                         .HasName("pk_asp_net_users");
 
-                    b.HasIndex("AccountSettingId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_asp_net_users_account_setting_id");
-
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_asp_net_users_contact_id");
 
@@ -504,7 +504,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("role_id");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -655,7 +655,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("serial_number");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -764,7 +764,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("status");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -848,6 +848,117 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("device_command", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Engagement.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("City")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("city");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<Guid?>("ContactRelationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_relation_id");
+
+                    b.Property<string>("Country")
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)")
+                        .HasColumnName("country");
+
+                    b.Property<string>("County")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("county");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("HomePhone")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
+                        .HasColumnName("home_phone");
+
+                    b.Property<string>("Line1")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("line1");
+
+                    b.Property<string>("Line2")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("line2");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(12)
+                        .HasColumnType("character varying(12)")
+                        .HasColumnName("phone");
+
+                    b.Property<string>("State")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("state");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("updated_by");
+
+                    b.Property<string>("Zip")
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)")
+                        .HasColumnName("zip");
+
+                    b.HasKey("Id")
+                        .HasName("pk_address");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_address_contact_id");
+
+                    b.HasIndex("ContactRelationId")
+                        .HasDatabaseName("ix_address_contact_relation_id");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("ix_address_deleted_at");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_address_tenant_id");
+
+                    b.ToTable("address", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
                 {
                     b.Property<Guid>("Id")
@@ -859,6 +970,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean")
                         .HasColumnName("active");
+
+                    b.Property<DateOnly?>("BirthDate")
+                        .HasColumnType("date")
+                        .HasColumnName("birth_date");
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -882,38 +997,26 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("email");
 
-                    b.Property<DateTimeOffset?>("Expiry")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("expiry");
+                    b.Property<string>("FullName")
+                        .HasColumnType("text")
+                        .HasColumnName("full_name");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("first_name");
-
-                    b.Property<DateTimeOffset?>("LastActive")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("last_active");
-
-                    b.Property<string>("LastName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("last_name");
-
-                    b.Property<string>("MiddleName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("middle_name");
+                    b.Property<bool>("Married")
+                        .HasColumnType("boolean")
+                        .HasColumnName("married");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(13)
-                        .HasColumnType("character varying(13)")
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
                         .HasColumnName("phone");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -923,97 +1026,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("updated_by");
 
-                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Contact.Address#ContactExtraObject", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<DateOnly?>("BirthDate")
-                                .HasColumnType("date")
-                                .HasColumnName("address_birth_date");
-
-                            b1.Property<int>("ChildrenCount")
-                                .HasColumnType("integer")
-                                .HasColumnName("address_children_count");
-
-                            b1.Property<string>("City")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_city");
-
-                            b1.Property<string>("Country")
-                                .HasMaxLength(25)
-                                .HasColumnType("character varying(25)")
-                                .HasColumnName("address_country");
-
-                            b1.Property<string>("County")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_county");
-
-                            b1.Property<string>("GuarantorEmail")
-                                .HasMaxLength(256)
-                                .HasColumnType("character varying(256)")
-                                .HasColumnName("address_guarantor_email");
-
-                            b1.Property<string>("GuarantorName")
-                                .HasMaxLength(256)
-                                .HasColumnType("character varying(256)")
-                                .HasColumnName("address_guarantor_name");
-
-                            b1.Property<string>("GuarantorPhone")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_guarantor_phone");
-
-                            b1.Property<string>("HomePhone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_home_phone");
-
-                            b1.Property<string>("KinEmail")
-                                .HasMaxLength(256)
-                                .HasColumnType("character varying(256)")
-                                .HasColumnName("address_kin_email");
-
-                            b1.Property<string>("KinName")
-                                .HasMaxLength(256)
-                                .HasColumnType("character varying(256)")
-                                .HasColumnName("address_kin_name");
-
-                            b1.Property<string>("KinPhone")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_kin_phone");
-
-                            b1.Property<string>("Line1")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line1");
-
-                            b1.Property<string>("Line2")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line2");
-
-                            b1.Property<bool>("Married")
-                                .HasColumnType("boolean")
-                                .HasColumnName("address_married");
-
-                            b1.Property<string>("Phone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_phone");
-
-                            b1.Property<string>("State")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_state");
-
-                            b1.Property<string>("Zip")
-                                .HasMaxLength(10)
-                                .HasColumnType("character varying(10)")
-                                .HasColumnName("address_zip");
-                        });
+                    b.Property<string>("Website")
+                        .HasColumnType("text")
+                        .HasColumnName("website");
 
                     b.HasKey("Id")
                         .HasName("pk_contact");
@@ -1022,9 +1037,109 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasDatabaseName("ix_contact_deleted_at");
 
                     b.HasIndex("TenantId")
+                        .IsUnique()
                         .HasDatabaseName("ix_contact_tenant_id");
 
                     b.ToTable("contact", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.ContactRelation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(1);
+
+                    b.Property<DateOnly?>("BirthDate")
+                        .HasColumnType("date")
+                        .HasColumnName("birth_date");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contact_id");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("created_by");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("deleted_by");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("email");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("FullName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("full_name");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("last_name");
+
+                    b.Property<bool>("Married")
+                        .HasColumnType("boolean")
+                        .HasColumnName("married");
+
+                    b.Property<string>("MiddleName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("middle_name");
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(15)
+                        .HasColumnType("character varying(15)")
+                        .HasColumnName("phone");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid")
+                        .HasColumnName("updated_by");
+
+                    b.HasKey("Id")
+                        .HasName("pk_contact_relation");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_contact_relation_contact_id");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("ix_contact_relation_deleted_at");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_contact_relation_tenant_id");
+
+                    b.ToTable("contact_relation", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
@@ -1117,7 +1232,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(1024)")
                         .HasColumnName("description");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -1139,93 +1254,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasDatabaseName("ix_opportunity_tenant_id");
 
                     b.ToTable("opportunity", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Engagement.Organization", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("Default")
-                        .HasColumnType("boolean")
-                        .HasColumnName("default");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<string>("FullName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("full_name");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Engagement.Organization.Address#ContactObject", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("City")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_city");
-
-                            b1.Property<string>("Country")
-                                .HasMaxLength(25)
-                                .HasColumnType("character varying(25)")
-                                .HasColumnName("address_country");
-
-                            b1.Property<string>("County")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_county");
-
-                            b1.Property<string>("HomePhone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_home_phone");
-
-                            b1.Property<string>("Line1")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line1");
-
-                            b1.Property<string>("Line2")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line2");
-
-                            b1.Property<string>("Phone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_phone");
-
-                            b1.Property<string>("State")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_state");
-
-                            b1.Property<string>("Zip")
-                                .HasMaxLength(10)
-                                .HasColumnType("character varying(10)")
-                                .HasColumnName("address_zip");
-                        });
-
-                    b.HasKey("Id")
-                        .HasName("pk_organization");
-
-                    b.HasIndex("FullName")
-                        .HasDatabaseName("ix_organization_full_name");
-
-                    b.HasIndex("Name")
-                        .HasDatabaseName("ix_organization_name");
-
-                    b.ToTable("organization", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Location.Location", b =>
@@ -1627,7 +1655,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("tag_id");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -1718,7 +1746,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("routes_tenant_id");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -1780,10 +1808,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
-                    b.Property<Guid?>("ProfileId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("profile_id");
-
                     b.Property<Guid?>("TenantSettingId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_setting_id");
@@ -1802,100 +1826,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasIndex("Name")
                         .HasDatabaseName("ix_tenant_name");
 
-                    b.HasIndex("ProfileId")
-                        .HasDatabaseName("ix_tenant_profile_id");
-
                     b.HasIndex("TenantSettingId")
                         .IsUnique()
                         .HasDatabaseName("ix_tenant_tenant_setting_id");
 
                     b.ToTable("tenant", (string)null);
-                });
-
-            modelBuilder.Entity("Trace.Application.Tenant.TenantBranch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id")
-                        .HasColumnOrder(1);
-
-                    b.Property<bool>("Default")
-                        .HasColumnType("boolean")
-                        .HasColumnName("default");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<Guid?>("TenantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tenant_id");
-
-                    b.ComplexProperty<Dictionary<string, object>>("Address", "Trace.Application.Tenant.TenantBranch.Address#ContactObject", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("City")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_city");
-
-                            b1.Property<string>("Country")
-                                .HasMaxLength(25)
-                                .HasColumnType("character varying(25)")
-                                .HasColumnName("address_country");
-
-                            b1.Property<string>("County")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_county");
-
-                            b1.Property<string>("HomePhone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_home_phone");
-
-                            b1.Property<string>("Line1")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line1");
-
-                            b1.Property<string>("Line2")
-                                .HasMaxLength(512)
-                                .HasColumnType("character varying(512)")
-                                .HasColumnName("address_line2");
-
-                            b1.Property<string>("Phone")
-                                .HasMaxLength(12)
-                                .HasColumnType("character varying(12)")
-                                .HasColumnName("address_phone");
-
-                            b1.Property<string>("State")
-                                .HasMaxLength(50)
-                                .HasColumnType("character varying(50)")
-                                .HasColumnName("address_state");
-
-                            b1.Property<string>("Zip")
-                                .HasMaxLength(10)
-                                .HasColumnType("character varying(10)")
-                                .HasColumnName("address_zip");
-                        });
-
-                    b.HasKey("Id")
-                        .HasName("pk_tenant_branch");
-
-                    b.HasIndex("Name")
-                        .HasDatabaseName("ix_tenant_branch_name");
-
-                    b.HasIndex("TenantId")
-                        .HasDatabaseName("ix_tenant_branch_tenant_id");
-
-                    b.ToTable("tenant_branch", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
@@ -1941,7 +1876,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("registrar");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -2106,7 +2041,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("name");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -2183,6 +2118,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("type");
 
+                    b.Property<string>("UniqueId")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("unique_id");
+
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
@@ -2224,7 +2164,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnType("character varying(64)")
                         .HasColumnName("registration_no");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<Guid?>("TenantId")
                         .HasColumnType("uuid")
                         .HasColumnName("tenant_id");
 
@@ -2415,13 +2355,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
+                {
+                    b.HasOne("Trace.Application.Account.UserAccount", null)
+                        .WithOne("AccountSetting")
+                        .HasForeignKey("Trace.Application.Account.AccountSetting", "UserAccountId")
+                        .HasConstraintName("fk_account_setting_user_account_user_account_id");
+                });
+
             modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
                 {
-                    b.HasOne("Trace.Application.Account.AccountSetting", null)
-                        .WithOne("UserAccount")
-                        .HasForeignKey("Trace.Application.Account.UserAccount", "AccountSettingId")
-                        .HasConstraintName("fk_asp_net_users_account_setting_account_setting_id");
-
                     b.HasOne("Trace.Application.Engagement.Contact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
@@ -2455,6 +2398,35 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasConstraintName("fk_asset_asset_category_category_id");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.Address", b =>
+                {
+                    b.HasOne("Trace.Application.Engagement.Contact", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("ContactId")
+                        .HasConstraintName("fk_address_contact_contact_id");
+
+                    b.HasOne("Trace.Application.Engagement.ContactRelation", null)
+                        .WithMany("Addresses")
+                        .HasForeignKey("ContactRelationId")
+                        .HasConstraintName("fk_address_contact_relation_contact_relation_id");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
+                {
+                    b.HasOne("Trace.Application.Tenant.Tenant", null)
+                        .WithOne("Contact")
+                        .HasForeignKey("Trace.Application.Engagement.Contact", "TenantId")
+                        .HasConstraintName("fk_contact_tenant_tenant_id");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.ContactRelation", b =>
+                {
+                    b.HasOne("Trace.Application.Engagement.Contact", null)
+                        .WithMany("Relations")
+                        .HasForeignKey("ContactId")
+                        .HasConstraintName("fk_contact_relation_contact_contact_id");
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
@@ -2519,27 +2491,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>
                 {
-                    b.HasOne("Trace.Application.Engagement.Organization", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileId")
-                        .HasConstraintName("fk_tenant_organization_profile_id");
-
                     b.HasOne("Trace.Application.Tenant.TenantSetting", null)
                         .WithOne("Tenant")
                         .HasForeignKey("Trace.Application.Tenant.Tenant", "TenantSettingId")
                         .HasConstraintName("fk_tenant_tenant_setting_tenant_setting_id");
-
-                    b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Trace.Application.Tenant.TenantBranch", b =>
-                {
-                    b.HasOne("Trace.Application.Tenant.Tenant", "Tenant")
-                        .WithMany("Branches")
-                        .HasForeignKey("TenantId")
-                        .HasConstraintName("fk_tenant_branch_tenant_tenant_id");
-
-                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
@@ -2547,8 +2502,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.HasOne("Trace.Application.Tenant.Tenant", "Tenant")
                         .WithMany("Domains")
                         .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_tenant_domains_tenant_tenant_id");
 
                     b.Navigation("Tenant");
@@ -2581,9 +2534,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Device");
                 });
 
-            modelBuilder.Entity("Trace.Application.Account.AccountSetting", b =>
+            modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
                 {
-                    b.Navigation("UserAccount");
+                    b.Navigation("AccountSetting");
                 });
 
             modelBuilder.Entity("Trace.Application.Account.UserRole", b =>
@@ -2593,7 +2546,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>
                 {
+                    b.Navigation("Addresses");
+
+                    b.Navigation("Relations");
+
                     b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("Trace.Application.Engagement.ContactRelation", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Lead", b =>
@@ -2618,7 +2580,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             modelBuilder.Entity("Trace.Application.Tenant.Tenant", b =>
                 {
-                    b.Navigation("Branches");
+                    b.Navigation("Contact");
 
                     b.Navigation("Domains");
                 });

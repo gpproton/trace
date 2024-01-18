@@ -29,6 +29,7 @@ namespace Trace.Application.Tenant;
 [Index(nameof(TenantSettingId))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenant)])]
 public class Tenant : BaseEntity<Guid> {
+    public Contact? Contact { get; set; }
     [Indexed]
     public Guid? Token { get; set; }
     [Indexed]
@@ -41,9 +42,7 @@ public class Tenant : BaseEntity<Guid> {
     [Indexed]
     [MaxLength(1024)]
     public string? Logo { get; set; }
-    public Organization? Profile { get; set; }
     [Indexed]
     public Guid? TenantSettingId { get; set; }
-    public ICollection<TenantBranch>? Branches { get; set; }
     public ICollection<TenantDomains>? Domains { get; set; }
 }

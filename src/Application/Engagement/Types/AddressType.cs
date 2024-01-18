@@ -11,21 +11,17 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created Date: 2024-1-13 17:12
+// Created Date: 2024-1-18 12:9
 // Modified By: Godwin peter .O
-// Last Modified: 2024-1-13 17:12
+// Last Modified: 2024-1-18 12:9
 
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
+using HotChocolate.Types;
 
-namespace Trace.Application.Engagement;
+namespace Trace.Application.Engagement.Types;
 
-[Index(nameof(Name))]
-[Index(nameof(FullName))]
-public class Organization : TypedEntity<Guid> {
-    [MaxLength(256)]
-    public string? FullName { get; set; }
-    public required ContactObject Address { get; set; }
+public class AddressType : ObjectType<Address> {
+    protected override void Configure(IObjectTypeDescriptor<Address> descriptor) {
+        descriptor.Description("Address for contacts");
+        descriptor.Field(t => t.Id).Type<NonNullType<IdType>>();
+    }
 }

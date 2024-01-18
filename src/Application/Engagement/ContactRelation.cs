@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,25 +12,32 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 18th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
-using Axolotl.EFCore.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using Trace.Application.Abstractions;
+using Trace.Application.Core.Interfaces;
+using Trace.Application.Engagement.Enums;
 
-namespace Trace.Application.Core.Interfaces;
+namespace Trace.Application.Engagement;
 
-public interface IPersonEntity : IAggregateRoot {
+public class ContactRelation : TenantEntity<Guid>, IPersonEntity {
+    public DateOnly? BirthDate { get; set; }
+    public ContactRelationVariant Type { get; set; }
+    public ICollection<Address>? Addresses { get; set; }
     public bool Married { get; set; }
-
+    [MaxLength(15)]
     public string? Phone { get; set; }
-
-    public string Email { get; set; }
-
-    public string FirstName { get; set; }
-
+    [MaxLength(256)]
+    public string Email { get; set; } = null!;
+    [MaxLength(256)]
+    public string FirstName { get; set; } = null!;
+    [MaxLength(256)]
     public string? MiddleName { get; set; }
-
+    [MaxLength(256)]
     public string? LastName { get; set; }
+    [MaxLength(256)]
     public string? FullName { get; set; }
 }

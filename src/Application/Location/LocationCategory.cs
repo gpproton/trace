@@ -23,7 +23,7 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Location;
 
 [PrimaryKey(nameof(Name), nameof(TenantId))]
-public class LocationCategory : TypedEntity<Guid>, ITenantEntity<Guid?> {
+public class LocationCategory : TypedEntity<Guid>, ITenantEntity {
     public string Icon { get; set; } = string.Empty;
     public Guid? TenantId { get; set; }
 }

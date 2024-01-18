@@ -32,6 +32,8 @@ public sealed class Trailer : AssetEntity {
     public TrailerType Type { get; set; }
     [MaxLength(256)]
     public string? FleetIdentifier { get; set; }
+    [MaxLength(64)]
+    public string? UniqueId { get; set; }
     public long Odometer { get; set; }
     public int HorsePower { get; set; }
     [MaxLength(256)]

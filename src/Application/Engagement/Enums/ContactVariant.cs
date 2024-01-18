@@ -12,21 +12,16 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Wednesday, 17th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Wed Jan 17 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application.Abstractions;
-using Trace.Application.Core;
-using Trace.Application.Core.Interfaces;
+namespace Trace.Application.Engagement.Enums;
 
-namespace Trace.Application.Tenant;
-
-[Index(nameof(Name))]
-[Index(nameof(TenantId))]
-public class TenantBranch : TypedEntity<Guid>, ITenantEntity<Guid?> {
-    public Guid? TenantId { get; set; }
-    public Tenant? Tenant { get; set; }
-    public required ContactObject Address { get; set; }
+public enum ContactVariant {
+    Contact = 0,
+    Organization = 1,
+    Account = 2,
+    External = 3,
+    System = 4
 }

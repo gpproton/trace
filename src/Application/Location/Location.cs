@@ -30,7 +30,7 @@ namespace Trace.Application.Location;
 [Index(nameof(Address))]
 [PrimaryKey(nameof(Name), nameof(TenantId))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
-public class Location : TaggedEntity<Guid>, ITenantEntity<Guid?> {
+public class Location : TaggedEntity<Guid>, ITenantEntity {
     [Indexed]
     public Guid? TenantId { get; set; }
 

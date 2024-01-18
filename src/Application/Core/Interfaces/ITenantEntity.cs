@@ -16,10 +16,8 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
-
 namespace Trace.Application.Core.Interfaces;
 
-public interface ITenantEntity<TKey> : IAggregateRoot {
-    public TKey TenantId { get; set; }
+public interface ITenantEntity {
+    public Guid? TenantId { get; set; }
 }

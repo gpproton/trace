@@ -28,21 +28,21 @@ using Trace.Application.Tenant;
 namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
+    private Guid? TenantId { get; set; }
     public ServiceContext(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
 
-        var assembly = typeof(ITenantEntity<>).Assembly;
-
+        var assembly = typeof(ITenantEntity).Assembly;
         modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         modelBuilder.RegisterAllEntities<CoreEntity>(assembly);
         modelBuilder.RegisterSoftDeleteFilter();
+        // TODO: Add condition to exclude manager service
+        // RegisterTenantFilter(modelBuilder);
     }
-
-    public DbSet<Tenant.Tenant> Tenants { get; set; }
+    public DbSet<Tenant.Tenant> Tenants { get; set; } = default!;
     public DbSet<TenantDomains> TenantDomains { get; set; }
-    public DbSet<TenantBranch> TenantBranches { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Vehicle.Vehicle> Vehicles { get; set; }
     public DbSet<Trailer.Trailer> Trailers { get; set; }

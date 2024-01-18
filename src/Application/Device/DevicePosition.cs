@@ -17,16 +17,16 @@
 // Modified At: Fri Jan 12 2024
 
 using System.ComponentModel.DataAnnotations;
-using Axolotl.EFCore.Interfaces;
 using Cassandra.Mapping;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
+using Trace.Common.Warehouse.Interfaces;
 
 namespace Trace.Application.Device;
 
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(DevicePosition)])]
-public class DevicePosition : ExtendedEntity, IHasKey<Guid>, ITenantEntity<Guid?> {
+public class DevicePosition : ExtendedEntity, ICassandraEntity<Guid>, ITenantEntity {
     public const string KeyMotion = "motion";
     public const string KeyPower = "power"; // volts
     public const string KeyBattery = "battery"; // volts

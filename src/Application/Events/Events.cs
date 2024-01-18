@@ -24,7 +24,7 @@ using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Events;
 
-public class Events : ExtendedEntity, IHasKey<Guid>, ITenantEntity<Guid?> {
+public class Events : ExtendedEntity, IHasKey<Guid>, ITenantEntity {
     public Guid Id { get; set; }
     public Guid? TenantId { get; set; }
     public DateTimeOffset Time { get; set; }

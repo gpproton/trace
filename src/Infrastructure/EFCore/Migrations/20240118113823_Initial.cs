@@ -17,44 +17,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 .Annotation("Npgsql:PostgresExtension:postgis", ",,");
 
             migrationBuilder.CreateTable(
-                name: "account_setting",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    map_auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
-                    map_auto_order = table.Column<bool>(type: "boolean", nullable: false),
-                    map_auto_route = table.Column<bool>(type: "boolean", nullable: false),
-                    map_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
-                    map_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    map_bing_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
-                    map_google_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_box_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_type = table.Column<string>(type: "text", nullable: true),
-                    map_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    map_zoom = table.Column<int>(type: "integer", nullable: true),
-                    map_zoom_selection = table.Column<int>(type: "integer", nullable: true),
-                    option_hour24time = table.Column<bool>(type: "boolean", nullable: false),
-                    option_language = table.Column<string>(type: "text", nullable: true),
-                    option_timezone = table.Column<string>(type: "text", nullable: true),
-                    option_token = table.Column<string>(type: "text", nullable: true),
-                    option_unit_area = table.Column<string>(type: "text", nullable: true),
-                    option_unit_distance = table.Column<string>(type: "text", nullable: true),
-                    option_unit_force = table.Column<string>(type: "text", nullable: true),
-                    option_unit_power = table.Column<string>(type: "text", nullable: true),
-                    option_unit_pressure = table.Column<string>(type: "text", nullable: true),
-                    option_unit_speed = table.Column<string>(type: "text", nullable: true),
-                    option_unit_temperature = table.Column<string>(type: "text", nullable: true),
-                    option_unit_volume = table.Column<string>(type: "text", nullable: true),
-                    option_unit_weight = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_account_setting", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -85,50 +47,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "contact",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    active = table.Column<bool>(type: "boolean", nullable: false),
-                    phone = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: true),
-                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    first_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    middle_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    last_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    last_active = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    address_birth_date = table.Column<DateOnly>(type: "date", nullable: true),
-                    address_children_count = table.Column<int>(type: "integer", nullable: false),
-                    address_city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_country = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: true),
-                    address_county = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_guarantor_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    address_guarantor_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    address_guarantor_phone = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_home_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_kin_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    address_kin_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    address_kin_phone = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_line1 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_line2 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_married = table.Column<bool>(type: "boolean", nullable: false),
-                    address_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_state = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_zip = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_contact", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "device",
                 columns: table => new
                 {
@@ -147,7 +65,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -199,35 +117,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_opportunity", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "organization",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    full_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    address_city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_country = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: true),
-                    address_county = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_home_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_line1 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_line2 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_state = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_zip = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_organization", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -371,7 +265,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -395,7 +289,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
                     serial_number = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     barcode = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     color = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
@@ -422,6 +316,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     type = table.Column<int>(type: "integer", nullable: false),
                     fleet_identifier = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    unique_id = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
                     odometer = table.Column<long>(type: "bigint", nullable: false),
                     horse_power = table.Column<int>(type: "integer", nullable: false),
                     model = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -446,77 +341,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         name: "fk_trailer_asset_category_category_id",
                         column: x => x.category_id,
                         principalTable: "asset_category",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    default_role = table.Column<int>(type: "integer", nullable: false),
-                    role_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    account_setting_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    normalized_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    password_hash = table.Column<string>(type: "text", nullable: true),
-                    security_stamp = table.Column<string>(type: "text", nullable: true),
-                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
-                    phone_number = table.Column<string>(type: "text", nullable: true),
-                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
-                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_asp_net_users", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_asp_net_users_account_setting_account_setting_id",
-                        column: x => x.account_setting_id,
-                        principalTable: "account_setting",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_asp_net_users_contact_contact_id",
-                        column: x => x.contact_id,
-                        principalTable: "contact",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_asp_net_users_user_role_role_id",
-                        column: x => x.role_id,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "lead",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    source = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tag_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_lead", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_lead_contact_contact_id",
-                        column: x => x.contact_id,
-                        principalTable: "contact",
                         principalColumn: "id");
                 });
 
@@ -610,21 +434,171 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
                     type = table.Column<int>(type: "integer", nullable: false),
                     logo = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
-                    profile_id = table.Column<Guid>(type: "uuid", nullable: true),
                     tenant_setting_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_tenant", x => x.id);
                     table.ForeignKey(
-                        name: "fk_tenant_organization_profile_id",
-                        column: x => x.profile_id,
-                        principalTable: "organization",
-                        principalColumn: "id");
-                    table.ForeignKey(
                         name: "fk_tenant_tenant_setting_tenant_setting_id",
                         column: x => x.tenant_setting_id,
                         principalTable: "tenant_setting",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "contact",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    type = table.Column<int>(type: "integer", nullable: false),
+                    active = table.Column<bool>(type: "boolean", nullable: false),
+                    phone = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
+                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    website = table.Column<string>(type: "text", nullable: true),
+                    married = table.Column<bool>(type: "boolean", nullable: false),
+                    full_name = table.Column<string>(type: "text", nullable: true),
+                    birth_date = table.Column<DateOnly>(type: "date", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_contact", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_contact_tenant_tenant_id",
+                        column: x => x.tenant_id,
+                        principalTable: "tenant",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tenant_domains",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    domain = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    registrar = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    active = table.Column<bool>(type: "boolean", nullable: false),
+                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_tenant_domains", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_tenant_domains_tenant_tenant_id",
+                        column: x => x.tenant_id,
+                        principalTable: "tenant",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    default_role = table.Column<int>(type: "integer", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    normalized_email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    password_hash = table.Column<string>(type: "text", nullable: true),
+                    security_stamp = table.Column<string>(type: "text", nullable: true),
+                    concurrency_stamp = table.Column<string>(type: "text", nullable: true),
+                    phone_number = table.Column<string>(type: "text", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    lockout_end = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    access_failed_count = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_asp_net_users", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_asp_net_users_contact_contact_id",
+                        column: x => x.contact_id,
+                        principalTable: "contact",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_asp_net_users_user_role_role_id",
+                        column: x => x.role_id,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "contact_relation",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    birth_date = table.Column<DateOnly>(type: "date", nullable: true),
+                    type = table.Column<int>(type: "integer", nullable: false),
+                    married = table.Column<bool>(type: "boolean", nullable: false),
+                    phone = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
+                    email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    first_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
+                    middle_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    last_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    full_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_contact_relation", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_contact_relation_contact_contact_id",
+                        column: x => x.contact_id,
+                        principalTable: "contact",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "lead",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    source = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tag_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_lead", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_lead_contact_contact_id",
+                        column: x => x.contact_id,
+                        principalTable: "contact",
                         principalColumn: "id");
                 });
 
@@ -642,7 +616,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -650,6 +624,50 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     table.ForeignKey(
                         name: "fk_account_alert_asp_net_users_account_id",
                         column: x => x.account_id,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "account_setting",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_account_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    map_auto_invoice = table.Column<bool>(type: "boolean", nullable: false),
+                    map_auto_order = table.Column<bool>(type: "boolean", nullable: false),
+                    map_auto_route = table.Column<bool>(type: "boolean", nullable: false),
+                    map_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
+                    map_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
+                    map_google_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_map_box_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
+                    map_zoom = table.Column<int>(type: "integer", nullable: true),
+                    map_zoom_selection = table.Column<int>(type: "integer", nullable: true),
+                    option_hour24time = table.Column<bool>(type: "boolean", nullable: false),
+                    option_language = table.Column<string>(type: "text", nullable: true),
+                    option_timezone = table.Column<string>(type: "text", nullable: true),
+                    option_token = table.Column<string>(type: "text", nullable: true),
+                    option_unit_area = table.Column<string>(type: "text", nullable: true),
+                    option_unit_distance = table.Column<string>(type: "text", nullable: true),
+                    option_unit_force = table.Column<string>(type: "text", nullable: true),
+                    option_unit_power = table.Column<string>(type: "text", nullable: true),
+                    option_unit_pressure = table.Column<string>(type: "text", nullable: true),
+                    option_unit_speed = table.Column<string>(type: "text", nullable: true),
+                    option_unit_temperature = table.Column<string>(type: "text", nullable: true),
+                    option_unit_volume = table.Column<string>(type: "text", nullable: true),
+                    option_unit_weight = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_account_setting", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_account_setting_user_account_user_account_id",
+                        column: x => x.user_account_id,
                         principalTable: "AspNetUsers",
                         principalColumn: "id");
                 });
@@ -740,6 +758,46 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "address",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    type = table.Column<int>(type: "integer", nullable: false),
+                    line1 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    line2 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
+                    city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    county = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    state = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
+                    zip = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
+                    country = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: true),
+                    home_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
+                    phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
+                    contact_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    contact_relation_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_address", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_address_contact_contact_id",
+                        column: x => x.contact_id,
+                        principalTable: "contact",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_address_contact_relation_contact_relation_id",
+                        column: x => x.contact_relation_id,
+                        principalTable: "contact_relation",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tags",
                 columns: table => new
                 {
@@ -758,7 +816,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -786,63 +844,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tenant_branch",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    address_city = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_country = table.Column<string>(type: "character varying(25)", maxLength: 25, nullable: true),
-                    address_county = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_home_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_line1 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_line2 = table.Column<string>(type: "character varying(512)", maxLength: 512, nullable: true),
-                    address_phone = table.Column<string>(type: "character varying(12)", maxLength: 12, nullable: true),
-                    address_state = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
-                    address_zip = table.Column<string>(type: "character varying(10)", maxLength: 10, nullable: true),
-                    @default = table.Column<bool>(name: "default", type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_branch", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_tenant_branch_tenant_tenant_id",
-                        column: x => x.tenant_id,
-                        principalTable: "tenant",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tenant_domains",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    domain = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: false),
-                    registrar = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
-                    active = table.Column<bool>(type: "boolean", nullable: false),
-                    expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    created_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    updated_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
-                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_tenant_domains", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_tenant_domains_tenant_tenant_id",
-                        column: x => x.tenant_id,
-                        principalTable: "tenant",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tag_members",
                 columns: table => new
                 {
@@ -857,7 +858,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     deleted_by = table.Column<Guid>(type: "uuid", nullable: false),
                     deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    tenant_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -895,6 +896,32 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_account_setting_user_account_id",
+                table: "account_setting",
+                column: "user_account_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_address_contact_id",
+                table: "address",
+                column: "contact_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_address_contact_relation_id",
+                table: "address",
+                column: "contact_relation_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_address_deleted_at",
+                table: "address",
+                column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_address_tenant_id",
+                table: "address",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_asp_net_role_claims_role_id",
                 table: "AspNetRoleClaims",
                 column: "role_id");
@@ -929,12 +956,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "normalized_email");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_asp_net_users_account_setting_id",
-                table: "AspNetUsers",
-                column: "account_setting_id",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_asp_net_users_contact_id",
@@ -980,6 +1001,22 @@ namespace Trace.Infrastructure.EFCore.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_contact_tenant_id",
                 table: "contact",
+                column: "tenant_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_contact_relation_contact_id",
+                table: "contact_relation",
+                column: "contact_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_contact_relation_deleted_at",
+                table: "contact_relation",
+                column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_contact_relation_tenant_id",
+                table: "contact_relation",
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
@@ -1059,16 +1096,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "tenant_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_organization_full_name",
-                table: "organization",
-                column: "full_name");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_organization_name",
-                table: "organization",
-                column: "name");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_routes_description",
                 table: "routes",
                 column: "description");
@@ -1139,25 +1166,10 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
-                name: "ix_tenant_profile_id",
-                table: "tenant",
-                column: "profile_id");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_tenant_tenant_setting_id",
                 table: "tenant",
                 column: "tenant_setting_id",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_tenant_branch_name",
-                table: "tenant_branch",
-                column: "name");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_tenant_branch_tenant_id",
-                table: "tenant_branch",
-                column: "tenant_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_tenant_domains_deleted_at",
@@ -1258,6 +1270,12 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "account_alert");
 
             migrationBuilder.DropTable(
+                name: "account_setting");
+
+            migrationBuilder.DropTable(
+                name: "address");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -1288,9 +1306,6 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "tag_members");
 
             migrationBuilder.DropTable(
-                name: "tenant_branch");
-
-            migrationBuilder.DropTable(
                 name: "tenant_domains");
 
             migrationBuilder.DropTable(
@@ -1303,13 +1318,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "vehicle");
 
             migrationBuilder.DropTable(
+                name: "contact_relation");
+
+            migrationBuilder.DropTable(
                 name: "tags");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "tenant");
 
             migrationBuilder.DropTable(
                 name: "asset_category");
@@ -1327,22 +1342,19 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "routes");
 
             migrationBuilder.DropTable(
-                name: "account_setting");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "organization");
-
-            migrationBuilder.DropTable(
-                name: "tenant_setting");
 
             migrationBuilder.DropTable(
                 name: "contact");
 
             migrationBuilder.DropTable(
                 name: "location_category");
+
+            migrationBuilder.DropTable(
+                name: "tenant");
+
+            migrationBuilder.DropTable(
+                name: "tenant_setting");
         }
     }
 }

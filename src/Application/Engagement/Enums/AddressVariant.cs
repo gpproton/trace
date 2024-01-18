@@ -12,16 +12,16 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Sunday, 14th Jan 2024
+// Created At: Thursday, 18th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Sun Jan 14 2024
+// Modified At: Thu Jan 18 2024
 
-using HotChocolate.Types;
+namespace Trace.Application.Engagement.Enums;
 
-namespace Trace.Application.Core.Types;
-
-public class ContactExtraObject : ObjectType<ContactExtraObject> {
-    protected override void Configure(IObjectTypeDescriptor<ContactExtraObject> descriptor) {
-        descriptor.Description("Additional details for contacts");
-    }
+public enum AddressVariant {
+    Contact,
+    Private,
+    Invoice,
+    Shipping,
+    Other
 }

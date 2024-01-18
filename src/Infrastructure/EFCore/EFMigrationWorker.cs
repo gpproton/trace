@@ -20,7 +20,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Trace.Application;
-using Trace.Application.Core;
 using Trace.Application.Device;
 using Trace.Application.Engagement;
 using Trace.Application.Tags;
@@ -51,10 +50,11 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                 Active = true,
                 Name = "Local Corp",
                 Domains = [new TenantDomains { Domain = "localhost" }],
-                Profile = new Organization {
+                Contact = new Contact {
                     FullName = "Local Corporation",
-                    Name = "Local Corp",
-                    Address = new ContactObject { Line1 = "001 X Street", City = "Gos" }
+                    Email = "contact@local-corp.com",
+                    Addresses = [
+                        new Address { Line1 = "001 X Street", City = "Gos" }]
                 }
             }, stoppingToken);
 
@@ -69,7 +69,9 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                 Email = "john.doe@email.com",
                 FirstName = "John",
                 LastName = "Doe",
-                Address = new ContactExtraObject { Line1 = "Aurora avenue 1", City = "LA", Country = "USA" }
+                Addresses = [
+                    new Address() { Line1 = "Aurora avenue 1", City = "LA", Country = "USA" }
+                ]
             }, stoppingToken);
 
             // Seed Vehicles

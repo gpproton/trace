@@ -17,6 +17,7 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Base;
+using Axolotl.EFCore.Interfaces;
 using HotChocolate;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Core.Interfaces;
@@ -24,8 +25,8 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Abstractions;
 
 [Index(nameof(TenantId))]
-public abstract class TenantEntity<TKey> : AuditableEntity<TKey>, ITenantEntity<TKey?>
+public abstract class TenantEntity<TKey> : AuditableEntity<TKey>, ITenantEntity
     where TKey : notnull {
     [GraphQLIgnore]
-    public TKey? TenantId { get; set; }
+    public Guid? TenantId { get; set; }
 }

@@ -24,8 +24,8 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Account;
 
 [Index(nameof(TenantId))]
-public class AccountSetting : BaseEntity<Guid>, ITenantEntity<Guid?> {
-    public UserAccount? UserAccount { get; set; }
+public class AccountSetting : BaseEntity<Guid>, ITenantEntity {
+    public Guid? UserAccountId { get; set; }
     public required ProfileOption Option { get; set; }
     public required MapOption Map { get; set; }
     public Guid? TenantId { get; set; }

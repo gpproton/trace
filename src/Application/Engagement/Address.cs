@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,33 +12,19 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 18th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
+using Trace.Application.Engagement.Enums;
 
-namespace Trace.Application.Core;
+namespace Trace.Application.Engagement;
 
-[ComplexType]
-public class ContactExtraObject : IContactEntity {
-    public DateOnly? BirthDate { get; set; }
-    public bool Married { get; set; }
-    public int ChildrenCount { get; set; }
-    [MaxLength(256)]
-    public string? KinName { get; set; }
-    [MaxLength(50)]
-    public string? KinPhone { get; set; }
-    [MaxLength(256)]
-    public string? KinEmail { get; set; }
-    [MaxLength(256)]
-    public string? GuarantorName { get; set; }
-    [MaxLength(50)]
-    public string? GuarantorPhone { get; set; }
-    [MaxLength(256)]
-    public string? GuarantorEmail { get; set; }
+public class Address : TenantEntity<Guid>, IContactEntity {
+    public AddressVariant Type { get; set; } = AddressVariant.Contact;
     [MaxLength(512)]
     public string? Line1 { get; set; }
     [MaxLength(512)]
