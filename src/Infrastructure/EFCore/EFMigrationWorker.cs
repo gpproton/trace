@@ -1,9 +1,10 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
-// Licensed under the Business Source License 1.1 and Trace License;
+// Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
+// Change License: Reciprocal Public License 1.5
 //     https://mariadb.com/bsl11
-//     https://trace.ng/license
+//     https://opensource.org/license/rpl-1-5
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -11,9 +12,9 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created Date: 2024-1-13 3:15
+// Created At: Saturday, 13th Jan 2024
 // Modified By: Godwin peter .O
-// Last Modified: 2024-1-13 3:15
+// Modified At: Thu Jan 18 2024
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,7 @@ using Trace.Application.Vehicle;
 using Trace.Application.Core.Enums;
 using NetTopologySuite.Geometries;
 using Location = Trace.Application.Location.Location;
+using Trace.Application.Engagement.Enums;
 
 namespace Trace.Infrastructure.EFCore;
 
@@ -41,17 +43,18 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
         logger.LogInformation("Started seeding data...");
 
-        var dataSeeded = await _context.Tenants.AnyAsync(stoppingToken);
+        var dataSeeded = await _context.Set<Tenant>().AnyAsync(stoppingToken);
         var tenantId = Guid.NewGuid();
         if (!dataSeeded) {
             // Seed Tenants
-            await _context.Tenants.AddAsync(new Tenant {
+            await _context.Set<Tenant>().AddAsync(new Tenant {
                 Id = tenantId,
                 Active = true,
                 Name = "Local Corp",
                 Domains = [new TenantDomains { Domain = "localhost" }],
                 Contact = new Contact {
                     FullName = "Local Corporation",
+                    Type = ContactVariant.Organization,
                     Email = "contact@local-corp.com",
                     Addresses = [
                         new Address { Line1 = "001 X Street", City = "Gos" }]
@@ -67,8 +70,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
             await _context.Set<Contact>().AddAsync(new Contact {
                 TenantId = tenantId,
                 Email = "john.doe@email.com",
-                FirstName = "John",
-                LastName = "Doe",
+                FullName = "John Doe",
                 Addresses = [
                     new Address() { Line1 = "Aurora avenue 1", City = "LA", Country = "USA" }
                 ]
@@ -76,9 +78,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
             // Seed Vehicles
             await _context.Set<Vehicle>().AddAsync(new Vehicle {
-                Id = Guid.NewGuid(),
                 TenantId = tenantId,
-                SerialNumber = "0001",
                 RegistrationNo = "XX 123 XXX",
                 FleetIdentifier = "fleet-001",
                 // Seed Device
@@ -90,10 +90,9 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
             // Seed Location
             await _context.Set<Location>().AddAsync(new Location {
-                Id = Guid.NewGuid(),
-                TenantId = tenantId,
                 Name = "Test-00",
                 Address = "Test",
+                Default = true,
                 Type = LocationType.Custom,
                 Geometry = new Point(6.243, 3.3431),
                 Description = "A sample location"

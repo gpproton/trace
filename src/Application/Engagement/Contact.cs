@@ -18,33 +18,25 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Cassandra.Mapping;
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Engagement.Enums;
 
 namespace Trace.Application.Engagement;
 
-[PrimaryKey(nameof(TenantId), nameof(Email))]
+[Index(nameof(TenantId), nameof(Email), IsUnique = true)]
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public ContactVariant Type { get; set; } = ContactVariant.Contact;
+    [MaxLength(256)]
+    public string FullName { get; set; }  = null!;
     public bool Active { get; set; }
     [MaxLength(15)]
     public string? Phone { get; set; }
     [MaxLength(256)]
     public required string Email { get; set; }
     public string? Website { get; set; }
-    [MaxLength(256)]
-    [NotMapped]
-    public string FirstName { get; set; } = null!;
-    [MaxLength(256)]
-    [NotMapped]
-    public string? MiddleName { get; set; }
-    [MaxLength(256)]
-    [NotMapped]
-    public string? LastName { get; set; }
     public bool Married { get; set; }
-    public string? FullName { get; set; }
     public DateOnly? BirthDate { get; set; }
     public ICollection<Address>? Addresses { get; set; }
     public ICollection<ContactRelation>? Relations { get; set; }

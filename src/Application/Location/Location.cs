@@ -28,7 +28,7 @@ namespace Trace.Application.Location;
 
 [Index(nameof(CategoryId))]
 [Index(nameof(Address))]
-[PrimaryKey(nameof(Name), nameof(TenantId))]
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
 public class Location : TaggedEntity<Guid>, ITenantEntity {
     [Indexed]

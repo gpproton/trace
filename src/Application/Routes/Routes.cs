@@ -25,7 +25,7 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Routes;
 
 [Index(nameof(Description))]
-[PrimaryKey(nameof(Name), nameof(TenantId))]
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
 public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid>, ITenantEntity {
     public Guid? TenantId { get; set; }
     public Guid? ApprovedBy { get; set; }

@@ -14,8 +14,9 @@
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Thu Jan 18 2024
 
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
@@ -28,8 +29,9 @@ namespace Trace.Application.Device;
 [Index(nameof(LastUpdate))]
 [Index(nameof(Status))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Device)])]
-public sealed class Device : TenantEntity<Guid> {
+public sealed class Device : AssetEntity {
     [Indexed]
+    [MaxLength(64)]
     public required string UniqueId { get; set; }
     [Indexed]
     public Guid? PositionId { get; set; }
@@ -37,6 +39,7 @@ public sealed class Device : TenantEntity<Guid> {
     public DateTimeOffset? LastUpdate { get; set; }
     public DateTimeOffset? LastMoved { get; set; }
     [Indexed]
+    [MaxLength(15)]
     public string? Phone { get; set; }
     [Indexed]
     public DeviceStatus Status { get; set; } = DeviceStatus.Offline;

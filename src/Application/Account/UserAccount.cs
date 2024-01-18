@@ -26,7 +26,7 @@ namespace Trace.Application.Account;
 
 [Index(nameof(UserName))]
 [Index(nameof(ContactId))]
-[PrimaryKey(nameof(TenantId), nameof(Email))]
+[Index(nameof(TenantId), nameof(Email), IsUnique = true)]
 public class UserAccount : IdentityUser<Guid>, IHasKey<Guid>, ITenantEntity, IAccountEntity, IAggregateRoot {
     public required Engagement.Contact Contact { get; set; }
     public Guid? ContactId { get; set; }

@@ -29,7 +29,7 @@ namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     private Guid? TenantId { get; set; }
-    public ServiceContext(DbContextOptions options) : base(options) { }
+    public ServiceContext(DbContextOptions<ServiceContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
@@ -41,13 +41,14 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
         // TODO: Add condition to exclude manager service
         // RegisterTenantFilter(modelBuilder);
     }
+    public DbSet<Address> Addresses { get; set; } = default!;
+    public DbSet<Contact> Contacts { get; set; } = default!;
     public DbSet<Tenant.Tenant> Tenants { get; set; } = default!;
-    public DbSet<TenantDomains> TenantDomains { get; set; }
-    public DbSet<Contact> Contacts { get; set; }
-    public DbSet<Vehicle.Vehicle> Vehicles { get; set; }
-    public DbSet<Trailer.Trailer> Trailers { get; set; }
-    public DbSet<Asset.Asset> Assets { get; set; }
-    public DbSet<Device.Device> Devices { get; set; }
-    public DbSet<Location.Location> Locations { get; set; }
-    public DbSet<Routes.Routes> Routes { get; set; }
+    public DbSet<TenantDomains> TenantDomains { get; set; } = default!;
+    public DbSet<Vehicle.Vehicle> Vehicles { get; set; } = default!;
+    public DbSet<Trailer.Trailer> Trailers { get; set; } = default!;
+    public DbSet<Asset.Asset> Assets { get; set; } = default!;
+    public DbSet<Device.Device> Devices { get; set; } = default!;
+    public DbSet<Location.Location> Locations { get; set; } = default!;
+    public DbSet<Routes.Routes> Routes { get; set; } = default!;
 }

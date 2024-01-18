@@ -23,7 +23,6 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Device;
 
 [Index(nameof(Name))]
-[PrimaryKey(nameof(Id), nameof(TenantId))]
 public class DeviceCommand : TypedEntity<Guid>, ITenantEntity {
     public Guid? TenantId { get; set; }
     public int Delay { get; set; }

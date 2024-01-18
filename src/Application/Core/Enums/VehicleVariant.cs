@@ -12,13 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 4th Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
 namespace Trace.Application.Core.Enums;
 
-public enum VehicleType {
+public enum VehicleVariant {
     Bicycle = 0,
     Bus = 1,
     Car = 2,

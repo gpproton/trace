@@ -25,8 +25,6 @@ namespace Trace.Application.Abstractions;
 [Index(nameof(CategoryId))]
 public abstract class AssetEntity : TenantEntity<Guid> {
     [MaxLength(256)]
-    public string SerialNumber { get; set; } = null!;
-    [MaxLength(256)]
     public string? Barcode { get; set; }
     [MaxLength(12)]
     public string? Color { get; set; }

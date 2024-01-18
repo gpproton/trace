@@ -23,10 +23,11 @@ using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Trailer;
 
-[Index(nameof(FleetIdentifier))]
-[Index(nameof(SerialNumber), IsUnique = true)]
-[PrimaryKey(nameof(Name), nameof(TenantId))]
+[Index(nameof(UniqueId), IsUnique = true)]
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
+[Index(nameof(FleetIdentifier), nameof(TenantId), IsUnique = true)]
 public sealed class Trailer : AssetEntity {
+    public Vehicle.Vehicle? Vehicle { get; set; }
     [MaxLength(256)]
     public string? Name { get; set; }
     public TrailerType Type { get; set; }

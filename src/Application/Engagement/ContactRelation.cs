@@ -24,6 +24,8 @@ using Trace.Application.Engagement.Enums;
 namespace Trace.Application.Engagement;
 
 public class ContactRelation : TenantEntity<Guid>, IPersonEntity {
+    [MaxLength(256)]
+    public string FullName { get; set; } = null!;
     public DateOnly? BirthDate { get; set; }
     public ContactRelationVariant Type { get; set; }
     public ICollection<Address>? Addresses { get; set; }
@@ -32,12 +34,4 @@ public class ContactRelation : TenantEntity<Guid>, IPersonEntity {
     public string? Phone { get; set; }
     [MaxLength(256)]
     public string Email { get; set; } = null!;
-    [MaxLength(256)]
-    public string FirstName { get; set; } = null!;
-    [MaxLength(256)]
-    public string? MiddleName { get; set; }
-    [MaxLength(256)]
-    public string? LastName { get; set; }
-    [MaxLength(256)]
-    public string? FullName { get; set; }
 }

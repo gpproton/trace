@@ -58,7 +58,7 @@
   </ItemGroup>
   <!-- EFcore packages -->
   <ItemGroup Label="Efcore">
-    <PackageVersion Include="EFCore.NamingConventions" Version="8.0.0" />
+    <PackageVersion Include="EFCore.NamingConventions" Version="8.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCoreVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(EFCoreVersion)" />

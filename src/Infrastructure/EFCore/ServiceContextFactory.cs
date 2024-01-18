@@ -35,7 +35,7 @@ public class ServiceContextFactory : IDesignTimeDbContextFactory<ServiceContext>
                  .MigrationsAssembly(typeof(ServiceContextFactory).Assembly.FullName)
                  .UseNetTopologySuite()
                  .EnableRetryOnFailure())
-                .UseSnakeCaseNamingConvention();
+        .UseSnakeCaseNamingConvention();
 
         return new ServiceContext(optionsBuilder.Options);
     }
