@@ -12,14 +12,19 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Friday, 19th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Fri Jan 19 2024
 
-using Axolotl.EFCore.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Trace.Application.Routes;
+namespace Trace.Application.Location.Configs;
 
-public interface IRouteRepository : IRepository<Route, Guid> {
-
+public class LocationConfig : IEntityTypeConfiguration<Location> {
+    public void Configure(EntityTypeBuilder<Location> builder) {
+        builder.HasMany(p => p.Tags)
+        .WithMany()
+        .UsingEntity<LocationTag>();
+    }
 }

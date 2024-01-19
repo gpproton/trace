@@ -59,7 +59,11 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                     Email = "contact@local-corp.com",
                     Mobile = "+2341234567891",
                     Addresses = [
-                        new Address { Line1 = "001 X Street", City = "Gos" }]
+                        new Address { Line1 = "01 X Street", City = "Lagos", Country = "Nigeria" }
+                    ],
+                    Tags = [
+                        new Tag{ Name = "Tag-00" }
+                    ]
                 },
                 Setting = new TenantSetting {
                     Option = new ProfileOption(),
@@ -69,7 +73,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
             // Seed Tags
             await _context.Set<Tag>().AddAsync(new Tag {
-                Name = "Tag-00",
+                Name = "Tag-01",
             }, stoppingToken);
 
             // Seed Contact

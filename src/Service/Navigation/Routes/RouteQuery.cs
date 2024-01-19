@@ -28,5 +28,5 @@ public class RouteQuery {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Routes")]
-    public IQueryable<Application.Routes.Routes> GetRoutes([Service(ServiceKind.Synchronized)] IRouteRepository routeRepository) => routeRepository.GetAll();
+    public IQueryable<Application.Routes.Route> GetRoutes([Service(ServiceKind.Synchronized)] IRouteRepository routeRepository) => routeRepository.GetAll();
 }

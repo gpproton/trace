@@ -25,7 +25,7 @@ using Trace.Application.Engagement.Enums;
 namespace Trace.Application.Engagement;
 
 [Index(nameof(TenantId), nameof(Email), IsUnique = true)]
-public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
+public class Contact : TaggedEntity<Guid>, ITenantEntity, IPersonEntity {
     public ContactVariant Type { get; set; } = ContactVariant.Contact;
     public ContactRelationVariant RelationType { get; set; } = ContactRelationVariant.None;
     [MaxLength(256)]
@@ -48,5 +48,5 @@ public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public Contact? Company { get; set; }
     public ICollection<Address> Addresses { get; set; } = [];
     public ICollection<Contact> Relations { get; set; } = [];
-    public ICollection<Tags.Tag> Tags { get; set; } = [];
+    public Guid? TenantId { get; set; }
 }

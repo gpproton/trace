@@ -33,7 +33,6 @@ namespace Trace.Application.Location;
 public class Location : TaggedEntity<Guid>, ITenantEntity {
     [Indexed]
     public Guid? TenantId { get; set; }
-
     [Indexed]
     public bool Default { get; set; }
     [Indexed]

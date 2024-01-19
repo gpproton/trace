@@ -12,14 +12,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Friday, 19th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Fri Jan 19 2024
 
-using Axolotl.EFCore.Repository;
+using Axolotl.EFCore.Base;
 
-namespace Trace.Application.Routes;
+namespace Trace.Application.Engagement;
 
-public interface IRouteRepository : IRepository<Route, Guid> {
-
+public class LeadTag : CoreEntity {
+    public Guid LeadId { get; set; }
+    public Guid TagId { get; set; }
 }

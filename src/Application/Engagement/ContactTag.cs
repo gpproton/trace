@@ -16,8 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 18 2024
 
+using Axolotl.EFCore.Base;
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Engagement;
 
-public class ContactTag {
-
+[Index(nameof(ContactId), nameof(TagId))]
+public class ContactTag : CoreEntity {
+    public Guid ContactId { get; set; }
+    public Guid TagId { get; set; }
 }

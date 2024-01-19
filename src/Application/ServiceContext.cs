@@ -68,5 +68,5 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
     public DbSet<DeviceCommand> DeviceCommands { get; set; } = default!;
     public DbSet<Location.Location> Locations { get; set; } = default!;
     public DbSet<LocationCategory> LocationCategories { get; set; } = default!;
-    public DbSet<Routes.Routes> Routes { get; set; } = default!;
+    public DbSet<Routes.Route> Routes { get; set; } = default!;
 }

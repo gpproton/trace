@@ -18,12 +18,14 @@
 
 using System.ComponentModel.DataAnnotations;
 using Trace.Application.Abstractions;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Engagement;
 
-public class Lead : TaggedEntity<Guid> {
-    public Engagement.Contact? Contact { get; set; }
+public class Lead : TaggedEntity<Guid>, ITenantEntity {
+    public Contact? Contact { get; set; }
     public DateTimeOffset Time { get; set; }
     [MaxLength(256)]
     public string? Source { get; set; }
+    public Guid? TenantId { get; set; }
 }

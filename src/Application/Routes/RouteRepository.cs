@@ -18,6 +18,6 @@
 
 namespace Trace.Application.Routes;
 
-public class RouteRepository(ServiceContext context) : GenericRepository<Routes, Guid>(context), IRouteRepository {
+public class RouteRepository(ServiceContext context) : GenericRepository<Route, Guid>(context), IRouteRepository {
 
 }
