@@ -20,8 +20,8 @@ using HotChocolate.Types;
 
 namespace Trace.Application.Tags.Types;
 
-public class TagsType : ObjectType<Tags> {
-    protected override void Configure(IObjectTypeDescriptor<Tags> descriptor) {
+public class TagsType : ObjectType<Tag> {
+    protected override void Configure(IObjectTypeDescriptor<Tag> descriptor) {
         descriptor.Description("Tags for binding most entities");
     }
 }

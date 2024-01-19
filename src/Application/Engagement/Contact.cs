@@ -17,7 +17,6 @@
 // Modified At: Thu Jan 04 2024
 
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Interfaces;
@@ -28,17 +27,26 @@ namespace Trace.Application.Engagement;
 [Index(nameof(TenantId), nameof(Email), IsUnique = true)]
 public class Contact : TenantEntity<Guid>, ITaggedEntity<Guid>, IPersonEntity {
     public ContactVariant Type { get; set; } = ContactVariant.Contact;
+    public ContactRelationVariant RelationType { get; set; } = ContactRelationVariant.None;
     [MaxLength(256)]
-    public string FullName { get; set; }  = null!;
+    public required string FullName { get; set; }
+    [MaxLength(256)]
+    public string? JobPosition { get; set; }
     public bool Active { get; set; }
+    [MaxLength(15)]
+    public required string Mobile { get; set; }
     [MaxLength(15)]
     public string? Phone { get; set; }
     [MaxLength(256)]
     public required string Email { get; set; }
+    [MaxLength(512)]
     public string? Website { get; set; }
     public bool Married { get; set; }
     public DateOnly? BirthDate { get; set; }
-    public ICollection<Address>? Addresses { get; set; }
-    public ICollection<ContactRelation>? Relations { get; set; }
-    public ICollection<Tags.Tags>? Tags { get; set; }
+    [MaxLength(1024)]
+    public string? Notes { get; set; }
+    public Contact? Company { get; set; }
+    public ICollection<Address> Addresses { get; set; } = [];
+    public ICollection<Contact> Relations { get; set; } = [];
+    public ICollection<Tags.Tag> Tags { get; set; } = [];
 }

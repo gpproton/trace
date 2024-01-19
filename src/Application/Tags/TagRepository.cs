@@ -18,6 +18,6 @@
 
 namespace Trace.Application.Tags;
 
-public class TagRepository(ServiceContext context) : GenericRepository<Tags, Guid>(context), ITagRepository {
+public class TagRepository(ServiceContext context) : GenericRepository<Tag, Guid>(context), ITagRepository {
 
 }

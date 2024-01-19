@@ -16,22 +16,21 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 18 2024
 
-using System.ComponentModel.DataAnnotations;
+using HotChocolate;
+using HotChocolate.Types;
+using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core.Interfaces;
-using Trace.Application.Engagement.Enums;
+using Trace.Application.Engagement;
+using Trace.Application.Engagement.Repositories;
 
-namespace Trace.Application.Engagement;
+namespace Trace.Service.Core.Engagements;
 
-public class ContactRelation : TenantEntity<Guid>, IPersonEntity {
-    [MaxLength(256)]
-    public string FullName { get; set; } = null!;
-    public DateOnly? BirthDate { get; set; }
-    public ContactRelationVariant Type { get; set; }
-    public ICollection<Address>? Addresses { get; set; }
-    public bool Married { get; set; }
-    [MaxLength(15)]
-    public string? Phone { get; set; }
-    [MaxLength(256)]
-    public string Email { get; set; } = null!;
+[ExtendObjectType(typeof(QueryRoot))]
+[GraphQLDescription("Query address for a contact")]
+public class AddressQuery {
+    public async Task<List<Address>> GetContactAddresses([Service(ServiceKind.Synchronized)] IContactRepository repository, Guid id) {
+        var query = await repository.GetQueryable().Include(b => b.Addresses).SingleOrDefaultAsync(x => x.Id == id);
+
+        return [.. query?.Addresses];
+    }
 }

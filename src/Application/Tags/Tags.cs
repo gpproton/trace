@@ -23,10 +23,11 @@ using Trace.Application.Abstractions;
 namespace Trace.Application.Tags;
 
 [Index(nameof(Name))]
-public class Tags : TenantEntity<Guid> {
+public class Tag : TenantEntity<Guid> {
     [MaxLength(256)]
-    public string? Name { get; set; }
+    public required string Name { get; set; }
     [MaxLength(12)]
     public string? Color { get; set; }
-    public ICollection<TagMembers>? Members { get; set; }
+    public Tag? Parent { get; set; }
+    public ICollection<TagMembers> Members { get; set; } = [];
 }

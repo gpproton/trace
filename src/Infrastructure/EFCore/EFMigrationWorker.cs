@@ -30,6 +30,7 @@ using Trace.Application.Core.Enums;
 using NetTopologySuite.Geometries;
 using Location = Trace.Application.Location.Location;
 using Trace.Application.Engagement.Enums;
+using Trace.Application.Core;
 
 namespace Trace.Infrastructure.EFCore;
 
@@ -43,11 +44,11 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
 
         logger.LogInformation("Started seeding data...");
 
-        var dataSeeded = await _context.Set<Tenant>().AnyAsync(stoppingToken);
+        var dataSeeded = await _context.Tenants.AnyAsync(stoppingToken);
         var tenantId = Guid.NewGuid();
         if (!dataSeeded) {
             // Seed Tenants
-            await _context.Set<Tenant>().AddAsync(new Tenant {
+            await _context.Tenants.AddAsync(new Tenant {
                 Id = tenantId,
                 Active = true,
                 Name = "Local Corp",
@@ -56,20 +57,26 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                     FullName = "Local Corporation",
                     Type = ContactVariant.Organization,
                     Email = "contact@local-corp.com",
+                    Mobile = "+2341234567891",
                     Addresses = [
                         new Address { Line1 = "001 X Street", City = "Gos" }]
+                },
+                Setting = new TenantSetting {
+                    Option = new ProfileOption(),
+                    Map = new MapOption(),
                 }
             }, stoppingToken);
 
             // Seed Tags
-            await _context.Set<Tags>().AddAsync(new Tags {
+            await _context.Set<Tag>().AddAsync(new Tag {
                 Name = "Tag-00",
             }, stoppingToken);
 
             // Seed Contact
-            await _context.Set<Contact>().AddAsync(new Contact {
+            await _context.Contacts.AddAsync(new Contact {
                 TenantId = tenantId,
                 Email = "john.doe@email.com",
+                Mobile = "+2341234567890",
                 FullName = "John Doe",
                 Addresses = [
                     new Address() { Line1 = "Aurora avenue 1", City = "LA", Country = "USA" }
@@ -77,7 +84,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
             }, stoppingToken);
 
             // Seed Vehicles
-            await _context.Set<Vehicle>().AddAsync(new Vehicle {
+            await _context.Vehicles.AddAsync(new Vehicle {
                 TenantId = tenantId,
                 RegistrationNo = "XX 123 XXX",
                 FleetIdentifier = "fleet-001",
@@ -89,7 +96,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
             }, stoppingToken);
 
             // Seed Location
-            await _context.Set<Location>().AddAsync(new Location {
+            await _context.Locations.AddAsync(new Location {
                 Name = "Test-00",
                 Address = "Test",
                 Default = true,

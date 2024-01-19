@@ -25,5 +25,5 @@ namespace Trace.Application.Account;
 [Index(nameof(Name))]
 public class UserRole : IdentityRole<Guid>, IAccountRoleEntity {
     public RoleLevel Root { get; set; }
-    public ICollection<UserPermissions>? Permissions { get; set; }
+    public ICollection<UserPermissions> Permissions { get; set; } = [];
 }

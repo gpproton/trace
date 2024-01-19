@@ -24,5 +24,5 @@ namespace Trace.Application.Core.Interfaces;
 
 public interface IAccountRoleEntity : IAggregateRoot {
     public RoleLevel Root { get; set; }
-    public ICollection<UserPermissions>? Permissions { get; set; }
+    public ICollection<UserPermissions> Permissions { get; set; }
 }

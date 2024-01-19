@@ -43,4 +43,6 @@ public class Address : TenantEntity<Guid>, IContactEntity {
     public string? HomePhone { get; set; }
     [MaxLength(12)]
     public string? Phone { get; set; }
+    public Contact? Contact { get; set; }
+    public Guid? ContactId { get; set; }
 }

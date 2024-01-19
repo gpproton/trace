@@ -28,5 +28,5 @@ public class TagQuery {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Tags")]
-    public IQueryable<Application.Tags.Tags> GetTags([Service(ServiceKind.Synchronized)] ITagRepository tagRepository) => tagRepository.GetAll();
+    public IQueryable<Application.Tags.Tag> GetTags([Service(ServiceKind.Synchronized)] ITagRepository tagRepository) => tagRepository.GetAll();
 }

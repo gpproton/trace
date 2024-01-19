@@ -42,7 +42,6 @@ public static class ApplicationTypes {
         services.AddType<OpportunityType>();
         services.AddType<LeadType>();
         services.AddType<AddressType>();
-        services.AddType<ContactRelationType>();
         // Tag types
         services.AddType<TagsType>();
         services.AddType<TagMembersType>();

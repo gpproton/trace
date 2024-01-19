@@ -74,7 +74,7 @@ public class DevicePosition : ExtendedEntity, ICassandraEntity<Guid>, ITenantEnt
     public double? Battery { get; set; }
     public bool Charging { get; set; }
     [Indexed]
-    public ICollection<Guid>? LocationIds { get; set; }
+    public ICollection<Guid> LocationIds { get; set; } = [];
 
     public static Map<DevicePosition> GetConfig(string keyspace) {
         return new Map<DevicePosition>()

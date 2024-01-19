@@ -12,9 +12,9 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
 using Axolotl.EFCore.Base;
 using Trace.Application.Core.Interfaces;
@@ -22,6 +22,5 @@ using Trace.Application.Core.Interfaces;
 namespace Trace.Application.Abstractions;
 
 public abstract class TaggedEntity<T> : AuditableEntity<T>, ITaggedEntity<T> where T : notnull {
-    public ICollection<Tags.Tags>? Tags { get; set; }
-    public T? TagId { get; set; }
+    public ICollection<Tags.Tag> Tags { get; set; } = [];
 }

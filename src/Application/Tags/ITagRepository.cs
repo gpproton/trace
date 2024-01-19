@@ -20,6 +20,6 @@ using Axolotl.EFCore.Repository;
 
 namespace Trace.Application.Tags;
 
-public interface ITagRepository : IRepository<Tags, Guid> {
+public interface ITagRepository : IRepository<Tag, Guid> {
 
 }

@@ -18,6 +18,7 @@
 namespace Trace.Application.Engagement.Enums;
 
 public enum ContactRelationVariant {
+    None,
     Guarantor,
     Spouse,
     Sibling,

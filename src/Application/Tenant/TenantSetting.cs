@@ -23,6 +23,7 @@ namespace Trace.Application.Tenant;
 
 public class TenantSetting : BaseEntity<Guid> {
     public Tenant? Tenant { get; set; }
+    public Guid? TenantId { get; set; }
     public required ProfileOption Option { get; set; }
     public required MapOption Map { get; set; }
 }

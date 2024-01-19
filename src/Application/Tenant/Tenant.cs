@@ -26,7 +26,6 @@ using Trace.Application.Engagement;
 namespace Trace.Application.Tenant;
 
 [Index(nameof(Name))]
-[Index(nameof(TenantSettingId))]
 [Document(StorageType = StorageType.Hash, Prefixes = [nameof(Tenant)])]
 public class Tenant : BaseEntity<Guid> {
     public Contact? Contact { get; set; }
@@ -43,6 +42,6 @@ public class Tenant : BaseEntity<Guid> {
     [MaxLength(1024)]
     public string? Logo { get; set; }
     [Indexed]
-    public Guid? TenantSettingId { get; set; }
-    public ICollection<TenantDomains>? Domains { get; set; }
+    public TenantSetting? Setting { get; set; }
+    public ICollection<TenantDomains> Domains { get; set; } = [];
 }

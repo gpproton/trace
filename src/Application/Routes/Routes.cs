@@ -39,5 +39,5 @@ public class Routes : TypedEntity<Guid>, ITaggedEntity<Guid>, ITenantEntity {
     public Point Source { get; set; } = null!;
     public Point Destination { get; set; } = null!;
     public LineString? Path { get; set; }
-    public ICollection<Tags.Tags>? Tags { get; set; }
+    public ICollection<Tags.Tag> Tags { get; set; } = [];
 }

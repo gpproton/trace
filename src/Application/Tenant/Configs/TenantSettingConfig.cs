@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,19 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 18th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
-namespace Trace.Application.Core.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public interface IPersonEntity {
-    public bool Married { get; set; }
-    public string Mobile { get; set; }
-    public string? Phone { get; set; }
-    public string Email { get; set; }
-    public string FullName { get; set; }
+namespace Trace.Application.Tenant.Configs;
+
+public class TenantSettingConfig : IEntityTypeConfiguration<TenantSetting> {
+    public void Configure(EntityTypeBuilder<TenantSetting> builder) {
+        // builder.HasOne(e => e.Tenant)
+        // .WithOne(e => e.Setting)
+        // .HasForeignKey<Tenant>(p => p.SettingId);
+    }
 }
