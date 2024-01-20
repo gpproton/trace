@@ -526,6 +526,30 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "trailer_tag",
+                columns: table => new
+                {
+                    trailer_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tag_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_trailer_tag", x => new { x.tag_id, x.trailer_id });
+                    table.ForeignKey(
+                        name: "fk_trailer_tag_tags_tag_id",
+                        column: x => x.tag_id,
+                        principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_trailer_tag_trailers_trailer_id",
+                        column: x => x.trailer_id,
+                        principalTable: "trailers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "vehicles",
                 columns: table => new
                 {
@@ -719,6 +743,30 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         column: x => x.contact_id,
                         principalTable: "contacts",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vehicle_tag",
+                columns: table => new
+                {
+                    vehicle_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    tag_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_vehicle_tag", x => new { x.tag_id, x.vehicle_id });
+                    table.ForeignKey(
+                        name: "fk_vehicle_tag_tags_tag_id",
+                        column: x => x.tag_id,
+                        principalTable: "tags",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_vehicle_tag_vehicles_vehicle_id",
+                        column: x => x.vehicle_id,
+                        principalTable: "vehicles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1280,6 +1328,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
+                name: "ix_trailer_tag_trailer_id",
+                table: "trailer_tag",
+                column: "trailer_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_trailers_category_id",
                 table: "trailers",
                 column: "category_id");
@@ -1336,6 +1389,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "ix_user_permissions_tenant_id",
                 table: "user_permissions",
                 column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehicle_tag_vehicle_id",
+                table: "vehicle_tag",
+                column: "vehicle_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_vehicles_category_id",
@@ -1438,10 +1496,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "tenant_settings");
 
             migrationBuilder.DropTable(
+                name: "trailer_tag");
+
+            migrationBuilder.DropTable(
                 name: "user_permissions");
 
             migrationBuilder.DropTable(
-                name: "vehicles");
+                name: "vehicle_tag");
 
             migrationBuilder.DropTable(
                 name: "leads");
@@ -1453,16 +1514,13 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "routes");
 
             migrationBuilder.DropTable(
-                name: "tags");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "devices");
+                name: "tags");
 
             migrationBuilder.DropTable(
-                name: "trailers");
+                name: "vehicles");
 
             migrationBuilder.DropTable(
                 name: "location_categories");
@@ -1474,10 +1532,16 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "asset_categories");
+                name: "devices");
+
+            migrationBuilder.DropTable(
+                name: "trailers");
 
             migrationBuilder.DropTable(
                 name: "tenants");
+
+            migrationBuilder.DropTable(
+                name: "asset_categories");
         }
     }
 }

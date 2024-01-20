@@ -12,14 +12,14 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Sat Jan 20 2024
 
 using Axolotl.EFCore.Interfaces;
 
 namespace Trace.Application.Core.Interfaces;
 
-public interface ITaggedEntity<TKey> : IHasKey<TKey>, IAggregateRoot where TKey : notnull {
+public interface ITaggedEntity : IAggregateRoot {
     public ICollection<Tags.Tag> Tags { get; set; }
 }

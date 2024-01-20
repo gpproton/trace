@@ -20,13 +20,15 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
+using Trace.Application.Core.Interfaces;
+using Trace.Application.Tags;
 
 namespace Trace.Application.Trailer;
 
 [Index(nameof(UniqueId), IsUnique = true)]
 [Index(nameof(Name), nameof(TenantId), IsUnique = true)]
 [Index(nameof(FleetIdentifier), nameof(TenantId), IsUnique = true)]
-public sealed class Trailer : AssetEntity {
+public sealed class Trailer : AssetEntity, ITaggedEntity {
     public Vehicle.Vehicle? Vehicle { get; set; }
     [MaxLength(256)]
     public string? Name { get; set; }
@@ -40,4 +42,5 @@ public sealed class Trailer : AssetEntity {
     [MaxLength(256)]
     public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
+    public ICollection<Tag> Tags { get; set; } = [];
 }

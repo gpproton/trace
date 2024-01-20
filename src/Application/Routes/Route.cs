@@ -26,7 +26,7 @@ namespace Trace.Application.Routes;
 
 [Index(nameof(Description))]
 [Index(nameof(Name), nameof(TenantId), IsUnique = true)]
-public class Route : TypedEntity<Guid>, ITaggedEntity<Guid>, ITenantEntity {
+public class Route : TypedEntity<Guid>, ITaggedEntity, ITenantEntity {
     public Guid? TenantId { get; set; }
     public Guid? ApprovedBy { get; set; }
     public DateTimeOffset ApprovedAt { get; set; }

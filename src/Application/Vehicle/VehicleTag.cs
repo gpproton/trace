@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 11th Jan 2024
+// Created At: Saturday, 20th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 18 2024
+// Modified At: Sat Jan 20 2024
 
-using Axolotl.EFCore.Base;
-using Trace.Application.Core.Interfaces;
+namespace Trace.Application.Vehicle;
 
-namespace Trace.Application.Abstractions;
-
-public abstract class TaggedEntity<TKey> : AuditableEntity<TKey>, ITaggedEntity where TKey : notnull {
-    public ICollection<Tags.Tag> Tags { get; set; } = [];
+public class VehicleTag {
+    public Guid VehicleId { get; set; }
+    public Guid TagId { get; set; }
 }

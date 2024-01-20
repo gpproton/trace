@@ -14,7 +14,7 @@ using Trace.Application;
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240119141412_Initial")]
+    [Migration("20240119235500_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -2173,6 +2173,25 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("trailers", (string)null);
                 });
 
+            modelBuilder.Entity("Trace.Application.Trailer.TrailerTag", b =>
+                {
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tag_id");
+
+                    b.Property<Guid>("TrailerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("trailer_id");
+
+                    b.HasKey("TagId", "TrailerId")
+                        .HasName("pk_trailer_tag");
+
+                    b.HasIndex("TrailerId")
+                        .HasDatabaseName("ix_trailer_tag_trailer_id");
+
+                    b.ToTable("trailer_tag", (string)null);
+                });
+
             modelBuilder.Entity("Trace.Application.Vehicle.Vehicle", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2310,6 +2329,25 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasDatabaseName("ix_vehicles_registration_no_tenant_id");
 
                     b.ToTable("vehicles", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Vehicle.VehicleTag", b =>
+                {
+                    b.Property<Guid>("TagId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tag_id");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicle_id");
+
+                    b.HasKey("TagId", "VehicleId")
+                        .HasName("pk_vehicle_tag");
+
+                    b.HasIndex("VehicleId")
+                        .HasDatabaseName("ix_vehicle_tag_vehicle_id");
+
+                    b.ToTable("vehicle_tag", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -2604,6 +2642,23 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Trace.Application.Trailer.TrailerTag", b =>
+                {
+                    b.HasOne("Trace.Application.Tags.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trailer_tag_tags_tag_id");
+
+                    b.HasOne("Trace.Application.Trailer.Trailer", null)
+                        .WithMany()
+                        .HasForeignKey("TrailerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trailer_tag_trailers_trailer_id");
+                });
+
             modelBuilder.Entity("Trace.Application.Vehicle.Vehicle", b =>
                 {
                     b.HasOne("Trace.Application.Asset.AssetCategory", "Category")
@@ -2626,6 +2681,23 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Device");
 
                     b.Navigation("Trailer");
+                });
+
+            modelBuilder.Entity("Trace.Application.Vehicle.VehicleTag", b =>
+                {
+                    b.HasOne("Trace.Application.Tags.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicle_tag_tags_tag_id");
+
+                    b.HasOne("Trace.Application.Vehicle.Vehicle", null)
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicle_tag_vehicles_vehicle_id");
                 });
 
             modelBuilder.Entity("Trace.Application.Account.UserAccount", b =>
