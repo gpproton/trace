@@ -16,8 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Asset;
 
-public class AssetRepository(ServiceContext context) : GenericRepository<Asset, Guid>(context), IAssetRepository {
+public class AssetRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Asset, Guid>(factory), IAssetRepository {
 
 }

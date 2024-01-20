@@ -16,8 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Tags;
 
-public class TagRepository(ServiceContext context) : GenericRepository<Tag, Guid>(context), ITagRepository {
+public class TagRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Tag, Guid>(factory), ITagRepository {
 
 }

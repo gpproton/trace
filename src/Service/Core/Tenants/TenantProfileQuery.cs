@@ -16,7 +16,6 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using HotChocolate;
 using HotChocolate.Types;
 using Trace.Application.Abstractions;
 using Trace.Application.Tenant;
@@ -24,6 +23,6 @@ using Trace.Application.Tenant;
 namespace Trace.Service.Core.Tenants;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class TenantProfileQuery() {
-    public async Task<Tenant?> GetTenantProfile([Service(ServiceKind.Synchronized)] ITenantRepository tenantRepository, Guid id) => await tenantRepository.GetByIdAsync(id);
+public class TenantProfileQuery(ITenantRepository tenantRepository) {
+    public async Task<Tenant?> GetTenantProfile(Guid id) => await tenantRepository.GetByIdAsync(id);
 }

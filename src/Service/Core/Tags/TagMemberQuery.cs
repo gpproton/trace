@@ -17,7 +17,6 @@
 // Modified At: Sat Jan 13 2024
 
 using HotChocolate;
-using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application.Abstractions;
 using Trace.Application.Tags;
@@ -25,7 +24,7 @@ using Trace.Application.Tags;
 namespace Trace.Service.Core.Tags;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class TagMemberQuery {
+public class TagMemberQuery(ITagMemberRepository tagMemberRepository) {
     [GraphQLDescription("Query Tag Members")]
-    public async Task<TagMembers?> GetTagMember([Service(ServiceKind.Synchronized)] ITagMemberRepository tagMemberRepository, Guid id) => await tagMemberRepository.GetByIdAsync(id);
+    public async Task<TagMembers?> GetTagMember(Guid id) => await tagMemberRepository.GetByIdAsync(id);
 }

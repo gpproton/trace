@@ -25,9 +25,9 @@ using Trace.Application.Device.Repositories;
 namespace Trace.Service.Integration.Devices;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class DeviceCommandQuery {
+public class DeviceCommandQuery(IDeviceCommandRepository deviceCommandRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query IOT devices  commands")]
-    public IQueryable<DeviceCommand> GetDeviceCommands([Service(ServiceKind.Synchronized)] IDeviceCommandRepository deviceCommandRepository) => deviceCommandRepository.GetAll();
+    public IQueryable<DeviceCommand> GetDeviceCommands() => deviceCommandRepository.GetAll();
 }

@@ -16,8 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Sun Jan 14 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Engagement.Repositories;
 
-public class ContactRepository(ServiceContext context) : GenericRepository<Contact, Guid>(context), IContactRepository {
+public class ContactRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Contact, Guid>(factory), IContactRepository {
 
 }

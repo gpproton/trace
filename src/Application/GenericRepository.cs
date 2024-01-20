@@ -18,14 +18,10 @@
 
 using Axolotl.EFCore.Interfaces;
 using Axolotl.EFCore.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Trace.Application;
 
-public class GenericRepository<TEntity, TKey>(ServiceContext context)
-    : GenericBaseRepository<TEntity, ServiceContext, TKey>(context), IAsyncDisposable
+public class GenericRepository<TEntity, TKey>(IDbContextFactory<ServiceContext> factory) : GenericBaseRepository<TEntity, ServiceContext, TKey>(factory.CreateDbContext())
     where TEntity : class, IAggregateRoot, IHasKey<TKey>
-    where TKey : notnull {
-    private readonly ServiceContext _context = context;
-
-    public async ValueTask DisposeAsync() => await _context.DisposeAsync();
-}
+    where TKey : notnull { }

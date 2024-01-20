@@ -24,9 +24,9 @@ using Trace.Application.Trailer;
 namespace Trace.Service.Core.Trailers;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class TrailerQuery {
+public class TrailerQuery(ITrailerRepository trailerRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Trailers")]
-    public IQueryable<Trailer> GetTrailers([Service(ServiceKind.Synchronized)] ITrailerRepository trailerRepository) => trailerRepository.GetAll();
+    public IQueryable<Trailer> GetTrailers() => trailerRepository.GetAll();
 }

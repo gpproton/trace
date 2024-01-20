@@ -16,8 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 18 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Engagement.Repositories;
 
-public class AddressRepository(ServiceContext context) : GenericRepository<Address, Guid>(context), IAddressRepository {
+public class AddressRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Address, Guid>(factory), IAddressRepository {
 
 }

@@ -24,9 +24,9 @@ using Trace.Application.Tags;
 namespace Trace.Service.Core.Tags;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class TagQuery {
+public class TagQuery(ITagRepository tagRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Tags")]
-    public IQueryable<Application.Tags.Tag> GetTags([Service(ServiceKind.Synchronized)] ITagRepository tagRepository) => tagRepository.GetAll();
+    public IQueryable<Application.Tags.Tag> GetTags() => tagRepository.GetAll();
 }

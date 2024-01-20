@@ -24,9 +24,9 @@ using Trace.Application.Asset;
 namespace Trace.Service.Core.Assets;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class AssetQuery {
+public class AssetQuery(IAssetRepository assetRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query assets")]
-     public IQueryable<Asset> GetAssets([Service(ServiceKind.Synchronized)] IAssetRepository assetRepository) => assetRepository.GetAll();
+    public IQueryable<Asset> GetAssets() => assetRepository.GetAll();
 }

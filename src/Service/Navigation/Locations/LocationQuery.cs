@@ -24,9 +24,9 @@ using Trace.Application.Location;
 namespace Trace.Service.Navigation.Locations;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class LocationQuery {
+public class LocationQuery(ILocationRepository locationRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Locations")]
-    public IQueryable<Application.Location.Location> GetLocations([Service(ServiceKind.Synchronized)] ILocationRepository locationRepository) => locationRepository.GetAll();
-} 
+    public IQueryable<Application.Location.Location> GetLocations() => locationRepository.GetAll();
+}

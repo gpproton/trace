@@ -27,7 +27,7 @@ namespace Trace.Application;
 
 public static class ApplicationTypes {
     public static IRequestExecutorBuilder AddContexConfig(this IRequestExecutorBuilder services) {
-        services.RegisterDbContext<ServiceContext>(DbContextKind.Synchronized)
+        services.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
         .AddQueryType<QueryRoot>()
         .AddMutationType<MutationRoot>()
         .AddSubscriptionType<SubscriptionRoot>()

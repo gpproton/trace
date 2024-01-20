@@ -34,14 +34,17 @@ public static class EfCoreExtension {
             configureSettings.HealthChecks = true;
             configureSettings.ConnectionString = connectionString;
         },
-        options => {
-            options.UseSnakeCaseNamingConvention();
-            options.UseNpgsql(connectionString, b => b
-            .MigrationsAssembly(typeof(ServiceContextFactory).Assembly.FullName)
-            .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
-            .UseNetTopologySuite());
-        });
+        DbOptions);
+        builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
 
         return builder;
+
+        void DbOptions(DbContextOptionsBuilder options) {
+            options.UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString, b => b
+                .MigrationsAssembly(typeof(ServiceContextFactory).Assembly.FullName)
+                .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
+                .UseNetTopologySuite());
+        }
     }
 }

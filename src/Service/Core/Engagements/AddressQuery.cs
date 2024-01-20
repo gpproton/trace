@@ -27,8 +27,8 @@ namespace Trace.Service.Core.Engagements;
 
 [ExtendObjectType(typeof(QueryRoot))]
 [GraphQLDescription("Query address for a contact")]
-public class AddressQuery {
-    public async Task<List<Address>> GetContactAddresses([Service(ServiceKind.Synchronized)] IContactRepository repository, Guid id) {
+public class AddressQuery(IContactRepository repository) {
+    public async Task<List<Address>> GetContactAddresses(Guid id) {
         var query = await repository.GetQueryable().Include(b => b.Addresses).SingleOrDefaultAsync(x => x.Id == id);
 
         return [.. query?.Addresses];

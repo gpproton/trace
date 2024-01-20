@@ -16,7 +16,9 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Tenant;
 
-public class TenantRepository(ServiceContext context)
-    : GenericRepository<Tenant, Guid>(context), ITenantRepository;
+public class TenantRepository(IDbContextFactory<ServiceContext> factory)
+    : GenericRepository<Tenant, Guid>(factory), ITenantRepository;

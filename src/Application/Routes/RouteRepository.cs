@@ -16,8 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Trace.Application.Routes;
 
-public class RouteRepository(ServiceContext context) : GenericRepository<Route, Guid>(context), IRouteRepository {
+public class RouteRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Route, Guid>(factory), IRouteRepository {
 
 }

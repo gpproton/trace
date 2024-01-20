@@ -24,9 +24,9 @@ using Trace.Application.Vehicle;
 namespace Trace.Service.Core.Vehicles;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class VehicleQuery {
+public class VehicleQuery(IVehicleRepository vehicleRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Vehicles")]
-    public IQueryable<Vehicle> GetVehicles([Service(ServiceKind.Synchronized)] IVehicleRepository vehicleRepository) => vehicleRepository.GetAll();
+    public IQueryable<Vehicle> GetVehicles() => vehicleRepository.GetAll();
 }
