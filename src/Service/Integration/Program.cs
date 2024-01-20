@@ -18,34 +18,36 @@
 
 using Trace.Common.Queueing.Extensions;
 using Trace.Infrastructure.Traccar;
-using Trace.Service.Integration;
-using Trace.Service.Integration.Features.Protocol;
-using Trace.Service.Integration.Features.Protocol.Services;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
 using Trace.Application;
-using Trace.Application.Core;
-using Trace.Infrastructure.Cassandra;
-using Trace.Service.Integration.Features.Devices;
+using Trace.Infrastructure;
+using Trace.Application.Abstractions;
+using Trace.Service.Integration.Devices;
+using Trace.Service.Integration.Protocol;
+using Trace.Service.Integration.Protocol.Services;
+using HotChocolate;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
-builder.RegisterPersistence(assembly);
+builder.RegisterInfrastructure(assembly);
 builder.Services.AddQueueing();
-builder.Services.RegisterCassandraInfrastructure();
-builder.Services.RegisterDefaultServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.RegisterHangfire(Nodes.Integration);
 builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
+builder.Services.RegisterDefaultServices();
 builder.Services.RegisterApplicationServices(assembly);
-
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
-    .AddQueryType<Query>()
+    .AddRequestOptions(isDevelopment)
+    .AddContexConfig()
+    .AddSpatialTypes()
+    .AddSpatialFiltering()
+    .AddSpatialProjections()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
@@ -56,7 +58,6 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.RegisterDefaults();
-app.UseHangfireDashboard(Nodes.Integration);
 app.RegisterGraphQl();
 app.MapGrpcService<ProtocolService>();
 

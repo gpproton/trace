@@ -18,7 +18,7 @@
 
 namespace Trace.Application.Core.Enums;
 
-public enum CrudAction {
+public enum CrudEnum {
     Create,
     Read,
     Update,

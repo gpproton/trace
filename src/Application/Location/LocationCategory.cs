@@ -16,10 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Location;
 
-public class LocationCategory : TypedEntity<Guid> {
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
+public class LocationCategory : TypedEntity<Guid>, ITenantEntity {
     public string Icon { get; set; } = string.Empty;
+    public Guid? TenantId { get; set; }
 }

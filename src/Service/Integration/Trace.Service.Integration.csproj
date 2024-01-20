@@ -8,6 +8,7 @@
   <Import Project="..\Shared.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\PipeHandlers\Trace.Common.PipeHandlers.csproj" />
     <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
     <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
@@ -25,6 +26,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handler\" />
   </ItemGroup>
 
 </Project>

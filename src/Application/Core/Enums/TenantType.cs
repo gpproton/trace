@@ -19,7 +19,7 @@
 namespace Trace.Application.Core.Enums;
 
 public enum TenantType {
-    Internal,
-    Organization,
-    Individual,
+    Internal = 0,
+    Organization = 1,
+    Individual = 2,
 }

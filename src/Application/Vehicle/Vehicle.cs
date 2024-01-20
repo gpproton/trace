@@ -12,25 +12,39 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
-using Trace.Application.Asset;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
+using Trace.Application.Core.Interfaces;
+using Trace.Application.Tags;
 
 namespace Trace.Application.Vehicle;
 
-public sealed class Vehicle : AssetEntity {
-    public string Name { get; set; } = string.Empty;
-    public VehicleType Type { get; set; }
-    public string FleetIdentifier { get; set; } = string.Empty;
-    public string? RegistrationNo { get; set; }
+[Index(nameof(TrailerId), IsUnique = true)]
+[Index(nameof(DeviceId), IsUnique = true)]
+[Index(nameof(RegistrationNo), nameof(TenantId), IsUnique = true)]
+[Index(nameof(FleetIdentifier), nameof(TenantId), IsUnique = true)]
+public sealed class Vehicle : AssetEntity, ITaggedEntity {
+    public VehicleVariant Type { get; set; } = VehicleVariant.Truck;
+    [MaxLength(64)]
+    public string FleetIdentifier { get; set; } = null!;
+    [MaxLength(64)]
+    public string RegistrationNo { get; set; } = null!;
     public long Odometer { get; set; }
     public FuelType FuelType { get; set; }
     public int FuelCapacity { get; set; }
     public int HorsePower { get; set; }
+    [MaxLength(256)]
     public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
+    public Trailer.Trailer? Trailer { get; set; }
     public Guid? TrailerId { get; set; }
+    public Device.Device? Device { get; set; }
+    public Guid? DeviceId { get; set; }
+    public ICollection<Tag> Tags { get; set; } = [];
 }

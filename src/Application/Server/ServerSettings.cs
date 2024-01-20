@@ -16,23 +16,17 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
-using Trace.Application.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using Axolotl.EFCore.Base;
+using Trace.Application.Core;
 
 namespace Trace.Application.Server;
 
-public class ServerSettings : ISettingEntity {
-    public string? Token { get; set; }
-    public string? Language { get; set; }
-    public string? Timezone { get; set; }
-    public bool Hour24Time { get; set; }
-    public string? UnitDistance { get; set; }
-    public string? UnitVolume { get; set; }
-    public string? UnitWeight { get; set; }
-    public string? UnitTemperature { get; set; }
-    public string? UnitSpeed { get; set; }
-    public string? UnitPower { get; set; }
-    public string? UnitPressure { get; set; }
-    public string? UnitForce { get; set; }
-    public string? UnitArea { get; set; }
+public class ServerSettings : BaseEntity<Guid> {
+    [MaxLength(50)]
+    public string? Name { get; set; }
+    public string? ApiKeyGoogle { get; set; }
+    public string? ApiKeyMicrosoft { get; set; }
+    public required ProfileOption Setting { get; set; }
+    public required MapOption Map { get; set; }
 }

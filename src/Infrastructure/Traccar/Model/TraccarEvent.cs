@@ -26,7 +26,7 @@ public class TraccarEvent {
     public long Id { get; set; }
 
     [JsonPropertyName("attributes")]
-    public JsonObject Attributes { get; set; } = default!;
+    public JsonObject? Attributes { get; set; }
 
     [JsonPropertyName("deviceId")]
     public long DeviceId { get; set; }

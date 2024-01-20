@@ -26,7 +26,7 @@ public sealed class TraccarEventObject : IQueueMessage {
     public required TraccarEvent Event { get; set; }
 
     [JsonPropertyName("device")]
-    public TraccarDevice Device { get; set; } = default!;
+    public TraccarDevice? Device { get; set; }
 
     [JsonPropertyName("position")]
     public TraccarPosition? Position { get; set; }

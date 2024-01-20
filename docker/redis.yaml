@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  cache:
+
+services:
+  cache:
+    image: docker.io/redis/redis-stack:7.2.0-v6
+    container_name: cache
+    hostname: cache
+    restart: unless-stopped
+    volumes:
+      - cache:/data
+    ports:
+      - 6379:6379
+      - 8011:8001
+    networks:
+      default:
+        ipv4_address: 192.168.55.20

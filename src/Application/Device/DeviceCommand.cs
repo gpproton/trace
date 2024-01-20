@@ -16,12 +16,15 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;
 
-public class DeviceCommand : TypedEntity<Guid> {
+[Index(nameof(Name))]
+public class DeviceCommand : TypedEntity<Guid>, ITenantEntity {
+    public Guid? TenantId { get; set; }
     public int Delay { get; set; }
-
     public string Messages { get; set; } = string.Empty;
 }

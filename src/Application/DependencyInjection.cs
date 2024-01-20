@@ -12,24 +12,32 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Sunday, 31st Dec 2023
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Sun Jan 07 2024
+// Modified At: Fri Jan 12 2024
 
 using System.Reflection;
+using Axolotl.EFCore.Repository;
 using FluentValidation;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Trace.Application.Device.Consumers;
+using Scrutor;
 
 namespace Trace.Application;
 
 public static class DependencyInjection {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, Assembly assembly) {
-        services.AddMediator(x => {
-            x.AddConsumersFromNamespaceContaining<CreateDevicePositionConsumer>();
-        });
+        services.AddMediator();
         services.AddValidatorsFromAssembly(assembly);
+        services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
+        services.Scan(selector =>
+            selector
+            .FromCallingAssembly()
+            .AddClasses(filter => filter.Where(x => x.Name.EndsWith("Repository")), publicOnly: false)
+            .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+            .AsMatchingInterface()
+            .WithScopedLifetime()
+        );
 
         return services;
     }

@@ -12,20 +12,37 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Thu Jan 18 2024
 
-using Trace.Application.Asset;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
 
 namespace Trace.Application.Device;
 
+[Index(nameof(UniqueId), IsUnique = true)]
+[Index(nameof(PositionId))]
+[Index(nameof(LastUpdate))]
+[Index(nameof(Status))]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Device)])]
 public sealed class Device : AssetEntity {
+    [Indexed]
+    [MaxLength(64)]
     public required string UniqueId { get; set; }
+    [Indexed]
     public Guid? PositionId { get; set; }
+    [Indexed]
     public DateTimeOffset? LastUpdate { get; set; }
-    public string Phone { get; set; } = string.Empty;
-    public DeviceStatus Status { get; set; }
+    public DateTimeOffset? LastMoved { get; set; }
+    [Indexed]
+    [MaxLength(15)]
+    public string? Phone { get; set; }
+    [Indexed]
+    public DeviceStatus Status { get; set; } = DeviceStatus.Offline;
     public int SpeedLimit { get; set; }
+    public DateTimeOffset? Expiry { get; set; }
 }

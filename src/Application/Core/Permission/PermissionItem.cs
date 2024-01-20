@@ -19,7 +19,7 @@
 namespace Trace.Application.Core.Permission;
 
 public class PermissionItem {
-    public PermissionItem(string module, string featureId, RoleLevel role, bool[] actions) {
+    public PermissionItem(string module, string featureId, RoleLevel role, CrudAction actions = default!) {
         this.Module = module;
         this.FeatureId = featureId;
         this.Role = role;
@@ -29,6 +29,5 @@ public class PermissionItem {
     public string Module { get; init; }
     public string FeatureId { get; init; }
     public RoleLevel Role { get; init; }
-    // Read, Create, Update, Delete
-    public bool[] Actions { get; init; }
+    public CrudAction Actions { get; init; }
 }

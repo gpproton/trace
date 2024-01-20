@@ -16,13 +16,26 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 
 namespace Trace.Application.Tenant;
 
+[Index(nameof(Domain))]
+[Index(nameof(Expiry))]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(TenantDomains)])]
 public class TenantDomains : TenantEntity<Guid> {
-    public string Domain { get; set; } = string.Empty;
+    public Tenant? Tenant { get; set; }
+    [Indexed]
+    [MaxLength(256)]
+    public string Domain { get; set; } = null!;
+    [Indexed]
+    [MaxLength(256)]
     public string? Registrar { get; set; }
+    [Indexed]
     public bool Active { get; set; }
-    public DateTimeOffset Expiry { get; set; }
+    [Indexed]
+    public DateTimeOffset? Expiry { get; set; }
 }

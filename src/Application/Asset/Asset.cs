@@ -16,10 +16,16 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
 
 namespace Trace.Application.Asset;
 
+[Index(nameof(SerialNumber), nameof(TenantId), IsUnique = true)]
 public class Asset : AssetEntity {
-    public string Name { get; set; } = String.Empty;
+    [MaxLength(256)]
+    public string Name { get; set; } = null!;
+    [MaxLength(64)]
+    public string SerialNumber { get; set; } = null!;
 }

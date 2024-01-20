@@ -23,8 +23,8 @@ namespace Trace.Infrastructure.Traccar.Model;
 
 public class TraccarPositionObject : IQueueMessage {
     [JsonPropertyName("device")]
-    public TraccarDevice Device { get; set; } = default!;
+    public TraccarDevice Device { get; set; } = null!;
 
     [JsonPropertyName("position")]
-    public TraccarPosition Position { get; set; } = default!;
+    public TraccarPosition Position { get; set; } = null!;
 }

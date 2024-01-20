@@ -16,16 +16,31 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
-using Trace.Application.Asset;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
+using Trace.Application.Core.Interfaces;
+using Trace.Application.Tags;
 
 namespace Trace.Application.Trailer;
 
-public sealed class Trailer : AssetEntity {
+[Index(nameof(UniqueId), IsUnique = true)]
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
+[Index(nameof(FleetIdentifier), nameof(TenantId), IsUnique = true)]
+public sealed class Trailer : AssetEntity, ITaggedEntity {
+    public Vehicle.Vehicle? Vehicle { get; set; }
+    [MaxLength(256)]
+    public string? Name { get; set; }
     public TrailerType Type { get; set; }
+    [MaxLength(256)]
     public string? FleetIdentifier { get; set; }
+    [MaxLength(64)]
+    public string? UniqueId { get; set; }
     public long Odometer { get; set; }
     public int HorsePower { get; set; }
-    public string Model { get; set; } = null!;
+    [MaxLength(256)]
+    public string? Model { get; set; }
     public decimal WeightCapacity { get; set; }
+    public ICollection<Tag> Tags { get; set; } = [];
 }

@@ -22,37 +22,36 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Trace.Application.Device;
-using Trace.Infrastructure.Cassandra.Interfaces;
+using Trace.Common.Warehouse.Configs;
+using Trace.Common.Warehouse.Interfaces;
 
 namespace Trace.Infrastructure.Cassandra;
 
 public class CassandraHostedService(ILogger<CassandraHostedService> logger, ICluster cluster, IServiceScopeFactory factory, CassandraOptions options) : IHostedService {
     public async Task StartAsync(CancellationToken cancellationToken) {
         var scope = factory.CreateScope().ServiceProvider;
-        var bootSession = cluster.Connect();
+        var bootSession = await cluster.ConnectAsync();
 
         logger.LogInformation("Creating cassandra default keyspace");
         bootSession.CreateKeyspaceIfNotExists(options.Keyspace);
 
         try {
             var cassandraProvider = scope.GetRequiredService<ICassandraProvider>();
-            using (var session = cassandraProvider.GetSession()) {
-                await new Table<DevicePosition>(session).CreateIfNotExistsAsync();
-            };
+            using var session = cassandraProvider.GetSession();
+            await new Table<DevicePosition>(session).CreateIfNotExistsAsync();
         }
         catch (Exception) {
-            logger.LogInformation("Tables creation failed");
+            logger.LogInformation("Creation of some table failed");
             throw;
         }
 
-        var keyspaces = new List<string>(cluster.Metadata.GetKeyspaces());
-        keyspaces.ForEach((value) => {
-            if (value == options.Keyspace) {
-                logger.LogInformation("KeySpace: " + value);
-                new List<string>(cluster.Metadata.GetKeyspace(value).GetTablesNames()).ForEach((tableName) => {
-                    Console.WriteLine("Table: " + tableName);
-                });
-            }
+        var keyspace = new List<string>(cluster.Metadata.GetKeyspaces());
+        keyspace.ForEach((value) => {
+            if (value != options.Keyspace) return;
+            logger.LogInformation("KeySpace: {0}", value);
+            new List<string>(cluster.Metadata.GetKeyspace(value).GetTablesNames()).ForEach(tableName => {
+                Console.WriteLine($"Table: {tableName}");
+            });
         });
     }
 

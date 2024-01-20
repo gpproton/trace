@@ -12,27 +12,46 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Wednesday, 3rd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Fri Jan 12 2024
 
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
-using Trace.Application.Core;
+using Redis.OM.Modeling;
+using Trace.Application.Abstractions;
 using Trace.Application.Core.Enums;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Location;
 
-public class Location : TaggedEntity<Guid> {
-    public string? OsmId { get; set; }
+[Index(nameof(CategoryId))]
+[Index(nameof(Address))]
+[Index(nameof(Name), nameof(TenantId), IsUnique = true)]
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Location)])]
+public class Location : TaggedEntity<Guid>, ITenantEntity {
+    [Indexed]
+    public Guid? TenantId { get; set; }
+    [Indexed]
     public bool Default { get; set; }
-    public bool Custom { get; set; }
+    [Indexed]
+    [MaxLength(256)]
     public required string Name { get; set; }
+    [Indexed]
+    [MaxLength(512)]
     public string? Address { get; set; }
     public DateTimeOffset? ApprovedAt { get; set; }
-    public string? ApprovedBy { get; set; }
+    public Guid? ApprovedBy { get; set; }
+    [Indexed]
     public LocationType? Type { get; set; }
+    [Indexed(CascadeDepth = 1)]
     public LocationCategory? Category { get; set; }
+    [Indexed]
     public Guid? CategoryId { get; set; }
+    [Indexed(CascadeDepth = 1)]
     public Geometry Geometry { get; set; } = null!;
+    [Indexed]
+    [MaxLength(256)]
     public string? Description { get; set; }
 }

@@ -12,17 +12,42 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
 
+using System.Reflection;
+using MassTransit;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Trace.Infrastructure.EFCore;
+using Trace.Infrastructure.CacheManager;
+using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure.Providers;
 
 namespace Trace.Infrastructure;
 
 public static class DependencyInjection {
-    public static IServiceCollection RegisterInfrastructure(this IServiceCollection services) {
+    public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
+        builder.AddRabbitMQ("messaging");
+        builder.RegisterCassandraInfrastructure();
+        builder.RegisterEfCoreInfrastructure();
+        builder.Services.RegisterCacheManager();
+        builder.Services.AddMassTransit(busConfigurator => {
+            busConfigurator.AddConsumers(consumerSAsembly);
+            busConfigurator.UsingRabbitMq((context, cfg) => {
+                var config = context.GetRequiredService<IConfiguration>();
+                cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {
+                    h.Heartbeat(TimeSpan.FromSeconds(3));
+                });
+                cfg.ConfigureEndpoints(context);
+            });
+        });
 
-        return services;
+        builder.Services.AddScoped<ITenantProvider, TenantProvider>();
+
+        return builder;
     }
 }

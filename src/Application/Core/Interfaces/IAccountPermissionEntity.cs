@@ -16,12 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Identity;
+using Trace.Application.Account;
+using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Core.Interfaces;
 
 public interface IAccountPermissionEntity {
-    public AccountRoleEntity? Role { get; set; }
-    public string Feature { get; set; }
-    public bool[] Actions { get; set; }
+    public UserRole? Role { get; set; }
+    public string? Module { get; set; }
+    public string? Feature { get; set; }
+    public CrudAction Actions { get; set; }
 }

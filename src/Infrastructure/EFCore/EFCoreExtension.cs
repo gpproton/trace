@@ -12,17 +12,39 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Tuesday, 2nd Jan 2024
+// Created At: Thursday, 11th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Jan 02 2024
+// Modified At: Fri Jan 12 2024
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Trace.Application;
 
 namespace Trace.Infrastructure.EFCore;
 
-public static class EFCoreExtension {
-    public static IServiceCollection RegisterEFCoreInfrastructure(this IServiceCollection services) {
+public static class EfCoreExtension {
+    public static WebApplicationBuilder RegisterEfCoreInfrastructure(this WebApplicationBuilder builder) {
+        var connectionString = builder.Configuration.GetConnectionString("db");
 
-        return services;
+        builder.AddNpgsqlDbContext<ServiceContext>("db",
+        configureSettings => {
+            configureSettings.HealthChecks = true;
+            configureSettings.ConnectionString = connectionString;
+        },
+        DbOptions);
+        builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
+
+        return builder;
+
+        void DbOptions(DbContextOptionsBuilder options) {
+            options.UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString, b => b
+                .MigrationsAssembly(typeof(ServiceContextFactory).Assembly.FullName)
+                .EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorCodesToAdd: null)
+                .UseNetTopologySuite());
+        }
     }
 }

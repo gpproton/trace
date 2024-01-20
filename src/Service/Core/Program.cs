@@ -16,28 +16,39 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Service.Core;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
+using Trace.Infrastructure;
+using Trace.Application.Abstractions;
+using Trace.Application;
+using Trace.Infrastructure.EFCore;
 using Trace.Infrastructure.Cassandra;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
-builder.RegisterPersistence(assembly);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterCassandraInfrastructure();
+builder.Services.RegisterApplicationServices(assembly);
 builder.Services.RegisterHangfire(Nodes.Core);
+builder.Services.AddHostedService<EfMigrationWorker>();
+builder.Services.AddHostedService<CassandraHostedService>();
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)
-    .AddQueryType<Query>()
+    .AddRequestOptions(isDevelopment)
+    .AddContexConfig()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.RegisterDefaults();
 app.UseHangfireDashboard(Nodes.Core);

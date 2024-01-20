@@ -16,13 +16,14 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
+using Trace.Application.Account;
 using Trace.Application.Core.Permission;
-using Trace.Application.Identity;
 
 namespace Trace.Application.Core.Interfaces;
 
 public interface IAccountEntity {
-    public Contact.Contact Identity { get; set; }
+    public Engagement.Contact Contact { get; set; }
     public RoleLevel DefaultRole { get; set; }
-    public AccountRoleEntity? Role { get; set; }
+    public Guid? RoleId { get; set; }
+    public UserRole? Role { get; set; }
 }

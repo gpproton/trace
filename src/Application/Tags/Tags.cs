@@ -16,10 +16,18 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application.Abstractions;
 
 namespace Trace.Application.Tags;
 
-public class Tags : TenantEntity<Guid> {
+[Index(nameof(Name))]
+public class Tag : TenantEntity<Guid> {
+    [MaxLength(256)]
+    public required string Name { get; set; }
+    [MaxLength(12)]
     public string? Color { get; set; }
+    public Tag? Parent { get; set; }
+    public ICollection<TagMembers> Members { get; set; } = [];
 }

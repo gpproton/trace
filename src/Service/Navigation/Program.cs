@@ -16,31 +16,37 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Trace.Application.Core;
-using Trace.Service.Navigation;
 using Trace.ServiceDefaults;
 using Trace.ServiceDefaults.Extensions;
-using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure;
+using Trace.Application;
+using Trace.Application.Abstractions;
+using HotChocolate;
+using NetTopologySuite.Geometries;
+using HotChocolate.Types.Spatial;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
-builder.RegisterPersistence(assembly);
-builder.Services.RegisterCassandraInfrastructure();
+builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterHangfire(Nodes.Navigation);
+builder.Services.RegisterApplicationServices(assembly);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Navigation)
-    .AddQueryType<Query>()
+    .AddRequestOptions(isDevelopment)
+    .AddContexConfig()
     .AddQueryableCursorPagingProvider()
+    .AddSpatialTypes()
+    .AddSpatialFiltering()
+    .AddSpatialProjections()
+    .BindRuntimeType<Geometry, GeoJsonInterfaceType>()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
 
 app.RegisterDefaults();
-app.UseHangfireDashboard(Nodes.Navigation);
 app.RegisterGraphQl();
 
 app.Run();

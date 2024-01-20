@@ -1,28 +1,39 @@
 ## public endpoints
+127.0.0.1 *.trace.ng
 127.0.0.1 staging.trace.ng
-127.0.0.1 storage.trace.ng
-127.0.0.1 support.trace.ng
-127.0.0.1 manage.trace.ng
-127.0.0.1 manage-iot.trace.ng
-127.0.0.1 manage-storage.trace.ng
+127.0.0.1 control.trace.ng
+127.0.0.1 control-iot.trace.ng
+
+## public 127.0.0.1 *.trace.ng
 
 ## tenant sample
-127.0.0.1 demo-one.trace.ng
-127.0.0.1 demo-one.trace.ng
-
-## internal services
-127.0.0.1 service-gateway
-127.0.0.1 service-identity
-127.0.0.1 service-core
-127.0.0.1 service-integration
-127.0.0.1 service-stream
-127.0.0.1 service-route
-127.0.0.1 manager-app
-127.0.0.1 client-app
+127.0.0.1 localhost
+127.0.0.1 demo.trace.ng
 
 ## service dependencies
 127.0.0.1 storage-server
-127.0.0.1 scylla-server
 127.0.0.1 traccar-server
 127.0.0.1 routing-server
-127.0.0.1 nominatim-server
+127.0.0.1 geocoding-server
+
+## Public website & boarding
+# https://staging.trace.ng
+
+## GraphQL federation proxy
+# https://*.trace.ng/graphql
+
+## Navigation routing proxy
+# https://*.trace.ng/api/routing
+
+## Geocoding proxy
+# https://*.trace.ng/api/geocoding
+
+## Tracking data ingest api
+# https://*.trace.ng/api/protocol
+
+## Object store proxy
+# https://*.trace.ng/api/storage
+
+## Management application
+# Basic-Auth/VPN
+# https://control.trace.ng

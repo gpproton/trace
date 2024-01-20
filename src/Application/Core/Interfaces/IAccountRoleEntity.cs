@@ -17,14 +17,12 @@
 // Modified At: Thu Jan 04 2024
 
 using Axolotl.EFCore.Interfaces;
+using Trace.Application.Account;
 using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Core.Interfaces;
 
 public interface IAccountRoleEntity : IAggregateRoot {
     public RoleLevel Root { get; set; }
-    public ICollection<AccountPermissionEntity> Permissions { get; set; }
-}
-
-public class AccountPermissionEntity {
+    public ICollection<UserPermissions> Permissions { get; set; }
 }
