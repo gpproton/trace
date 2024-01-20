@@ -17,11 +17,9 @@
 // Modified At: Fri Jan 12 2024
 
 using System.Reflection;
-using Axolotl.EFCore.Repository;
 using FluentValidation;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
-using Scrutor;
 
 namespace Trace.Application;
 
@@ -29,15 +27,6 @@ public static class DependencyInjection {
     public static IServiceCollection RegisterApplicationServices(this IServiceCollection services, Assembly assembly) {
         services.AddMediator();
         services.AddValidatorsFromAssembly(assembly);
-        services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
-        services.Scan(selector =>
-            selector
-            .FromCallingAssembly()
-            .AddClasses(filter => filter.Where(x => x.Name.EndsWith("Repository")), publicOnly: false)
-            .UsingRegistrationStrategy(RegistrationStrategy.Skip)
-            .AsMatchingInterface()
-            .WithScopedLifetime()
-        );
 
         return services;
     }

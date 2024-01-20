@@ -12,14 +12,15 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Thursday, 18th Jan 2024
+// Created At: Friday, 12th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 18 2024
+// Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Tenant;
 
-namespace Trace.Application.Engagement.Repositories;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class AddressRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Address, Guid>(factory), IAddressRepository {
-
-}
+public class TenantRepository(IDbContextFactory<ServiceContext> factory)
+    : GenericRepository<Tenant, Guid>(factory), ITenantRepository;

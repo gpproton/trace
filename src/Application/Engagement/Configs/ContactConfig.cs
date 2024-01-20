@@ -18,9 +18,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Trace.Application.Engagement;
 
-namespace Trace.Application;
+namespace Trace.Application.Engagement.Configs;
 
 public class ContactConfig : IEntityTypeConfiguration<Contact> {
     public void Configure(EntityTypeBuilder<Contact> builder) {

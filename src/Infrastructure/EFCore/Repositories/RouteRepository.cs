@@ -17,9 +17,11 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Routes;
 
-namespace Trace.Application.Location;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class LocationRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Location, Guid>(factory), ILocationRepository {
+public class RouteRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Route, Guid>(factory), IRouteRepository {
 
 }

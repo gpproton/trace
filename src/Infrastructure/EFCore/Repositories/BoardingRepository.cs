@@ -16,10 +16,8 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Microsoft.EntityFrameworkCore;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-namespace Trace.Application.Asset;
-
-public class AssetRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Asset, Guid>(factory), IAssetRepository {
+public class BoardingRepository {
 
 }

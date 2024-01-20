@@ -16,11 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Axolotl.EFCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Scrutor;
 using Trace.Application;
 
 namespace Trace.Infrastructure.EFCore;
@@ -36,6 +38,15 @@ public static class EfCoreExtension {
         },
         DbOptions);
         builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
+        builder.Services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
+        builder.Services.Scan(selector =>
+            selector
+                .FromCallingAssembly()
+                .AddClasses(filter => filter.Where(x => x.Name.EndsWith("Repository")), publicOnly: false)
+                .UsingRegistrationStrategy(RegistrationStrategy.Skip)
+                .AsMatchingInterface()
+                .WithScopedLifetime()
+        );
 
         return builder;
 

@@ -17,8 +17,11 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Tags;
 
-namespace Trace.Application.Tenant;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class TenantRepository(IDbContextFactory<ServiceContext> factory)
-    : GenericRepository<Tenant, Guid>(factory), ITenantRepository;
+public class TagRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Tag, Guid>(factory), ITagRepository {
+
+}

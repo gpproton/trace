@@ -17,9 +17,11 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Account;
 
-namespace Trace.Application.Device.Repositories;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class DeviceRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Device, Guid>(factory), IDeviceRepository {
+public class AccountRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<UserAccount, Guid>(factory), IAccountRepository {
 
 }

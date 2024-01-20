@@ -12,12 +12,17 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Thursday, 18th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Thu Jan 18 2024
 
-namespace Trace.Application.Boarding;
+using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Engagement;
+using Trace.Application.Engagement.Repositories;
 
-public class BoardingRepository {
+namespace Trace.Infrastructure.EFCore.Repositories;
+
+public class AddressRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Address, Guid>(factory), IAddressRepository {
 
 }

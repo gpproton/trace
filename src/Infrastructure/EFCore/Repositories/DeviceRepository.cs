@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -16,12 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Interfaces;
-using Axolotl.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Device;
+using Trace.Application.Device.Repositories;
 
-namespace Trace.Application;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class GenericRepository<TEntity, TKey>(IDbContextFactory<ServiceContext> factory) : GenericBaseRepository<TEntity, ServiceContext, TKey>(factory.CreateDbContext())
-    where TEntity : class, IAggregateRoot, IHasKey<TKey>
-    where TKey : notnull { }
+public class DeviceRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Device, Guid>(factory), IDeviceRepository {
+
+}

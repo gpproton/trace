@@ -12,14 +12,16 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Friday, 12th Jan 2024
+// Created At: Sunday, 14th Jan 2024
 // Modified By: Godwin peter .O
-// Modified At: Fri Jan 12 2024
+// Modified At: Sun Jan 14 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Tags;
 
-namespace Trace.Application.Vehicle;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class VehicleRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Vehicle, Guid>(factory), IVehicleRepository {
+public class TagMemberRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<TagMembers, Guid>(factory), ITagMemberRepository {
 
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace License
 // you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Axolotl.EFCore.Interfaces;
+using Axolotl.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
 
-namespace Trace.Application.Routes;
+namespace Trace.Infrastructure.EFCore;
 
-public class RouteRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Route, Guid>(factory), IRouteRepository {
-
-}
+public class GenericRepository<TEntity, TKey>(IDbContextFactory<ServiceContext> factory) : GenericBaseRepository<TEntity, ServiceContext, TKey>(factory.CreateDbContext())
+    where TEntity : class, IAggregateRoot, IHasKey<TKey>
+    where TKey : notnull { }

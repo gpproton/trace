@@ -17,9 +17,12 @@
 // Modified At: Sun Jan 14 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Engagement;
+using Trace.Application.Engagement.Repositories;
 
-namespace Trace.Application.Device.Repositories;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class DeviceCommandRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<DeviceCommand, Guid>(factory), IDeviceCommandRepository {
+public class ContactRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Contact, Guid>(factory), IContactRepository {
 
 }

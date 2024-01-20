@@ -17,9 +17,11 @@
 // Modified At: Fri Jan 12 2024
 
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
+using Trace.Application.Asset;
 
-namespace Trace.Application.Account;
+namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class AccountRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<UserAccount, Guid>(factory), IAccountRepository {
+public class AssetRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Asset, Guid>(factory), IAssetRepository {
 
 }
