@@ -23,7 +23,9 @@ namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     public override int SaveChanges(bool acceptAllChangesOnSuccess) {
-        OnBeforeSaving();
+        AuditableOnBeforeSaving();
+        // TODO: Test tenant provider first
+        // TenantOnBeforeSaving();
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
@@ -31,7 +33,9 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
         bool acceptAllChangesOnSuccess,
         CancellationToken cancellationToken = default
     ) {
-        OnBeforeSaving();
+        AuditableOnBeforeSaving();
+        // TODO: Test tenant provider first
+        // TenantOnBeforeSaving();
         return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 }

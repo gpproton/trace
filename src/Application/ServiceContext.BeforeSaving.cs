@@ -20,16 +20,17 @@ using Axolotl.EFCore.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Account;
+using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
-    private void OnBeforeSaving() {
-        var entries = ChangeTracker.Entries();
+    private void AuditableOnBeforeSaving() {
+        var entries = ChangeTracker.Entries<IAuditableEntity>().ToList();
         var utcNow = DateTimeOffset.UtcNow;
 
         foreach (var entry in entries) {
-            if (entry.Entity is IAuditableEntity trackable) {
+            if (entry.Entity is { } trackable) {
                 switch (entry.State) {
                     case EntityState.Added:
                         entry.Property("UpdatedAt").IsModified = false;
@@ -43,8 +44,7 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
                         break;
                     case EntityState.Deleted:
                         entry.State = EntityState.Modified;
-                        // ReSharper disable once UnusedVariable
-                        bool all = entry.References.All(e => e.IsModified = true);
+                        bool _ = entry.References.All(e => e.IsModified = true);
                         entry.Property("CreatedAt").IsModified = false;
                         entry.Property("UpdatedAt").IsModified = false;
                         trackable.DeletedAt = utcNow;
@@ -54,6 +54,22 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
                     default:
                         break;
                 }
+            }
+        }
+    }
+
+    private void TenantOnBeforeSaving() {
+        foreach (var entry in ChangeTracker.Entries<ITenantEntity>().ToList()) {
+            switch (entry.State) {
+                case EntityState.Added:
+                case EntityState.Modified:
+                    entry.Entity.TenantId = TenantId;
+                    break;
+                case EntityState.Detached:
+                case EntityState.Unchanged:
+                case EntityState.Deleted:
+                default:
+                    break;
             }
         }
     }
