@@ -26,9 +26,9 @@ namespace Trace.Service.Core.Engagements;
 
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class ContactQuery {
+public class ContactQuery(IContactRepository contactRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Contacts")]
-    public IQueryable<Contact> GetContacts([Service(ServiceKind.Synchronized)] IContactRepository contactRepository) => contactRepository.GetAll();
+    public IQueryable<Contact> GetContacts() => contactRepository.GetAll();
 }
