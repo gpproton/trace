@@ -47,7 +47,7 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
         // RegisterTenantFilter(modelBuilder);
     }
 
-    public DbSet<Application.Tenant.Tenant> Tenants { get; set; } = default!;
+    public DbSet<Tenant> Tenants { get; set; } = default!;
     public DbSet<TenantSetting> TenantSettings { get; set; } = default!;
     public DbSet<TenantDomains> TenantDomains { get; set; } = default!;
     public DbSet<Tag> Tags { get; set; } = default!;
@@ -63,10 +63,10 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
     public DbSet<Application.Vehicle.Vehicle> Vehicles { get; set; } = default!;
     public DbSet<Application.Trailer.Trailer> Trailers { get; set; } = default!;
     public DbSet<AssetCategory> AssetCategories { get; set; } = default!;
-    public DbSet<Application.Asset.Asset> Assets { get; set; } = default!;
-    public DbSet<Application.Device.Device> Devices { get; set; } = default!;
+    public DbSet<Asset> Assets { get; set; } = default!;
+    public DbSet<Device> Devices { get; set; } = default!;
     public DbSet<DeviceCommand> DeviceCommands { get; set; } = default!;
-    public DbSet<Application.Location.Location> Locations { get; set; } = default!;
+    public DbSet<Location> Locations { get; set; } = default!;
     public DbSet<LocationCategory> LocationCategories { get; set; } = default!;
     public DbSet<Application.Routes.Route> Routes { get; set; } = default!;
 }

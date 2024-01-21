@@ -18,7 +18,6 @@
 
 using HotChocolate.Execution.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Trace.Application.Abstractions;
 using Trace.Application.Device.Types;
 using Trace.Application.Engagement.Types;
 using Trace.Application.Tags.Types;
@@ -26,16 +25,6 @@ using Trace.Application.Tags.Types;
 namespace Trace.Application;
 
 public static class ApplicationTypes {
-    public static IRequestExecutorBuilder AddContexConfig(this IRequestExecutorBuilder services) {
-        services.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
-        .AddQueryType<QueryRoot>()
-        .AddMutationType<MutationRoot>()
-        .AddSubscriptionType<SubscriptionRoot>()
-        .AddApplicationTypes();
-
-        return services;
-    }
-
     public static IRequestExecutorBuilder AddApplicationTypes(this IRequestExecutorBuilder services) {
         // Engagement types
         services.AddType<ContactType>();

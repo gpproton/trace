@@ -7,14 +7,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetTopologySuite.Geometries;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Trace.Application;
+using Trace.Infrastructure.EFCore.Context;
 
 #nullable disable
 
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240121005643_Initial")]
+    [Migration("20240121010526_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

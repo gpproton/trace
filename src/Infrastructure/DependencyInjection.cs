@@ -17,19 +17,32 @@
 // Modified At: Fri Jan 12 2024
 
 using System.Reflection;
+using HotChocolate.Execution.Configuration;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Trace.Application;
 using Trace.Infrastructure.EFCore;
 using Trace.Infrastructure.CacheManager;
 using Trace.Infrastructure.Cassandra;
+using Trace.Infrastructure.EFCore.Context;
 using Trace.Infrastructure.Providers;
 
 namespace Trace.Infrastructure;
 
 public static class DependencyInjection {
+    public static IRequestExecutorBuilder AddContexConfig(this IRequestExecutorBuilder services) {
+        services.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
+            .AddQueryType<QueryRoot>()
+            .AddMutationType<MutationRoot>()
+            .AddSubscriptionType<SubscriptionRoot>()
+            .AddApplicationTypes();
+
+        return services;
+    }
+
     public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
         builder.AddRabbitMQ("messaging");
         builder.RegisterCassandraInfrastructure();
