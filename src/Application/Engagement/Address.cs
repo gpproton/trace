@@ -18,6 +18,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using Trace.Application.Abstractions;
+using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Engagement.Enums;
 

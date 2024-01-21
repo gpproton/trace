@@ -8,11 +8,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MassTransit" />
-    <PackageReference Include="Axolotl.EFCore" />
     <PackageReference Include="NetTopologySuite" />
     <PackageReference Include="CassandraCSharpDriver" />
-    <PackageReference Include="HotChocolate.Types" />
-    <PackageReference Include="HotChocolate.Abstractions" />
     <PackageReference Include="HotChocolate.Data.EntityFramework" />
     <PackageReference Include="HotChocolate.Execution" />
     <PackageReference Include="Redis.OM" />
@@ -27,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Application.Abstractions\Trace.Application.Abstractions.csproj" />
     <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
     <ProjectReference Include="..\Common\Warehouse\Trace.Common.Warehouse.csproj" />
   </ItemGroup>

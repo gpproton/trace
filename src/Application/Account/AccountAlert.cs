@@ -18,7 +18,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
 
 namespace Trace.Application.Account;
 

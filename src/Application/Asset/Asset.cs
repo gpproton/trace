@@ -19,6 +19,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
+using Trace.Application.Core;
 
 namespace Trace.Application.Asset;
 

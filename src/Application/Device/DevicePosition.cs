@@ -20,6 +20,7 @@ using System.ComponentModel.DataAnnotations;
 using Cassandra.Mapping;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
+using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Core.Interfaces;
 using Trace.Common.Warehouse.Interfaces;
 

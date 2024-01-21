@@ -17,6 +17,7 @@
 // Modified At: Fri Jan 12 2024
 
 using HotChocolate.Types;
+using Trace.Application;
 using Trace.Application.Abstractions;
 using Trace.Application.Tenant;
 

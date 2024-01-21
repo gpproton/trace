@@ -18,6 +18,7 @@
 using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
+using Trace.Application;
 using Trace.Application.Abstractions;
 using Trace.Application.Device;
 using Trace.Application.Device.Repositories;

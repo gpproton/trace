@@ -20,7 +20,9 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
+using Trace.Application.Asset;
+using Trace.Application.Core;
 
 namespace Trace.Application.Device;
 

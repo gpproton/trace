@@ -18,6 +18,7 @@
 
 using HotChocolate;
 using HotChocolate.Types;
+using Trace.Application;
 using Trace.Application.Abstractions;
 using Trace.Application.Tags;
 

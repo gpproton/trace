@@ -19,6 +19,7 @@
 using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
+using Trace.Application;
 using Trace.Application.Abstractions;
 using Trace.Application.Engagement;
 using Trace.Application.Engagement.Repositories;

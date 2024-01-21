@@ -18,6 +18,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using Trace.Application.Abstractions;
+using Trace.Application.Abstractions.Interfaces;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Engagement;

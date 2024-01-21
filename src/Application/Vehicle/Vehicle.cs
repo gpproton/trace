@@ -19,7 +19,9 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
+using Trace.Application.Asset;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 using Trace.Application.Tags;
 

@@ -20,7 +20,7 @@ using System.ComponentModel.DataAnnotations;
 using Axolotl.EFCore.Base;
 using Microsoft.EntityFrameworkCore;
 using Redis.OM.Modeling;
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
 using Trace.Application.Engagement;
 
 namespace Trace.Application.Tenant;

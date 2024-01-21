@@ -16,8 +16,8 @@
 // Modified By: Godwin peter .O
 // Modified At: Wed Jan 03 2024
 
+using Trace.Application.Abstractions.Permission;
 using Trace.Application.Account;
-using Trace.Application.Core.Permission;
 
 namespace Trace.Application.Core.Interfaces;
 

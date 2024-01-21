@@ -21,7 +21,9 @@ using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
+using Trace.Application.Abstractions.Interfaces;
+using Trace.Application.Core;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Location;

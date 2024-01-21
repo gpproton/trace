@@ -18,6 +18,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using Axolotl.EFCore.Base;
+using Trace.Application.Abstractions;
 using Trace.Application.Core;
 
 namespace Trace.Application.Server;

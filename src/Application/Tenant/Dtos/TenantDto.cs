@@ -16,7 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Trace.Application.Core.Enums;
+using Trace.Application.Abstractions.Enums;
 
 namespace Trace.Application.Tenant.Dtos;
 

@@ -18,6 +18,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions;
+using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Device;

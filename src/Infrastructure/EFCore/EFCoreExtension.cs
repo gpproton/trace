@@ -33,8 +33,8 @@ public static class EfCoreExtension {
 
         builder.AddNpgsqlDbContext<ServiceContext>("db",
         configureSettings => {
-            configureSettings.HealthChecks = true;
             configureSettings.ConnectionString = connectionString;
+            configureSettings.DbContextPooling = true;
         },
         DbOptions);
         builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);

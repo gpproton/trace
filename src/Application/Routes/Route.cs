@@ -20,6 +20,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using Trace.Application.Abstractions;
+using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Core.Interfaces;
 
 namespace Trace.Application.Routes;

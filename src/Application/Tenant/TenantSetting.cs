@@ -17,6 +17,7 @@
 // Modified At: Sat Jan 13 2024
 
 using Axolotl.EFCore.Base;
+using Trace.Application.Abstractions;
 using Trace.Application.Core;
 
 namespace Trace.Application.Tenant;
