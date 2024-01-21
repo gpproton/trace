@@ -9,9 +9,6 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MassTransit" />
     <PackageReference Include="NetTopologySuite" />
-    <PackageReference Include="CassandraCSharpDriver" />
-    <PackageReference Include="HotChocolate.Data.EntityFramework" />
-    <PackageReference Include="HotChocolate.Execution" />
     <PackageReference Include="Redis.OM" />
     <PackageReference Include="Scrutor" />
   </ItemGroup>

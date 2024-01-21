@@ -20,7 +20,6 @@ using HotChocolate.Types;
 
 namespace Trace.Application.Device.Types;
 
-[ExtendObjectType(typeof(ApplicationTypes))]
 public class DeviceCommandType : ObjectType<DeviceCommand> {
     protected override void Configure(IObjectTypeDescriptor<DeviceCommand> descriptor) {
         descriptor.Description("IOT device commands");

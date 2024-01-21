@@ -20,7 +20,6 @@ using HotChocolate.Types;
 
 namespace Trace.Application.Device.Types;
 
-[ExtendObjectType(typeof(ApplicationTypes))]
 public class DeviceType : ObjectType<Device> {
     protected override void Configure(IObjectTypeDescriptor<Device> descriptor) {
         descriptor.Description("IOT devices");

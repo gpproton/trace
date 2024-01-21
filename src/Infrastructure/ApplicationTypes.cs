@@ -22,7 +22,7 @@ using Trace.Application.Device.Types;
 using Trace.Application.Engagement.Types;
 using Trace.Application.Tags.Types;
 
-namespace Trace.Application;
+namespace Trace.Infrastructure;
 
 public static class ApplicationTypes {
     public static IRequestExecutorBuilder AddApplicationTypes(this IRequestExecutorBuilder services) {
