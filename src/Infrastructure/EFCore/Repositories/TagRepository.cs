@@ -19,6 +19,7 @@
 using Microsoft.EntityFrameworkCore;
 using Trace.Application;
 using Trace.Application.Tags;
+using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 

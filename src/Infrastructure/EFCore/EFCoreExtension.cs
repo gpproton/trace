@@ -24,6 +24,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Scrutor;
 using Trace.Application;
+using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore;
 

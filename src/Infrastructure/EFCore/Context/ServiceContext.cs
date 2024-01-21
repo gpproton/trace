@@ -23,7 +23,6 @@ using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Account;
 using Trace.Application.Asset;
-using Trace.Application.Core.Interfaces;
 using Trace.Application.Device;
 using Trace.Application.Engagement;
 using Trace.Application.Location;
@@ -31,7 +30,7 @@ using Trace.Application.Tags;
 using Trace.Application.Tenant;
 using Tag = Trace.Application.Tags.Tag;
 
-namespace Trace.Application;
+namespace Trace.Infrastructure.EFCore.Context;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     private Guid? TenantId { get; set; }
@@ -48,7 +47,7 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
         // RegisterTenantFilter(modelBuilder);
     }
 
-    public DbSet<Tenant.Tenant> Tenants { get; set; } = default!;
+    public DbSet<Application.Tenant.Tenant> Tenants { get; set; } = default!;
     public DbSet<TenantSetting> TenantSettings { get; set; } = default!;
     public DbSet<TenantDomains> TenantDomains { get; set; } = default!;
     public DbSet<Tag> Tags { get; set; } = default!;
@@ -61,13 +60,13 @@ public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, G
     public DbSet<Contact> Contacts { get; set; } = default!;
     public DbSet<Lead> Leads { get; set; } = default!;
     public DbSet<Opportunity> Opportunities { get; set; } = default!;
-    public DbSet<Vehicle.Vehicle> Vehicles { get; set; } = default!;
-    public DbSet<Trailer.Trailer> Trailers { get; set; } = default!;
+    public DbSet<Application.Vehicle.Vehicle> Vehicles { get; set; } = default!;
+    public DbSet<Application.Trailer.Trailer> Trailers { get; set; } = default!;
     public DbSet<AssetCategory> AssetCategories { get; set; } = default!;
-    public DbSet<Asset.Asset> Assets { get; set; } = default!;
-    public DbSet<Device.Device> Devices { get; set; } = default!;
+    public DbSet<Application.Asset.Asset> Assets { get; set; } = default!;
+    public DbSet<Application.Device.Device> Devices { get; set; } = default!;
     public DbSet<DeviceCommand> DeviceCommands { get; set; } = default!;
-    public DbSet<Location.Location> Locations { get; set; } = default!;
+    public DbSet<Application.Location.Location> Locations { get; set; } = default!;
     public DbSet<LocationCategory> LocationCategories { get; set; } = default!;
-    public DbSet<Routes.Route> Routes { get; set; } = default!;
+    public DbSet<Application.Routes.Route> Routes { get; set; } = default!;
 }

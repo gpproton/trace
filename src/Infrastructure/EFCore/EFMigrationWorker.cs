@@ -32,6 +32,7 @@ using Trace.Application.Abstractions.Enums;
 using Location = Trace.Application.Location.Location;
 using Trace.Application.Engagement.Enums;
 using Trace.Application.Core;
+using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore;
 

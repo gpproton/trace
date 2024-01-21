@@ -15,15 +15,7 @@
 // Modified By: Godwin peter .O
 // Last Modified: 2024-1-17 2:22
 
-using System.Linq.Expressions;
-using System.Reflection;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Trace.Application.Account;
-using Trace.Application.Core.Interfaces;
-
-namespace Trace.Application;
+namespace Trace.Infrastructure.EFCore.Context;
 
 // public partial class ServiceContext: IdentityDbContext<UserAccount, UserRole, Guid> {
 //     private static void RegisterTenantFilter(ModelBuilder modelBuilder) {

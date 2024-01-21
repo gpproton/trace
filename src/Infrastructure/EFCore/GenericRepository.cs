@@ -20,6 +20,7 @@ using Axolotl.EFCore.Interfaces;
 using Axolotl.EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application;
+using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore;
 

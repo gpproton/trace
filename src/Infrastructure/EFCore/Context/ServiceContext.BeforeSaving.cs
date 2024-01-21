@@ -21,9 +21,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application.Abstractions.Interfaces;
 using Trace.Application.Account;
-using Trace.Application.Core.Interfaces;
 
-namespace Trace.Application;
+namespace Trace.Infrastructure.EFCore.Context;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     private void AuditableOnBeforeSaving() {

@@ -20,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Trace.Application;
 using Trace.Application.Device;
 using Trace.Application.Device.Repositories;
+using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 

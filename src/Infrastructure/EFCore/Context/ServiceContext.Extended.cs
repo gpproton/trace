@@ -19,7 +19,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Trace.Application.Account;
 
-namespace Trace.Application;
+namespace Trace.Infrastructure.EFCore.Context;
 
 public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
     public override int SaveChanges(bool acceptAllChangesOnSuccess) {

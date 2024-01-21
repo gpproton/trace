@@ -23,6 +23,7 @@ using Trace.Application;
 using Trace.Application.Abstractions;
 using Trace.Application.Account;
 using Trace.Infrastructure;
+using Trace.Infrastructure.EFCore.Context;
 using Trace.Manager.Components;
 using Trace.Manager.Components.Account;
 using Trace.ServiceDefaults;
