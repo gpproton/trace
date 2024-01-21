@@ -44,7 +44,7 @@ builder.Services.RegisterApplicationServices(assembly);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Integration)
     .AddRequestOptions(isDevelopment)
-    .AddContexConfig()
+    .AddContextConfig()
     .AddSpatialTypes()
     .AddSpatialFiltering()
     .AddSpatialProjections()

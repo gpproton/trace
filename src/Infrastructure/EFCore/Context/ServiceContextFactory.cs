@@ -19,10 +19,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Trace.Application;
-using Trace.Infrastructure.EFCore.Context;
 
-namespace Trace.Infrastructure.EFCore;
+namespace Trace.Infrastructure.EFCore.Context;
 
 public class ServiceContextFactory : IDesignTimeDbContextFactory<ServiceContext> {
     public ServiceContext CreateDbContext(string[] args) {

@@ -24,7 +24,7 @@ using Trace.Application.Account;
 
 namespace Trace.Infrastructure.EFCore.Context;
 
-public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
+public sealed partial class ServiceContext {
     private void AuditableOnBeforeSaving() {
         var entries = ChangeTracker.Entries<IAuditableEntity>().ToList();
         var utcNow = DateTimeOffset.UtcNow;

@@ -40,7 +40,7 @@ builder.Services.AddHostedService<CassandraHostedService>();
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Core)
     .AddRequestOptions(isDevelopment)
-    .AddContexConfig()
+    .AddContextConfig()
     .AddQueryableCursorPagingProvider()
     .RegisterObjectExtensions(typeof(Program).Assembly);
 

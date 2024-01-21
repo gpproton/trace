@@ -33,7 +33,7 @@ using Trace.Infrastructure.Providers;
 namespace Trace.Infrastructure;
 
 public static class DependencyInjection {
-    public static IRequestExecutorBuilder AddContexConfig(this IRequestExecutorBuilder services) {
+    public static IRequestExecutorBuilder AddContextConfig(this IRequestExecutorBuilder services) {
         services.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
             .AddQueryType<QueryRoot>()
             .AddMutationType<MutationRoot>()
@@ -43,13 +43,13 @@ public static class DependencyInjection {
         return services;
     }
 
-    public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumerSAsembly) {
+    public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumersAssembly) {
         builder.AddRabbitMQ("messaging");
         builder.RegisterCassandraInfrastructure();
         builder.RegisterEfCoreInfrastructure();
         builder.Services.RegisterCacheManager();
         builder.Services.AddMassTransit(busConfigurator => {
-            busConfigurator.AddConsumers(consumerSAsembly);
+            busConfigurator.AddConsumers(consumersAssembly);
             busConfigurator.UsingRabbitMq((context, cfg) => {
                 var config = context.GetRequiredService<IConfiguration>();
                 cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {

@@ -15,26 +15,34 @@
 // Modified By: Godwin peter .O
 // Last Modified: 2024-1-17 2:22
 
+using System.Linq.Expressions;
+using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Trace.Application.Abstractions.Interfaces;
+using Trace.Application.Account;
+
 namespace Trace.Infrastructure.EFCore.Context;
 
-// public partial class ServiceContext: IdentityDbContext<UserAccount, UserRole, Guid> {
-//     private static void RegisterTenantFilter(ModelBuilder modelBuilder) {
-//         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-//             if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
-//                 AddTenantQueryFilter(entityType);
-//     }
-//     private static void AddTenantQueryFilter(IMutableEntityType entityData) {
-//         var methodToCall = typeof(ServiceContext)
-//             .GetMethod(nameof(GetTenantFilter), BindingFlags.NonPublic | BindingFlags.Instance)
-//             ?.MakeGenericMethod(entityData.ClrType);
-//         var filter = methodToCall?.Invoke(null, []);
-//         entityData.SetQueryFilter((LambdaExpression)filter!);
-//         entityData.AddIndex(entityData. FindProperty(nameof(ITenantEntity.TenantId))!);
-//     }
-//
-//     private Expression<Func<TEntity, bool>> GetTenantFilter<TEntity>()
-//         where TEntity : ITenantEntity {
-//         Expression<Func<TEntity, bool>> filter = x => x.TenantId == TenantId;
-//         return filter;
-//     }
-// }
+public sealed partial class ServiceContext {
+    private static void RegisterTenantFilter(ModelBuilder modelBuilder) {
+        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
+                AddTenantQueryFilter(entityType);
+    }
+    private static void AddTenantQueryFilter(IMutableEntityType entityData) {
+        var methodToCall = typeof(ServiceContext)
+            .GetMethod(nameof(GetTenantFilter), BindingFlags.NonPublic | BindingFlags.Instance)
+            ?.MakeGenericMethod(entityData.ClrType);
+        var filter = methodToCall?.Invoke(null, []);
+        entityData.SetQueryFilter((LambdaExpression)filter!);
+        entityData.AddIndex(entityData. FindProperty(nameof(ITenantEntity.TenantId))!);
+    }
+
+    private Expression<Func<TEntity, bool>> GetTenantFilter<TEntity>()
+        where TEntity : ITenantEntity {
+        Expression<Func<TEntity, bool>> filter = x => x.TenantId == TenantId;
+        return filter;
+    }
+}

@@ -14,7 +14,7 @@ using Trace.Infrastructure.EFCore.Context;
 namespace Trace.Infrastructure.EFCore.Migrations
 {
     [DbContext(typeof(ServiceContext))]
-    [Migration("20240121010526_Initial")]
+    [Migration("20240121014801_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

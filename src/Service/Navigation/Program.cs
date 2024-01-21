@@ -36,7 +36,7 @@ builder.Services.RegisterApplicationServices(assembly);
 builder.Services.AddGraphQLServer()
     .AddGraphqlDefaults(Nodes.Navigation)
     .AddRequestOptions(isDevelopment)
-    .AddContexConfig()
+    .AddContextConfig()
     .AddQueryableCursorPagingProvider()
     .AddSpatialTypes()
     .AddSpatialFiltering()

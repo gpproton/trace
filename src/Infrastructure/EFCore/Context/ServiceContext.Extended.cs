@@ -21,7 +21,7 @@ using Trace.Application.Account;
 
 namespace Trace.Infrastructure.EFCore.Context;
 
-public partial class ServiceContext : IdentityDbContext<UserAccount, UserRole, Guid> {
+public sealed partial class ServiceContext {
     public override int SaveChanges(bool acceptAllChangesOnSuccess) {
         AuditableOnBeforeSaving();
         // TODO: Test tenant provider first
