@@ -21,13 +21,12 @@ using Cassandra.Mapping;
 using Redis.OM.Modeling;
 using Trace.Application.Abstractions;
 using Trace.Application.Abstractions.Interfaces;
-using Trace.Application.Core.Interfaces;
 using Trace.Common.Warehouse.Interfaces;
 
 namespace Trace.Application.Device;
 
-[Document(StorageType = StorageType.Hash, Prefixes = [nameof(DevicePosition)])]
-public class DevicePosition : ExtendedEntity, ICassandraEntity<Guid>, ITenantEntity {
+[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Position)])]
+public class Position : ExtendedEntity, ICassandraEntity<Guid>, ITenantEntity {
     public const string KeyMotion = "motion";
     public const string KeyPower = "power"; // volts
     public const string KeyBattery = "battery"; // volts
@@ -77,8 +76,8 @@ public class DevicePosition : ExtendedEntity, ICassandraEntity<Guid>, ITenantEnt
     [Indexed]
     public ICollection<Guid> LocationIds { get; set; } = [];
 
-    public static Map<DevicePosition> GetConfig(string keyspace) {
-        return new Map<DevicePosition>()
+    public static Map<Position> GetConfig(string keyspace) {
+        return new Map<Position>()
             .KeyspaceName(keyspace)
             .TableName("positions")
             .PartitionKey(x => x.Id)

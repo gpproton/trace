@@ -38,7 +38,7 @@ public class CassandraHostedService(ILogger<CassandraHostedService> logger, IClu
         try {
             var cassandraProvider = scope.GetRequiredService<ICassandraProvider>();
             using var session = cassandraProvider.GetSession();
-            await new Table<DevicePosition>(session).CreateIfNotExistsAsync();
+            await new Table<Position>(session).CreateIfNotExistsAsync();
         }
         catch (Exception) {
             logger.LogInformation("Creation of some table failed");

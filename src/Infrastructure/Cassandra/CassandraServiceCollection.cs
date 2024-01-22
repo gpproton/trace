@@ -26,7 +26,7 @@ public static class CassandraServiceCollection {
     public static WebApplicationBuilder RegisterCassandraInfrastructure(this WebApplicationBuilder builder) {
         const string keyspace = CanssandraConst.Keyspace;
         builder.AddCassandra([
-            DevicePosition.GetConfig(keyspace),
+            Position.GetConfig(keyspace),
         ]);
 
         return builder;
