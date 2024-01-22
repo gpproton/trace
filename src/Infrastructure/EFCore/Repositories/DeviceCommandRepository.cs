@@ -16,14 +16,11 @@
 // Modified By: Godwin peter .O
 // Modified At: Sun Jan 14 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Device;
 using Trace.Application.Device.Repositories;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class DeviceCommandRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<DeviceCommand, Guid>(factory), IDeviceCommandRepository {
+public class DeviceCommandRepository(IUnitOfWork unitOfWork) : GenericRepository<DeviceCommand, Guid>(unitOfWork), IDeviceCommandRepository {
 
 }

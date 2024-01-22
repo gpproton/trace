@@ -16,13 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Account;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class AccountRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<UserAccount, Guid>(factory), IAccountRepository {
+public class AccountRepository(IUnitOfWork unitOfWork) : GenericRepository<UserAccount, Guid>(unitOfWork), IAccountRepository {
 
 }

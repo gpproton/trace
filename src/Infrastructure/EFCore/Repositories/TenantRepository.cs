@@ -16,12 +16,9 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Tenant;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class TenantRepository(IDbContextFactory<ServiceContext> factory)
-    : GenericRepository<Tenant, Guid>(factory), ITenantRepository;
+public class TenantRepository(IUnitOfWork unitOfWork)
+    : GenericRepository<Tenant, Guid>(unitOfWork), ITenantRepository;

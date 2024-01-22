@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Vehicle;
 
 namespace Trace.Service.Core.Vehicles;
@@ -29,5 +28,5 @@ public class VehicleQuery(IVehicleRepository vehicleRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Vehicles")]
-    public IQueryable<Vehicle> GetVehicles() => vehicleRepository.GetAll();
+    public IQueryable<Vehicle> GetVehicles() => vehicleRepository.Query();
 }

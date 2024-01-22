@@ -16,13 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Sun Jan 14 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Tags;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class TagMemberRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<TagMembers, Guid>(factory), ITagMemberRepository {
+public class TagMemberRepository(IUnitOfWork unitOfWork) : GenericRepository<TagMembers, Guid>(unitOfWork), ITagMemberRepository {
 
 }

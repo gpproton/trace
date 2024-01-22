@@ -31,5 +31,5 @@ public class ContactQuery(IContactRepository contactRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Contacts")]
-    public IQueryable<Contact> GetContacts() => contactRepository.GetAll();
+    public IQueryable<Contact> GetContacts() => contactRepository.Query();
 }

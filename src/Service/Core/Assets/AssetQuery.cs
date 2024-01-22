@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Asset;
 
 namespace Trace.Service.Core.Assets;
@@ -29,5 +28,5 @@ public class AssetQuery(IAssetRepository assetRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query assets")]
-    public IQueryable<Asset> GetAssets() => assetRepository.GetAll();
+    public IQueryable<Asset> GetAssets() => assetRepository.Query();
 }

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AxolotlVersion>8.0.1</AxolotlVersion>
+    <AxolotlVersion>8.0.5</AxolotlVersion>
     <AspireVersion>8.0.0-preview.3.23619.4</AspireVersion>
     <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>

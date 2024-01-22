@@ -16,13 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Trailer;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class TrailerRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Trailer, Guid>(factory), ITrailerRepository {
+public class TrailerRepository(IUnitOfWork unitOfWork) : GenericRepository<Trailer, Guid>(unitOfWork), ITrailerRepository {
 
 }

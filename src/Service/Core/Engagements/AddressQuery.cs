@@ -20,7 +20,6 @@ using HotChocolate;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Engagement;
 using Trace.Application.Engagement.Repositories;
 
@@ -30,7 +29,7 @@ namespace Trace.Service.Core.Engagements;
 [GraphQLDescription("Query address for a contact")]
 public class AddressQuery(IContactRepository repository) {
     public async Task<List<Address>> GetContactAddresses(Guid id) {
-        var query = await repository.GetQueryable().Include(b => b.Addresses).SingleOrDefaultAsync(x => x.Id == id);
+        var query = await repository.Query().Include(b => b.Addresses).SingleOrDefaultAsync(x => x.Id == id);
 
         return [.. query?.Addresses];
     }

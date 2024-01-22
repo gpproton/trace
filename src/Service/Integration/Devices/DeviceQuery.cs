@@ -20,7 +20,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Device;
 using Trace.Application.Device.Repositories;
 
@@ -31,5 +30,5 @@ public class DeviceQuery(IDeviceRepository deviceRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query IOT devices")]
-    public IQueryable<Device> GetDevices() => deviceRepository.GetAll();
+    public IQueryable<Device> GetDevices() => deviceRepository.Query();
 }

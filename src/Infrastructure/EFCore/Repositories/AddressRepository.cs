@@ -16,14 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 18 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
+
 using Trace.Application.Engagement;
 using Trace.Application.Engagement.Repositories;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class AddressRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Address, Guid>(factory), IAddressRepository {
+public class AddressRepository(IUnitOfWork unitOfWork) : GenericRepository<Address, Guid>(unitOfWork), IAddressRepository {
 
 }

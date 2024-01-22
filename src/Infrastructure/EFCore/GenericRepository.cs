@@ -18,12 +18,10 @@
 
 using Axolotl.EFCore.Interfaces;
 using Axolotl.EFCore.Repository;
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore;
 
-public class GenericRepository<TEntity, TKey>(IDbContextFactory<ServiceContext> factory) : GenericBaseRepository<TEntity, ServiceContext, TKey>(factory.CreateDbContext())
+public class GenericRepository<TEntity, TKey>(IUnitOfWork unitOfWork) : GenericBaseRepository<TEntity, ServiceContext, TKey>(unitOfWork)
     where TEntity : class, IAggregateRoot, IHasKey<TKey>
     where TKey : notnull { }

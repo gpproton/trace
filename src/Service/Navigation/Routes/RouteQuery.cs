@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Routes;
 
 namespace Trace.Service.Navigation.Routes;
@@ -29,5 +28,5 @@ public class RouteQuery(IRouteRepository routeRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Routes")]
-    public IQueryable<Application.Routes.Route> GetRoutes() => routeRepository.GetAll();
+    public IQueryable<Application.Routes.Route> GetRoutes() => routeRepository.Query();
 }

@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Location;
 
 namespace Trace.Service.Navigation.Locations;
@@ -29,5 +28,5 @@ public class LocationQuery(ILocationRepository locationRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Locations")]
-    public IQueryable<Application.Location.Location> GetLocations() => locationRepository.GetAll();
+    public IQueryable<Application.Location.Location> GetLocations() => locationRepository.Query();
 }

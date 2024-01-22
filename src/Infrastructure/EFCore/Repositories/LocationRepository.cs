@@ -16,13 +16,10 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Microsoft.EntityFrameworkCore;
-using Trace.Application;
 using Trace.Application.Location;
-using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore.Repositories;
 
-public class LocationRepository(IDbContextFactory<ServiceContext> factory) : GenericRepository<Location, Guid>(factory), ILocationRepository {
+public class LocationRepository(IUnitOfWork unitOfWork) : GenericRepository<Location, Guid>(unitOfWork), ILocationRepository {
 
 }

@@ -16,10 +16,12 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
+using Axolotl.EFCore;
+using Axolotl.EFCore.Implementation;
+using Axolotl.EFCore.Interfaces;
 using Axolotl.EFCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -41,6 +43,8 @@ public static class EfCoreExtension {
         DbOptions);
         builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
         builder.Services.AddScoped<IServiceContext>(provider => provider.GetRequiredService<ServiceContext>());
+        builder.Services.RegisterUnitOfWork<ServiceContext>(pooled: true);
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         builder.Services.AddScoped(typeof(IRepository<,>), typeof(GenericRepository<,>));
         builder.Services.Scan(selector =>
             selector

@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Tags;
 
 namespace Trace.Service.Core.Tags;
@@ -29,5 +28,5 @@ public class TagQuery(ITagRepository tagRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Tags")]
-    public IQueryable<Application.Tags.Tag> GetTags() => tagRepository.GetAll();
+    public IQueryable<Application.Tags.Tag> GetTags() => tagRepository.Query();
 }

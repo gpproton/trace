@@ -24,9 +24,9 @@ namespace Trace.Infrastructure.CacheManager;
 
 public static class CacheManagerExtension {
     public static IServiceCollection RegisterCacheManager(this IServiceCollection services) {
-        var cnnectionMultiplexer = services.BuildServiceProvider().GetRequiredService<IConnectionMultiplexer>();
+        var connectionMultiplexer = services.BuildServiceProvider().GetRequiredService<IConnectionMultiplexer>();
 
-        services.AddSingleton(new RedisConnectionProvider(cnnectionMultiplexer));
+        services.AddSingleton(new RedisConnectionProvider(connectionMultiplexer));
         services.AddHostedService<IndexCreationService>();
 
         return services;

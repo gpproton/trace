@@ -19,7 +19,6 @@ using HotChocolate;
 using HotChocolate.Data;
 using HotChocolate.Types;
 using Trace.Application;
-using Trace.Application.Abstractions;
 using Trace.Application.Trailer;
 
 namespace Trace.Service.Core.Trailers;
@@ -29,5 +28,5 @@ public class TrailerQuery(ITrailerRepository trailerRepository) {
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Trailers")]
-    public IQueryable<Trailer> GetTrailers() => trailerRepository.GetAll();
+    public IQueryable<Trailer> GetTrailers() => trailerRepository.Query();
 }
