@@ -16,11 +16,9 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Jan 04 2024
 
-using Axolotl.EFCore.Interfaces;
-
 namespace Trace.Application.Abstractions.Interfaces;
 
-public interface ISettingEntity : IAggregateRoot {
+public interface ISettingEntity {
     public string? Token { get; set; }
     public string? Language { get; set; }
     public string? Timezone { get; set; }

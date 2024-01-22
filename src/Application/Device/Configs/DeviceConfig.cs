@@ -11,25 +11,22 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created Date: 2024-1-15 19:31
+// Created Date: 2024-1-22 23:42
 // Modified By: Godwin peter .O
-// Last Modified: 2024-1-15 19:31
+// Last Modified: 2024-1-22 23:42
 
-using Microsoft.AspNetCore.Builder;
-using Trace.Application.Device;
-using Trace.Application.Protocol;
-using Trace.Common.Warehouse;
-using Trace.Common.Warehouse.Constants;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Trace.Infrastructure.Cassandra;
+namespace Trace.Application.Device.Configs;
 
-public static class CassandraServiceCollection {
-    public static WebApplicationBuilder RegisterCassandraInfrastructure(this WebApplicationBuilder builder) {
-        const string keyspace = CanssandraConst.Keyspace;
-        builder.AddCassandra([
-            Position.GetConfig(keyspace),
-        ]);
-
-        return builder;
+public class DeviceConfig : IEntityTypeConfiguration<Device> {
+    public void Configure(EntityTypeBuilder<Device> builder) {
+        builder.HasOne<DevicePosition>(e => e.Position)
+            .WithOne(e => e.Device)
+            .HasForeignKey<Device>(k => k.PositionId)
+            .HasPrincipalKey<DevicePosition>(k => k.DeviceId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .IsRequired(false);
     }
 }

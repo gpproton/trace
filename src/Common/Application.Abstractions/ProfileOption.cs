@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Sat Jan 13 2024
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Trace.Application.Abstractions.Interfaces;
 
@@ -23,17 +24,29 @@ namespace Trace.Application.Abstractions;
 
 [ComplexType]
 public class ProfileOption : ISettingEntity {
+    [MaxLength(128)]
     public string? Token { get; set; }
+    [MaxLength(64)]
     public string? Language { get; set; }
+    [MaxLength(64)]
     public string? Timezone { get; set; }
     public bool Hour24Time { get; set; }
+    [MaxLength(64)]
     public string? UnitDistance { get; set; }
+    [MaxLength(64)]
     public string? UnitVolume { get; set; }
+    [MaxLength(64)]
     public string? UnitWeight { get; set; }
+    [MaxLength(64)]
     public string? UnitTemperature { get; set; }
+    [MaxLength(64)]
     public string? UnitSpeed { get; set; }
+    [MaxLength(64)]
     public string? UnitPower { get; set; }
+    [MaxLength(64)]
     public string? UnitPressure { get; set; }
+    [MaxLength(64)]
     public string? UnitForce { get; set; }
+    [MaxLength(64)]
     public string? UnitArea { get; set; }
 }

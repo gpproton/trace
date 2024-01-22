@@ -22,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Trace.Application.Device;
+using Trace.Application.Protocol;
 using Trace.Common.Warehouse.Configs;
 using Trace.Common.Warehouse.Interfaces;
 

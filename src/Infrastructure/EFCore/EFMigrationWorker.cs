@@ -54,7 +54,7 @@ public class EfMigrationWorker(ILogger<EfMigrationWorker> logger, IServiceScopeF
                 Id = tenantId,
                 Active = true,
                 Name = "Local Corp",
-                Domains = [new TenantDomains { Domain = "localhost" }],
+                Domains = [new TenantDomain { Domain = "localhost" }],
                 Contact = new Contact {
                     FullName = "Local Corporation",
                     Type = ContactVariant.Organization,

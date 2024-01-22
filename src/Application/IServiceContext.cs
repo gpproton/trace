@@ -30,7 +30,7 @@ namespace Trace.Application;
 public interface IServiceContext : ICoreContext {
     public DbSet<Tenant.Tenant> Tenants { get; set; }
     public DbSet<TenantSetting> TenantSettings { get; set; }
-    public DbSet<TenantDomains> TenantDomains { get; set; }
+    public DbSet<TenantDomain> TenantDomains { get; set; }
     public DbSet<Tag> Tags { get; set; }
     public DbSet<TagMembers> TagMembers { get; set; }
     public DbSet<UserAccount> Accounts { get; set; }

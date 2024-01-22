@@ -41,10 +41,13 @@ public sealed class Device : AssetEntity {
     public DateTimeOffset? LastUpdate { get; set; }
     public DateTimeOffset? LastMoved { get; set; }
     [Indexed]
-    [MaxLength(15)]
+    [MaxLength(32)]
     public string? Phone { get; set; }
     [Indexed]
     public DeviceStatus Status { get; set; } = DeviceStatus.Offline;
+    [Indexed]
     public int SpeedLimit { get; set; }
+    [Indexed]
     public DateTimeOffset? Expiry { get; set; }
+    public DevicePosition? Position { get; set; }
 }

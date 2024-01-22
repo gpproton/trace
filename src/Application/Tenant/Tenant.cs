@@ -43,5 +43,5 @@ public class Tenant : BaseEntity<Guid> {
     public string? Logo { get; set; }
     [Indexed]
     public TenantSetting? Setting { get; set; }
-    public ICollection<TenantDomains> Domains { get; set; } = [];
+    public ICollection<TenantDomain> Domains { get; set; } = [];
 }

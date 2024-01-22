@@ -16,65 +16,22 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using System.ComponentModel.DataAnnotations;
 using Cassandra.Mapping;
 using Redis.OM.Modeling;
-using Trace.Application.Abstractions;
-using Trace.Application.Abstractions.Interfaces;
 using Trace.Common.Warehouse.Interfaces;
 
-namespace Trace.Application.Device;
+namespace Trace.Application.Protocol;
 
-[Document(StorageType = StorageType.Hash, Prefixes = [nameof(Position)])]
-public class Position : ExtendedEntity, ICassandraEntity<Guid>, ITenantEntity {
+public class Position : BasePosition, ICassandraEntity<Guid> {
     public const string KeyMotion = "motion";
-    public const string KeyPower = "power"; // volts
-    public const string KeyBattery = "battery"; // volts
     public const string KeyBatteryLevel = "batteryLevel"; // percentage
     public const string KeyFuelLevel = "fuel"; // liters
     public const string KeyFuelUsed = "fuelUsed"; // liters
-    public const string KeyFuelConsumption = "fuelConsumption";
     public const string KeyIgnition = "ignition";
-    public const string KeyAntenna = "antenna";
     public const string KeyCharge = "charge";
 
-    [Indexed]
-    [Key]
     public Guid Id { get; set; }
-    [Indexed]
-    public Guid? TenantId { get; set; }
-    [Indexed]
-    [RedisIdField]
     public Guid DeviceId { get; set; }
-    [Indexed]
-    public DateTimeOffset Time { get; set; }
-    [Indexed]
-    public DateTimeOffset ServerTime { get; set; }
-    [Indexed]
-    public double Longitude { get; set; }
-    [Indexed]
-    public double Latitude { get; set; }
-    [Indexed]
-    public string? Address { get; set; }
-    [Indexed]
-    public double Speed { get; set; }
-    [Indexed]
-    public double Course { get; set; }
-    [Indexed]
-    public double Distance { get; set; }
-    [Indexed]
-    public double Odometer { get; set; }
-    [Indexed]
-    public double Altitude { get; set; }
-    [Indexed]
-    public int Satellites { get; set; }
-    [Indexed]
-    public double? Fuel { get; set; }
-    [Indexed]
-    public double? Battery { get; set; }
-    public bool Charging { get; set; }
-    [Indexed]
-    public ICollection<Guid> LocationIds { get; set; } = [];
 
     public static Map<Position> GetConfig(string keyspace) {
         return new Map<Position>()

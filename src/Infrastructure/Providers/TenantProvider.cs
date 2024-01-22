@@ -29,7 +29,7 @@ public interface ITenantProvider {
 }
 
 public class TenantProvider(RedisConnectionProvider provider, IHttpContextAccessor httpContext) : ITenantProvider {
-    private readonly IRedisCollection<TenantDomains> _domains = provider.RedisCollection<TenantDomains>();
+    private readonly IRedisCollection<TenantDomain> _domains = provider.RedisCollection<TenantDomain>();
 
     public string GetDomain() => httpContext.HttpContext!.Request.Host.Host;
 

@@ -229,7 +229,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     position_id = table.Column<Guid>(type: "uuid", nullable: true),
                     last_update = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     last_moved = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    phone = table.Column<string>(type: "character varying(15)", maxLength: 15, nullable: true),
+                    phone = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: true),
                     status = table.Column<int>(type: "integer", nullable: false),
                     speed_limit = table.Column<int>(type: "integer", nullable: false),
                     expiry = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
@@ -403,27 +403,27 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     map_auto_route = table.Column<bool>(type: "boolean", nullable: false),
                     map_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
                     map_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    map_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_bing_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     map_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
-                    map_google_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_box_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_google_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    map_map_box_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    map_map_type = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     map_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
                     map_zoom = table.Column<int>(type: "integer", nullable: true),
                     map_zoom_selection = table.Column<int>(type: "integer", nullable: true),
                     option_hour24time = table.Column<bool>(type: "boolean", nullable: false),
-                    option_language = table.Column<string>(type: "text", nullable: true),
-                    option_timezone = table.Column<string>(type: "text", nullable: true),
-                    option_token = table.Column<string>(type: "text", nullable: true),
-                    option_unit_area = table.Column<string>(type: "text", nullable: true),
-                    option_unit_distance = table.Column<string>(type: "text", nullable: true),
-                    option_unit_force = table.Column<string>(type: "text", nullable: true),
-                    option_unit_power = table.Column<string>(type: "text", nullable: true),
-                    option_unit_pressure = table.Column<string>(type: "text", nullable: true),
-                    option_unit_speed = table.Column<string>(type: "text", nullable: true),
-                    option_unit_temperature = table.Column<string>(type: "text", nullable: true),
-                    option_unit_volume = table.Column<string>(type: "text", nullable: true),
-                    option_unit_weight = table.Column<string>(type: "text", nullable: true)
+                    option_language = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_timezone = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_token = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    option_unit_area = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_distance = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_force = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_power = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_pressure = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_speed = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_temperature = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_volume = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_weight = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -433,6 +433,41 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         column: x => x.tenant_id,
                         principalTable: "tenants",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "device_positions",
+                columns: table => new
+                {
+                    device_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    updated_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    deleted_at = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    tenant_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    server_time = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    longitude = table.Column<double>(type: "double precision", nullable: false),
+                    latitude = table.Column<double>(type: "double precision", nullable: false),
+                    address = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    speed = table.Column<double>(type: "double precision", nullable: false),
+                    course = table.Column<double>(type: "double precision", nullable: false),
+                    distance = table.Column<double>(type: "double precision", nullable: false),
+                    odometer = table.Column<double>(type: "double precision", nullable: false),
+                    altitude = table.Column<double>(type: "double precision", nullable: false),
+                    satellites = table.Column<int>(type: "integer", nullable: false),
+                    fuel = table.Column<double>(type: "double precision", nullable: false),
+                    battery = table.Column<double>(type: "double precision", nullable: false),
+                    charging = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_device_positions", x => x.device_id);
+                    table.ForeignKey(
+                        name: "fk_device_positions_devices_device_id",
+                        column: x => x.device_id,
+                        principalTable: "devices",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -621,27 +656,27 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     map_auto_route = table.Column<bool>(type: "boolean", nullable: false),
                     map_auto_route_cost = table.Column<bool>(type: "boolean", nullable: false),
                     map_auto_zone_otp = table.Column<bool>(type: "boolean", nullable: false),
-                    map_bing_api_key = table.Column<string>(type: "text", nullable: true),
+                    map_bing_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     map_enable_trip = table.Column<bool>(type: "boolean", nullable: false),
-                    map_google_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_box_api_key = table.Column<string>(type: "text", nullable: true),
-                    map_map_type = table.Column<string>(type: "text", nullable: true),
+                    map_google_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    map_map_box_api_key = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    map_map_type = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
                     map_verify_otp = table.Column<bool>(type: "boolean", nullable: false),
                     map_zoom = table.Column<int>(type: "integer", nullable: true),
                     map_zoom_selection = table.Column<int>(type: "integer", nullable: true),
                     option_hour24time = table.Column<bool>(type: "boolean", nullable: false),
-                    option_language = table.Column<string>(type: "text", nullable: true),
-                    option_timezone = table.Column<string>(type: "text", nullable: true),
-                    option_token = table.Column<string>(type: "text", nullable: true),
-                    option_unit_area = table.Column<string>(type: "text", nullable: true),
-                    option_unit_distance = table.Column<string>(type: "text", nullable: true),
-                    option_unit_force = table.Column<string>(type: "text", nullable: true),
-                    option_unit_power = table.Column<string>(type: "text", nullable: true),
-                    option_unit_pressure = table.Column<string>(type: "text", nullable: true),
-                    option_unit_speed = table.Column<string>(type: "text", nullable: true),
-                    option_unit_temperature = table.Column<string>(type: "text", nullable: true),
-                    option_unit_volume = table.Column<string>(type: "text", nullable: true),
-                    option_unit_weight = table.Column<string>(type: "text", nullable: true)
+                    option_language = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_timezone = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_token = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: true),
+                    option_unit_area = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_distance = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_force = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_power = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_pressure = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_speed = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_temperature = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_volume = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true),
+                    option_unit_weight = table.Column<string>(type: "character varying(64)", maxLength: 64, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -985,6 +1020,22 @@ namespace Trace.Infrastructure.EFCore.Migrations
                 column: "name");
 
             migrationBuilder.CreateIndex(
+                name: "ix_device_positions_deleted_at",
+                table: "device_positions",
+                column: "deleted_at");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_positions_device_id",
+                table: "device_positions",
+                column: "device_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_device_positions_tenant_id",
+                table: "device_positions",
+                column: "tenant_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_devices_category_id",
                 table: "devices",
                 column: "category_id");
@@ -1314,6 +1365,9 @@ namespace Trace.Infrastructure.EFCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "device_commands");
+
+            migrationBuilder.DropTable(
+                name: "device_positions");
 
             migrationBuilder.DropTable(
                 name: "opportunities");

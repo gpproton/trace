@@ -260,7 +260,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("map_auto_zone_otp");
 
                             b1.Property<string>("BingApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_bing_api_key");
 
                             b1.Property<bool>("EnableTrip")
@@ -268,15 +269,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("map_enable_trip");
 
                             b1.Property<string>("GoogleApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_google_api_key");
 
                             b1.Property<string>("MapBoxApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_map_box_api_key");
 
                             b1.Property<string>("MapType")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_map_type");
 
                             b1.Property<bool>("VerifyOtp")
@@ -301,51 +305,63 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("option_hour24time");
 
                             b1.Property<string>("Language")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_language");
 
                             b1.Property<string>("Timezone")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_timezone");
 
                             b1.Property<string>("Token")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("option_token");
 
                             b1.Property<string>("UnitArea")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_area");
 
                             b1.Property<string>("UnitDistance")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_distance");
 
                             b1.Property<string>("UnitForce")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_force");
 
                             b1.Property<string>("UnitPower")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_power");
 
                             b1.Property<string>("UnitPressure")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_pressure");
 
                             b1.Property<string>("UnitSpeed")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_speed");
 
                             b1.Property<string>("UnitTemperature")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_temperature");
 
                             b1.Property<string>("UnitVolume")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_volume");
 
                             b1.Property<string>("UnitWeight")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_weight");
                         });
 
@@ -781,8 +797,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasColumnName("last_update");
 
                     b.Property<string>("Phone")
-                        .HasMaxLength(15)
-                        .HasColumnType("character varying(15)")
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)")
                         .HasColumnName("phone");
 
                     b.Property<Guid?>("PositionId")
@@ -883,6 +899,101 @@ namespace Trace.Infrastructure.EFCore.Migrations
                         .HasDatabaseName("ix_device_commands_name");
 
                     b.ToTable("device_commands", (string)null);
+                });
+
+            modelBuilder.Entity("Trace.Application.Device.DevicePosition", b =>
+                {
+                    b.Property<Guid>("DeviceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("device_id");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)")
+                        .HasColumnName("address");
+
+                    b.Property<double>("Altitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("altitude");
+
+                    b.Property<double>("Battery")
+                        .HasColumnType("double precision")
+                        .HasColumnName("battery");
+
+                    b.Property<bool>("Charging")
+                        .HasColumnType("boolean")
+                        .HasColumnName("charging");
+
+                    b.Property<double>("Course")
+                        .HasColumnType("double precision")
+                        .HasColumnName("course");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTimeOffset?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at");
+
+                    b.Property<double>("Distance")
+                        .HasColumnType("double precision")
+                        .HasColumnName("distance");
+
+                    b.Property<double>("Fuel")
+                        .HasColumnType("double precision")
+                        .HasColumnName("fuel");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("latitude");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision")
+                        .HasColumnName("longitude");
+
+                    b.Property<double>("Odometer")
+                        .HasColumnType("double precision")
+                        .HasColumnName("odometer");
+
+                    b.Property<int>("Satellites")
+                        .HasColumnType("integer")
+                        .HasColumnName("satellites");
+
+                    b.Property<DateTimeOffset>("ServerTime")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("server_time");
+
+                    b.Property<double>("Speed")
+                        .HasColumnType("double precision")
+                        .HasColumnName("speed");
+
+                    b.Property<Guid?>("TenantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tenant_id");
+
+                    b.Property<DateTimeOffset>("Time")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("time");
+
+                    b.Property<DateTimeOffset?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("DeviceId")
+                        .HasName("pk_device_positions");
+
+                    b.HasIndex("DeletedAt")
+                        .HasDatabaseName("ix_device_positions_deleted_at");
+
+                    b.HasIndex("DeviceId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_device_positions_device_id");
+
+                    b.HasIndex("TenantId")
+                        .HasDatabaseName("ix_device_positions_tenant_id");
+
+                    b.ToTable("device_positions", (string)null);
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Address", b =>
@@ -1661,7 +1772,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.ToTable("tenants", (string)null);
                 });
 
-            modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
+            modelBuilder.Entity("Trace.Application.Tenant.TenantDomain", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1771,7 +1882,8 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("map_auto_zone_otp");
 
                             b1.Property<string>("BingApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_bing_api_key");
 
                             b1.Property<bool>("EnableTrip")
@@ -1779,15 +1891,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("map_enable_trip");
 
                             b1.Property<string>("GoogleApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_google_api_key");
 
                             b1.Property<string>("MapBoxApiKey")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_map_box_api_key");
 
                             b1.Property<string>("MapType")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("map_map_type");
 
                             b1.Property<bool>("VerifyOtp")
@@ -1812,51 +1927,63 @@ namespace Trace.Infrastructure.EFCore.Migrations
                                 .HasColumnName("option_hour24time");
 
                             b1.Property<string>("Language")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_language");
 
                             b1.Property<string>("Timezone")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_timezone");
 
                             b1.Property<string>("Token")
-                                .HasColumnType("text")
+                                .HasMaxLength(128)
+                                .HasColumnType("character varying(128)")
                                 .HasColumnName("option_token");
 
                             b1.Property<string>("UnitArea")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_area");
 
                             b1.Property<string>("UnitDistance")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_distance");
 
                             b1.Property<string>("UnitForce")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_force");
 
                             b1.Property<string>("UnitPower")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_power");
 
                             b1.Property<string>("UnitPressure")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_pressure");
 
                             b1.Property<string>("UnitSpeed")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_speed");
 
                             b1.Property<string>("UnitTemperature")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_temperature");
 
                             b1.Property<string>("UnitVolume")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_volume");
 
                             b1.Property<string>("UnitWeight")
-                                .HasColumnType("text")
+                                .HasMaxLength(64)
+                                .HasColumnType("character varying(64)")
                                 .HasColumnName("option_unit_weight");
                         });
 
@@ -2253,6 +2380,18 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Trace.Application.Device.DevicePosition", b =>
+                {
+                    b.HasOne("Trace.Application.Device.Device", "Device")
+                        .WithOne("Position")
+                        .HasForeignKey("Trace.Application.Device.DevicePosition", "DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_device_positions_devices_device_id");
+
+                    b.Navigation("Device");
+                });
+
             modelBuilder.Entity("Trace.Application.Engagement.Address", b =>
                 {
                     b.HasOne("Trace.Application.Engagement.Contact", "Contact")
@@ -2355,7 +2494,7 @@ namespace Trace.Infrastructure.EFCore.Migrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("Trace.Application.Tenant.TenantDomains", b =>
+            modelBuilder.Entity("Trace.Application.Tenant.TenantDomain", b =>
                 {
                     b.HasOne("Trace.Application.Tenant.Tenant", "Tenant")
                         .WithMany("Domains")
@@ -2417,6 +2556,11 @@ namespace Trace.Infrastructure.EFCore.Migrations
             modelBuilder.Entity("Trace.Application.Account.UserRole", b =>
                 {
                     b.Navigation("Permissions");
+                });
+
+            modelBuilder.Entity("Trace.Application.Device.Device", b =>
+                {
+                    b.Navigation("Position");
                 });
 
             modelBuilder.Entity("Trace.Application.Engagement.Contact", b =>

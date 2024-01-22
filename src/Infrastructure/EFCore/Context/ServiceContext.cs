@@ -16,8 +16,8 @@
 // Modified By: Godwin peter .O
 // Modified At: Fri Jan 12 2024
 
-using Axolotl.EFCore.Base;
 using Axolotl.EFCore.Context;
+using Axolotl.EFCore.Interfaces;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Trace.Application;
@@ -53,7 +53,7 @@ public sealed partial class ServiceContext : IdentityDbContext<UserAccount, User
 
         var assembly = typeof(ITenantEntity).Assembly;
         modelBuilder.ApplyConfigurationsFromAssembly(assembly);
-        modelBuilder.RegisterAllEntities<CoreEntity>(assembly);
+        modelBuilder.RegisterAllEntities<IAggregateRoot>(assembly);
         modelBuilder.RegisterSoftDeleteFilter();
         // TODO: Add condition to exclude manager service
         // RegisterTenantFilter(modelBuilder);
@@ -62,7 +62,7 @@ public sealed partial class ServiceContext : IdentityDbContext<UserAccount, User
     public DbContext Instance => this;
     public DbSet<Tenant> Tenants { get; set; } = null!;
     public DbSet<TenantSetting> TenantSettings { get; set; } = null!;
-    public DbSet<TenantDomains> TenantDomains { get; set; } = null!;
+    public DbSet<TenantDomain> TenantDomains { get; set; } = null!;
     public DbSet<Tag> Tags { get; set; } = null!;
     public DbSet<TagMembers> TagMembers { get; set; } = null!;
     public DbSet<UserAccount> Accounts { get; set; } = null!;
@@ -78,6 +78,7 @@ public sealed partial class ServiceContext : IdentityDbContext<UserAccount, User
     public DbSet<AssetCategory> AssetCategories { get; set; } = null!;
     public DbSet<Asset> Assets { get; set; } = null!;
     public DbSet<Device> Devices { get; set; } = null!;
+    public DbSet<DevicePosition> DevicePositions { get; set; } = null!;
     public DbSet<DeviceCommand> DeviceCommands { get; set; } = null!;
     public DbSet<Location> Locations { get; set; } = null!;
     public DbSet<LocationCategory> LocationCategories { get; set; } = null!;

@@ -27,9 +27,9 @@ namespace Trace.Infrastructure.CacheManager;
 public class IndexCreationService(RedisConnectionProvider provider) : IHostedService {
     public async Task StartAsync(CancellationToken cancellationToken) {
         await provider.Connection.CreateIndexAsync(typeof(Tenant));
-        await provider.Connection.CreateIndexAsync(typeof(TenantDomains));
+        await provider.Connection.CreateIndexAsync(typeof(TenantDomain));
         await provider.Connection.CreateIndexAsync(typeof(Device));
-        await provider.Connection.CreateIndexAsync(typeof(Position));
+        await provider.Connection.CreateIndexAsync(typeof(DevicePosition));
         await provider.Connection.CreateIndexAsync(typeof(Location));
     }
 

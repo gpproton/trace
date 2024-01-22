@@ -15,6 +15,7 @@
 // Modified By: Godwin peter .O
 // Last Modified: 2024-1-13 11:35
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Trace.Application.Abstractions.Interfaces;
 
@@ -22,9 +23,13 @@ namespace Trace.Application.Abstractions;
 
 [ComplexType]
 public class MapOption : IMapSettingEntity {
+    [MaxLength(128)]
     public string? GoogleApiKey { get; set; }
+    [MaxLength(128)]
     public string? BingApiKey { get; set; }
+    [MaxLength(128)]
     public string? MapBoxApiKey { get; set; }
+    [MaxLength(128)]
     public string? MapType { get; set; }
     public int? Zoom { get; set; }
     public int? ZoomSelection { get; set; }
