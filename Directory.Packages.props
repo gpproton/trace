@@ -4,25 +4,25 @@
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AxolotlVersion>8.0.5</AxolotlVersion>
     <AspireVersion>8.0.0-preview.3.23619.4</AspireVersion>
-    <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
+    <AspNetCoreVersion>8.0.2</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
-    <EFCoreVersion>8.0.0</EFCoreVersion>
-    <NpgsqlVersion>8.0.0</NpgsqlVersion>
+    <EFCoreVersion>8.0.2</EFCoreVersion>
+    <NpgsqlVersion>8.0.2</NpgsqlVersion>
     <HotChocolateVersion>13.5.1</HotChocolateVersion>
     <CassandraVersion>3.19.3</CassandraVersion>
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
     <MassTransitVersion>8.1.2</MassTransitVersion>
-    <FluentUIVersion>4.3.1</FluentUIVersion>
+    <FluentUIVersion>4.4.1</FluentUIVersion>
   </PropertyGroup>
   <!-- Core packages -->
   <ItemGroup Label="Core">
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.2" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
@@ -49,12 +49,12 @@
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
-    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
+    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.4.0" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
-    <PackageVersion Include="Grpc.AspNetCore" Version="2.59.0" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.61.0" />
     <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
-    <PackageVersion Include="Google.Protobuf" Version="3.25.1" />
-    <PackageVersion Include="Google.Protobuf.Tools" Version="3.25.1" />
+    <PackageVersion Include="Google.Protobuf" Version="3.25.3" />
+    <PackageVersion Include="Google.Protobuf.Tools" Version="3.25.3" />
   </ItemGroup>
   <!-- EFcore packages -->
   <ItemGroup Label="Efcore">
