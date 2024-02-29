@@ -5,5 +5,5 @@ url = ../trace-client.git
 path = proxy
 url = ../trace-proxy.git
 [submodule "deploy"]
-path = charts
+path = deploy
 url = ../trace-deploy.git
