@@ -25,7 +25,7 @@ services:
     image: ${REGISTRY}/trace-manager:${VERSION}
     build:
       context: .
-      dockerfile: src/Manager/Service/Dockerfile
+      dockerfile: Manager/Dockerfile
     environment:
       <<: *app-env
     ports:
@@ -36,7 +36,7 @@ services:
     image: ${REGISTRY}/trace-frontend:${VERSION}
     build:
       context: .
-      dockerfile: src/Frontend/Dockerfile
+      dockerfile: Host/Frontend/Dockerfile
     environment:
       <<: *app-env
     ports:
@@ -47,7 +47,7 @@ services:
     image: ${REGISTRY}/trace-gateway:${VERSION}
     build:
       context: .
-      dockerfile: src/Gateway/Dockerfile
+      dockerfile: Host/Gateway/Dockerfile
     environment:
       <<: *app-env
     ports:
@@ -58,7 +58,7 @@ services:
     image: ${REGISTRY}/trace-service-core:${VERSION}
     build:
       context: .
-      dockerfile: src/Service/Core/Dockerfile
+      dockerfile: Service/Core/Dockerfile
     environment:
       <<: *app-env
     ports:
@@ -69,7 +69,7 @@ services:
     image: ${REGISTRY}/trace-service-integration:${VERSION}
     build:
       context: .
-      dockerfile: src/Service/Integration/Dockerfile
+      dockerfile: Service/Integration/Dockerfile
     environment:
       <<: *app-env
     ports:
@@ -80,7 +80,7 @@ services:
     image: ${REGISTRY}/trace-service-routing:${VERSION}
     build:
       context: .
-      dockerfile: src/Service/Routing/Dockerfile
+      dockerfile: Service/Routing/Dockerfile
     environment:
       <<: *app-env
     ports:

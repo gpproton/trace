@@ -9,14 +9,11 @@
     <SpaProxyServerUrl>http://localhost:3010</SpaProxyServerUrl>
   </PropertyGroup>
 
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
 
   <ItemGroup>
-<!--    <ProjectReference Include="..\..\client\apps\Trace.Frontend.Node.esproj">-->
-<!--      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>-->
-<!--    </ProjectReference>-->
-    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
 
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" />

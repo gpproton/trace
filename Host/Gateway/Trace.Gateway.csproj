@@ -11,10 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
   </ItemGroup>
 
-  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Shared.props" />
 
 </Project>
