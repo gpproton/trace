@@ -5,7 +5,7 @@
     "allowPrerelease": true
   },
   "scripts": {
-    "w:update": "dotnet workload update --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json",
+    "w:update": "dotnet workload update",
     "w:restore": "dotnet workload restore Trace.sln",
     "docker": "docker-compose up -d cache messaging scylladb db traccar",
     "docker:down": "docker-compose down -v",
@@ -15,16 +15,16 @@
     "lint": "dotnet format Trace.sln",
     "install": "dotnet restore && dotnet build && pnpm install",
     "clean": "dotnet clean && pnpm clean && rm -rf ./**/{bin,obj,node_modules} && pnpm store prune",
-    "dev": "dotnet watch --project src/AppHost",
-    "run": "dotnet run --project src/AppHost",
+    "dev": "dotnet watch --project AppHost",
+    "run": "dotnet run --project AppHost",
     "build": "dotnet build --configuration Debug",
-    "k:generate": "cd src/AppHost; dotnet aspirate generate --skip-build",
-    "k:compose": "cd src/AppHost; dotnet aspirate generate --skip-build --output-format compose",
-    "k:apply": "cd src/AppHost; dotnet aspirate apply",
-    "k:destroy": "cd src/AppHost; dotnet aspirate destroy",
-    "k:build": "cd src/AppHost; dotnet aspirate build",
+    "k:generate": "cd AppHost; dotnet aspirate generate --skip-build",
+    "k:compose": "cd AppHost; dotnet aspirate generate --skip-build --output-format compose",
+    "k:apply": "cd AppHost; dotnet aspirate apply",
+    "k:destroy": "cd AppHost; dotnet aspirate destroy",
+    "k:build": "cd AppHost; dotnet aspirate build",
     "k:frontend": "kubectl port-forward svc/frontend 4040:8080",
-    "opt:migrate": "dotnet ef migrations add --project src/Infrastructure/Trace.Infrastructure.csproj --startup-project src/Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
-    "opt:update": "dotnet ef database update --project src/Infrastructure/Trace.Infrastructure.csproj --startup-project src/Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
+    "opt:migrate": "dotnet ef migrations add --project Infrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
+    "opt:update": "dotnet ef database update --project nfrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
   }
 }

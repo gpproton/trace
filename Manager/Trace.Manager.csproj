@@ -8,7 +8,7 @@
     <Content Include="..\.dockerignore">
       <Link>.dockerignore</Link>
     </Content>
-    <None Include="..\..\config\**\*.*" Link="config\%(Filename)%(Extension)">
+    <None Include="..\config\**\*.*" Link="config\%(Filename)%(Extension)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
