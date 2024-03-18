@@ -9,7 +9,7 @@
     <RuntimeVersion>8.0.0</RuntimeVersion>
     <EFCoreVersion>8.0.2</EFCoreVersion>
     <NpgsqlVersion>8.0.2</NpgsqlVersion>
-    <HotChocolateVersion>13.5.1</HotChocolateVersion>
+    <HotChocolateVersion>13.9.0</HotChocolateVersion>
     <CassandraVersion>3.19.3</CassandraVersion>
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
