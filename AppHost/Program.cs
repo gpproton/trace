@@ -1,39 +1,100 @@
+// Copyright (c) 2023 - 2024 drolx Solutions
+//
+// Licensed under the Business Source License 1.1 and Trace License
+// you may not use this file except in compliance with the License.
+// Change License: Reciprocal Public License 1.5
+//     https://mariadb.com/bsl11
+//     https://opensource.org/license/rpl-1-5
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Author: Godwin peter .O (me@godwin.dev)
+// Created At: Monday, 11th Mar 2024
+// Modified By: Godwin peter .O
+// Modified At: Mon Mar 18 2024
+
+using Trace.AppHost;
+
 var builder = DistributedApplication.CreateBuilder(args);
+var cassandraPort = builder.AddParameter("cassandraPort");
+var cassandraUsername = builder.AddParameter("cassandraUsername");
+var cassandraPassword = builder.AddParameter("cassandraPassword");
 
-var cache = builder.AddRedis("cache", port: 6379).PublishAsContainer();
-var messaging = builder.AddRabbitMQ("messaging", port: 5672).WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
-var db = builder.AddPostgres("db", port: 5432, password: "trace")
-.WithImage("postgis/postgis")
-.WithImageTag("15-3.3")
-.AddDatabase("trace");
-var scylladb = builder.AddContainer("scylladb", "scylladb/scylla", "5.4")
-    .WithEndpoint(containerPort: 9042, scheme: "tcp", name: "default")
-    .WithEndpoint(containerPort: 9160, scheme: "tcp", name: "thrift");
+/** App Services **/
+var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core")
+.WithEnvironment("CassandraPort", cassandraPort)
+.WithEnvironment("CassandraUsername", cassandraUsername)
+.WithEnvironment("CassandraPassword", cassandraPassword);
 
-// var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core")
-// .WithReference(cache)
-// .WithReference(messaging)
-// .WithReference(db);
+var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration")
+.WithEnvironment("CassandraPort", cassandraPort)
+.WithEnvironment("CassandraUsername", cassandraUsername)
+.WithEnvironment("CassandraPassword", cassandraPassword);
 
-// var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration");
-// var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation");
-// var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway")
-//     .WithReference(coreService)
-//     .WithReference(integrationService)
-//     .WithReference(routingService);
-// var manager = builder.AddProject<Projects.Trace_Manager>("manager")
-//     .WithReference(integrationService)
-//     .WithReference(routingService);
-// var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
-//     .WithReference(gateway)
-//     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
-//     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
+var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
+.WithEnvironment("CassandraPort", cassandraPort)
+.WithEnvironment("CassandraUsername", cassandraUsername)
+.WithEnvironment("CassandraPassword", cassandraPassword);
 
-// coreService.WithReference(cache).WithReference(messaging).WithReference(db);
-// integrationService.WithReference(cache).WithReference(messaging).WithReference(db);
-// routingService.WithReference(cache).WithReference(messaging).WithReference(db);
-// gateway.WithReference(cache);
-// manager.WithReference(cache).WithReference(messaging).WithReference(db);
-// frontend.WithReference(cache);
+var manager = builder.AddProject<Projects.Trace_Manager>("manager")
+.WithEnvironment("CassandraPort", cassandraPort)
+.WithEnvironment("CassandraUsername", cassandraUsername)
+.WithEnvironment("CassandraPassword", cassandraPassword);
+
+var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway");
+
+// Only for deployment
+if (builder.ExecutionContext.IsPublishMode) {
+    var cache = builder.AddRedis("cache", port: 6379)
+    .WithRedisCommander();
+
+    var messaging = builder.AddRabbitMQ("messaging", port: 5672)
+    .WithImage("rabbitmq")
+    .WithImageTag("3-management-alpine")
+    .WithEnvironment("RABBITMQ_DEFAULT_USER", "guest")
+    .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
+
+    var db = builder.AddPostgres("db", port: 5432, password: "trace")
+    .WithPgAdmin()
+    .WithImage("postgis/postgis")
+    .WithImageTag("15-3.3")
+    .AddDatabase("trace");
+
+    // TODO: Improve cassandra resource
+    builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
+
+    // Binds containers to services
+    coreService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
+    integrationService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
+    routingService.WithReference(messaging)
+    .WithReference(db);
+
+    gateway.WithReference(coreService)
+        .WithReference(integrationService)
+        .WithReference(routingService)
+        .WithReference(cache);
+
+    manager.WithReference(integrationService)
+    .WithReference(routingService)
+    .WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
+    builder.AddProject<Projects.Trace_Frontend>("frontend")
+        .WithReference(gateway)
+        .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
+        .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"))
+        .WithReference(cache);
+
+}
 
 builder.Build().Run();

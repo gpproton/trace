@@ -21,7 +21,6 @@ using Cassandra.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Trace.Common.Warehouse.Configs;
 using Trace.Common.Warehouse.Constants;
 using Trace.Common.Warehouse.Implementation;
@@ -32,7 +31,6 @@ namespace Trace.Common.Warehouse;
 public static class CassandraExtension {
     public static WebApplicationBuilder AddCassandra(this WebApplicationBuilder builder, ITypeDefinition[] configs) {
         const string keyspace = CanssandraConst.Keyspace;
-
         builder.Services.AddSingleton(_ => new CassandraOptions {
             Keyspace = keyspace,
             Config = configs
@@ -44,14 +42,17 @@ public static class CassandraExtension {
 
         builder.Services.AddOptions<CassandraConfig>().Bind(config.GetSection(CassandraConfig.Key));
         builder.Services.AddSingleton<ICluster>(provider => {
-            var conf = provider.GetRequiredService<IOptions<CassandraConfig>>();
+            var host = builder.Configuration.GetValue<string>("cassandraHost", "localhost");
+            var port = builder.Configuration.GetValue<int>("cassandraPort", 9042);
+            var username = builder.Configuration.GetValue<string>("cassandraUsername", "cassandra");
+            var password = builder.Configuration.GetValue<string>("cassandraPassword", "cassandra");
             var queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.One);
 
             return Cluster.Builder()
-                .AddContactPoint(conf.Value.Host)
-                .WithPort(conf.Value.Port)
+                .AddContactPoint(host)
+                .WithPort(port)
                 .WithCompression(CompressionType.LZ4)
-                .WithCredentials(conf.Value.Username, conf.Value.Password)
+                .WithCredentials(username, password)
                 .WithQueryOptions(queryOptions)
                 .WithRetryPolicy(new LoggingRetryPolicy(new DefaultRetryPolicy()))
                 .Build();
