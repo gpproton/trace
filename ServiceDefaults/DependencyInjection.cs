@@ -12,9 +12,9 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Sunday, 31st Dec 2023
+// Created At: Monday, 26th Feb 2024
 // Modified By: Godwin peter .O
-// Modified At: Sat Jan 06 2024
+// Modified At: Mon Mar 18 2024
 
 using System.IO.Compression;
 using System.Reflection;
@@ -43,6 +43,7 @@ public static class DependencyInjection {
         builder.AddRedis("cache");
         builder.AddRedisDistributedCache("cache");
         builder.AddServiceDefaults();
+        builder.Services.AddProblemDetails();
         builder.RegisterSharedArchitecture();
 
         return builder;
