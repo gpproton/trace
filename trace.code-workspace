@@ -86,7 +86,10 @@
         "ini"
       ],
       "excludeGlob": [
-        "./**/*/.gitignore"
+        "./**/*/.gitignore",
+        "./**/*/.env",
+        "./**/*/.env*",
+        "./.env"
       ],
       "autoHeader": "autoSave",
       "enforceHeader": true,
