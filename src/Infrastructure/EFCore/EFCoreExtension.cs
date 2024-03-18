@@ -35,13 +35,8 @@ public static class EfCoreExtension {
     public static WebApplicationBuilder RegisterEfCoreInfrastructure(this WebApplicationBuilder builder) {
         var connectionString = builder.Configuration.GetConnectionString("db");
 
-        builder.AddNpgsqlDbContext<ServiceContext>("db",
-        configureSettings => {
-            configureSettings.ConnectionString = connectionString;
-            configureSettings.DbContextPooling = true;
-        },
-        DbOptions);
         builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
+        builder.EnrichNpgsqlDbContext<ServiceContext>();
         builder.Services.AddScoped<IServiceContext>(provider => provider.GetRequiredService<ServiceContext>());
         builder.Services.RegisterUnitOfWork<ServiceContext>(pooled: true);
         builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
