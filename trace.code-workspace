@@ -8,8 +8,8 @@
       "path": "proxy"
     },
     {
-      "name": "helm-charts",
-      "path": "charts"
+      "name": "deploy",
+      "path": "deploy"
     },
     {
       "name": "ui",
