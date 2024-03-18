@@ -481,3 +481,5 @@ $RECYCLE.BIN/
 .output
 pnpm-lock.yaml
 .env
+.mono
+
