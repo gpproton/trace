@@ -1,5 +1,5 @@
 
-# Trace License
+# Trace Source Available License 1.0
 
 This license agreement is between drolx Solutions, a logistics and transportation CRM software as a service project (the “Licensor”), and the person or entity who receives a copy of the software (the “Licensee”). The Licensee agrees to be bound by the terms of this license by installing, copying, or using the software.
 

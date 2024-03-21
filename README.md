@@ -6,7 +6,7 @@ delivery to the customer and ending with return logistics.
 
 ## License
 
-Trace is license under the [Trace License 1.0](./LICENSE.md) and [Business Source License 1.1](./LICENSE\(BSL\).md) [![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE\(BSL\).md)
+Trace is license under the [Trace Source Available License 1.0](./LICENSE.md) and [Business Source License 1.1](./LICENSE\(BSL\).md) [![Business Source License 1.1](https://img.shields.io/badge/license-BSL--1.1-blue.svg?style=flat-square)](./LICENSE\(BSL\).md)
 
 - Agboola Solomon ([abiodun@drolx.com](mailto:abiodun@drolx.com))
 - Godwin peter .O ([me@godwin.dev](mailto:me@godwin.dev))

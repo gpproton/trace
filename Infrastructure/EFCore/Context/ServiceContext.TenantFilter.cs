@@ -1,6 +1,6 @@
 // Copyright 2023 - 2024 drolx Solutions
 //
-// Licensed under the Business Source License 1.1 and Trace License;
+// Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
 //     https://mariadb.com/bsl11
 //     https://trace.ng/license
@@ -37,7 +37,7 @@ public sealed partial class ServiceContext {
             ?.MakeGenericMethod(entityData.ClrType);
         var filter = methodToCall?.Invoke(null, []);
         entityData.SetQueryFilter((LambdaExpression)filter!);
-        entityData.AddIndex(entityData. FindProperty(nameof(ITenantEntity.TenantId))!);
+        entityData.AddIndex(entityData.FindProperty(nameof(ITenantEntity.TenantId))!);
     }
 
     private Expression<Func<TEntity, bool>> GetTenantFilter<TEntity>()

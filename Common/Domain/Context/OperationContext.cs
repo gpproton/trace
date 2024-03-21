@@ -1,6 +1,6 @@
 // Copyright 2022 - 2023 Godwin peter .O (me@godwin.dev)
 //
-// Licensed under the Reciprocal Public License (RPL-1.5) and Trace License;
+// Licensed under the Reciprocal Public License (RPL-1.5) and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -13,7 +13,8 @@ using Trace.Common.Domain.Modules;
 
 namespace Trace.Common.Domain.Context;
 
-public sealed class OperationContext : BaseContext {
+public sealed class OperationContext : BaseContext
+{
     public OperationContext() { }
 
     private static DbContextOptions<T> ChangeOptionsType<T>(DbContextOptions options) where T : DbContext
@@ -21,7 +22,8 @@ public sealed class OperationContext : BaseContext {
 
     public OperationContext(DbContextOptions<OperationContext> options) : base(ChangeOptionsType<OperationContext>(options)) { }
 
-    protected override void OnModelCreating(ModelBuilder builder) {
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
         // Apply entities configs
         builder.ApplyConfigurationsFromAssembly(typeof(ITenantEntity<>).Assembly);
 

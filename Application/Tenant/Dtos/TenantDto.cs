@@ -1,6 +1,6 @@
 ﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
-// Licensed under the Business Source License 1.1 and Trace License
+// Licensed under the Business Source License 1.1 and Trace Source Available License 1.0
 // you may not use this file except in compliance with the License.
 // Change License: Reciprocal Public License 1.5
 //     https://mariadb.com/bsl11
@@ -21,7 +21,7 @@ using Trace.Application.Abstractions.Enums;
 namespace Trace.Application.Tenant.Dtos;
 
 public class TenantDto {
-     public Guid Token { get; set; }
+    public Guid Token { get; set; }
     public bool Active { get; set; }
     public string? FullName { get; set; }
     public string? ShortName { get; set; }

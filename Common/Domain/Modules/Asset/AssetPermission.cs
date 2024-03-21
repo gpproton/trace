@@ -1,6 +1,6 @@
 // Copyright 2022 - 2023 Godwin peter .O (me@godwin.dev)
 // 
-// Licensed under the Reciprocal Public License (RPL-1.5) and Trace License;
+// Licensed under the Reciprocal Public License (RPL-1.5) and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,7 +12,8 @@ using Trace.Common.Domain.Permission;
 
 namespace Trace.Common.Domain.Modules.Asset;
 
-public class AssetPermission : IPermission {
+public class AssetPermission : IPermission
+{
     private const string Id = "asset";
     private const RoleLevel Role = RoleLevel.Default;
     private const Module DefaultModule = Module.Asset;
