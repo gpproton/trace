@@ -24,7 +24,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-manager:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Manager/Dockerfile
     environment:
       <<: *app-env
@@ -35,7 +35,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-frontend:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Host/Frontend/Dockerfile
     environment:
       <<: *app-env
@@ -46,7 +46,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-gateway:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Host/Gateway/Dockerfile
     environment:
       <<: *app-env
@@ -57,7 +57,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-core:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Service/Core/Dockerfile
     environment:
       <<: *app-env
@@ -68,7 +68,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-integration:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Service/Integration/Dockerfile
     environment:
       <<: *app-env
@@ -79,7 +79,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-navigation:${VERSION}
     build:
-      context: .
+      context: ..
       dockerfile: Service/Navigation/Dockerfile
     environment:
       <<: *app-env
