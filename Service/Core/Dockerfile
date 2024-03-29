@@ -6,8 +6,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /workspace
 COPY . .
-RUN dotnet restore "src/Service/Core/Trace.Service.Core.csproj"
-WORKDIR "/workspace/src/Service/Core"
+RUN dotnet restore "Service/Core/Trace.Service.Core.csproj"
+WORKDIR "/workspace/Service/Core"
 RUN dotnet build "Trace.Service.Core.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -16,8 +16,8 @@ x-app: &app
     services__service-core__1: "https://service-core:8443"
     services__service-integration__0: "http://service-integration:8080"
     services__service-integration__1: "https://service-integration:8443"
-    services__service-routing__0: "http://service-routing:8080"
-    services__service-routing__1: "https://service-routing:8443"
+    services__service-navigation__0: "http://service-navigation:8080"
+    services__service-navigation__1: "https://service-navigation:8443"
 
 services:
   manager:
@@ -75,12 +75,12 @@ services:
     ports:
       - 4572:8080
 
-  service-routing:
+  service-navigation:
     <<: *app
-    image: ${REGISTRY}/trace-service-routing:${VERSION}
+    image: ${REGISTRY}/trace-service-navigation:${VERSION}
     build:
       context: .
-      dockerfile: Service/Routing/Dockerfile
+      dockerfile: Service/Navigation/Dockerfile
     environment:
       <<: *app-env
     ports:

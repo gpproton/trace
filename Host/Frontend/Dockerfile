@@ -19,8 +19,8 @@ WORKDIR /workspace
 COPY . .
 
 RUN cd client; pnpm install
-RUN dotnet restore "src/Frontend/Trace.Frontend.csproj"
-WORKDIR "/workspace/src/Frontend"
+RUN dotnet restore "Host/Frontend/Trace.Frontend.csproj"
+WORKDIR "/workspace/Host/Frontend"
 RUN dotnet build "Trace.Frontend.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -15,17 +15,17 @@ jobs:
       matrix:
         include:
           - image: 'ghcr.io/drolx/trace-frontend'
-            dockerfile: ./src/Frontend/Dockerfile
+            dockerfile: ./Host/Frontend/Dockerfile
           - image: 'ghcr.io/drolx/trace-gateway'
-            dockerfile: ./src/Gateway/Dockerfile
+            dockerfile: ./Host/Gateway/Dockerfile
           - image: 'ghcr.io/drolx/trace-manager'
-            dockerfile: ./src/Manager/Service/Dockerfile
+            dockerfile: ./Manager/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-core'
-            dockerfile: ./src/Service/Core/Dockerfile
-          - image: 'ghcr.io/drolx/trace-service-routing'
-            dockerfile: ./src/Service/Routing/Dockerfile
+            dockerfile: ./Service/Core/Dockerfile
+          - image: 'ghcr.io/drolx/trace-service-navigation'
+            dockerfile: ./Service/Navigation/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-integration'
-            dockerfile: ./src/Service/Integration/Dockerfile
+            dockerfile: ./Service/Integration/Dockerfile
     permissions:
       contents: read
       packages: write
