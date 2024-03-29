@@ -28,6 +28,17 @@ public static class CassandraExtensions {
             .WithEndpoint(containerPort: 9042, hostPort: hostPort, scheme: "tcp", name: "cassandra", isProxied: isProxied)
             .WithEndpoint(containerPort: 9160, hostPort: thriftPort, scheme: "tcp", name: "thrift", isProxied: isProxied);
     }
+
+    public static IResourceBuilder<ProjectResource> AddCassandraParameters(this IResourceBuilder<ProjectResource> builder) {
+        var resourceBuilder = builder.ApplicationBuilder;
+        var cassandraPort = resourceBuilder.AddParameter("cassandraPort");
+        var cassandraUsername = resourceBuilder.AddParameter("cassandraUsername");
+        var cassandraPassword = resourceBuilder.AddParameter("cassandraPassword");
+
+        return builder.WithEnvironment("CassandraPort", cassandraPort)
+        .WithEnvironment("CassandraUsername", cassandraUsername)
+        .WithEnvironment("CassandraPassword", cassandraPassword);
+    }
 }
 
 public class CassandraResource(string name) : Resource(name), IResourceWithConnectionString, IResourceWithEnvironment {
