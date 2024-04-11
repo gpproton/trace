@@ -11,4 +11,8 @@
   <Import Project="..\..\Shared.props" />
   <Import Project="..\SpaHost.props" />
 
+  <ItemGroup>
+    <PackageReference Include="LettuceEncrypt" />
+  </ItemGroup>
+
 </Project>
