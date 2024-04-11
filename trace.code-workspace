@@ -97,8 +97,6 @@
         "markdown",
         "json",
         "jsonc",
-        "yml",
-        "yaml",
         "shellscript",
         "xml",
         "dockerfile",
@@ -107,10 +105,10 @@
         "vue"
       ],
       "excludeGlob": [
-        "./**/*/.gitignore",
-        "./**/*/.env",
-        "./**/*/.env*",
-        "./.env"
+        ".gitignore",
+        "*.env*",
+        "./**/*.yml",
+        "./**/*.yaml"
       ],
       "autoHeader": "autoSave",
       "enforceHeader": true,

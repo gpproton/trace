@@ -20,6 +20,10 @@ using Trace.AppHost;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
+var cache = builder.AddRedis("cache", port: 6379)
+    .WithImage("docker.io/redis/redis-stack")
+    .WithImageTag("7.2.0-v6");
+
 /** App Services **/
 var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core");
 var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration");
@@ -34,16 +38,17 @@ if (builder.ExecutionContext.IsPublishMode) {
     var cassandraUsername = builder.AddParameter("cassandraUsername");
     var cassandraPassword = builder.AddParameter("cassandraPassword");
 
-    var cache = builder.AddRedis("cache", port: 6379);
     var messaging = builder.AddRabbitMQ("messaging", port: 5672)
     .WithImage("rabbitmq")
     .WithImageTag("3-management-alpine")
     .WithEnvironment("RABBITMQ_DEFAULT_USER", "guest")
     .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
+
     var db = builder.AddPostgres("db", port: 5432, password: "trace")
     .WithImage("postgis/postgis")
     .WithImageTag("15-3.3")
     .AddDatabase("trace");
+
     // TODO: Improve cassandra resource
     builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
 
