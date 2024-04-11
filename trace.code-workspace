@@ -106,7 +106,7 @@
       ],
       "excludeGlob": [
         ".gitignore",
-        "*.env*",
+        "./.env*",
         "./**/*.yml",
         "./**/*.yaml"
       ],
