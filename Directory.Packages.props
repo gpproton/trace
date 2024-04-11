@@ -31,12 +31,21 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageVersion Include="CliWrap" Version="3.6.6" />
   </ItemGroup>
+
   <!-- Axolotl packages -->
   <ItemGroup Label="Axolotl">
     <PackageVersion Include="Axolotl" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.AspNet" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.EFCore" Version="$(AxolotlVersion)" />
   </ItemGroup>
+
+  <!-- Multitenancy packages -->
+  <ItemGroup>
+    <PackageVersion Include="Finbuckle.MultiTenant" Version="6.13.1" />
+    <PackageVersion Include="Finbuckle.MultiTenant.AspNetCore" Version="6.13.1" />
+    <PackageVersion Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.13.1" />
+  </ItemGroup>
+
   <!-- AspNet packages -->
   <ItemGroup Label="AspNetCore">
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspNetCoreVersion)" />

@@ -62,6 +62,9 @@ public static class DependencyInjection {
 
         builder.Services.AddScoped<ITenantProvider, TenantProvider>();
 
+        // TODO: Section for multi tenancy setup
+        // builder.Services.AddMultiTenant<TenantInfo>().WithHostStrategy();
+
         return builder;
     }
 }

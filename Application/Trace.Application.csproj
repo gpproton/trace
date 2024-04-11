@@ -6,6 +6,7 @@
 
   <ItemGroup Label="Other">
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
     <PackageReference Include="MassTransit" />
     <PackageReference Include="NetTopologySuite" />

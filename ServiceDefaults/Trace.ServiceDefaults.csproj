@@ -16,14 +16,13 @@
   <Import Project="..\Hangfire.props" />
 
   <ItemGroup Label="AspNet">
+    <PackageReference Include="Finbuckle.MultiTenant" />
+    <PackageReference Include="Finbuckle.MultiTenant.AspNetCore" />
+    <PackageReference Include="MassTransit" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" />
-  </ItemGroup>
-
-  <ItemGroup Label="Others">
-    <PackageReference Include="MassTransit" />
     <PackageReference Include="Riok.Mapperly" />
   </ItemGroup>
 
