@@ -40,7 +40,7 @@ public static class DependencyInjection {
             .AddJsonFile($"config/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
 
-        builder.AddRedis("cache");
+        builder.AddRedisClient("cache");
         builder.AddRedisDistributedCache("cache");
         builder.AddServiceDefaults();
         builder.Services.AddProblemDetails();

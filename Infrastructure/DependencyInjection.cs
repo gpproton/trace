@@ -44,7 +44,8 @@ public static class DependencyInjection {
     }
 
     public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumersAssembly) {
-        builder.AddRabbitMQ("messaging");
+        builder.AddRabbitMQClient("messaging");
+        builder.AddNpgsqlDataSource("db");
         builder.RegisterCassandraInfrastructure();
         builder.RegisterEfCoreInfrastructure();
         builder.Services.RegisterCacheManager();

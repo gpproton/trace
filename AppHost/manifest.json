@@ -10,8 +10,8 @@
         "ConnectionStrings__messaging": "{messaging.connectionString}",
         "ConnectionStrings__trace": "{trace.connectionString}",
         "CassandraPort": "{cassandraPort.value}",
-        "CassandraUsername": "{cassandraUsername.value}",
-        "CassandraPassword": "{cassandraPassword.value}"
+        "cassandraUser": "{cassandraUser.value}",
+        "cassandraPass": "{cassandraPass.value}"
       },
       "bindings": {
         "http": {
@@ -36,8 +36,8 @@
         "ConnectionStrings__messaging": "{messaging.connectionString}",
         "ConnectionStrings__trace": "{trace.connectionString}",
         "CassandraPort": "{cassandraPort.value}",
-        "CassandraUsername": "{cassandraUsername.value}",
-        "CassandraPassword": "{cassandraPassword.value}"
+        "cassandraUser": "{cassandraUser.value}",
+        "cassandraPass": "{cassandraPass.value}"
       },
       "bindings": {
         "http": {
@@ -62,8 +62,8 @@
         "ConnectionStrings__messaging": "{messaging.connectionString}",
         "ConnectionStrings__trace": "{trace.connectionString}",
         "CassandraPort": "{cassandraPort.value}",
-        "CassandraUsername": "{cassandraUsername.value}",
-        "CassandraPassword": "{cassandraPassword.value}"
+        "cassandraUser": "{cassandraUser.value}",
+        "cassandraPass": "{cassandraPass.value}"
       },
       "bindings": {
         "http": {
@@ -88,8 +88,8 @@
         "ConnectionStrings__messaging": "{messaging.connectionString}",
         "ConnectionStrings__trace": "{trace.connectionString}",
         "CassandraPort": "{cassandraPort.value}",
-        "CassandraUsername": "{cassandraUsername.value}",
-        "CassandraPassword": "{cassandraPassword.value}"
+        "cassandraUser": "{cassandraUser.value}",
+        "cassandraPass": "{cassandraPass.value}"
       },
       "bindings": {
         "http": {
@@ -165,18 +165,18 @@
         }
       }
     },
-    "cassandraUsername": {
+    "cassandraUser": {
       "type": "parameter.v0",
-      "value": "{cassandraUsername.inputs.value}",
+      "value": "{cassandraUser.inputs.value}",
       "inputs": {
         "value": {
           "type": "string"
         }
       }
     },
-    "cassandraPassword": {
+    "cassandraPass": {
       "type": "parameter.v0",
-      "value": "{cassandraPassword.inputs.value}",
+      "value": "{cassandraPass.inputs.value}",
       "inputs": {
         "value": {
           "type": "string"

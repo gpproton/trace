@@ -44,8 +44,8 @@ public static class CassandraExtension {
         builder.Services.AddSingleton<ICluster>(provider => {
             var host = builder.Configuration.GetValue<string>("cassandraHost", "localhost");
             var port = builder.Configuration.GetValue<int>("cassandraPort", 9042);
-            var username = builder.Configuration.GetValue<string>("cassandraUsername", "cassandra");
-            var password = builder.Configuration.GetValue<string>("cassandraPassword", "cassandra");
+            var username = builder.Configuration.GetValue<string>("cassandraUser", "cassandra");
+            var password = builder.Configuration.GetValue<string>("cassandraPass", "cassandra");
             var queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.One);
 
             return Cluster.Builder()

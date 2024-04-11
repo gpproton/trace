@@ -12,86 +12,105 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Monday, 11th Mar 2024
+// Created At: Thursday, 11th Apr 2024
 // Modified By: Godwin peter .O
-// Modified At: Mon Mar 18 2024
+// Modified At: Thu Apr 11 2024
 
 using Trace.AppHost;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var cache = builder.AddRedis("cache", port: 6379)
-    .WithImage("docker.io/redis/redis-stack")
-    .WithImageTag("7.2.0-v6");
+MessagingUser = builder.AddParameter("MessagingUser");
+MessagingPass = builder.AddParameter("MessagingPass");
+CassandraPort = builder.AddParameter("CassandraPort");
+CassandraUser = builder.AddParameter("CassandraUser");
+CassandraPass = builder.AddParameter("CassandraPass");
+DbUser = builder.AddParameter("DbUser");
+DbPass = builder.AddParameter("DbPass");
 
-/** App Services **/
-var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core");
-var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration");
-var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation");
-var manager = builder.AddProject<Projects.Trace_Manager>("manager");
-var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway");
-var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend");
+var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core")
+    .AddProjectParameters();
 
-// Only for deployment
-if (builder.ExecutionContext.IsPublishMode) {
-    var cassandraPort = builder.AddParameter("cassandraPort");
-    var cassandraUsername = builder.AddParameter("cassandraUsername");
-    var cassandraPassword = builder.AddParameter("cassandraPassword");
+var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration")
+    .AddProjectParameters();
 
-    var messaging = builder.AddRabbitMQ("messaging", port: 5672)
-    .WithImage("rabbitmq")
-    .WithImageTag("3-management-alpine")
-    .WithEnvironment("RABBITMQ_DEFAULT_USER", "guest")
-    .WithEnvironment("RABBITMQ_DEFAULT_PASS", "guest");
+var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
+   .AddProjectParameters();
 
-    var db = builder.AddPostgres("db", port: 5432, password: "trace")
-    .WithImage("postgis/postgis")
-    .WithImageTag("15-3.3")
-    .AddDatabase("trace");
-
-    // TODO: Improve cassandra resource
-    builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
-
-    // Binds containers to services
-    coreService.WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
-    .WithEnvironment("CassandraPort", cassandraPort)
-    .WithEnvironment("CassandraUsername", cassandraUsername)
-    .WithEnvironment("CassandraPassword", cassandraPassword);
-
-    integrationService.WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
-    .WithEnvironment("CassandraPort", cassandraPort)
-    .WithEnvironment("CassandraUsername", cassandraUsername)
-    .WithEnvironment("CassandraPassword", cassandraPassword);
-
-    routingService.WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
-    .WithEnvironment("CassandraPort", cassandraPort)
-    .WithEnvironment("CassandraUsername", cassandraUsername)
-    .WithEnvironment("CassandraPassword", cassandraPassword);
-
-    gateway.WithReference(cache)
+var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway")
     .WithReference(coreService)
     .WithReference(integrationService)
     .WithReference(routingService);
 
+var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
+    .WithReference(gateway)
+    .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
+    .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
+
+var manager = builder.AddProject<Projects.Trace_Manager>("manager")
+    .AddProjectParameters();
+
+if (builder.ExecutionContext.IsRunMode) {
+    builder.AddExternalContainer("cache", "cache");
+    builder.AddExternalContainer("messaging", "messaging");
+    builder.AddExternalContainer("db", "db");
+    builder.AddExternalContainer("warehouse", "scylladb");
+}
+
+if (builder.ExecutionContext.IsPublishMode) {
+    var cache = builder.AddRedis("cache", 6379)
+    .WithImage("docker.io/redis/redis-stack-server")
+    .WithImageTag("7.2.0-v10");
+
+    var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5672);
+
+    var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
+        .WithImage("postgis/postgis")
+        .WithImageTag("15-3.3")
+        .AddDatabase("trace");
+
+    // TODO: Improve cassandra resource
+    builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
+
+    coreService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
+    integrationService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
+    routingService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db);
+
     manager.WithReference(cache)
     .WithReference(messaging)
-    .WithReference(db)
-    .WithEnvironment("CassandraPort", cassandraPort)
-    .WithEnvironment("CassandraUsername", cassandraUsername)
-    .WithEnvironment("CassandraPassword", cassandraPassword);
+    .WithReference(db);
 
-    frontend
-        .WithReference(gateway)
-        .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
-        .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"))
-        .WithReference(cache);
-
+    gateway.WithReference(cache);
+    frontend.WithReference(cache);
 }
 
 builder.Build().Run();
+
+public static partial class Program {
+    private static IResourceBuilder<ParameterResource>? MessagingUser { get; set; }
+    private static IResourceBuilder<ParameterResource>? MessagingPass { get; set; }
+    private static IResourceBuilder<ParameterResource>? CassandraPort { get; set; }
+    private static IResourceBuilder<ParameterResource>? CassandraUser { get; set; }
+    private static IResourceBuilder<ParameterResource>? CassandraPass { get; set; }
+    private static IResourceBuilder<ParameterResource>? DbUser { get; set; }
+    private static IResourceBuilder<ParameterResource>? DbPass { get; set; }
+
+    private static IResourceBuilder<ProjectResource> AddProjectParameters(this IResourceBuilder<ProjectResource> builder) {
+        return builder
+            .WithEnvironment("MessagingUser", MessagingUser ?? throw new InvalidOperationException())
+            .WithEnvironment("MessagingPass", MessagingPass ?? throw new InvalidOperationException())
+            .WithEnvironment("DbUser", DbUser ?? throw new InvalidOperationException())
+            .WithEnvironment("DbPass", DbPass ?? throw new InvalidOperationException())
+            .WithEnvironment("CassandraPort", CassandraPort ?? throw new InvalidOperationException())
+            .WithEnvironment("CassandraUser", CassandraUser ?? throw new InvalidOperationException())
+            .WithEnvironment("CassandraPass", CassandraPass ?? throw new InvalidOperationException());
+    }
+}

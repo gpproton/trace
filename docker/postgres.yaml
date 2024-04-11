@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 volumes:
   db:
@@ -12,7 +12,7 @@ services:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: trace
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: trace
     volumes:
       - db:/var/lib/postgresql/data/pgdata

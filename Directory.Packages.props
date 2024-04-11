@@ -3,7 +3,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AxolotlVersion>8.0.5</AxolotlVersion>
-    <AspireVersion>8.0.0-preview.4.24156.9</AspireVersion>
+    <AspireVersion>8.0.0-preview.5.24201.12</AspireVersion>
     <OpenTelemetryVersion>1.7.0</OpenTelemetryVersion>
     <AspNetCoreVersion>8.0.2</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
@@ -29,6 +29,7 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="NUnit" Version="4.0.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageVersion Include="CliWrap" Version="3.6.6" />
   </ItemGroup>
   <!-- Axolotl packages -->
   <ItemGroup Label="Axolotl">
@@ -71,6 +72,10 @@
   <!-- Aspire packages -->
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Npgsql" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
@@ -85,9 +90,7 @@
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
     <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.7.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.7.0-beta.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.7.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Process" Version="0.5.0-beta.4" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />
   </ItemGroup>
   <!-- HotChocolate packages -->

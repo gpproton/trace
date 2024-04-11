@@ -25,39 +25,32 @@ public static class CassandraExtensions {
 
         return builder.AddResource(new CassandraResource(name))
             .WithAnnotation(new ContainerImageAnnotation { Image = "scylladb/scylla", Tag = "5.4" })
-            .WithEndpoint(containerPort: 9042, hostPort: hostPort, scheme: "tcp", name: "cassandra", isProxied: isProxied)
-            .WithEndpoint(containerPort: 9160, hostPort: thriftPort, scheme: "tcp", name: "thrift", isProxied: isProxied);
-    }
-
-    public static IResourceBuilder<ProjectResource> AddCassandraParameters(this IResourceBuilder<ProjectResource> builder) {
-        var resourceBuilder = builder.ApplicationBuilder;
-        var cassandraPort = resourceBuilder.AddParameter("cassandraPort");
-        var cassandraUsername = resourceBuilder.AddParameter("cassandraUsername");
-        var cassandraPassword = resourceBuilder.AddParameter("cassandraPassword");
-
-        return builder.WithEnvironment("CassandraPort", cassandraPort)
-        .WithEnvironment("CassandraUsername", cassandraUsername)
-        .WithEnvironment("CassandraPassword", cassandraPassword);
+            .WithEndpoint(targetPort: 9042, port: hostPort, scheme: "tcp", name: "cassandra", isProxied: isProxied)
+            .WithEndpoint(targetPort: 9160, port: thriftPort, scheme: "tcp", name: "thrift", isProxied: isProxied);
     }
 }
 
 public class CassandraResource(string name) : Resource(name), IResourceWithConnectionString, IResourceWithEnvironment {
+    public ReferenceExpression ConnectionStringExpression => throw new NotImplementedException();
 
     public string? GetConnectionString() {
-        if (!this.TryGetAllocatedEndPoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
+        if (!this.TryGetEndpoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
 
-        var endpoint = endpoints.Where(a => a.Name != "cassandra").Single();
-        return $"{endpoint.Address}";
+        var endpoint = endpoints.Single(a => a.Name != "cassandra");
+
+        return $"{endpoint?.AllocatedEndpoint?.Address}";
     }
 
     public CassandraOptions GetConfig() {
         if (!this.TryGetEnvironmentVariables(out var env)) throw new InvalidOperationException("Resource has not been allocated yet");
-        if (!this.TryGetAllocatedEndPoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
-        var cassandra = endpoints.Where(a => a.Name != "cassandra").Single();
+        if (!this.TryGetEndpoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
+
+
+        var cassandra = endpoints.Single(a => a.Name != "cassandra");
 
         return new CassandraOptions {
-            Address = cassandra.Address,
-            Port = cassandra.Port
+            Address = cassandra?.AllocatedEndpoint?.Address,
+            Port = cassandra?.Port
         };
     }
 }
