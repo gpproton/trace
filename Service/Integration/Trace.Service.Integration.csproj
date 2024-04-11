@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" />
-    <PackageReference Include="Grpc.AspNetCore" />
-    <PackageReference Include="Google.Protobuf" />
-    <PackageReference Include="Google.Protobuf.Tools" />
+    <!-- <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" /> -->
+    <!-- <PackageReference Include="Grpc.AspNetCore" /> -->
+    <!-- <PackageReference Include="Google.Protobuf" /> -->
+    <!-- <PackageReference Include="Google.Protobuf.Tools" /> -->
   </ItemGroup>
 
   <ItemGroup>

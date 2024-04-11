@@ -7,8 +7,8 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 
 WORKDIR /workspace
 COPY . .
-RUN dotnet restore "Manager/Service/Trace.Manager.csproj"
-WORKDIR "/workspace/Manager/Service"
+RUN dotnet restore "Manager/Trace.Manager.csproj"
+WORKDIR "/workspace/Manager"
 RUN dotnet build "Trace.Manager.csproj" -c Release -o /app/build
 
 FROM build AS publish

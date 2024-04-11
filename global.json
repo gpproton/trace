@@ -26,7 +26,7 @@
     "k:destroy": "cd AppHost; dotnet aspirate destroy",
     "k:build": "cd AppHost; dotnet aspirate build",
     "k:frontend": "kubectl port-forward svc/frontend 4040:8080",
-    "opt:migrate": "dotnet ef migrations add --project Infrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
-    "opt:update": "dotnet ef database update --project nfrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
+    "m:run": "dotnet ef migrations add --project Infrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
+    "m:update": "dotnet ef database update --project nfrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
   }
 }

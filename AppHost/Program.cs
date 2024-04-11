@@ -30,6 +30,10 @@ var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend");
 
 // Only for deployment
 if (builder.ExecutionContext.IsPublishMode) {
+    var cassandraPort = builder.AddParameter("cassandraPort");
+    var cassandraUsername = builder.AddParameter("cassandraUsername");
+    var cassandraPassword = builder.AddParameter("cassandraPassword");
+
     var cache = builder.AddRedis("cache", port: 6379);
     var messaging = builder.AddRabbitMQ("messaging", port: 5672)
     .WithImage("rabbitmq")
@@ -47,28 +51,35 @@ if (builder.ExecutionContext.IsPublishMode) {
     coreService.WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
-    .AddCassandraParameters();
+    .WithEnvironment("CassandraPort", cassandraPort)
+    .WithEnvironment("CassandraUsername", cassandraUsername)
+    .WithEnvironment("CassandraPassword", cassandraPassword);
 
     integrationService.WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
-    .AddCassandraParameters();
+    .WithEnvironment("CassandraPort", cassandraPort)
+    .WithEnvironment("CassandraUsername", cassandraUsername)
+    .WithEnvironment("CassandraPassword", cassandraPassword);
 
-    routingService.WithReference(messaging)
-    .WithReference(db)
-    .AddCassandraParameters();
-
-    gateway.WithReference(coreService)
-        .WithReference(integrationService)
-        .WithReference(routingService)
-        .WithReference(cache);
-
-    manager.WithReference(integrationService)
-    .WithReference(routingService)
-    .WithReference(cache)
+    routingService.WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
-    .AddCassandraParameters();
+    .WithEnvironment("CassandraPort", cassandraPort)
+    .WithEnvironment("CassandraUsername", cassandraUsername)
+    .WithEnvironment("CassandraPassword", cassandraPassword);
+
+    gateway.WithReference(cache)
+    .WithReference(coreService)
+    .WithReference(integrationService)
+    .WithReference(routingService);
+
+    manager.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(db)
+    .WithEnvironment("CassandraPort", cassandraPort)
+    .WithEnvironment("CassandraUsername", cassandraUsername)
+    .WithEnvironment("CassandraPassword", cassandraPassword);
 
     frontend
         .WithReference(gateway)
