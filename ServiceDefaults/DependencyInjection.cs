@@ -35,7 +35,7 @@ public static class DependencyInjection {
 
         builder.Configuration
             .SetBasePath(root)
-            .AddJsonFile("config/appsettings.json", optional: true, reloadOnChange: true)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
             .AddJsonFile("config/appsettings.Shared.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"config/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
