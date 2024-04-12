@@ -25,7 +25,7 @@ builder.AddRedisOutputCache("cache");
 builder.Services.RegisterDefaultServices();
 // TODO: Refactor later for domain pull
 // from database or cache
-builder.Services.AddLettuceEncrypt();
+// builder.Services.AddLettuceEncrypt();
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
     .AddServiceDiscoveryDestinationResolver();
