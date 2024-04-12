@@ -85,7 +85,7 @@ services:
     restart: unless-stopped
   gateway:
     container_name: "gateway"
-    image: "ghcr.io/drolx/trace-gateway:0.0.1-preview.6"
+    image: "ghcr.io/drolx/trace-service-gateway:0.0.1-preview.6"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
