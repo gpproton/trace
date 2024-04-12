@@ -44,6 +44,7 @@ services:
   manager:
     <<: *app
     image: ${REGISTRY}/trace-manager:${VERSION}
+    container_name: manager
     build:
       context: .
       dockerfile: Manager/Dockerfile
@@ -55,6 +56,7 @@ services:
   frontend:
     <<: *app
     image: ${REGISTRY}/trace-frontend:${VERSION}
+    container_name: frontend
     build:
       context: .
       dockerfile: Host/Frontend/Dockerfile
@@ -66,6 +68,7 @@ services:
   website:
     <<: *app
     image: ${REGISTRY}/trace-website:${VERSION}
+    container_name: website
     build:
       context: .
       dockerfile: Host/Website/Dockerfile
@@ -77,6 +80,7 @@ services:
   service-gateway:
     <<: *app
     image: ${REGISTRY}/trace-service-gateway:${VERSION}
+    container_name: service-gateway
     build:
       context: .
       dockerfile: Host/Gateway/Dockerfile
@@ -88,6 +92,7 @@ services:
   service-core:
     <<: *app
     image: ${REGISTRY}/trace-service-core:${VERSION}
+    container_name: service-core
     build:
       context: .
       dockerfile: Service/Core/Dockerfile
@@ -99,6 +104,7 @@ services:
   service-integration:
     <<: *app
     image: ${REGISTRY}/trace-service-integration:${VERSION}
+    container_name: service-integration
     build:
       context: .
       dockerfile: Service/Integration/Dockerfile
@@ -110,6 +116,7 @@ services:
   service-navigation:
     <<: *app
     image: ${REGISTRY}/trace-service-navigation:${VERSION}
+    container_name: service-navigation
     build:
       context: .
       dockerfile: Service/Navigation/Dockerfile
