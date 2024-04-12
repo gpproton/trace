@@ -70,7 +70,11 @@ if (builder.ExecutionContext.IsPublishMode) {
         .AddDatabase("trace");
 
     // TODO: Improve cassandra resource
-    builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
+    // builder.AddCassandra("scylladb", 9042, thriftPort: 9160, isProxied: false);
+    builder.AddContainer("warehouse", "scylladb/scylla")
+       .WithImageTag("5.4")
+       .WithEndpoint(targetPort: 9042, scheme: "tcp", name: "cassandra", isProxied: true)
+       .WithEndpoint(targetPort: 9160, scheme: "tcp", name: "thrift", isProxied: true);
 
     coreService.WithReference(cache)
     .WithReference(messaging)

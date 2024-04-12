@@ -20,12 +20,12 @@
     "dev": "dotnet watch --project AppHost",
     "run": "dotnet run --project AppHost",
     "build": "dotnet build --configuration Debug",
-    "k:generate": "cd AppHost; dotnet aspirate generate --skip-build",
-    "k:compose": "cd AppHost; dotnet aspirate generate --skip-build --output-format compose",
-    "k:apply": "cd AppHost; dotnet aspirate apply",
-    "k:destroy": "cd AppHost; dotnet aspirate destroy",
-    "k:build": "cd AppHost; dotnet aspirate build",
-    "k:frontend": "kubectl port-forward svc/frontend 4040:8080",
+    "a:generate": "dotnet aspirate generate --non-interactive --include-dashboard --skip-build --project-path AppHost/",
+    "a:compose": "dotnet aspirate generate --non-interactive --include-dashboard --skip-build --output-format compose --project-path AppHost/",
+    "a:apply": "cd AppHost; dotnet aspirate apply",
+    "a:destroy": "cd AppHost; dotnet aspirate destroy",
+    "a:build": "cd AppHost; dotnet aspirate build",
+    "a:frontend": "kubectl port-forward svc/frontend 4040:8080",
     "m:run": "dotnet ef migrations add --project Infrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
     "m:update": "dotnet ef database update --project nfrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
   }

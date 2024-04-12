@@ -1,17 +1,85 @@
 {
   "resources": {
+    "MessagingUser": {
+      "type": "parameter.v0",
+      "value": "{MessagingUser.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "MessagingPass": {
+      "type": "parameter.v0",
+      "value": "{MessagingPass.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "CassandraPort": {
+      "type": "parameter.v0",
+      "value": "{CassandraPort.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "CassandraUser": {
+      "type": "parameter.v0",
+      "value": "{CassandraUser.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "CassandraPass": {
+      "type": "parameter.v0",
+      "value": "{CassandraPass.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "DbUser": {
+      "type": "parameter.v0",
+      "value": "{DbUser.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "DbPass": {
+      "type": "parameter.v0",
+      "value": "{DbPass.inputs.value}",
+      "inputs": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
     "service-core": {
       "type": "project.v0",
       "path": "../Service/Core/Trace.Service.Core.csproj",
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "MessagingUser": "{MessagingUser.value}",
+        "MessagingPass": "{MessagingPass.value}",
+        "DbUser": "{DbUser.value}",
+        "DbPass": "{DbPass.value}",
+        "CassandraPort": "{CassandraPort.value}",
+        "CassandraUser": "{CassandraUser.value}",
+        "CassandraPass": "{CassandraPass.value}",
         "ConnectionStrings__cache": "{cache.connectionString}",
         "ConnectionStrings__messaging": "{messaging.connectionString}",
-        "ConnectionStrings__trace": "{trace.connectionString}",
-        "CassandraPort": "{cassandraPort.value}",
-        "cassandraUser": "{cassandraUser.value}",
-        "cassandraPass": "{cassandraPass.value}"
+        "ConnectionStrings__trace": "{trace.connectionString}"
       },
       "bindings": {
         "http": {
@@ -32,12 +100,17 @@
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "MessagingUser": "{MessagingUser.value}",
+        "MessagingPass": "{MessagingPass.value}",
+        "DbUser": "{DbUser.value}",
+        "DbPass": "{DbPass.value}",
+        "CassandraPort": "{CassandraPort.value}",
+        "CassandraUser": "{CassandraUser.value}",
+        "CassandraPass": "{CassandraPass.value}",
         "ConnectionStrings__cache": "{cache.connectionString}",
         "ConnectionStrings__messaging": "{messaging.connectionString}",
-        "ConnectionStrings__trace": "{trace.connectionString}",
-        "CassandraPort": "{cassandraPort.value}",
-        "cassandraUser": "{cassandraUser.value}",
-        "cassandraPass": "{cassandraPass.value}"
+        "ConnectionStrings__trace": "{trace.connectionString}"
       },
       "bindings": {
         "http": {
@@ -58,38 +131,17 @@
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "MessagingUser": "{MessagingUser.value}",
+        "MessagingPass": "{MessagingPass.value}",
+        "DbUser": "{DbUser.value}",
+        "DbPass": "{DbPass.value}",
+        "CassandraPort": "{CassandraPort.value}",
+        "CassandraUser": "{CassandraUser.value}",
+        "CassandraPass": "{CassandraPass.value}",
         "ConnectionStrings__cache": "{cache.connectionString}",
         "ConnectionStrings__messaging": "{messaging.connectionString}",
-        "ConnectionStrings__trace": "{trace.connectionString}",
-        "CassandraPort": "{cassandraPort.value}",
-        "cassandraUser": "{cassandraUser.value}",
-        "cassandraPass": "{cassandraPass.value}"
-      },
-      "bindings": {
-        "http": {
-          "scheme": "http",
-          "protocol": "tcp",
-          "transport": "http"
-        },
-        "https": {
-          "scheme": "https",
-          "protocol": "tcp",
-          "transport": "http"
-        }
-      }
-    },
-    "manager": {
-      "type": "project.v0",
-      "path": "../Manager/Trace.Manager.csproj",
-      "env": {
-        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
-        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
-        "ConnectionStrings__cache": "{cache.connectionString}",
-        "ConnectionStrings__messaging": "{messaging.connectionString}",
-        "ConnectionStrings__trace": "{trace.connectionString}",
-        "CassandraPort": "{cassandraPort.value}",
-        "cassandraUser": "{cassandraUser.value}",
-        "cassandraPass": "{cassandraPass.value}"
+        "ConnectionStrings__trace": "{trace.connectionString}"
       },
       "bindings": {
         "http": {
@@ -110,13 +162,14 @@
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
-        "ConnectionStrings__cache": "{cache.connectionString}",
-        "services__service-core__0": "{service-core.bindings.http.url}",
-        "services__service-core__1": "{service-core.bindings.https.url}",
-        "services__service-integration__0": "{service-integration.bindings.http.url}",
-        "services__service-integration__1": "{service-integration.bindings.https.url}",
-        "services__service-navigation__0": "{service-navigation.bindings.http.url}",
-        "services__service-navigation__1": "{service-navigation.bindings.https.url}"
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "services__service-core__http__0": "{service-core.bindings.http.url}",
+        "services__service-core__https__0": "{service-core.bindings.https.url}",
+        "services__service-integration__http__0": "{service-integration.bindings.http.url}",
+        "services__service-integration__https__0": "{service-integration.bindings.https.url}",
+        "services__service-navigation__http__0": "{service-navigation.bindings.http.url}",
+        "services__service-navigation__https__0": "{service-navigation.bindings.https.url}",
+        "ConnectionStrings__cache": "{cache.connectionString}"
       },
       "bindings": {
         "http": {
@@ -137,11 +190,12 @@
       "env": {
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "services__gateway__http__0": "{gateway.bindings.http.url}",
+        "services__gateway__https__0": "{gateway.bindings.https.url}",
         "services__geocoding": "https://nominatim.openstreetmap.org/",
         "services__routing": "https://valhalla.openstreetmap.de/",
-        "ConnectionStrings__cache": "{cache.connectionString}",
-        "services__gateway__0": "{gateway.bindings.http.url}",
-        "services__gateway__1": "{gateway.bindings.https.url}"
+        "ConnectionStrings__cache": "{cache.connectionString}"
       },
       "bindings": {
         "http": {
@@ -156,100 +210,83 @@
         }
       }
     },
-    "cassandraPort": {
-      "type": "parameter.v0",
-      "value": "{cassandraPort.inputs.value}",
-      "inputs": {
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "cassandraUser": {
-      "type": "parameter.v0",
-      "value": "{cassandraUser.inputs.value}",
-      "inputs": {
-        "value": {
-          "type": "string"
-        }
-      }
-    },
-    "cassandraPass": {
-      "type": "parameter.v0",
-      "value": "{cassandraPass.inputs.value}",
-      "inputs": {
-        "value": {
-          "type": "string"
+    "manager": {
+      "type": "project.v0",
+      "path": "../Manager/Trace.Manager.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "MessagingUser": "{MessagingUser.value}",
+        "MessagingPass": "{MessagingPass.value}",
+        "DbUser": "{DbUser.value}",
+        "DbPass": "{DbPass.value}",
+        "CassandraPort": "{CassandraPort.value}",
+        "CassandraUser": "{CassandraUser.value}",
+        "CassandraPass": "{CassandraPass.value}",
+        "ConnectionStrings__cache": "{cache.connectionString}",
+        "ConnectionStrings__messaging": "{messaging.connectionString}",
+        "ConnectionStrings__trace": "{trace.connectionString}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
         }
       }
     },
     "cache": {
       "type": "container.v0",
       "connectionString": "{cache.bindings.tcp.host}:{cache.bindings.tcp.port}",
-      "image": "redis:7.2.4",
+      "image": "docker.io/redis/redis-stack-server:7.2.0-v10",
       "bindings": {
         "tcp": {
           "scheme": "tcp",
           "protocol": "tcp",
           "transport": "tcp",
-          "containerPort": 6379
+          "targetPort": 6379
         }
       }
     },
     "messaging": {
       "type": "container.v0",
-      "connectionString": "amqp://guest:{messaging.inputs.password}@{messaging.bindings.tcp.host}:{messaging.bindings.tcp.port}",
-      "image": "rabbitmq:3-management-alpine",
+      "connectionString": "amqp://{MessagingUser.value}:{MessagingPass.value}@{messaging.bindings.tcp.host}:{messaging.bindings.tcp.port}",
+      "image": "rabbitmq:3",
       "env": {
-        "RABBITMQ_DEFAULT_USER": "guest",
-        "RABBITMQ_DEFAULT_PASS": "guest"
+        "RABBITMQ_DEFAULT_USER": "{MessagingUser.value}",
+        "RABBITMQ_DEFAULT_PASS": "{MessagingPass.value}"
       },
       "bindings": {
         "tcp": {
           "scheme": "tcp",
           "protocol": "tcp",
           "transport": "tcp",
-          "containerPort": 5672
-        }
-      },
-      "inputs": {
-        "password": {
-          "type": "string",
-          "secret": true,
-          "default": {
-            "generate": {
-              "minLength": 10
-            }
-          }
+          "targetPort": 5672
         }
       }
     },
     "db": {
       "type": "container.v0",
-      "connectionString": "Host={db.bindings.tcp.host};Port={db.bindings.tcp.port};Username=postgres;Password={db.inputs.password}",
+      "connectionString": "Host={db.bindings.tcp.host};Port={db.bindings.tcp.port};Username={DbUser.value};Password={DbPass.value}",
       "image": "postgis/postgis:15-3.3",
       "env": {
         "POSTGRES_HOST_AUTH_METHOD": "scram-sha-256",
         "POSTGRES_INITDB_ARGS": "--auth-host=scram-sha-256 --auth-local=scram-sha-256",
-        "POSTGRES_PASSWORD": "{db.inputs.password}"
+        "POSTGRES_USER": "{DbUser.value}",
+        "POSTGRES_PASSWORD": "{DbPass.value}"
       },
       "bindings": {
         "tcp": {
           "scheme": "tcp",
           "protocol": "tcp",
           "transport": "tcp",
-          "containerPort": 5432
-        }
-      },
-      "inputs": {
-        "password": {
-          "type": "string",
-          "secret": true,
-          "default": {
-            "generate": {
-              "minLength": 10
-            }
-          }
+          "targetPort": 5432
         }
       }
     },
@@ -257,8 +294,23 @@
       "type": "value.v0",
       "connectionString": "{db.connectionString};Database=trace"
     },
-    "scylladb": {
-      "error": "This resource does not support generation in the manifest."
+    "warehouse": {
+      "type": "container.v0",
+      "image": "scylladb/scylla:5.4",
+      "bindings": {
+        "cassandra": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "targetPort": 9042
+        },
+        "thrift": {
+          "scheme": "tcp",
+          "protocol": "tcp",
+          "transport": "tcp",
+          "targetPort": 9160
+        }
+      }
     }
   }
 }
