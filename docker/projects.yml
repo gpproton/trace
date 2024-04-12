@@ -13,7 +13,7 @@ x-app: &app
     CassandraPort: "guest"
     CassandraUser: "cassandra"
     CassandraPass: "cassandra"
-    ConnectionStrings__cache: "cache:6379"
+    ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
     ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
     ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
     OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:4317"
