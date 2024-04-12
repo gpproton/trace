@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <UserSecretsId>aspnet-Trace.Manager-1efca38a-bc2c-4129-a543-a8e8640b4a78</UserSecretsId>
+    <Title>Trace.Manager</Title>
+    <ContainerRepository>$(ContainerRepo)/trace-manager</ContainerRepository>
   </PropertyGroup>
 
   <ItemGroup>

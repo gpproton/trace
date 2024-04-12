@@ -43,5 +43,6 @@
     "yarn": "please-use-pnpm",
     "bun": ">= 1.0.1",
     "node": ">= 16.0.0"
-  }
+  },
+  "packageManager": "pnpm@8.11.0+sha1.01bf39424f1008f29012bbae851d2acb8a20a0d0"
 }

@@ -37,13 +37,13 @@ var integrationService = builder.AddProject<Projects.Trace_Service_Integration>(
 var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
    .AddProjectParameters();
 
-var gateway = builder.AddProject<Projects.Trace_Gateway>("gateway")
+var gatewayService = builder.AddProject<Projects.Trace_Gateway>("service-gateway")
     .WithReference(coreService)
     .WithReference(integrationService)
     .WithReference(routingService);
 
 var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
-    .WithReference(gateway)
+    .WithReference(gatewayService)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
 
@@ -92,7 +92,7 @@ if (builder.ExecutionContext.IsPublishMode) {
     .WithReference(messaging)
     .WithReference(db);
 
-    gateway.WithReference(cache);
+    gatewayService.WithReference(cache);
     frontend.WithReference(cache);
 }
 

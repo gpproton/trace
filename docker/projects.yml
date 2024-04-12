@@ -10,8 +10,8 @@ x-app: &app
     ConnectionStrings__db: "Host=db;Port=5432;Database=trace;Username=postgres;Password=trace;Timeout=15;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
-    services__gateway__0: "http://gateway:8080"
-    services__gateway__1: "https://gateway:8443"
+    services__service-gateway__0: "http://service-gateway:8080"
+    services__service-gateway__1: "https://service-gateway:8443"
     services__service-core__0: "http://service-core:8080"
     services__service-core__1: "https://service-core:8443"
     services__service-integration__0: "http://service-integration:8080"
@@ -42,9 +42,9 @@ services:
     ports:
       - 4580:8080
 
-  gateway:
+  service-gateway:
     <<: *app
-    image: ${REGISTRY}/trace-gateway:${VERSION}
+    image: ${REGISTRY}/trace-service-gateway:${VERSION}
     build:
       context: ..
       dockerfile: Host/Gateway/Dockerfile
