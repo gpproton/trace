@@ -5,12 +5,14 @@ volumes:
 
 services:
   cache:
-    image: docker.io/redis/redis-stack:7.2.0-v6
+    image: docker.io/redis/redis-stack:7.2.0-v10
     container_name: cache
     hostname: cache
     restart: unless-stopped
     volumes:
       - cache:/data
+    environment:
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
       - 6379:6379
       - 8011:8001
