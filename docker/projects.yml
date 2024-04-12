@@ -5,9 +5,18 @@ x-app: &app
     ASPNETCORE_URLS: "http://+:8080"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
-    ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    MessagingUser: "guest"
+    MessagingPass: "guest"
+    DbUser: "postgres"
+    DbPass: "postgres"
+    CassandraPort: "guest"
+    CassandraUser: "cassandra"
+    CassandraPass: "cassandra"
+    ConnectionStrings__cache: "cache:6379"
     ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
-    ConnectionStrings__db: "Host=db;Port=5432;Database=trace;Username=postgres;Password=trace;Timeout=15;Pooling=true;MinPoolSize=1;MaxPoolSize=20;ConnectionLifeTime=15"
+    ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:4317"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
     services__service-gateway__0: "http://service-gateway:8080"
@@ -24,7 +33,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-manager:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Manager/Dockerfile
     environment:
       <<: *app-env
@@ -35,7 +44,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-frontend:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Host/Frontend/Dockerfile
     environment:
       <<: *app-env
@@ -46,7 +55,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-gateway:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Host/Gateway/Dockerfile
     environment:
       <<: *app-env
@@ -57,7 +66,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-core:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Service/Core/Dockerfile
     environment:
       <<: *app-env
@@ -68,7 +77,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-integration:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Service/Integration/Dockerfile
     environment:
       <<: *app-env
@@ -79,7 +88,7 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-navigation:${VERSION}
     build:
-      context: ..
+      context: .
       dockerfile: Service/Navigation/Dockerfile
     environment:
       <<: *app-env
