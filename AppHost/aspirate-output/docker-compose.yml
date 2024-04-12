@@ -22,7 +22,7 @@ services:
       MessagingPass: "guest"
       DbUser: "postgres"
       DbPass: "postgres"
-      CassandraPort: "guest"
+      CassandraPort: "9042"
       CassandraUser: "cassandra"
       CassandraPass: "cassandra"
       ConnectionStrings__cache: "cache:6379"
@@ -46,7 +46,7 @@ services:
       MessagingPass: "guest"
       DbUser: "postgres"
       DbPass: "postgres"
-      CassandraPort: "guest"
+      CassandraPort: "9042"
       CassandraUser: "cassandra"
       CassandraPass: "cassandra"
       ConnectionStrings__cache: "cache:6379"
@@ -70,7 +70,7 @@ services:
       MessagingPass: "guest"
       DbUser: "postgres"
       DbPass: "postgres"
-      CassandraPort: "guest"
+      CassandraPort: "9042"
       CassandraUser: "cassandra"
       CassandraPass: "cassandra"
       ConnectionStrings__cache: "cache:6379"
@@ -83,8 +83,8 @@ services:
     - target: 8443
       published: 10005
     restart: unless-stopped
-  gateway:
-    container_name: "gateway"
+  service-gateway:
+    container_name: "service-gateway"
     image: "ghcr.io/drolx/trace-service-gateway:0.0.1-preview.6"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
@@ -108,7 +108,7 @@ services:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
       ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
-      services__gateway__http__0: "http://gateway:8080"
+      services__service-gateway__http__0: "http://service-gateway:8080"
       services__geocoding: "https://nominatim.openstreetmap.org/"
       services__routing: "https://valhalla.openstreetmap.de/"
       ConnectionStrings__cache: "cache:6379"
@@ -119,9 +119,24 @@ services:
     - target: 8443
       published: 10009
     restart: unless-stopped
+  website:
+    container_name: "website"
+    image: "ghcr.io/drolx/trace-website:0.0.1-preview.6"
+    environment:
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+      OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+      ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+      ConnectionStrings__cache: "cache:6379"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:4317"
+    ports:
+    - target: 8080
+      published: 10010
+    - target: 8443
+      published: 10011
+    restart: unless-stopped
   manager:
     container_name: "manager"
-    image: "ghcr.io/manager:0.0.1-preview.6"
+    image: "ghcr.io/drolx/trace-manager:0.0.1-preview.6"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -130,7 +145,7 @@ services:
       MessagingPass: "guest"
       DbUser: "postgres"
       DbPass: "postgres"
-      CassandraPort: "guest"
+      CassandraPort: "9042"
       CassandraUser: "cassandra"
       CassandraPass: "cassandra"
       ConnectionStrings__cache: "cache:6379"
@@ -139,9 +154,9 @@ services:
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:4317"
     ports:
     - target: 8080
-      published: 10010
+      published: 10012
     - target: 8443
-      published: 10011
+      published: 10013
     restart: unless-stopped
   cache:
     container_name: "cache"

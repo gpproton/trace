@@ -156,7 +156,7 @@
         }
       }
     },
-    "gateway": {
+    "service-gateway": {
       "type": "project.v0",
       "path": "../Host/Gateway/Trace.Gateway.csproj",
       "env": {
@@ -191,10 +191,32 @@
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
-        "services__gateway__http__0": "{gateway.bindings.http.url}",
-        "services__gateway__https__0": "{gateway.bindings.https.url}",
+        "services__service-gateway__http__0": "{service-gateway.bindings.http.url}",
+        "services__service-gateway__https__0": "{service-gateway.bindings.https.url}",
         "services__geocoding": "https://nominatim.openstreetmap.org/",
         "services__routing": "https://valhalla.openstreetmap.de/",
+        "ConnectionStrings__cache": "{cache.connectionString}"
+      },
+      "bindings": {
+        "http": {
+          "scheme": "http",
+          "protocol": "tcp",
+          "transport": "http"
+        },
+        "https": {
+          "scheme": "https",
+          "protocol": "tcp",
+          "transport": "http"
+        }
+      }
+    },
+    "website": {
+      "type": "project.v0",
+      "path": "../Host/Website/Trace.Host.Website.csproj",
+      "env": {
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES": "true",
+        "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
+        "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
         "ConnectionStrings__cache": "{cache.connectionString}"
       },
       "bindings": {
