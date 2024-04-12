@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Host\Frontend\Trace.Frontend.csproj" />
+    <ProjectReference Include="..\Host\Website\Trace.Host.Website.csproj" />
     <ProjectReference Include="..\Host\Gateway\Trace.Gateway.csproj" />
     <ProjectReference Include="..\Manager\Trace.Manager.csproj" />
     <ProjectReference Include="..\Service\Core\Trace.Service.Core.csproj" />

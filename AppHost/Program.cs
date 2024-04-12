@@ -47,6 +47,8 @@ var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
 
+var website = builder.AddProject<Projects.Trace_Host_Website>("website");
+
 var manager = builder.AddProject<Projects.Trace_Manager>("manager")
     .AddProjectParameters();
 
@@ -93,7 +95,9 @@ if (builder.ExecutionContext.IsPublishMode) {
     .WithReference(db);
 
     gatewayService.WithReference(cache);
+
     frontend.WithReference(cache);
+    website.WithReference(cache);
 }
 
 builder.Build().Run();

@@ -51,6 +51,17 @@ services:
     ports:
       - 4580:8080
 
+  website:
+    <<: *app
+    image: ${REGISTRY}/trace-website:${VERSION}
+    build:
+      context: .
+      dockerfile: Host/Website/Dockerfile
+    environment:
+      <<: *app-env
+    ports:
+      - 4600:8080
+
   service-gateway:
     <<: *app
     image: ${REGISTRY}/trace-service-gateway:${VERSION}
