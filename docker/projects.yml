@@ -10,13 +10,13 @@ x-app: &app
     MessagingPass: "guest"
     DbUser: "postgres"
     DbPass: "postgres"
-    CassandraPort: "guest"
+    CassandraPort: 9042
     CassandraUser: "cassandra"
     CassandraPass: "cassandra"
     ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
     ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
     ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:4317"
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
     services__service-gateway__0: "http://service-gateway:8080"
@@ -29,6 +29,18 @@ x-app: &app
     services__service-navigation__1: "https://service-navigation:8443"
 
 services:
+  aspire-dashboard:
+    container_name: "aspire-dashboard"
+    image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.5"
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+    ports:
+    - target: 18888
+      published: 18888
+    - target: 18889
+      published: 4317
+    restart: unless-stopped
+
   manager:
     <<: *app
     image: ${REGISTRY}/trace-manager:${VERSION}
