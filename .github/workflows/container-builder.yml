@@ -16,6 +16,8 @@ jobs:
         include:
           - image: 'ghcr.io/drolx/trace-frontend'
             dockerfile: ./Host/Frontend/Dockerfile
+          - image: 'ghcr.io/drolx/trace-website'
+            dockerfile: ./Host/Website/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-gateway'
             dockerfile: ./Host/Gateway/Dockerfile
           - image: 'ghcr.io/drolx/trace-manager'
