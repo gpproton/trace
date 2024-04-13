@@ -42,7 +42,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
 app.MapReverseProxy();
-app.UseSpaStaticFiles();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

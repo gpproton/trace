@@ -17,8 +17,6 @@ RUN npm i -g pnpm npm
 
 WORKDIR /workspace
 COPY . .
-
-RUN cd client; pnpm install
 RUN dotnet restore "Host/Website/Trace.Host.Website.csproj"
 WORKDIR "/workspace/Host/Website"
 RUN dotnet build "Trace.Host.Website.csproj" -c Release -o /app/build

@@ -36,7 +36,6 @@ app.MapControllers();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
-app.UseSpaStaticFiles();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
