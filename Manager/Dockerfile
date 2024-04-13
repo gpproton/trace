@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 
 WORKDIR /workspace
 COPY . .
-RUN dotnet publish "/workspace/Manager/Trace.Manager.csproj" -c Release -o /app/publish
+RUN dotnet publish "Manager/Trace.Manager.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

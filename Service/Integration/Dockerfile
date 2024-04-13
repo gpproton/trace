@@ -6,7 +6,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build
 WORKDIR /workspace
 COPY . .
-RUN dotnet publish "/workspace/Service/Integration/Trace.Service.Integration.csproj" -c Release -o /app/publish
+RUN dotnet publish "Service/Integration/Trace.Service.Integration.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
