@@ -6,14 +6,14 @@ services:
     environment:
       DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
     ports:
-    - target: 18888
-      published: 18888
-    - target: 18889
-      published: 4317
+      - target: 18888
+        published: 18888
+      - target: 18889
+        published: 4317
     restart: unless-stopped
   service-core:
     container_name: "service-core"
-    image: "ghcr.io/drolx/trace-service-core:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-service-core:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -30,14 +30,14 @@ services:
       ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10000
-    - target: 8443
-      published: 10001
+      - target: 8080
+        published: 10000
+      - target: 8443
+        published: 10001
     restart: unless-stopped
   service-integration:
     container_name: "service-integration"
-    image: "ghcr.io/drolx/trace-service-integration:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-service-integration:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -54,14 +54,14 @@ services:
       ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10002
-    - target: 8443
-      published: 10003
+      - target: 8080
+        published: 10002
+      - target: 8443
+        published: 10003
     restart: unless-stopped
   service-navigation:
     container_name: "service-navigation"
-    image: "ghcr.io/drolx/trace-service-navigation:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-service-navigation:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -78,14 +78,14 @@ services:
       ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10004
-    - target: 8443
-      published: 10005
+      - target: 8080
+        published: 10004
+      - target: 8443
+        published: 10005
     restart: unless-stopped
   service-gateway:
     container_name: "service-gateway"
-    image: "ghcr.io/drolx/trace-service-gateway:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-service-gateway:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -96,14 +96,14 @@ services:
       ConnectionStrings__cache: "cache:6379"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10006
-    - target: 8443
-      published: 10007
+      - target: 8080
+        published: 10006
+      - target: 8443
+        published: 10007
     restart: unless-stopped
   frontend:
     container_name: "frontend"
-    image: "ghcr.io/drolx/trace-frontend:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-frontend:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -114,14 +114,14 @@ services:
       ConnectionStrings__cache: "cache:6379"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10008
-    - target: 8443
-      published: 10009
+      - target: 8080
+        published: 10008
+      - target: 8443
+        published: 10009
     restart: unless-stopped
   website:
     container_name: "website"
-    image: "ghcr.io/drolx/trace-website:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-website:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -129,14 +129,14 @@ services:
       ConnectionStrings__cache: "cache:6379"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10010
-    - target: 8443
-      published: 10011
+      - target: 8080
+        published: 10010
+      - target: 8443
+        published: 10011
     restart: unless-stopped
   manager:
     container_name: "manager"
-    image: "ghcr.io/drolx/trace-manager:0.0.1-preview.8"
+    image: "ghcr.io/drolx/trace-manager:0.0.1-preview.9"
     environment:
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
       OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
@@ -153,10 +153,10 @@ services:
       ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 8080
-      published: 10012
-    - target: 8443
-      published: 10013
+      - target: 8080
+        published: 10012
+      - target: 8443
+        published: 10013
     restart: unless-stopped
   cache:
     container_name: "cache"
@@ -164,8 +164,8 @@ services:
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 6379
-      published: 6379
+      - target: 6379
+        published: 6379
     restart: unless-stopped
   messaging:
     container_name: "messaging"
@@ -175,8 +175,8 @@ services:
       RABBITMQ_DEFAULT_PASS: "guest"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 5672
-      published: 5672
+      - target: 5672
+        published: 5672
     restart: unless-stopped
   db:
     container_name: "db"
@@ -188,8 +188,8 @@ services:
       POSTGRES_PASSWORD: "postgres"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 5432
-      published: 5432
+      - target: 5432
+        published: 5432
     restart: unless-stopped
   warehouse:
     container_name: "warehouse"
@@ -197,8 +197,8 @@ services:
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
     ports:
-    - target: 9042
-      published: 9042
-    - target: 9160
-      published: 9160
+      - target: 9042
+        published: 9042
+      - target: 9160
+        published: 9160
     restart: unless-stopped

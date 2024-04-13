@@ -1,5 +1,3 @@
-version: '3'
-
 x-app: &app
   environment: &app-env
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"

@@ -1,7 +1,7 @@
 {
   "name": "@trace/core",
   "description": "Trace logistics system",
-  "version": "0.0.1-preview.8",
+  "version": "0.0.1-preview.9",
   "repository": {
     "type": "git",
     "url": "https://github.com/drolx/trace.git"
