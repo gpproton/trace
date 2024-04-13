@@ -26,9 +26,9 @@ builder.Services.RegisterDefaultServices();
 // TODO: Refactor later for domain pull
 // from database or cache
 // builder.Services.AddLettuceEncrypt();
-builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
-    .AddServiceDiscoveryDestinationResolver();
+// builder.Services.AddReverseProxy()
+//     .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
+//     .AddServiceDiscoveryDestinationResolver();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -37,15 +37,15 @@ if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
+
 app.MapControllers();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
-app.MapReverseProxy();
+// app.MapReverseProxy();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
-app.MapFallbackToFile("index.html");
 app.MapFallbackToFile("index.html");
 
 app.Run();
