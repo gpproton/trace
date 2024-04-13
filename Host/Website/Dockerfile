@@ -14,17 +14,11 @@ COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
 RUN npm i -g pnpm npm
-
 WORKDIR /workspace
 COPY . .
-RUN dotnet restore "Host/Website/Trace.Host.Website.csproj"
-WORKDIR "/workspace/Host/Website"
-RUN dotnet build "Trace.Host.Website.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "Trace.Host.Website.csproj" -c Release -o /app/publish
+RUN dotnet publish "Host/Website/Trace.Host.Website.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Trace.Host.Website.dll"]
