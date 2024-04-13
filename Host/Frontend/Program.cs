@@ -29,12 +29,24 @@ builder.Services.RegisterDefaultServices();
 builder.Services.AddReverseProxy()
     .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
     .AddServiceDiscoveryDestinationResolver();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+if (!app.Environment.IsDevelopment()) {
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+}
+app.MapControllers();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
 app.MapReverseProxy();
+app.UseSpaStaticFiles();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+app.MapFallbackToFile("index.html");
 app.MapFallbackToFile("index.html");
 
 app.Run();

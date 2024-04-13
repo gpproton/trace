@@ -4,7 +4,7 @@
     <Title>Trace.Host.Website</Title>
     <UserSecretsId>bd15d7c4-4ab5-4b71-9826-24d28bd2df4b</UserSecretsId>
     <ContainerRepository>$(ContainerRepo)/trace-website</ContainerRepository>
-    <SpaRoot>..\..\client\website</SpaRoot>
+    <SpaRoot>..\..\client\website\</SpaRoot>
     <SpaProxyServerUrl>http://localhost:3005</SpaProxyServerUrl>
   </PropertyGroup>
 
