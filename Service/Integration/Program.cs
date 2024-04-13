@@ -62,5 +62,6 @@ app.RegisterGraphQl();
 // app.MapGrpcService<ProtocolService>();
 // app.MapProtocolEndpoint();
 app.MapDeviceEndpoint();
+app.MapGet("/", () => "service.integration");
 
 app.Run();

@@ -48,5 +48,6 @@ var app = builder.Build();
 
 app.RegisterDefaults();
 app.RegisterGraphQl();
+app.MapGet("/", () => "service.navigation");
 
 app.Run();

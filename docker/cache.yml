@@ -11,6 +11,7 @@ services:
       - cache:/data
     environment:
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_SERVICE_NAME: cache
     ports:
       - 6379:6379
       - 8011:8001

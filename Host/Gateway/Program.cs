@@ -49,6 +49,6 @@ builder.Services
 var app = builder.Build();
 app.RegisterDefaults();
 app.RegisterGraphQl();
-app.MapGet("/", () => "gateway");
+app.MapGet("/", () => "service.gateway");
 
 app.Run();
