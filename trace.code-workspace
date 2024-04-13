@@ -108,7 +108,8 @@
         ".gitignore",
         "./.env*",
         "./**/*.yml",
-        "./**/*.yaml"
+        "./**/*.yaml",
+        "./.dockerignore"
       ],
       "autoHeader": "autoSave",
       "enforceHeader": true,
@@ -136,10 +137,13 @@
   "extensions": {
     "recommendations": [
       "ms-dotnettools.vscodeintellicode-csharp",
+      "ms-azuretools.vscode-docker",
       "editorconfig.editorconfig",
       "ms-dotnettools.csharp",
+      "ms-dotnettools.blazorwasm-companion",
       "wayou.vscode-todo-highlight",
       "vscode-icons-team.vscode-icons",
+      "github.vscode-github-actions",
       "gruntfuggly.todo-tree",
       "jacokok.csharp-stretch",
       "psioniq.psi-header"

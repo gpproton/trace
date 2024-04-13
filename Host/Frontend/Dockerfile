@@ -17,14 +17,9 @@ RUN npm i -g pnpm npm
 
 WORKDIR /workspace
 COPY . .
-RUN dotnet restore "Host/Frontend/Trace.Frontend.csproj"
-WORKDIR "/workspace/Host/Frontend"
-RUN dotnet build "Trace.Frontend.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "Trace.Frontend.csproj" -c Release -o /app/publish
+RUN dotnet publish "Host/Frontend/Trace.Frontend.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "Trace.Frontend.dll"]
