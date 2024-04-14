@@ -40,11 +40,18 @@ var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5
     .WithImage("masstransit/rabbitmq")
     .WithOtlpExporter();
 
-ScyllaResource = builder.AddContainer("scylladb", "scylladb/scylla", "5.4")
+var scylladb = builder.AddContainer("scylladb", "scylladb/scylla", "5.4")
     .WithVolume("scylladb", "/var/lib/scylla")
     // .WithArgs("-u", CassandraUser.ToString() ?? "cassandra", "-p", CassandraPass.ToString() ?? "cassandra") // -u cassandra -p cassandra
     .WithOtlpExporter()
-    .WithEndpoint(targetPort: 9042, port: 9042, name: "default", scheme: "tcp", isProxied: true);
+    .WithEndpoint(targetPort: 9042, port: 9042, scheme: "tcp", isProxied: true);
+
+
+if (ScyllaResource is not null && scylladb.Resource.TryGetEndpoints(out var cassandraEndpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
+
+var cassandraEndpoint = cassandraEndpoints?.Single(a => a.Name != "cassandra");
+var cassandraAddress = cassandraEndpoint?.AllocatedEndpoint?.Address;
+var cassandraPort = cassandraEndpoint?.AllocatedEndpoint?.Port.ToString();
 
 var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
     .WithImage("postgis/postgis")
@@ -58,19 +65,25 @@ var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core"
     .WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
+    .WithEnvironment("CassandraHost", cassandraAddress)
+    .WithEnvironment("CassandraPort", cassandraPort ?? "9042")
     .AddProjectParameters();
 
 var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration")
 .WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
+    .WithEnvironment("CassandraHost", cassandraAddress)
+    .WithEnvironment("CassandraPort", cassandraPort ?? "9042")
     .AddProjectParameters();
 
 var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
     .WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
-   .AddProjectParameters();
+    .WithEnvironment("CassandraHost", cassandraAddress)
+    .WithEnvironment("CassandraPort", cassandraPort ?? "9042")
+    .AddProjectParameters();
 
 var gatewayService = builder.AddProject<Projects.Trace_Gateway>("service-gateway")
     .WithReference(cache)
@@ -90,6 +103,8 @@ var manager = builder.AddProject<Projects.Trace_Manager>("manager")
     .WithReference(cache)
     .WithReference(messaging)
     .WithReference(db)
+    .WithEnvironment("CassandraHost", cassandraAddress)
+    .WithEnvironment("CassandraPort", cassandraPort ?? "9042")
     .AddProjectParameters();
 
 builder.Build().Run();
@@ -105,16 +120,12 @@ public static partial class Program {
     private static IResourceBuilder<ContainerResource>? ScyllaResource { get; set; }
 
     private static IResourceBuilder<ProjectResource> AddProjectParameters(this IResourceBuilder<ProjectResource> builder) {
-        var cassandraHost = ScyllaResource?.GetEndpoint("default").Host ?? "localhost";
-        var cassandraPort = ScyllaResource?.GetEndpoint("default").Port.ToString() ?? "9042";
 
         return builder
             .WithEnvironment("MessagingUser", MessagingUser ?? throw new InvalidOperationException())
             .WithEnvironment("MessagingPass", MessagingPass ?? throw new InvalidOperationException())
             .WithEnvironment("DbUser", DbUser ?? throw new InvalidOperationException())
             .WithEnvironment("DbPass", DbPass ?? throw new InvalidOperationException())
-            .WithEnvironment("CassandraHost", cassandraHost)
-            .WithEnvironment("CassandraPort", cassandraPort)
             .WithEnvironment("CassandraUser", CassandraUser ?? throw new InvalidOperationException())
             .WithEnvironment("CassandraPass", CassandraPass ?? throw new InvalidOperationException());
     }
