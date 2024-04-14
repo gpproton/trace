@@ -30,19 +30,17 @@ DbUser = builder.AddParameter("DbUser");
 DbPass = builder.AddParameter("DbPass");
 
 var cache = builder.AddRedis("cache", 6379)
-    .WithRedisCommander()
     .WithImage("docker.io/redis/redis-stack-server")
-    .WithImageTag("7.2.0-v10")
+    .WithRedisCommander()
     .WithOtlpExporter();
 
 var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5672)
     .WithDataVolume()
     .WithManagementPlugin()
-    .WithImage("masstransit/rabbitmq")
     .WithOtlpExporter();
 
 var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
-    .WithImage("postgis/postgis")
+    .WithImage("docker.io/postgis/postgis")
     .WithImageTag("15-3.3")
     .WithDataVolume()
     .WithPgAdmin()
