@@ -40,12 +40,11 @@ var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5
     .WithImage("masstransit/rabbitmq")
     .WithOtlpExporter();
 
-ScyllaResource = builder.AddContainer("scylladb", "scylladb/scylla")
+ScyllaResource = builder.AddContainer("scylladb", "scylladb/scylla", "5.4")
     .WithVolume("scylladb", "/var/lib/scylla")
     // .WithArgs("-u", CassandraUser.ToString() ?? "cassandra", "-p", CassandraPass.ToString() ?? "cassandra") // -u cassandra -p cassandra
     .WithOtlpExporter()
-    .WithImageTag("5.4")
-    .WithEndpoint(targetPort: 9042, port: 9042, name: "0", scheme: "tcp");
+    .WithEndpoint(targetPort: 9042, port: 9042, name: "default", scheme: "tcp", isProxied: true);
 
 var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
     .WithImage("postgis/postgis")
@@ -106,8 +105,8 @@ public static partial class Program {
     private static IResourceBuilder<ContainerResource>? ScyllaResource { get; set; }
 
     private static IResourceBuilder<ProjectResource> AddProjectParameters(this IResourceBuilder<ProjectResource> builder) {
-        var cassandraHost = ScyllaResource?.GetEndpoint("0").Host ?? "localhost";
-        var cassandraPort = ScyllaResource?.GetEndpoint("0").Port.ToString() ?? "9042";
+        var cassandraHost = ScyllaResource?.GetEndpoint("default").Host ?? "localhost";
+        var cassandraPort = ScyllaResource?.GetEndpoint("default").Port.ToString() ?? "9042";
 
         return builder
             .WithEnvironment("MessagingUser", MessagingUser ?? throw new InvalidOperationException())
