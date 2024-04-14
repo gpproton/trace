@@ -42,17 +42,17 @@ public static class CassandraExtension {
 
         builder.Services.AddOptions<CassandraConfig>().Bind(config.GetSection(CassandraConfig.Key));
         builder.Services.AddSingleton<ICluster>(provider => {
-            var host = builder.Configuration.GetValue<string>("CassandraHost", "localhost");
-            var port = builder.Configuration.GetValue<int>("CassandraPort", 9042);
-            var username = builder.Configuration.GetValue<string>("CassandraUser", "cassandra");
-            var password = builder.Configuration.GetValue<string>("CassandraPass", "cassandra");
-            var queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.Quorum);
+            var host = builder.Configuration.GetValue("CassandraHost", "localhost");
+            var port = builder.Configuration.GetValue("CassandraPort", 9042);
+            var username = builder.Configuration.GetValue("CassandraUser", "cassandra");
+            var password = builder.Configuration.GetValue("CassandraPass", "cassandra");
+            var queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.One);
 
             return Cluster.Builder()
                 .AddContactPoint(host)
                 .WithPort(port)
                 .WithCompression(CompressionType.LZ4)
-                // .WithCredentials(username, password)
+                .WithCredentials(username, password)
                 .WithQueryOptions(queryOptions)
                 .WithRetryPolicy(new LoggingRetryPolicy(new DefaultRetryPolicy()))
                 .Build();

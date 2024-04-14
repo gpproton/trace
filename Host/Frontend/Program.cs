@@ -43,6 +43,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
 // app.MapReverseProxy();
+app.UseOutputCache();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");

@@ -16,46 +16,45 @@
 // Modified By: Godwin peter .O
 // Modified At: Mon Mar 18 2024
 
-using System.Net.Sockets;
-
 namespace Trace.AppHost;
 
-public static class CassandraExtensions {
-    public static IResourceBuilder<CassandraResource> AddCassandra(this IDistributedApplicationBuilder builder, string name, int? hostPort = null, int? thriftPort = null, bool isProxied = true) {
+public static class ScylladbExtensions {
+    public static IResourceBuilder<ScylladbResource> AddScylladb(this IDistributedApplicationBuilder builder, string name, int? port = null, bool isProxied = true) {
 
-        return builder.AddResource(new CassandraResource(name))
-            .WithAnnotation(new ContainerImageAnnotation { Image = "scylladb/scylla", Tag = "5.4" })
-            .WithEndpoint(targetPort: 9042, port: hostPort, scheme: "tcp", name: "cassandra", isProxied: isProxied)
-            .WithEndpoint(targetPort: 9160, port: thriftPort, scheme: "tcp", name: "thrift", isProxied: isProxied);
+        return builder.AddResource(new ScylladbResource(name))
+            .WithImage("scylladb/scylla")
+            .WithImageTag("5.4")
+            .WithOtlpExporter()
+            .WithEndpoint(targetPort: 9042, port: port, scheme: "tcp", name: "scylladb", isProxied: isProxied);
     }
 }
 
-public class CassandraResource(string name) : Resource(name), IResourceWithConnectionString, IResourceWithEnvironment {
+public class ScylladbResource(string name) : ContainerResource(name), IResourceWithConnectionString, IResourceWithEnvironment {
     public ReferenceExpression ConnectionStringExpression => throw new NotImplementedException();
 
     public string? GetConnectionString() {
         if (!this.TryGetEndpoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
 
-        var endpoint = endpoints.Single(a => a.Name != "cassandra");
+        var endpoint = endpoints.Single(a => a.Name != "scylladb");
 
         return $"{endpoint?.AllocatedEndpoint?.Address}";
     }
 
-    public CassandraOptions GetConfig() {
+    public ScylladbOptions GetConfig() {
         if (!this.TryGetEnvironmentVariables(out var env)) throw new InvalidOperationException("Resource has not been allocated yet");
         if (!this.TryGetEndpoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
 
 
-        var cassandra = endpoints.Single(a => a.Name != "cassandra");
+        var scylladb = endpoints.Single(a => a.Name != "scylladb");
 
-        return new CassandraOptions {
-            Address = cassandra?.AllocatedEndpoint?.Address,
-            Port = cassandra?.Port
+        return new ScylladbOptions {
+            Address = scylladb?.AllocatedEndpoint?.Address,
+            Port = scylladb?.Port
         };
     }
 }
 
-public class CassandraOptions {
+public class ScylladbOptions {
     public int? Port { get; set; } = 9042;
     public string? Address { get; set; }
 }
