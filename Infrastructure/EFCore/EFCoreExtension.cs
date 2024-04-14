@@ -33,7 +33,7 @@ namespace Trace.Infrastructure.EFCore;
 
 public static class EfCoreExtension {
     public static WebApplicationBuilder RegisterEfCoreInfrastructure(this WebApplicationBuilder builder) {
-        var connectionString = builder.Configuration.GetConnectionString("db");
+        var connectionString = builder.Configuration.GetConnectionString("trace");
 
         builder.AddNpgsqlDbContext<ServiceContext>("db", o => {
             o.HealthChecks = true;

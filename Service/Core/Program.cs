@@ -32,6 +32,7 @@ builder.RegisterDefaults();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
 builder.Services.RegisterApplicationServices(assembly);
+// TODO: Temporary disabled
 // builder.Services.RegisterHangfire(Nodes.Core);
 builder.Services.AddHostedService<EfMigrationWorker>();
 builder.Services.AddHostedService<CassandraHostedService>();

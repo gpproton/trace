@@ -24,8 +24,6 @@ using Trace.Application;
 using Trace.Infrastructure;
 using Trace.Application.Abstractions;
 using Trace.Service.Integration.Devices;
-// using Trace.Service.Integration.Protocol;
-// using Trace.Service.Integration.Protocol.Services;
 using HotChocolate;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,6 +35,7 @@ builder.RegisterInfrastructure(assembly);
 builder.Services.AddQueueing();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// TODO: Temporary till adding GRPC back
 // builder.Services.AddGrpc();
 builder.Services.RegisterTraccarInfrastructure();
 builder.Services.RegisterDefaultServices();
@@ -59,6 +58,7 @@ if (app.Environment.IsDevelopment()) {
 
 app.RegisterDefaults();
 app.RegisterGraphQl();
+// TODO: Temporary till adding GRPC back
 // app.MapGrpcService<ProtocolService>();
 // app.MapProtocolEndpoint();
 app.MapDeviceEndpoint();

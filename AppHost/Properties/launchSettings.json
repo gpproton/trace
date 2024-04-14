@@ -5,7 +5,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:15109;https://localhost:17063",
+      "applicationUrl": "https://localhost:17063;http://localhost:15109",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "DOTNET_ENVIRONMENT": "Development",
@@ -26,6 +26,6 @@
         "DOTNET_RESOURCE_SERVICE_ENDPOINT_URL": "https://localhost:22170",
         "ASPIRE_ALLOW_UNSECURED_TRANSPORT": true
       }
-    },
+    }
   }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- TODO: Temporary till adding GRPC back -->
     <!-- <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" /> -->
     <!-- <PackageReference Include="Grpc.AspNetCore" /> -->
     <!-- <PackageReference Include="Google.Protobuf" /> -->

@@ -28,21 +28,21 @@ namespace Trace.Common.Queueing.Extensions;
 public static class QueueingStartupExtensions {
     public static void AddQueueing(this IServiceCollection services) {
         var scope = services.BuildServiceProvider();
-        var config = scope.GetRequiredService<IConfiguration>().GetConnectionString("messaging");
-        var uri = new Uri(config ?? "amqp://guest:guest@localhost:5672");
+        var config = scope.GetRequiredService<IConfiguration>();
+        // services.AddSingleton<IAsyncConnectionFactory>(provider => provider.GetRequiredService<IConnectionFactory>() )
 
-        services.AddSingleton<IAsyncConnectionFactory>(provider => {
-            var factory = new ConnectionFactory {
-                Uri = uri,
-                DispatchConsumersAsync = true,
-                AutomaticRecoveryEnabled = true,
-                ConsumerDispatchConcurrency = 2
-            };
+        // services.AddSingleton<IAsyncConnectionFactory>(provider => {
+        //     var factory = new ConnectionFactory {
+        //         Uri = new Uri(config.GetConnectionString("messaging") ?? "localhost"),
+        //         DispatchConsumersAsync = true,
+        //         AutomaticRecoveryEnabled = true,
+        //         ConsumerDispatchConcurrency = 5
+        //     };
 
-            return factory;
-        });
+        //     return factory;
+        // });
 
-        services.AddSingleton<IConnectionProvider, ConnectionProvider>();
+        // services.AddSingleton<IConnectionProvider, ConnectionProvider>();
         services.AddScoped<IChannelProvider, ChannelProvider>();
         services.AddScoped(typeof(IQueueChannelProvider<>), typeof(QueueChannelProvider<>));
         services.AddScoped(typeof(IQueueProducer<>), typeof(QueueProducer<>));

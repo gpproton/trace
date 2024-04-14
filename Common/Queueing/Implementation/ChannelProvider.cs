@@ -4,15 +4,16 @@ using Trace.Common.Queueing.Interfaces;
 
 namespace Trace.Common.Queueing.Implementation;
 
-internal sealed class ChannelProvider(
-    IConnectionProvider connectionProvider,
+internal sealed class ChannelProvider(IConnection connection,
+    // TODO: Review necessity of using factory directly
+    // IConnectionProvider connectionProvider,
     ILogger<ChannelProvider> logger) : IDisposable, IChannelProvider {
     private IModel? _model;
 
     public IModel GetChannel() {
         if (_model is null || !_model.IsOpen) {
             logger.LogDebug("Opening RabbitMQ channel");
-            _model = connectionProvider.GetConnection().CreateModel();
+            _model = connection.CreateModel();
             logger.LogDebug($"Created RabbitMQ channel {_model.ChannelNumber}");
         }
 

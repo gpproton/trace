@@ -29,6 +29,7 @@ using Trace.Infrastructure.CacheManager;
 using Trace.Infrastructure.Cassandra;
 using Trace.Infrastructure.EFCore.Context;
 using Trace.Infrastructure.Providers;
+using RabbitMQ.Client;
 
 namespace Trace.Infrastructure;
 
@@ -44,17 +45,28 @@ public static class DependencyInjection {
     }
 
     public static WebApplicationBuilder RegisterInfrastructure(this WebApplicationBuilder builder, Assembly consumersAssembly) {
-        builder.AddRabbitMQClient("messaging");
-        builder.AddNpgsqlDataSource("db");
+        const string messagingKey = "messaging";
+
+        builder.AddRabbitMQClient(messagingKey, configureConnectionFactory: factory => {
+            // var test = factory.CreateConnection();
+            if (factory is IAsyncConnectionFactory asyncFactory) asyncFactory.DispatchConsumersAsync = true;
+        });
+
+        builder.AddNpgsqlDataSource("trace");
         builder.RegisterCassandraInfrastructure();
         builder.RegisterEfCoreInfrastructure();
         builder.Services.RegisterCacheManager();
+        builder.Services.Configure<MassTransitHostOptions>(options => {
+            options.WaitUntilStarted = true;
+            options.StartTimeout = TimeSpan.FromMinutes(5);
+            options.StopTimeout = TimeSpan.FromMinutes(1);
+        });
         builder.Services.AddMassTransit(busConfigurator => {
             busConfigurator.AddConsumers(consumersAssembly);
             busConfigurator.UsingRabbitMq((context, cfg) => {
                 var config = context.GetRequiredService<IConfiguration>();
-                cfg.Host(config.GetConnectionString("messaging") ?? "amqp://localhost", h => {
-                    h.Heartbeat(TimeSpan.FromSeconds(3));
+                cfg.Host(config.GetConnectionString(messagingKey), h => {
+                    h.Heartbeat(TimeSpan.FromSeconds(5));
                 });
                 cfg.ConfigureEndpoints(context);
             });
