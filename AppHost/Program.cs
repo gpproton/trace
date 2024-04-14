@@ -44,14 +44,13 @@ var scylladb = builder.AddContainer("scylladb", "scylladb/scylla", "5.4")
     .WithVolume("scylladb", "/var/lib/scylla")
     // .WithArgs("-u", CassandraUser.ToString() ?? "cassandra", "-p", CassandraPass.ToString() ?? "cassandra") // -u cassandra -p cassandra
     .WithOtlpExporter()
-    .WithEndpoint(targetPort: 9042, port: 9042, scheme: "tcp", isProxied: true);
+    .WithEndpoint(targetPort: 9042, port: 9042, scheme: "tcp", name: "cassandra", isProxied: true);
 
 
-if (ScyllaResource is not null && scylladb.Resource.TryGetEndpoints(out var cassandraEndpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
 
-var cassandraEndpoint = cassandraEndpoints?.Single(a => a.Name != "cassandra");
-var cassandraAddress = cassandraEndpoint?.AllocatedEndpoint?.Address;
-var cassandraPort = cassandraEndpoint?.AllocatedEndpoint?.Port.ToString();
+var cassandraEndpoint = scylladb.GetEndpoint("cassandra");
+var cassandraAddress = cassandraEndpoint.Host;
+var cassandraPort = cassandraEndpoint.Port.ToString();
 
 var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
     .WithImage("postgis/postgis")
