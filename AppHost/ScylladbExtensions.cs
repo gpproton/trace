@@ -29,9 +29,7 @@ public static class ScylladbExtensions {
     }
 }
 
-public class ScylladbResource(string name) : ContainerResource(name), IResourceWithConnectionString, IResourceWithEnvironment {
-    public ReferenceExpression ConnectionStringExpression => throw new NotImplementedException();
-
+public class ScylladbResource(string name) : ContainerResource(name), IResourceWithEnvironment {
     public string? GetConnectionString() {
         if (!this.TryGetEndpoints(out var endpoints)) throw new InvalidOperationException("Resource has not been allocated yet");
 

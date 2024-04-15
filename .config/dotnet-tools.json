@@ -21,7 +21,7 @@
       ]
     },
     "aspirate": {
-      "version": "0.5.3-preview",
+      "version": "0.5.4-preview",
       "commands": [
         "aspirate"
       ]
