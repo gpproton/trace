@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+﻿// Copyright (c) 2023 - 2024 drolx Solutions
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0
 // you may not use this file except in compliance with the License.
@@ -12,13 +12,13 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Monday, 26th Feb 2024
+// Created At: Monday, 22nd Apr 2024
 // Modified By: Godwin peter .O
 // Modified At: Mon Apr 22 2024
 
-namespace Trace.Common.Standard;
+namespace Trace.Common;
 
-public class NodeOption {
-    public string Name { get; set; } = string.Empty;
-    public bool Api { get; set; }
+public static class Constants {
+    public const string AppName = "Trace";
+    public const string AppVersion = "0.0.1";
 }

@@ -41,9 +41,15 @@ builder.Services
     .AddHttpClient("Fusion")
     .AddHeaderPropagation();
 
-builder.Services.AddFusionGatewayServer()
+var fusion = builder.Services.AddFusionGatewayServer()
     .ConfigureFromFile("gateway.fgp", watchFileForUpdates: true)
     .AddServiceDiscoveryRewriter();
+
+fusion.Services
+    .AddGraphQL()
+    .AddType<GeometryType>()
+    .AddType<GeoJsonPositionType>()
+    .AddType<GeoJsonCoordinatesType>();
 
 var app = builder.Build();
 app.RegisterDefaults();

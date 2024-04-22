@@ -20,17 +20,17 @@ namespace Trace.ServiceDefaults;
 public static class Nodes {
     public const string GroupName = "Trace";
 
-    public static readonly IReadOnlyList<string> All = [
+    public static IReadOnlyList<string> All => [
         Core,
         Integration,
         Navigation
     ];
 
-    // Services
-    public const string Gateway = nameof(Gateway);
-    public const string Client = nameof(Client);
-    public const string Integration = nameof(Integration);
-    public const string Core = nameof(Core);
-    public const string Navigation = nameof(Navigation);
-    public const string Manager = nameof(Manager);
+    public static string Gateway => nameof(Gateway).ToLower();
+    public static string Frontend => nameof(Frontend).ToLower();
+    public static string Website => nameof(Website).ToLower();
+    public static string Integration => nameof(Integration).ToLower();
+    public static string Core => nameof(Core).ToLower();
+    public static string Navigation => nameof(Navigation).ToLower();
+    public static string Manager => nameof(Manager).ToLower();
 }

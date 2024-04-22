@@ -17,6 +17,8 @@
 // Modified At: Thu Apr 11 2024
 
 using Trace.AppHost;
+using Trace.Common;
+using Trace.ServiceDefaults;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -29,52 +31,61 @@ CassandraPass = builder.AddParameter("CassandraPass");
 DbUser = builder.AddParameter("DbUser");
 DbPass = builder.AddParameter("DbPass");
 
-var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core")
+if (builder.ExecutionContext.IsRunMode) {
+    // TODO: Apply after resolving project root path
+    // _ = Task.Run(() => {
+    //     var cmd = Cli.Wrap("docker-compose").WithArguments(["up", "-d", "cache", "messaging", "db", "scylladb"]).WithWorkingDirectory("");
+    // });
+
+    builder.AddExternalContainer(AppConstants.Cache, AppConstants.Cache);
+    builder.AddExternalContainer(AppConstants.Messaging, AppConstants.Messaging);
+    builder.AddExternalContainer(AppConstants.Db, AppConstants.Db);
+    builder.AddExternalContainer(AppConstants.Scylladb, AppConstants.Scylladb);
+}
+
+var coreService = builder.AddProject<Projects.Trace_Service_Core>($"service-{Nodes.Core}")
     .AddProjectParameters();
 
-var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration")
+var integrationService = builder.AddProject<Projects.Trace_Service_Integration>($"service-{Nodes.Integration}")
     .AddProjectParameters();
 
-var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
+var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>($"service-{Nodes.Navigation}")
     .AddProjectParameters();
 
-var manager = builder.AddProject<Projects.Trace_Manager>("manager")
-    .AddProjectParameters();
-
-var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>("service-gateway")
+var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>($"service-{Nodes.Gateway}")
     .WithSubgraph(coreService)
     .WithSubgraph(integrationService)
     .WithSubgraph(navigationService);
 
-var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
+var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend)
     .WithReference(gatewayService)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
 
-var website = builder.AddProject<Projects.Trace_Host_Website>("website");
+var website = builder.AddProject<Projects.Trace_Host_Website>(Nodes.Website);
+
+var manager = builder.AddProject<Projects.Trace_Manager>(Nodes.Manager)
+    .AddProjectParameters();
 
 if (builder.ExecutionContext.IsPublishMode) {
-    var cache = builder.AddRedis("cache", 6379)
+    var cache = builder.AddRedis(AppConstants.Cache, 6379)
     .WithImage("docker.io/redis/redis-stack-server")
-    .WithRedisCommander()
     .WithOtlpExporter();
 
-    var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5672)
+    var messaging = builder.AddRabbitMQ(AppConstants.Messaging, MessagingUser, MessagingPass, 5672)
         .WithDataVolume()
-        .WithManagementPlugin()
         .WithOtlpExporter();
 
-    var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
+    var db = builder.AddPostgres(AppConstants.Db, DbUser, DbPass, 5432)
         .WithImage("docker.io/postgis/postgis")
         .WithImageTag("15-3.3")
         .WithDataVolume()
-        .WithPgAdmin()
         .WithOtlpExporter();
 
     var traceDb = db.AddDatabase("trace");
 
-    builder.AddScylladb("scylladb", port: 9042)
-    .WithVolume("scylladb", "/var/lib/scylla");
+    builder.AddScylladb(AppConstants.Scylladb, port: 9042)
+    .WithVolume(AppConstants.Scylladb, "/var/lib/scylla");
 
     coreService.WithReference(cache)
     .WithReference(messaging)
@@ -95,13 +106,6 @@ if (builder.ExecutionContext.IsPublishMode) {
     manager.WithReference(cache)
     .WithReference(messaging)
     .WithReference(traceDb);
-}
-
-if (builder.ExecutionContext.IsRunMode) {
-    builder.AddExternalContainer("cache", "cache");
-    builder.AddExternalContainer("messaging", "messaging");
-    builder.AddExternalContainer("db", "db");
-    builder.AddExternalContainer("scylladb", "scylladb");
 }
 
 builder.Build().Compose().Run();
