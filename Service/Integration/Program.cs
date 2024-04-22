@@ -64,4 +64,4 @@ app.RegisterGraphQl();
 app.MapDeviceEndpoint();
 app.MapGet("/", () => "service.integration");
 
-app.Run();
+app.RunWithGraphQLCommands(args);

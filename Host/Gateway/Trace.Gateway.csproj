@@ -6,8 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.HeaderPropagation" />
+    <PackageReference Include="BananaCakePop.Services" />
     <PackageReference Include="Microsoft.Extensions.ServiceDiscovery.Yarp" />
     <PackageReference Include="Yarp.ReverseProxy" />
+    <PackageReference Include="HotChocolate.Fusion" />
+    <PackageReference Include="HotChocolate.Diagnostics" />
   </ItemGroup>
 
   <ItemGroup>

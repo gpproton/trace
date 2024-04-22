@@ -5,11 +5,11 @@
     <AxolotlVersion>8.0.5</AxolotlVersion>
     <AspireVersion>8.0.0-preview.5.24201.12</AspireVersion>
     <OpenTelemetryVersion>1.8.0</OpenTelemetryVersion>
-    <AspNetCoreVersion>8.0.2</AspNetCoreVersion>
+    <AspNetCoreVersion>8.0.4</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
-    <EFCoreVersion>8.0.2</EFCoreVersion>
+    <EFCoreVersion>8.0.4</EFCoreVersion>
     <NpgsqlVersion>8.0.2</NpgsqlVersion>
-    <HotChocolateVersion>13.9.0</HotChocolateVersion>
+    <HotChocolateVersion>14.0.0-p.90</HotChocolateVersion>
     <CassandraVersion>3.19.3</CassandraVersion>
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
@@ -105,18 +105,23 @@
   </ItemGroup>
   <!-- HotChocolate packages -->
   <ItemGroup Label="HotChocolate">
+    <PackageVersion Include="Microsoft.AspNetCore.HeaderPropagation" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="BananaCakePop.Services" Version="3.2.0" />
     <PackageVersion Include="HotChocolate.Abstractions" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.AspNetCore.CommandLine" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.AspNetCore" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.EntityFramework" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.Spatial" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Diagnostics" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Execution" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Fusion" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Fusion.Aspire" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.InMemory" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolateVersion)" />
-    <PackageVersion Include="HotChocolate.Stitching" Version="$(HotChocolateVersion)" />
-    <PackageVersion Include="HotChocolate.Stitching.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Subscriptions.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Types" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Types.Analyzers" Version="$(HotChocolateVersion)" />
   </ItemGroup>
   <!-- Hangfire packages -->
   <ItemGroup Label="Hangfire">

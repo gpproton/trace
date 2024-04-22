@@ -29,26 +29,26 @@ builder.Services.RegisterDefaultServices();
 builder.Services.RegisterSchemaHttpClients(Nodes.All.ToDictionary(schema => schema,
     schema => new Uri($"http://service-{schema}/graphql")
 ));
+
 builder.Services
-    .AddGraphQLServer()
-    .AddRemoteSchemasFromRedis(Nodes.GroupName, sp => sp.GetRequiredService<IConnectionMultiplexer>())
-    .AddHttpRequestInterceptor<RequestInterceptor>()
-    .AddType<GeometryType>()
-    .AddType<GeoJsonPositionType>()
-    .AddType<GeoJsonCoordinatesType>();
+    .AddCors()
+    .AddHeaderPropagation(c => {
+        c.Headers.Add("GraphQL-Preflight");
+        c.Headers.Add("Authorization");
+    });
+
 builder.Services
-    .AddGraphQL(Nodes.Navigation)
-    .AddType<GeometryType>()
-    .AddType<GeoJsonPositionType>()
-    .AddType<GeoJsonCoordinatesType>();
-builder.Services
-    .AddGraphQL(Nodes.Integration)
-    .AddType<GeoJsonPositionType>()
-    .AddType<GeoJsonCoordinatesType>();
+    .AddHttpClient("Fusion")
+    .AddHeaderPropagation();
+
+builder.Services.AddFusionGatewayServer()
+    .ConfigureFromFile("gateway.fgp", watchFileForUpdates: true)
+    .AddServiceDiscoveryRewriter();
 
 var app = builder.Build();
 app.RegisterDefaults();
+app.UseHeaderPropagation();
 app.RegisterGraphQl();
 app.MapGet("/", () => "service.gateway");
 
-app.Run();
+app.RunWithGraphQLCommands(args);

@@ -35,7 +35,9 @@ namespace Trace.Infrastructure;
 
 public static class DependencyInjection {
     public static IRequestExecutorBuilder AddContextConfig(this IRequestExecutorBuilder services) {
-        services.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
+        services
+            // TODO: resolve issues with dbcontext registration
+            //.RegisterDbContext<ServiceContext>(DbContextKind.Pooled)
             .AddQueryType<QueryRoot>()
             .AddMutationType<MutationRoot>()
             .AddSubscriptionType<SubscriptionRoot>()
@@ -48,7 +50,6 @@ public static class DependencyInjection {
         const string messagingKey = "messaging";
 
         builder.AddRabbitMQClient(messagingKey, configureConnectionFactory: factory => {
-            // var test = factory.CreateConnection();
             if (factory is IAsyncConnectionFactory asyncFactory) asyncFactory.DispatchConsumersAsync = true;
         });
 

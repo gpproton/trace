@@ -29,70 +29,82 @@ CassandraPass = builder.AddParameter("CassandraPass");
 DbUser = builder.AddParameter("DbUser");
 DbPass = builder.AddParameter("DbPass");
 
-var cache = builder.AddRedis("cache", 6379)
-    .WithImage("docker.io/redis/redis-stack-server")
-    .WithRedisCommander()
-    .WithOtlpExporter();
-
-var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5672)
-    .WithDataVolume()
-    .WithManagementPlugin()
-    .WithOtlpExporter();
-
-var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
-    .WithImage("docker.io/postgis/postgis")
-    .WithImageTag("15-3.3")
-    .WithDataVolume()
-    .WithPgAdmin()
-    .WithOtlpExporter()
-    .AddDatabase("trace");
-
 var coreService = builder.AddProject<Projects.Trace_Service_Core>("service-core")
-    .WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
     .AddProjectParameters();
 
 var integrationService = builder.AddProject<Projects.Trace_Service_Integration>("service-integration")
-.WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
     .AddProjectParameters();
 
-var routingService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
-    .WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
+var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>("service-navigation")
     .AddProjectParameters();
 
-var gatewayService = builder.AddProject<Projects.Trace_Gateway>("service-gateway")
-    .WithReference(cache)
-    .WithReference(coreService)
-    .WithReference(integrationService)
-    .WithReference(routingService);
+var manager = builder.AddProject<Projects.Trace_Manager>("manager")
+    .AddProjectParameters();
 
-builder.AddProject<Projects.Trace_Frontend>("frontend")
-    .WithReference(cache)
+var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>("service-gateway")
+    .WithSubgraph(coreService)
+    .WithSubgraph(integrationService)
+    .WithSubgraph(navigationService);
+
+var frontend = builder.AddProject<Projects.Trace_Frontend>("frontend")
     .WithReference(gatewayService)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
 
-builder.AddProject<Projects.Trace_Host_Website>("website").WithReference(cache);
+var website = builder.AddProject<Projects.Trace_Host_Website>("website");
 
-builder.AddProject<Projects.Trace_Manager>("manager")
-    .WithReference(cache)
-    .WithReference(messaging)
-    .WithReference(db)
-    .AddProjectParameters();
+if (builder.ExecutionContext.IsPublishMode) {
+    var cache = builder.AddRedis("cache", 6379)
+    .WithImage("docker.io/redis/redis-stack-server")
+    .WithRedisCommander()
+    .WithOtlpExporter();
 
-if (builder.ExecutionContext.IsRunMode)
-    builder.AddExternalContainer("scylladb", "scylladb");
+    var messaging = builder.AddRabbitMQ("messaging", MessagingUser, MessagingPass, 5672)
+        .WithDataVolume()
+        .WithManagementPlugin()
+        .WithOtlpExporter();
 
-if (builder.ExecutionContext.IsPublishMode)
+    var db = builder.AddPostgres("db", DbUser, DbPass, 5432)
+        .WithImage("docker.io/postgis/postgis")
+        .WithImageTag("15-3.3")
+        .WithDataVolume()
+        .WithPgAdmin()
+        .WithOtlpExporter();
+
+    var traceDb = db.AddDatabase("trace");
+
     builder.AddScylladb("scylladb", port: 9042)
     .WithVolume("scylladb", "/var/lib/scylla");
 
-builder.Build().Run();
+    coreService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(traceDb);
+
+    integrationService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(traceDb);
+
+    navigationService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(traceDb);
+
+    gatewayService.WithReference(cache);
+    frontend.WithReference(cache);
+    website.WithReference(cache);
+
+    manager.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(traceDb);
+}
+
+if (builder.ExecutionContext.IsRunMode) {
+    builder.AddExternalContainer("cache", "cache");
+    builder.AddExternalContainer("messaging", "messaging");
+    builder.AddExternalContainer("db", "db");
+    builder.AddExternalContainer("scylladb", "scylladb");
+}
+
+builder.Build().Compose().Run();
 
 public static partial class Program {
     private static IResourceBuilder<ParameterResource>? MessagingUser { get; set; }

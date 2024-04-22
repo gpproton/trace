@@ -50,4 +50,4 @@ app.RegisterDefaults();
 app.RegisterGraphQl();
 app.MapGet("/", () => "service.navigation");
 
-app.Run();
+app.RunWithGraphQLCommands(args);

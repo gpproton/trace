@@ -6,8 +6,8 @@
       <PackageReference Include="HotChocolate.Diagnostics" />
       <PackageReference Include="HotChocolate.PersistedQueries.InMemory" />
       <PackageReference Include="HotChocolate.PersistedQueries.Redis" />
-      <PackageReference Include="HotChocolate.Stitching" />
-      <PackageReference Include="HotChocolate.Stitching.Redis" />
+      <PackageReference Include="HotChocolate.AspNetCore" />
+      <PackageReference Include="HotChocolate.AspNetCore.CommandLine" />
       <PackageReference Include="HotChocolate.Subscriptions.Redis" />
     </ItemGroup>
 

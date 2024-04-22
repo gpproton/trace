@@ -31,7 +31,7 @@ namespace Trace.ServiceDefaults;
 public static class DependencyInjection {
     public static WebApplicationBuilder RegisterDefaults(this WebApplicationBuilder builder) {
         var env = builder.Environment;
-        var root = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location) ?? env.ContentRootPath;
+        var root = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location) ?? env.ContentRootPath;
 
         builder.Configuration
             .SetBasePath(root)
@@ -102,7 +102,6 @@ public static class DependencyInjection {
                     Enable = app.Environment.IsDevelopment()
                 }
             });
-        app.MapDefaultEndpoints();
 
         return app;
     }

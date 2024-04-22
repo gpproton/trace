@@ -47,7 +47,8 @@ var app = builder.Build();
 
 app.RegisterDefaults();
 // app.UseHangfireDashboard(Nodes.Core);
-app.RegisterGraphQl();
+// app.RegisterGraphQl();
+app.MapGraphQL();
 app.MapGet("/", () => "service.core");
 
-app.Run();
+app.RunWithGraphQLCommands(args);
