@@ -12,15 +12,17 @@
 // limitations under the License.
 //
 // Author: Godwin peter .O (me@godwin.dev)
-// Created At: Sunday, 31st Dec 2023
+// Created At: Tuesday, 23rd Apr 2024
 // Modified By: Godwin peter .O
-// Modified At: Thu Jan 04 2024
+// Modified At: Wed Apr 24 2024
 
 using Trace.ServiceDefaults;
-using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
-using Trace.Application.Abstractions;
 using Trace.Application;
+using Trace.Application.Abstractions;
+using Trace.Infrastructure.EFCore;
+using Trace.Infrastructure.Cassandra;
+using Trace.Worker.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -30,17 +32,15 @@ builder.RegisterDefaults();
 builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
 builder.Services.RegisterApplicationServices(assembly);
-builder.Services.AddGraphQLServer()
-    .AddGraphqlDefaults(Nodes.Core)
-    .AddRequestOptions(isDevelopment)
-    .AddContextConfig()
-    .AddQueryableCursorPagingProvider()
-    .RegisterObjectExtensions(typeof(Program).Assembly);
+// TODO: Temporary
+builder.Services.RegisterHangfire(Nodes.Core);
+builder.Services.AddHostedService<EfMigrationWorker>();
+builder.Services.AddHostedService<CassandraHostedService>();
 
 var app = builder.Build();
 
 app.RegisterDefaults();
-app.RegisterGraphQl();
-app.MapGet("/", () => "service.core");
+app.UseHangfireDashboard(Nodes.Worker);
+app.MapGet("/", () => "service.worker");
 
-app.RunWithGraphQLCommands(args);
+app.Run();

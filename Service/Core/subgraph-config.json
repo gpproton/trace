@@ -1,7 +1,7 @@
 {
   "subgraph": "service-core",
   "http": {
-    "baseAddress": "http://localhost:4571/graphql",
+    "baseAddress": "https://localhost:4571/graphql",
     "clientName": "http"
   }
 }

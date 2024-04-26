@@ -5,8 +5,8 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "launchUrl": "http://localhost:4570/graphql",
-      "applicationUrl": "http://localhost:4570",
+      "launchUrl": "https://localhost:4570/graphql",
+      "applicationUrl": "https://localhost:4570",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

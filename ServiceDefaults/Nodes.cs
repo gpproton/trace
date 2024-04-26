@@ -31,6 +31,7 @@ public static class Nodes {
     public static string Website => nameof(Website).ToLower();
     public static string Integration => nameof(Integration).ToLower();
     public static string Core => nameof(Core).ToLower();
+    public static string Worker => nameof(Worker).ToLower();
     public static string Navigation => nameof(Navigation).ToLower();
     public static string Manager => nameof(Manager).ToLower();
 }

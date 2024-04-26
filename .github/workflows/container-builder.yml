@@ -22,6 +22,8 @@ jobs:
             dockerfile: ./Host/Gateway/Dockerfile
           - image: 'ghcr.io/drolx/trace-manager'
             dockerfile: ./Manager/Dockerfile
+          - image: 'ghcr.io/drolx/trace-service-worker'
+            dockerfile: ./Service/Worker/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-core'
             dockerfile: ./Service/Core/Dockerfile
           - image: 'ghcr.io/drolx/trace-service-navigation'

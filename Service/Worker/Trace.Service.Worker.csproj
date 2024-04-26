@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Title>Trace.Service.Worker</Title>
+    <ContainerRepository>$(ContainerRepo)/trace-service-worker</ContainerRepository>
+  </PropertyGroup>
+
+  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Hangfire.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\PipeHandlers\Trace.Common.PipeHandlers.csproj" />
+    <ProjectReference Include="..\..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

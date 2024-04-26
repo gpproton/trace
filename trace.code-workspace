@@ -43,6 +43,7 @@
     "editor.guides.bracketPairs": true,
     "editor.formatOnSave": true,
     "dotnet.preferVisualStudioCodeFileSystemWatcher": true,
+    "dotnetAcquisitionExtension.installTimeoutValue": 1200,
     "nuget.autoOpenOutputWindowOnRestore": "off",
     "files.watcherExclude": {
       "**/.git/objects/**": true,
@@ -107,6 +108,7 @@
       "excludeGlob": [
         ".gitignore",
         "./.env*",
+        ".github/**/*.yml",
         "./**/*.yml",
         "./**/*.yaml",
         "./.dockerignore"

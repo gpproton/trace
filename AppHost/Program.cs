@@ -43,6 +43,9 @@ if (builder.ExecutionContext.IsRunMode) {
     builder.AddExternalContainer(AppConstants.Scylladb, AppConstants.Scylladb);
 }
 
+var workerService = builder.AddProject<Projects.Trace_Service_Worker>($"service-{Nodes.Worker}")
+    .AddProjectParameters();
+
 var coreService = builder.AddProject<Projects.Trace_Service_Core>($"service-{Nodes.Core}")
     .AddProjectParameters();
 
@@ -86,6 +89,10 @@ if (builder.ExecutionContext.IsPublishMode) {
 
     builder.AddScylladb(AppConstants.Scylladb, port: 9042)
     .WithVolume(AppConstants.Scylladb, "/var/lib/scylla");
+
+    workerService.WithReference(cache)
+    .WithReference(messaging)
+    .WithReference(traceDb);
 
     coreService.WithReference(cache)
     .WithReference(messaging)

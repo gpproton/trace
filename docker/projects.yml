@@ -29,7 +29,7 @@ x-app: &app
 services:
   aspire-dashboard:
     container_name: "aspire-dashboard"
-    image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.5"
+    image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6"
     environment:
       DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
     ports:
@@ -67,7 +67,7 @@ services:
       <<: *app-env
       OTEL_SERVICE_NAME: frontend
     ports:
-      - 4580:8080
+      - 4700:8080
     networks:
       default:
 
@@ -83,6 +83,21 @@ services:
       OTEL_SERVICE_NAME: website
     ports:
       - 4600:8080
+    networks:
+      default:
+
+  service-worker:
+    <<: *app
+    image: ${REGISTRY}/trace-service-worker:${VERSION}
+    container_name: service-worker
+    build:
+      context: .
+      dockerfile: Service/Worker/Dockerfile
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-worker
+    ports:
+      - 4650:8080
     networks:
       default:
 
