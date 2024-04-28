@@ -1,8 +1,24 @@
 x-app: &app
+  restart: unless-stopped
+  volumes:
+  - ~/localhost.pfx:/app/certs/localhost.pfx:ro
+  deploy: &app-deploy
+    mode: replicated
+    resources:
+      limits:
+        cpus: "0.5"
+        memory: 256M
+      reservations:
+        cpus: "0.1"
+        memory: 128M
   environment: &app-env
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    ASPNETCORE_HTTP_PORTS: 8080
+    ASPNETCORE_HTTPS_PORTS: 8443
+    ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+    ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
     MessagingUser: "guest"
     MessagingPass: "guest"
     DbUser: "postgres"
@@ -32,6 +48,12 @@ services:
     image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6"
     environment:
       DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+      ASPNETCORE_HTTP_PORTS: 8080
+      ASPNETCORE_HTTPS_PORTS: 8443
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
+    deploy:
+      <<: *app-deploy
     ports:
     - target: 18888
       published: 18888
@@ -51,8 +73,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: manager
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4590:8080
+      - 4590:8443
     networks:
       default:
 
@@ -66,8 +90,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: frontend
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4700:8080
+      - 4700:8443
     networks:
       default:
 
@@ -81,8 +107,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: website
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4600:8080
+      - 4600:8443
     networks:
       default:
 
@@ -96,8 +124,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-worker
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4650:8080
+      - 4650:8443
     networks:
       default:
 
@@ -111,8 +141,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-gateway
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4570:8080
+      - 4570:8443
     networks:
       default:
 
@@ -126,8 +158,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-core
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4571:8080
+      - 4571:8443
     networks:
       default:
 
@@ -141,8 +175,10 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-integration
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4572:8080
+      - 4572:8443
     networks:
       default:
 
@@ -156,7 +192,9 @@ services:
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-navigation
+    deploy:
+      <<: *app-deploy
     ports:
-      - 4573:8080
+      - 4573:8443
     networks:
       default:
