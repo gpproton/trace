@@ -16,8 +16,8 @@ x-app: &app
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
-    ASPNETCORE_HTTP_PORTS: 8080
-    ASPNETCORE_HTTPS_PORTS: 8443
+    ASPNETCORE_HTTP_PORTS: 80
+    ASPNETCORE_HTTPS_PORTS: 443
     ASPNETCORE_Kestrel__Certificates__Default__Password: ""
     ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
     MessagingUser: "guest"
@@ -34,14 +34,14 @@ x-app: &app
     OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
-    services__service-gateway__0: "http://service-gateway:8080"
-    services__service-gateway__1: "https://service-gateway:8443"
-    services__service-core__0: "http://service-core:8080"
-    services__service-core__1: "https://service-core:8443"
-    services__service-integration__0: "http://service-integration:8080"
-    services__service-integration__1: "https://service-integration:8443"
-    services__service-navigation__0: "http://service-navigation:8080"
-    services__service-navigation__1: "https://service-navigation:8443"
+    services__service-gateway__http__0: "http://service-gateway:80"
+    services__service-gateway__http__1: "https://service-gateway:443"
+    services__service-core__http__0: "http://service-core:80"
+    services__service-core__http__1: "https://service-core:443"
+    services__service-integration__http__0: "http://service-integration:80"
+    services__service-integration__http__1: "https://service-integration:443"
+    services__service-navigation__http__0: "http://service-navigation:80"
+    services__service-navigation__http__1: "https://service-navigation:443"
 
 services:
   dashboard:

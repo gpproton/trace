@@ -71,7 +71,6 @@ var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend, launc
 
 // TODO: Resolve temporary hack
 if (builder.ExecutionContext.IsRunMode) {
-    // frontend.WithEnvironment($"services__service-{Nodes.Gateway}__http__0", "https://localhost:5000");
     frontend.WithReference($"service-{Nodes.Gateway}", new Uri("https://localhost:5000"));
 }
 

@@ -62,6 +62,7 @@ public static class DependencyInjection {
     }
 
     public static IServiceCollection RegisterDefaultServices(this IServiceCollection services) {
+        services.AddControllersWithViews();
         services.AddProblemDetails();
         services.AddAntiforgery();
         services.AddAuthorization();

@@ -17,38 +17,41 @@
 // Modified At: Thu Mar 21 2024
 
 using Trace.ServiceDefaults;
+using Yarp.ReverseProxy.Forwarder;
+using Yarp.ReverseProxy.Transforms;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.RegisterDefaults();
 builder.AddRedisOutputCache("cache");
 builder.Services.RegisterDefaultServices();
+builder.Services.AddHttpForwarderWithServiceDiscovery();
 // TODO: Refactor later for domain pull
 // from database or cache
 // builder.Services.AddLettuceEncrypt();
-builder.Services.AddHttpForwarderWithServiceDiscovery();
-builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
-    .AddServiceDiscoveryDestinationResolver();
-builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-if (!app.Environment.IsDevelopment()) {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
 
 app.MapControllers();
 app.UseStaticFiles();
 app.RegisterDefaults();
-app.MapReverseProxy();
-// app.MapForwarder("/graphql", $"https+http://localhost:5000", "/graphql");
+
+var gatewayAddress = app.Configuration.GetValue<string>("services:service-gateway");
+var geocodingUrl = app.Configuration.GetValue<string>("services:geocoding");
+var routingUrl = app.Configuration.GetValue<string>("services:routing");
+var requestConfig = ForwarderRequestConfig.Empty;
+
+app.MapForwarder("/api/service", $"{gatewayAddress}graphql", requestConfig, (proxy) => {
+    proxy.AddPathRemovePrefix("/api/service");
+});
+app.MapForwarder("/api/geocoding/{**catch-all}", $"{geocodingUrl}", requestConfig, (proxy) => {
+    proxy.AddPathRemovePrefix("/api/geocoding");
+});
+app.MapForwarder("/api/routing/{**catch-all}", $"{routingUrl}", requestConfig, (proxy) => {
+    proxy.AddPathRemovePrefix("/api/routing");
+});
 
 app.UseOutputCache();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
 app.MapFallbackToFile("index.html");
 
 app.Run();
