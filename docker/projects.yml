@@ -67,9 +67,6 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-manager:${VERSION}
     container_name: manager
-    build:
-      context: .
-      dockerfile: Manager/Dockerfile
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: manager
@@ -84,9 +81,6 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-frontend:${VERSION}
     container_name: frontend
-    build:
-      context: .
-      dockerfile: Host/Frontend/Dockerfile
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: frontend
@@ -101,9 +95,6 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-website:${VERSION}
     container_name: website
-    build:
-      context: .
-      dockerfile: Host/Website/Dockerfile
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: website
@@ -118,9 +109,6 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-worker:${VERSION}
     container_name: service-worker
-    build:
-      context: .
-      dockerfile: Service/Worker/Dockerfile
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-worker
@@ -135,9 +123,6 @@ services:
     <<: *app
     image: ${REGISTRY}/trace-service-gateway:${VERSION}
     container_name: service-gateway
-    build:
-      context: .
-      dockerfile: Host/Gateway/Dockerfile
     environment:
       <<: *app-env
       OTEL_SERVICE_NAME: service-gateway

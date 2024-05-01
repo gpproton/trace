@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Integration</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
     <ContainerRepository>$(ContainerRepo)/trace-service-integration</ContainerRepository>
   </PropertyGroup>
 

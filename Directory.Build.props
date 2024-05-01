@@ -25,9 +25,8 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <ContainerRegistry>ghcr.io</ContainerRegistry>
     <ContainerRepo>drolx</ContainerRepo>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
     <ContainerFamily>alpine</ContainerFamily>
-    <ContainerImageTag>$(Version)</ContainerImageTag>
+    <ContainerImageTags>$(Version);latest</ContainerImageTags>
   </PropertyGroup>
 
 </Project>

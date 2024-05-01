@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Navigation</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
     <ContainerRepository>$(ContainerRepo)/trace-service-navigation</ContainerRepository>
   </PropertyGroup>
 

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Gateway</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
     <ContainerRepository>$(ContainerRepo)/trace-service-gateway</ContainerRepository>
   </PropertyGroup>
 

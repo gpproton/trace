@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <Title>Trace.Service.Worker</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
     <ContainerRepository>$(ContainerRepo)/trace-service-worker</ContainerRepository>
   </PropertyGroup>
 
