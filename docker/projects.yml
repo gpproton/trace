@@ -14,6 +14,7 @@ x-app: &app
   environment: &app-env
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
     ASPNETCORE_HTTP_PORTS: 8080
     ASPNETCORE_HTTPS_PORTS: 8443
@@ -30,7 +31,7 @@ x-app: &app
     ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
     ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
     ConnectionStrings__db: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
-    OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
     services__service-gateway__0: "http://service-gateway:8080"
@@ -43,13 +44,12 @@ x-app: &app
     services__service-navigation__1: "https://service-navigation:8443"
 
 services:
-  aspire-dashboard:
-    container_name: "aspire-dashboard"
+  dashboard:
+    container_name: "dashboard"
     image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6"
     environment:
       DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
-      ASPNETCORE_HTTP_PORTS: 8080
-      ASPNETCORE_HTTPS_PORTS: 8443
+      ASPNETCORE_HTTPS_PORTS: 18888
       ASPNETCORE_Kestrel__Certificates__Default__Password: ""
       ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
     deploy:

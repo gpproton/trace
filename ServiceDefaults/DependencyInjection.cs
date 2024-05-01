@@ -20,7 +20,9 @@ using System.IO.Compression;
 using System.Reflection;
 using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +41,16 @@ public static class DependencyInjection {
             .AddJsonFile("config/appsettings.Shared.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"config/appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables();
+
+        if (builder.Environment.IsProduction()) {
+            builder.WebHost.ConfigureKestrel((context, options) => {
+                var httpsPort = Environment.GetEnvironmentVariable("ASPNETCORE_HTTPS_PORT ") ?? "443";
+                options.ListenAnyIP(int.Parse(httpsPort), listenOptions => {
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                    listenOptions.UseHttps();
+                });
+            });
+        }
 
         builder.AddRedisClient("cache");
         builder.AddRedisDistributedCache("cache");
@@ -73,7 +85,16 @@ public static class DependencyInjection {
     }
 
     public static WebApplication RegisterDefaults(this WebApplication app) {
+        if (app.Environment.IsDevelopment()) {
+            app.UseDeveloperExceptionPage();
+        }
+        else {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
         app.UseRouting();
+        app.UseHttpsRedirection();
         app.UseAntiforgery();
         app.UseAuthorization();
         app.UseSession();

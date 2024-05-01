@@ -16,6 +16,8 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Apr 11 2024
 
+using Aspire.Hosting.Lifecycle;
+using HotChocolate.Fusion.Aspire;
 using Trace.AppHost;
 using Trace.Common;
 using Trace.ServiceDefaults;
@@ -43,27 +45,35 @@ if (builder.ExecutionContext.IsRunMode) {
     builder.AddExternalContainer(AppConstants.Scylladb, AppConstants.Scylladb);
 }
 
-var workerService = builder.AddProject<Projects.Trace_Service_Worker>($"service-{Nodes.Worker}")
+var workerService = builder.AddProject<Projects.Trace_Service_Worker>($"service-{Nodes.Worker}", launchProfileName: "https")
     .AddProjectParameters();
 
-var coreService = builder.AddProject<Projects.Trace_Service_Core>($"service-{Nodes.Core}")
+var coreService = builder.AddProject<Projects.Trace_Service_Core>($"service-{Nodes.Core}", launchProfileName: "https")
     .AddProjectParameters();
 
-var integrationService = builder.AddProject<Projects.Trace_Service_Integration>($"service-{Nodes.Integration}")
+var integrationService = builder.AddProject<Projects.Trace_Service_Integration>($"service-{Nodes.Integration}", launchProfileName: "https")
     .AddProjectParameters();
 
-var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>($"service-{Nodes.Navigation}")
+var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>($"service-{Nodes.Navigation}", launchProfileName: "https")
     .AddProjectParameters();
 
 var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>($"service-{Nodes.Gateway}")
+    .WithOptions(new FusionCompositionOptions { EnableGlobalObjectIdentification = true })
     .WithSubgraph(coreService)
     .WithSubgraph(integrationService)
     .WithSubgraph(navigationService);
 
-var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend)
+var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend, launchProfileName: "https")
     .WithReference(gatewayService)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));
+
+
+// TODO: Resolve temporary hack
+if (builder.ExecutionContext.IsRunMode) {
+    // frontend.WithEnvironment($"services__service-{Nodes.Gateway}__http__0", "https://localhost:5000");
+    frontend.WithReference($"service-{Nodes.Gateway}", new Uri("https://localhost:5000"));
+}
 
 var website = builder.AddProject<Projects.Trace_Host_Website>(Nodes.Website);
 
@@ -115,6 +125,7 @@ if (builder.ExecutionContext.IsPublishMode) {
     .WithReference(traceDb);
 }
 
+builder.Services.AddLifecycleHook<AspNetCoreForwardedHeadersLifecycleHook>();
 builder.Build().Compose().Run();
 
 public static partial class Program {

@@ -19,4 +19,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

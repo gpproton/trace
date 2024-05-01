@@ -14,7 +14,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: trace
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
       OTEL_SERVICE_NAME: db
     volumes:
       - db:/var/lib/postgresql/data/pgdata

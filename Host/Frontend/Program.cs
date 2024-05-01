@@ -26,9 +26,10 @@ builder.Services.RegisterDefaultServices();
 // TODO: Refactor later for domain pull
 // from database or cache
 // builder.Services.AddLettuceEncrypt();
-// builder.Services.AddReverseProxy()
-//     .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
-//     .AddServiceDiscoveryDestinationResolver();
+builder.Services.AddHttpForwarderWithServiceDiscovery();
+builder.Services.AddReverseProxy()
+    .LoadFromConfig(builder.Configuration.GetSection("FrontendProxies"))
+    .AddServiceDiscoveryDestinationResolver();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -39,10 +40,11 @@ if (!app.Environment.IsDevelopment()) {
 }
 
 app.MapControllers();
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.RegisterDefaults();
-// app.MapReverseProxy();
+app.MapReverseProxy();
+// app.MapForwarder("/graphql", $"https+http://localhost:5000", "/graphql");
+
 app.UseOutputCache();
 app.MapControllerRoute(
     name: "default",

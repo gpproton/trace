@@ -44,13 +44,6 @@ public static class GraphqlServerExtension {
             IncludeTotalCount = true
         });
 
-        // if (name is not null)
-        //     services.PublishSchemaDefinition(c => {
-        //         c.SetName(name)
-        //         .PublishToRedis(Nodes.GroupName,
-        //             sp => sp.GetRequiredService<IConnectionMultiplexer>());
-        //     });
-
         return services;
     }
 

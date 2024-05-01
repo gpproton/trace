@@ -17,29 +17,32 @@
 // Modified At: Sat Apr 13 2024
 
 using Trace.ServiceDefaults;
+using Trace.ServiceDefaults.Extensions;
+using Trace.Infrastructure;
+using Trace.Application.Abstractions;
+using Trace.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+var assembly = typeof(TenantEntity<>).Assembly;
+var isDevelopment = builder.Environment.IsDevelopment();
 
 builder.RegisterDefaults();
 builder.AddRedisOutputCache("cache");
+builder.RegisterInfrastructure(assembly);
 builder.Services.RegisterDefaultServices();
-builder.Services.AddControllersWithViews();
+builder.Services.RegisterApplicationServices(assembly);
+builder.Services.AddGraphQLServer()
+    .AddGraphqlDefaults(Nodes.Worker)
+    .AddRequestOptions(isDevelopment)
+    .AddContextConfig()
+    .AddQueryableCursorPagingProvider()
+    .RegisterObjectExtensions(typeof(Program).Assembly);
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment()) {
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
-
-app.MapControllers();
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 app.RegisterDefaults();
+app.RegisterGraphQl();
 app.UseOutputCache();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
 app.MapFallbackToFile("index.html");
 
-app.Run();
+app.RunWithGraphQLCommands(args);

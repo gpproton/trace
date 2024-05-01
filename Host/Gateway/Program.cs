@@ -18,25 +18,17 @@
 
 using HotChocolate;
 using HotChocolate.Types.Spatial;
-using StackExchange.Redis;
 using Trace.ServiceDefaults;
-using Trace.ServiceDefaults.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.RegisterDefaults();
 builder.Services.RegisterDefaultServices();
-builder.Services.RegisterSchemaHttpClients(Nodes.All.ToDictionary(schema => schema,
-    schema => new Uri($"http://service-{schema}/graphql")
-));
-
-builder.Services
-    .AddCors()
+builder.Services.AddHttpForwarderWithServiceDiscovery();
+builder.Services.AddCors()
     .AddHeaderPropagation(c => {
         c.Headers.Add("GraphQL-Preflight");
         c.Headers.Add("Authorization");
     });
-
 builder.Services
     .AddHttpClient("Fusion")
     .AddHeaderPropagation();
@@ -56,5 +48,4 @@ app.RegisterDefaults();
 app.UseHeaderPropagation();
 app.RegisterGraphQl();
 app.MapGet("/", () => "service.gateway");
-
 app.RunWithGraphQLCommands(args);

@@ -8,7 +8,7 @@ services:
     hostname: scylladb
     restart: unless-stopped
     environment:
-      OTEL_EXPORTER_OTLP_ENDPOINT: "http://aspire-dashboard:18889"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
       OTEL_SERVICE_NAME: scylladb
     ports:
       - 9042:9042
