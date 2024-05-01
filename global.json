@@ -8,7 +8,7 @@
     "w:update": "dotnet workload update",
     "w:restore": "dotnet workload restore Trace.sln",
     "docker": "docker-compose up -d cache messaging scylladb db",
-    "publish:docker": "dotnet publish -t:PublishContainer",
+    "publish": "dotnet publish -t:PublishContainer",
     "dev": "dotnet r docker;dotnet watch --project AppHost --launch-profile https",
     "run": "dotnet r docker;dotnet run --project AppHost --launch-profile https",
     "docker:down": "docker-compose down -v",
