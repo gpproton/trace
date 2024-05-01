@@ -1,7 +1,7 @@
 x-app: &app
   restart: unless-stopped
   volumes:
-  - ~/localhost.pfx:/app/certs/localhost.pfx:ro
+  - ~/certs:/app/certs:ro
   deploy: &app-deploy
     mode: replicated
     resources:
@@ -34,6 +34,7 @@ x-app: &app
     OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
+    services__service-gateway: "https://service-gateway:443/"
     services__service-gateway__http__0: "http://service-gateway:80"
     services__service-gateway__http__1: "https://service-gateway:443"
     services__service-core__http__0: "http://service-core:80"
@@ -73,7 +74,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4590:8443
+      - 4590:443
     networks:
       default:
 
@@ -87,7 +88,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4700:8443
+      - 4700:443
     networks:
       default:
 
@@ -101,7 +102,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4600:8443
+      - 4600:443
     networks:
       default:
 
@@ -115,7 +116,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4650:8443
+      - 4650:443
     networks:
       default:
 
@@ -129,7 +130,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4570:8443
+      - 4570:443
     networks:
       default:
 
@@ -146,7 +147,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4571:8443
+      - 4571:443
     networks:
       default:
 
@@ -163,7 +164,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4572:8443
+      - 4572:443
     networks:
       default:
 
@@ -180,6 +181,6 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4573:8443
+      - 4573:443
     networks:
       default:
