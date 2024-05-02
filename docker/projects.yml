@@ -30,13 +30,12 @@ x-app: &app
     CassandraPass: "cassandra"
     ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
     ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
-    ConnectionStrings__db: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
+    ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
     OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
     services__geocoding: "https://nominatim.openstreetmap.org"
     services__routing: "https://valhalla.openstreetmap.de"
-    services__service-gateway: "https://service-gateway:443/"
-    services__service-gateway__http__0: "http://service-gateway:80"
-    services__service-gateway__http__1: "https://service-gateway:443"
+    services__service-gateway__http__0: "http://service-gateway:80/"
+    services__service-gateway__http__1: "https://service-gateway:443/"
     services__service-core__http__0: "http://service-core:80"
     services__service-core__http__1: "https://service-core:443"
     services__service-integration__http__0: "http://service-integration:80"
@@ -130,7 +129,7 @@ services:
     deploy:
       <<: *app-deploy
     ports:
-      - 4570:443
+      - 5000:443
     networks:
       default:
 

@@ -71,7 +71,8 @@ var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend, launc
 
 // TODO: Resolve temporary hack
 if (builder.ExecutionContext.IsRunMode) {
-    frontend.WithReference($"service-{Nodes.Gateway}", new Uri("https://localhost:5000"));
+    frontend.WithEnvironment("services__service-gateway__http__0", "http://localhost:5001")
+   .WithEnvironment("services__service-gateway__http__1", "https://localhost:5000");
 }
 
 var website = builder.AddProject<Projects.Trace_Host_Website>(Nodes.Website);
@@ -116,7 +117,11 @@ if (builder.ExecutionContext.IsPublishMode) {
     .WithReference(traceDb);
 
     gatewayService.WithReference(cache);
-    frontend.WithReference(cache);
+
+    frontend.WithReference(cache)
+    .WithEnvironment("services__service-gateway__http__0", "http://service-gateway:80")
+    .WithEnvironment("services__service-gateway__http__1", "https://service-gateway:443");
+
     website.WithReference(cache);
 
     manager.WithReference(cache)
@@ -124,7 +129,7 @@ if (builder.ExecutionContext.IsPublishMode) {
     .WithReference(traceDb);
 }
 
-builder.Services.AddLifecycleHook<AspNetCoreForwardedHeadersLifecycleHook>();
+// builder.Services.AddLifecycleHook<AspNetCoreForwardedHeadersLifecycleHook>();
 builder.Build().Compose().Run();
 
 public static partial class Program {

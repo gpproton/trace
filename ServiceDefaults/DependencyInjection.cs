@@ -90,7 +90,6 @@ public static class DependencyInjection {
             app.UseDeveloperExceptionPage();
         }
         else {
-            app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
 

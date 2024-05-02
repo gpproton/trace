@@ -36,18 +36,17 @@ app.MapControllers();
 app.UseStaticFiles();
 app.RegisterDefaults();
 
-var gatewayAddress = app.Configuration.GetValue<string>("services:service-gateway");
-var geocodingUrl = app.Configuration.GetValue<string>("services:geocoding");
-var routingUrl = app.Configuration.GetValue<string>("services:routing");
+var geocodingUrl = app.Configuration.GetValue<string>("services:geocoding") ?? "http://geocoding";
+var routingUrl = app.Configuration.GetValue<string>("services:routing") ?? "http://routing";
 var requestConfig = ForwarderRequestConfig.Empty;
 
-app.MapForwarder("/api/service", $"{gatewayAddress}graphql", requestConfig, (proxy) => {
+app.MapForwarder("/api/service", $"http://service-{Nodes.Gateway}/graphql", requestConfig, (proxy) => {
     proxy.AddPathRemovePrefix("/api/service");
 });
-app.MapForwarder("/api/geocoding/{**catch-all}", $"{geocodingUrl}", requestConfig, (proxy) => {
+app.MapForwarder("/api/geocoding/{**catch-all}", geocodingUrl, requestConfig, (proxy) => {
     proxy.AddPathRemovePrefix("/api/geocoding");
 });
-app.MapForwarder("/api/routing/{**catch-all}", $"{routingUrl}", requestConfig, (proxy) => {
+app.MapForwarder("/api/routing/{**catch-all}", routingUrl, requestConfig, (proxy) => {
     proxy.AddPathRemovePrefix("/api/routing");
 });
 
