@@ -49,13 +49,17 @@ var workerService = builder.AddProject<Projects.Trace_Service_Worker>($"service-
     .AddProjectParameters();
 
 var coreService = builder.AddProject<Projects.Trace_Service_Core>($"service-{Nodes.Core}", launchProfileName: "https")
-    .AddProjectParameters();
+    .AddProjectParameters()
+    .AsHttp2Service();
 
 var integrationService = builder.AddProject<Projects.Trace_Service_Integration>($"service-{Nodes.Integration}", launchProfileName: "https")
-    .AddProjectParameters();
+    .AddProjectParameters()
+    .AsHttp2Service();
 
 var navigationService = builder.AddProject<Projects.Trace_Service_Navigation>($"service-{Nodes.Navigation}", launchProfileName: "https")
-    .AddProjectParameters();
+    .AddProjectParameters()
+    .AsHttp2Service()
+    .WithExternalHttpEndpoints();
 
 var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>($"service-{Nodes.Gateway}")
     .WithOptions(new FusionCompositionOptions { EnableGlobalObjectIdentification = true })
@@ -64,6 +68,9 @@ var gatewayService = builder.AddFusionGateway<Projects.Trace_Gateway>($"service-
     .WithSubgraph(navigationService);
 
 var frontend = builder.AddProject<Projects.Trace_Frontend>(Nodes.Frontend, launchProfileName: "https")
+    .WithReference(integrationService)
+    .WithReference(coreService)
+    .WithReference(navigationService)
     .WithReference(gatewayService)
     .WithReference("geocoding", new Uri("https://nominatim.openstreetmap.org"))
     .WithReference("routing", new Uri("https://valhalla.openstreetmap.de"));

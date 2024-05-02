@@ -16,8 +16,8 @@ x-app: &app
     OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
     OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
     ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
-    ASPNETCORE_HTTP_PORTS: 80
-    ASPNETCORE_HTTPS_PORTS: 443
+    # ASPNETCORE_HTTP_PORTS: 80
+    # ASPNETCORE_HTTPS_PORTS: 443
     ASPNETCORE_Kestrel__Certificates__Default__Password: ""
     ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
     MessagingUser: "guest"

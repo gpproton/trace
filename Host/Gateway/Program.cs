@@ -14,7 +14,7 @@
 // Author: Godwin peter .O (me@godwin.dev)
 // Created At: Monday, 22nd Apr 2024
 // Modified By: Godwin peter .O
-// Modified At: Tue Apr 23 2024
+// Modified At: Thu May 02 2024
 
 using HotChocolate;
 using HotChocolate.Types.Spatial;
@@ -37,7 +37,7 @@ var fusion = builder.Services.AddFusionGatewayServer()
     .ConfigureFromFile("./gateway.fgp", watchFileForUpdates: true)
     .AddServiceDiscoveryRewriter();
 
-fusion.Services
+builder.Services
     .AddGraphQL()
     .AddType<GeometryType>()
     .AddType<GeoJsonPositionType>()

@@ -129,12 +129,12 @@
         "http": {
           "scheme": "http",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2"
         },
         "https": {
           "scheme": "https",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2"
         }
       }
     },
@@ -162,12 +162,12 @@
         "http": {
           "scheme": "http",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2"
         },
         "https": {
           "scheme": "https",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2"
         }
       }
     },
@@ -195,12 +195,14 @@
         "http": {
           "scheme": "http",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2",
+          "external": true
         },
         "https": {
           "scheme": "https",
           "protocol": "tcp",
-          "transport": "http"
+          "transport": "http2",
+          "external": true
         }
       }
     },
@@ -238,9 +240,17 @@
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES": "true",
         "OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY": "in_memory",
         "ASPNETCORE_FORWARDEDHEADERS_ENABLED": "true",
+        "services__service-integration__http__0": "{service-integration.bindings.http.url}",
+        "services__service-integration__https__0": "{service-integration.bindings.https.url}",
+        "services__service-core__http__0": "{service-core.bindings.http.url}",
+        "services__service-core__https__0": "{service-core.bindings.https.url}",
+        "services__service-navigation__http__0": "{service-navigation.bindings.http.url}",
+        "services__service-navigation__https__0": "{service-navigation.bindings.https.url}",
         "services__geocoding": "https://nominatim.openstreetmap.org/",
         "services__routing": "https://valhalla.openstreetmap.de/",
-        "ConnectionStrings__cache": "{cache.connectionString}"
+        "ConnectionStrings__cache": "{cache.connectionString}",
+        "services__service-gateway__http__0": "http://service-gateway:80",
+        "services__service-gateway__http__1": "https://service-gateway:443"
       },
       "bindings": {
         "http": {
