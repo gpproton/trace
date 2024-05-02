@@ -42,7 +42,8 @@ public static class GraphqlServerExtension {
             MaxPageSize = 1000,
             DefaultPageSize = 50,
             IncludeTotalCount = true
-        });
+        })
+        .AddInstrumentation(o => o.RenameRootActivity = true);
 
         return services;
     }

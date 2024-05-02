@@ -40,6 +40,8 @@ builder.Services.AddGraphQLServer()
 
 var app = builder.Build();
 
+app.MapControllers();
+app.UseStaticFiles();
 app.RegisterDefaults();
 app.RegisterGraphQl();
 app.UseOutputCache();

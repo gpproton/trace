@@ -34,7 +34,7 @@ builder.Services
     .AddHeaderPropagation();
 
 var fusion = builder.Services.AddFusionGatewayServer()
-    .ConfigureFromFile("gateway.fgp", watchFileForUpdates: true)
+    .ConfigureFromFile("./gateway.fgp", watchFileForUpdates: true)
     .AddServiceDiscoveryRewriter();
 
 fusion.Services

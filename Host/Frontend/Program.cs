@@ -40,7 +40,7 @@ var geocodingUrl = app.Configuration.GetValue<string>("services:geocoding") ?? "
 var routingUrl = app.Configuration.GetValue<string>("services:routing") ?? "http://routing";
 var requestConfig = ForwarderRequestConfig.Empty;
 
-app.MapForwarder("/api/service", $"http://service-{Nodes.Gateway}/graphql", requestConfig, (proxy) => {
+app.MapForwarder("/api/service", $"https+http://service-{Nodes.Gateway}/graphql", requestConfig, (proxy) => {
     proxy.AddPathRemovePrefix("/api/service");
 });
 app.MapForwarder("/api/geocoding/{**catch-all}", geocodingUrl, requestConfig, (proxy) => {
