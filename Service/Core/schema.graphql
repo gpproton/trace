@@ -1,0 +1,1210 @@
+﻿schema {
+  query: QueryRoot
+  mutation: MutationRoot
+  subscription: SubscriptionRoot
+}
+
+type AccountSetting {
+  userAccountId: UUID
+  option: ProfileOption!
+  map: MapOption!
+  tenantId: UUID
+  id: UUID!
+}
+
+"Address for contacts"
+type Address {
+  id: ID!
+  type: AddressVariant!
+  line1: String
+  line2: String
+  city: String
+  county: String
+  state: String
+  zip: String
+  country: String
+  homePhone: String
+  phone: String
+  contact: Contact
+  contactId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type Asset {
+  name: String!
+  serialNumber: String!
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type AssetCategory {
+  color: String
+  default: Boolean!
+  name: String
+  description: String
+  id: UUID!
+}
+
+"A connection to a list of items."
+type AssetsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [AssetsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Asset!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type AssetsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Asset!
+}
+
+"Contact for individual or organizations"
+type Contact {
+  id: ID!
+  type: ContactVariant!
+  relationType: ContactRelationVariant!
+  fullName: String!
+  jobPosition: String
+  active: Boolean!
+  mobile: String!
+  phone: String
+  email: String!
+  website: String
+  married: Boolean!
+  birthDate: Date
+  notes: String
+  company: Contact
+  addresses: [Address!]!
+  relations: [Contact!]!
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"A connection to a list of items."
+type ContactsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [ContactsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Contact!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type ContactsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Contact!
+}
+
+type CrudAction {
+  read: Boolean!
+  create: Boolean!
+  update: Boolean!
+  delete: Boolean!
+}
+
+"IOT devices"
+type Device {
+  id: ID!
+  uniqueId: String!
+  positionId: UUID
+  lastUpdate: DateTime
+  lastMoved: DateTime
+  phone: String
+  status: DeviceStatus!
+  speedLimit: Int!
+  expiry: DateTime
+  position: DevicePosition
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"IOT device commands"
+type DeviceCommand {
+  id: ID!
+  tenantId: UUID
+  delay: Int!
+  messages: String!
+  default: Boolean!
+  name: String
+  description: String
+}
+
+type DevicePosition {
+  hasAttribute(key: String!): Boolean!
+  attributes: [KeyValuePairOfStringAndObject!]!
+  string(key: String!): String!
+  boolean(key: String!): Boolean!
+  decimal(key: String!): Decimal!
+  double(key: String!): Float!
+  integer(key: String!): Int!
+  float(key: String!): Float!
+  deviceId: UUID!
+  device: Device!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  tenantId: UUID
+  time: DateTime!
+  serverTime: DateTime!
+  longitude: Float!
+  latitude: Float!
+  address: String
+  speed: Float!
+  course: Float!
+  distance: Float!
+  odometer: Float!
+  altitude: Float!
+  satellites: Int!
+  fuel: Float!
+  battery: Float!
+  charging: Boolean!
+}
+
+type KeyValuePairOfStringAndObject {
+  key: String!
+}
+
+"Lead for customers"
+type Lead {
+  id: ID!
+  contact: Contact
+  time: DateTime!
+  source: String
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type MapOption {
+  googleApiKey: String
+  bingApiKey: String
+  mapBoxApiKey: String
+  mapType: String
+  zoom: Int
+  zoomSelection: Int
+  enableTrip: Boolean!
+  autoRoute: Boolean!
+  autoOrder: Boolean!
+  autoRouteCost: Boolean!
+  autoInvoice: Boolean!
+  verifyOtp: Boolean!
+  autoZoneOtp: Boolean!
+}
+
+type MutationRoot {
+  version: VersionPayload!
+}
+
+"Oppertunities details"
+type Opportunity {
+  id: ID!
+  description: String
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type ProfileOption {
+  token: String
+  language: String
+  timezone: String
+  hour24Time: Boolean!
+  unitDistance: String
+  unitVolume: String
+  unitWeight: String
+  unitTemperature: String
+  unitSpeed: String
+  unitPower: String
+  unitPressure: String
+  unitForce: String
+  unitArea: String
+}
+
+"Query address for a contact"
+type QueryRoot {
+  version: String!
+  "Query Vehicles"
+  vehicles("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: VehicleFilterInput): VehiclesConnection
+  "Query Trailers"
+  trailers("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: TrailerFilterInput): TrailersConnection
+  tenantProfile(id: UUID!): Tenant
+  "Query Tag Members"
+  tagMember(id: UUID!): TagMembers
+  "Query Tags"
+  tags("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: TagFilterInput): TagsConnection
+  contactAddresses(id: UUID!): [Address!]!
+  "Query Contacts"
+  contacts("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: ContactFilterInput): ContactsConnection
+  "Query assets"
+  assets("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: AssetFilterInput): AssetsConnection
+  hostProfile(id: UUID!): Tenant
+}
+
+type SubscriptionRoot {
+  version: String!
+}
+
+"Tags for binding most entities"
+type Tag {
+  name: String!
+  color: String
+  parent: Tag
+  members: [TagMembers!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"user attached to tag"
+type TagMembers {
+  tag: Tag!
+  tagId: UUID
+  name: String
+  account: UserAccount
+  expiry: DateTime
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"A connection to a list of items."
+type TagsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [TagsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Tag!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type TagsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Tag!
+}
+
+type Tenant {
+  contact: Contact
+  token: UUID
+  active: Boolean!
+  name: String!
+  type: TenantType!
+  logo: String
+  setting: TenantSetting
+  domains: [TenantDomain!]!
+  id: UUID!
+}
+
+type TenantDomain {
+  tenant: Tenant
+  domain: String!
+  registrar: String
+  active: Boolean!
+  expiry: DateTime
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type TenantSetting {
+  tenant: Tenant
+  tenantId: UUID
+  option: ProfileOption!
+  map: MapOption!
+  id: UUID!
+}
+
+type Trailer {
+  vehicle: Vehicle
+  name: String
+  type: TrailerType!
+  fleetIdentifier: String
+  uniqueId: String
+  odometer: Long!
+  horsePower: Int!
+  model: String
+  weightCapacity: Decimal!
+  tags: [Tag!]!
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"A connection to a list of items."
+type TrailersConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [TrailersEdge!]
+  "A flattened list of the nodes."
+  nodes: [Trailer!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type TrailersEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Trailer!
+}
+
+type UserAccount {
+  contact: Contact!
+  contactId: UUID
+  defaultRole: RoleLevel!
+  roleId: UUID
+  role: UserRole
+  tenantId: UUID
+  accountSetting: AccountSetting
+  id: UUID!
+  userName: String
+  normalizedUserName: String
+  email: String
+  normalizedEmail: String
+  emailConfirmed: Boolean!
+  passwordHash: String
+  securityStamp: String
+  concurrencyStamp: String
+  phoneNumber: String
+  phoneNumberConfirmed: Boolean!
+  twoFactorEnabled: Boolean!
+  lockoutEnd: DateTime
+  lockoutEnabled: Boolean!
+  accessFailedCount: Int!
+}
+
+type UserPermissions {
+  role: UserRole
+  roleId: UUID
+  module: String
+  feature: String
+  actions: CrudAction!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type UserRole {
+  root: RoleLevel!
+  permissions: [UserPermissions!]!
+  id: UUID!
+  name: String
+  normalizedName: String
+  concurrencyStamp: String
+}
+
+type Vehicle {
+  type: VehicleVariant!
+  fleetIdentifier: String!
+  registrationNo: String!
+  odometer: Long!
+  fuelType: FuelType!
+  fuelCapacity: Int!
+  horsePower: Int!
+  model: String
+  weightCapacity: Decimal!
+  trailer: Trailer
+  trailerId: UUID
+  device: Device
+  deviceId: UUID
+  tags: [Tag!]!
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"A connection to a list of items."
+type VehiclesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [VehiclesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Vehicle!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type VehiclesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Vehicle!
+}
+
+type VersionPayload {
+  string: String
+}
+
+input AccountSettingFilterInput {
+  and: [AccountSettingFilterInput!]
+  or: [AccountSettingFilterInput!]
+  userAccountId: UuidOperationFilterInput
+  option: ProfileOptionFilterInput
+  map: MapOptionFilterInput
+  tenantId: UuidOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AddressFilterInput {
+  and: [AddressFilterInput!]
+  or: [AddressFilterInput!]
+  type: AddressVariantOperationFilterInput
+  line1: StringOperationFilterInput
+  line2: StringOperationFilterInput
+  city: StringOperationFilterInput
+  county: StringOperationFilterInput
+  state: StringOperationFilterInput
+  zip: StringOperationFilterInput
+  country: StringOperationFilterInput
+  homePhone: StringOperationFilterInput
+  phone: StringOperationFilterInput
+  contact: ContactFilterInput
+  contactId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AddressVariantOperationFilterInput {
+  eq: AddressVariant
+  neq: AddressVariant
+  in: [AddressVariant!]
+  nin: [AddressVariant!]
+}
+
+input AssetCategoryFilterInput {
+  and: [AssetCategoryFilterInput!]
+  or: [AssetCategoryFilterInput!]
+  color: StringOperationFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  description: StringOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AssetFilterInput {
+  and: [AssetFilterInput!]
+  or: [AssetFilterInput!]
+  name: StringOperationFilterInput
+  serialNumber: StringOperationFilterInput
+  barcode: StringOperationFilterInput
+  color: StringOperationFilterInput
+  deployed: DateTimeOperationFilterInput
+  decommissioned: DateTimeOperationFilterInput
+  category: AssetCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input ContactFilterInput {
+  and: [ContactFilterInput!]
+  or: [ContactFilterInput!]
+  type: ContactVariantOperationFilterInput
+  relationType: ContactRelationVariantOperationFilterInput
+  fullName: StringOperationFilterInput
+  jobPosition: StringOperationFilterInput
+  active: BooleanOperationFilterInput
+  mobile: StringOperationFilterInput
+  phone: StringOperationFilterInput
+  email: StringOperationFilterInput
+  website: StringOperationFilterInput
+  married: BooleanOperationFilterInput
+  birthDate: DateOperationFilterInput
+  notes: StringOperationFilterInput
+  company: ContactFilterInput
+  addresses: ListFilterInputTypeOfAddressFilterInput
+  relations: ListFilterInputTypeOfContactFilterInput
+  tenantId: UuidOperationFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input ContactRelationVariantOperationFilterInput {
+  eq: ContactRelationVariant
+  neq: ContactRelationVariant
+  in: [ContactRelationVariant!]
+  nin: [ContactRelationVariant!]
+}
+
+input ContactVariantOperationFilterInput {
+  eq: ContactVariant
+  neq: ContactVariant
+  in: [ContactVariant!]
+  nin: [ContactVariant!]
+}
+
+input CrudActionFilterInput {
+  and: [CrudActionFilterInput!]
+  or: [CrudActionFilterInput!]
+  read: BooleanOperationFilterInput
+  create: BooleanOperationFilterInput
+  update: BooleanOperationFilterInput
+  delete: BooleanOperationFilterInput
+}
+
+input DateOperationFilterInput {
+  eq: Date
+  neq: Date
+  in: [Date]
+  nin: [Date]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal]
+  nin: [Decimal]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input DeviceFilterInput {
+  and: [DeviceFilterInput!]
+  or: [DeviceFilterInput!]
+  uniqueId: StringOperationFilterInput
+  positionId: UuidOperationFilterInput
+  lastUpdate: DateTimeOperationFilterInput
+  lastMoved: DateTimeOperationFilterInput
+  phone: StringOperationFilterInput
+  status: DeviceStatusOperationFilterInput
+  speedLimit: IntOperationFilterInput
+  expiry: DateTimeOperationFilterInput
+  position: DevicePositionFilterInput
+  barcode: StringOperationFilterInput
+  color: StringOperationFilterInput
+  deployed: DateTimeOperationFilterInput
+  decommissioned: DateTimeOperationFilterInput
+  category: AssetCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input DevicePositionFilterInput {
+  and: [DevicePositionFilterInput!]
+  or: [DevicePositionFilterInput!]
+  deviceId: UuidOperationFilterInput
+  device: DeviceFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  tenantId: UuidOperationFilterInput
+  time: DateTimeOperationFilterInput
+  serverTime: DateTimeOperationFilterInput
+  longitude: FloatOperationFilterInput
+  latitude: FloatOperationFilterInput
+  address: StringOperationFilterInput
+  speed: FloatOperationFilterInput
+  course: FloatOperationFilterInput
+  distance: FloatOperationFilterInput
+  odometer: FloatOperationFilterInput
+  altitude: FloatOperationFilterInput
+  satellites: IntOperationFilterInput
+  fuel: FloatOperationFilterInput
+  battery: FloatOperationFilterInput
+  charging: BooleanOperationFilterInput
+}
+
+input DeviceStatusOperationFilterInput {
+  eq: DeviceStatus
+  neq: DeviceStatus
+  in: [DeviceStatus!]
+  nin: [DeviceStatus!]
+}
+
+input FloatOperationFilterInput {
+  eq: Float
+  neq: Float
+  in: [Float]
+  nin: [Float]
+  gt: Float
+  ngt: Float
+  gte: Float
+  ngte: Float
+  lt: Float
+  nlt: Float
+  lte: Float
+  nlte: Float
+}
+
+input FuelTypeOperationFilterInput {
+  eq: FuelType
+  neq: FuelType
+  in: [FuelType!]
+  nin: [FuelType!]
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input ListFilterInputTypeOfAddressFilterInput {
+  all: AddressFilterInput
+  none: AddressFilterInput
+  some: AddressFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfContactFilterInput {
+  all: ContactFilterInput
+  none: ContactFilterInput
+  some: ContactFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfTagFilterInput {
+  all: TagFilterInput
+  none: TagFilterInput
+  some: TagFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfTagMembersFilterInput {
+  all: TagMembersFilterInput
+  none: TagMembersFilterInput
+  some: TagMembersFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfUserPermissionsFilterInput {
+  all: UserPermissionsFilterInput
+  none: UserPermissionsFilterInput
+  some: UserPermissionsFilterInput
+  any: Boolean
+}
+
+input LongOperationFilterInput {
+  eq: Long
+  neq: Long
+  in: [Long]
+  nin: [Long]
+  gt: Long
+  ngt: Long
+  gte: Long
+  ngte: Long
+  lt: Long
+  nlt: Long
+  lte: Long
+  nlte: Long
+}
+
+input MapOptionFilterInput {
+  and: [MapOptionFilterInput!]
+  or: [MapOptionFilterInput!]
+  googleApiKey: StringOperationFilterInput
+  bingApiKey: StringOperationFilterInput
+  mapBoxApiKey: StringOperationFilterInput
+  mapType: StringOperationFilterInput
+  zoom: IntOperationFilterInput
+  zoomSelection: IntOperationFilterInput
+  enableTrip: BooleanOperationFilterInput
+  autoRoute: BooleanOperationFilterInput
+  autoOrder: BooleanOperationFilterInput
+  autoRouteCost: BooleanOperationFilterInput
+  autoInvoice: BooleanOperationFilterInput
+  verifyOtp: BooleanOperationFilterInput
+  autoZoneOtp: BooleanOperationFilterInput
+}
+
+input ProfileOptionFilterInput {
+  and: [ProfileOptionFilterInput!]
+  or: [ProfileOptionFilterInput!]
+  token: StringOperationFilterInput
+  language: StringOperationFilterInput
+  timezone: StringOperationFilterInput
+  hour24Time: BooleanOperationFilterInput
+  unitDistance: StringOperationFilterInput
+  unitVolume: StringOperationFilterInput
+  unitWeight: StringOperationFilterInput
+  unitTemperature: StringOperationFilterInput
+  unitSpeed: StringOperationFilterInput
+  unitPower: StringOperationFilterInput
+  unitPressure: StringOperationFilterInput
+  unitForce: StringOperationFilterInput
+  unitArea: StringOperationFilterInput
+}
+
+input RoleLevelOperationFilterInput {
+  eq: RoleLevel
+  neq: RoleLevel
+  in: [RoleLevel!]
+  nin: [RoleLevel!]
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input TagFilterInput {
+  and: [TagFilterInput!]
+  or: [TagFilterInput!]
+  name: StringOperationFilterInput
+  color: StringOperationFilterInput
+  parent: TagFilterInput
+  members: ListFilterInputTypeOfTagMembersFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input TagMembersFilterInput {
+  and: [TagMembersFilterInput!]
+  or: [TagMembersFilterInput!]
+  tag: TagFilterInput
+  tagId: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  account: UserAccountFilterInput
+  expiry: DateTimeOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input TrailerFilterInput {
+  and: [TrailerFilterInput!]
+  or: [TrailerFilterInput!]
+  vehicle: VehicleFilterInput
+  name: StringOperationFilterInput
+  type: TrailerTypeOperationFilterInput
+  fleetIdentifier: StringOperationFilterInput
+  uniqueId: StringOperationFilterInput
+  odometer: LongOperationFilterInput
+  horsePower: IntOperationFilterInput
+  model: StringOperationFilterInput
+  weightCapacity: DecimalOperationFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  barcode: StringOperationFilterInput
+  color: StringOperationFilterInput
+  deployed: DateTimeOperationFilterInput
+  decommissioned: DateTimeOperationFilterInput
+  category: AssetCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input TrailerTypeOperationFilterInput {
+  eq: TrailerType
+  neq: TrailerType
+  in: [TrailerType!]
+  nin: [TrailerType!]
+}
+
+input UserAccountFilterInput {
+  and: [UserAccountFilterInput!]
+  or: [UserAccountFilterInput!]
+  contact: ContactFilterInput
+  contactId: UuidOperationFilterInput
+  defaultRole: RoleLevelOperationFilterInput
+  roleId: UuidOperationFilterInput
+  role: UserRoleFilterInput
+  tenantId: UuidOperationFilterInput
+  accountSetting: AccountSettingFilterInput
+  id: UuidOperationFilterInput
+  userName: StringOperationFilterInput
+  normalizedUserName: StringOperationFilterInput
+  email: StringOperationFilterInput
+  normalizedEmail: StringOperationFilterInput
+  emailConfirmed: BooleanOperationFilterInput
+  passwordHash: StringOperationFilterInput
+  securityStamp: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+  phoneNumber: StringOperationFilterInput
+  phoneNumberConfirmed: BooleanOperationFilterInput
+  twoFactorEnabled: BooleanOperationFilterInput
+  lockoutEnd: DateTimeOperationFilterInput
+  lockoutEnabled: BooleanOperationFilterInput
+  accessFailedCount: IntOperationFilterInput
+}
+
+input UserPermissionsFilterInput {
+  and: [UserPermissionsFilterInput!]
+  or: [UserPermissionsFilterInput!]
+  role: UserRoleFilterInput
+  roleId: UuidOperationFilterInput
+  module: StringOperationFilterInput
+  feature: StringOperationFilterInput
+  actions: CrudActionFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input UserRoleFilterInput {
+  and: [UserRoleFilterInput!]
+  or: [UserRoleFilterInput!]
+  root: RoleLevelOperationFilterInput
+  permissions: ListFilterInputTypeOfUserPermissionsFilterInput
+  id: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  normalizedName: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+input VehicleFilterInput {
+  and: [VehicleFilterInput!]
+  or: [VehicleFilterInput!]
+  type: VehicleVariantOperationFilterInput
+  fleetIdentifier: StringOperationFilterInput
+  registrationNo: StringOperationFilterInput
+  odometer: LongOperationFilterInput
+  fuelType: FuelTypeOperationFilterInput
+  fuelCapacity: IntOperationFilterInput
+  horsePower: IntOperationFilterInput
+  model: StringOperationFilterInput
+  weightCapacity: DecimalOperationFilterInput
+  trailer: TrailerFilterInput
+  trailerId: UuidOperationFilterInput
+  device: DeviceFilterInput
+  deviceId: UuidOperationFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  barcode: StringOperationFilterInput
+  color: StringOperationFilterInput
+  deployed: DateTimeOperationFilterInput
+  decommissioned: DateTimeOperationFilterInput
+  category: AssetCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input VehicleVariantOperationFilterInput {
+  eq: VehicleVariant
+  neq: VehicleVariant
+  in: [VehicleVariant!]
+  nin: [VehicleVariant!]
+}
+
+enum AddressVariant {
+  CONTACT
+  PRIVATE
+  INVOICE
+  SHIPPING
+  OTHER
+}
+
+enum ContactRelationVariant {
+  NONE
+  GUARANTOR
+  SPOUSE
+  SIBLING
+  CHILD
+  OTHER
+}
+
+enum ContactVariant {
+  CONTACT
+  ORGANIZATION
+  ACCOUNT
+  EXTERNAL
+  SYSTEM
+}
+
+enum DeviceStatus {
+  ONLINE
+  OFFLINE
+  MOVING
+  STOPPED
+  IDLING
+}
+
+enum FuelType {
+  PETROL
+  CNG
+  DIESEL
+  ELECTRIC
+  GAS
+  HYDROGEN
+  LPG
+  OTHER
+}
+
+enum RoleLevel {
+  DEFAULT
+  ANONYMOUS
+  BOT
+  CUSTOMER_CLIENT
+  CUSTOMER_BASIC
+  CUSTOMER_OPERATOR
+  CUSTOMER_ADMINISTRATOR
+  TENANT_DRIVER
+  TENANT_LOAD_SUPERVISOR
+  TENANT_WAREHOUSE_MANAGER
+  TENANT_DRIVER_SUPERVISOR
+  TENANT_DRIVER_MANAGER
+  TENANT_FLEET_MEMBER
+  TENANT_FLEET_LEAD
+  TENANT_FLEET_MANAGER
+  TENANT_ADMINISTRATOR
+  TENANT_SUPER_ADMINISTRATOR
+  SYSTEM_BOT
+  SYSTEM_OPERATOR
+  SYSTEM_ADMINISTRATOR
+  SYSTEM_SUPER_ADMINISTRATOR
+}
+
+enum TenantType {
+  INTERNAL
+  ORGANIZATION
+  INDIVIDUAL
+}
+
+enum TrailerType {
+  PICK_UP
+  LONG_HAUL
+}
+
+enum VehicleVariant {
+  BICYCLE
+  BUS
+  CAR
+  CRANE
+  MOTO_CYCLE
+  OFF_ROAD
+  MOBILE
+  PICK_UP
+  TRACTOR
+  TRAIN
+  TRUCK
+  VAN
+  SCOOTER
+}
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+"The `Long` scalar type represents non-fractional signed whole 64-bit numeric values. Long can represent values between -(2^63) and 2^63 - 1."
+scalar Long
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

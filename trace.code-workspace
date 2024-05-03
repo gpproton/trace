@@ -1,3 +1,22 @@
+/*
+ * Copyright (c) 2023 - 2024 drolx Solutions
+ *
+ * Licensed under the Business Source License 1.1 and Trace Source Available License
+ * you may not use this file except in compliance with the License.
+ * Change License: Reciprocal Public License 1.5
+ *     https://mariadb.com/bsl11
+ *     https://opensource.org/license/rpl-1-5
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Author: Godwin peter .O (me@godwin.dev)
+ * Created At: Monday, 26th Feb 2024
+ * Modified By: Godwin peter .O
+ * Modified At: Thu Mar 21 2024
+ */
 {
   "folders": [
     {
@@ -8,8 +27,8 @@
       "path": "proxy"
     },
     {
-      "name": "helm-charts",
-      "path": "charts"
+      "name": "deploy",
+      "path": "deploy"
     },
     {
       "name": "ui",
@@ -24,6 +43,7 @@
     "editor.guides.bracketPairs": true,
     "editor.formatOnSave": true,
     "dotnet.preferVisualStudioCodeFileSystemWatcher": true,
+    "dotnetAcquisitionExtension.installTimeoutValue": 1200,
     "nuget.autoOpenOutputWindowOnRestore": "off",
     "files.watcherExclude": {
       "**/.git/objects/**": true,
@@ -49,7 +69,7 @@
         "template": [
           "Copyright (c) <<yeartoyear(2023,now)>> <<company>>",
           "",
-          "Licensed under the Business Source License 1.1 and Trace License",
+          "Licensed under the Business Source License 1.1 and Trace Source Available License 1.0",
           "you may not use this file except in compliance with the License.",
           "Change License: Reciprocal Public License 1.5",
           "    https://mariadb.com/bsl11",
@@ -78,15 +98,20 @@
         "markdown",
         "json",
         "jsonc",
-        "yaml",
         "shellscript",
         "xml",
         "dockerfile",
         "dockercompose",
-        "ini"
+        "ini",
+        "vue"
       ],
       "excludeGlob": [
-        "./**/*/.gitignore"
+        ".gitignore",
+        "./.env*",
+        ".github/**/*.yml",
+        "./**/*.yml",
+        "./**/*.yaml",
+        "./.dockerignore"
       ],
       "autoHeader": "autoSave",
       "enforceHeader": true,
@@ -100,14 +125,33 @@
         "suffix": "",
         "end": "",
         "forceToTop": true
+      },
+      {
+        "language": "yaml",
+        "begin": "",
+        "prefix": "# ",
+        "suffix": "",
+        "end": "",
+        "forceToTop": true
       }
     ],
   },
   "extensions": {
     "recommendations": [
+      "esbenp.prettier-vscode",
+      "sibiraj-s.vscode-scss-formatter",
+      "eliostruyf.vscode-typescript-exportallmodules",
+      "nuxtr.nuxt-vscode-extentions",
+      "vue.volar",
+      "gitHub.vscode-github-actions",
+      "ms-dotnettools.vscode-dotnet-runtime",
+      "ms-dotnettools.csdevkit",
+      "ms-dotnetools.csharp",
+      "ms-azuretools.vscode-docker",
       "ms-dotnettools.vscodeintellicode-csharp",
       "editorconfig.editorconfig",
       "ms-dotnettools.csharp",
+      "ms-dotnettools.blazorwasm-companion",
       "wayou.vscode-todo-highlight",
       "vscode-icons-team.vscode-icons",
       "gruntfuggly.todo-tree",

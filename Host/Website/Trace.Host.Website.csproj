@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Title>Trace.Host.Website</Title>
+    <UserSecretsId>bd15d7c4-4ab5-4b71-9826-24d28bd2df4b</UserSecretsId>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>$(ContainerRepo)/trace-website</ContainerRepository>
+    <SpaRoot>..\..\client\website\</SpaRoot>
+    <SpaProxyServerUrl>http://localhost:3005</SpaProxyServerUrl>
+  </PropertyGroup>
+
+  <Import Project="..\..\Shared.props" />
+  <Import Project="..\SpaHost.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

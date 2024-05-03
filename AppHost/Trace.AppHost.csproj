@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsAspireHost>true</IsAspireHost>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" IsAspireProjectResource="false" />
+    <ProjectReference Include="..\Host\Frontend\Trace.Frontend.csproj" />
+    <ProjectReference Include="..\Host\Website\Trace.Host.Website.csproj" />
+    <ProjectReference Include="..\Host\Gateway\Trace.Gateway.csproj" />
+    <ProjectReference Include="..\Service\Worker\Trace.Service.Worker.csproj" />
+    <ProjectReference Include="..\Manager\Trace.Manager.csproj" />
+    <ProjectReference Include="..\Service\Core\Trace.Service.Core.csproj" />
+    <ProjectReference Include="..\Service\Integration\Trace.Service.Integration.csproj" />
+    <ProjectReference Include="..\Service\Navigation\Trace.Service.Navigation.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Redis" />
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" />
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+    <PackageReference Include="CliWrap" />
+    <PackageReference Include="HotChocolate.Fusion.Aspire" />
+  </ItemGroup>
+
+</Project>

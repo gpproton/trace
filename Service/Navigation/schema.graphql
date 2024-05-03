@@ -1,0 +1,1264 @@
+﻿schema {
+  query: QueryRoot
+  mutation: MutationRoot
+  subscription: SubscriptionRoot
+}
+
+interface GeoJSONInterface {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+type AccountSetting {
+  userAccountId: UUID
+  option: ProfileOption!
+  map: MapOption!
+  tenantId: UUID
+  id: UUID!
+}
+
+"Address for contacts"
+type Address {
+  id: ID!
+  type: AddressVariant!
+  line1: String
+  line2: String
+  city: String
+  county: String
+  state: String
+  zip: String
+  country: String
+  homePhone: String
+  phone: String
+  contact: Contact
+  contactId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type AssetCategory {
+  color: String
+  default: Boolean!
+  name: String
+  description: String
+  id: UUID!
+}
+
+"Contact for individual or organizations"
+type Contact {
+  id: ID!
+  type: ContactVariant!
+  relationType: ContactRelationVariant!
+  fullName: String!
+  jobPosition: String
+  active: Boolean!
+  mobile: String!
+  phone: String
+  email: String!
+  website: String
+  married: Boolean!
+  birthDate: Date
+  notes: String
+  company: Contact
+  addresses: [Address!]!
+  relations: [Contact!]!
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type CrudAction {
+  read: Boolean!
+  create: Boolean!
+  update: Boolean!
+  delete: Boolean!
+}
+
+"IOT devices"
+type Device {
+  id: ID!
+  uniqueId: String!
+  positionId: UUID
+  lastUpdate: DateTime
+  lastMoved: DateTime
+  phone: String
+  status: DeviceStatus!
+  speedLimit: Int!
+  expiry: DateTime
+  position: DevicePosition
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"IOT device commands"
+type DeviceCommand {
+  id: ID!
+  tenantId: UUID
+  delay: Int!
+  messages: String!
+  default: Boolean!
+  name: String
+  description: String
+}
+
+type DevicePosition {
+  hasAttribute(key: String!): Boolean!
+  attributes: [KeyValuePairOfStringAndObject!]!
+  string(key: String!): String!
+  boolean(key: String!): Boolean!
+  decimal(key: String!): Decimal!
+  double(key: String!): Float!
+  integer(key: String!): Int!
+  float(key: String!): Float!
+  deviceId: UUID!
+  device: Device!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  tenantId: UUID
+  time: DateTime!
+  serverTime: DateTime!
+  longitude: Float!
+  latitude: Float!
+  address: String
+  speed: Float!
+  course: Float!
+  distance: Float!
+  odometer: Float!
+  altitude: Float!
+  satellites: Int!
+  fuel: Float!
+  battery: Float!
+  charging: Boolean!
+}
+
+type GeoJSONLineStringType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of two or more positions."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiLineStringType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of LineString coordinate arrays."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiPointType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of positions."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiPolygonType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of Polygon coordinate arrays."
+  coordinates: Coordinates
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONPointType implements GeoJSONInterface {
+  "The \"coordinates\" field is a single position."
+  coordinates: Position
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONPolygonType implements GeoJSONInterface {
+  "The \"coordinates\" field MUST be an array of linear ring coordinate arrays. For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface."
+  coordinates: [[Position]]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type KeyValuePairOfStringAndObject {
+  key: String!
+}
+
+"Lead for customers"
+type Lead {
+  id: ID!
+  contact: Contact
+  time: DateTime!
+  source: String
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type Location {
+  tenantId: UUID
+  default: Boolean!
+  name: String!
+  address: String
+  approvedAt: DateTime
+  approvedBy: UUID
+  type: LocationType
+  category: LocationCategory
+  categoryId: UUID
+  geometry: GeoJSONInterface!
+  description: String
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type LocationCategory {
+  icon: String!
+  tenantId: UUID
+  default: Boolean!
+  name: String
+  description: String
+  id: UUID!
+}
+
+"A connection to a list of items."
+type LocationsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [LocationsEdge!]
+  "A flattened list of the nodes."
+  nodes: [Location!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type LocationsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Location!
+}
+
+type MapOption {
+  googleApiKey: String
+  bingApiKey: String
+  mapBoxApiKey: String
+  mapType: String
+  zoom: Int
+  zoomSelection: Int
+  enableTrip: Boolean!
+  autoRoute: Boolean!
+  autoOrder: Boolean!
+  autoRouteCost: Boolean!
+  autoInvoice: Boolean!
+  verifyOtp: Boolean!
+  autoZoneOtp: Boolean!
+}
+
+type MutationRoot {
+  version: VersionPayload!
+}
+
+"Oppertunities details"
+type Opportunity {
+  id: ID!
+  description: String
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type ProfileOption {
+  token: String
+  language: String
+  timezone: String
+  hour24Time: Boolean!
+  unitDistance: String
+  unitVolume: String
+  unitWeight: String
+  unitTemperature: String
+  unitSpeed: String
+  unitPower: String
+  unitPressure: String
+  unitForce: String
+  unitArea: String
+}
+
+type QueryRoot {
+  version: String!
+  "Query Routes"
+  routes("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: RouteFilterInput): RoutesConnection
+  "Query Locations"
+  locations("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: LocationFilterInput): LocationsConnection
+}
+
+type Route {
+  tenantId: UUID
+  approvedBy: UUID
+  approvedAt: DateTime!
+  color: String
+  speedLimit: Int
+  restDuration: Decimal!
+  toleranceDuration: Decimal!
+  completedRate: Int
+  source: GeoJSONPointType!
+  destination: GeoJSONPointType!
+  path: GeoJSONLineStringType
+  tags: [Tag!]!
+  default: Boolean!
+  name: String
+  description: String
+  id: UUID!
+}
+
+"A connection to a list of items."
+type RoutesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [RoutesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Route!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type RoutesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Route!
+}
+
+type SubscriptionRoot {
+  version: String!
+}
+
+"Tags for binding most entities"
+type Tag {
+  name: String!
+  color: String
+  parent: Tag
+  members: [TagMembers!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"user attached to tag"
+type TagMembers {
+  tag: Tag!
+  tagId: UUID
+  name: String
+  account: UserAccount
+  expiry: DateTime
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type UserAccount {
+  contact: Contact!
+  contactId: UUID
+  defaultRole: RoleLevel!
+  roleId: UUID
+  role: UserRole
+  tenantId: UUID
+  accountSetting: AccountSetting
+  id: UUID!
+  userName: String
+  normalizedUserName: String
+  email: String
+  normalizedEmail: String
+  emailConfirmed: Boolean!
+  passwordHash: String
+  securityStamp: String
+  concurrencyStamp: String
+  phoneNumber: String
+  phoneNumberConfirmed: Boolean!
+  twoFactorEnabled: Boolean!
+  lockoutEnd: DateTime
+  lockoutEnabled: Boolean!
+  accessFailedCount: Int!
+}
+
+type UserPermissions {
+  role: UserRole
+  roleId: UUID
+  module: String
+  feature: String
+  actions: CrudAction!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type UserRole {
+  root: RoleLevel!
+  permissions: [UserPermissions!]!
+  id: UUID!
+  name: String
+  normalizedName: String
+  concurrencyStamp: String
+}
+
+type VersionPayload {
+  string: String
+}
+
+input AccountSettingFilterInput {
+  and: [AccountSettingFilterInput!]
+  or: [AccountSettingFilterInput!]
+  userAccountId: UuidOperationFilterInput
+  option: ProfileOptionFilterInput
+  map: MapOptionFilterInput
+  tenantId: UuidOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AddressFilterInput {
+  and: [AddressFilterInput!]
+  or: [AddressFilterInput!]
+  type: AddressVariantOperationFilterInput
+  line1: StringOperationFilterInput
+  line2: StringOperationFilterInput
+  city: StringOperationFilterInput
+  county: StringOperationFilterInput
+  state: StringOperationFilterInput
+  zip: StringOperationFilterInput
+  country: StringOperationFilterInput
+  homePhone: StringOperationFilterInput
+  phone: StringOperationFilterInput
+  contact: ContactFilterInput
+  contactId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input AddressVariantOperationFilterInput {
+  eq: AddressVariant
+  neq: AddressVariant
+  in: [AddressVariant!]
+  nin: [AddressVariant!]
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input ContactFilterInput {
+  and: [ContactFilterInput!]
+  or: [ContactFilterInput!]
+  type: ContactVariantOperationFilterInput
+  relationType: ContactRelationVariantOperationFilterInput
+  fullName: StringOperationFilterInput
+  jobPosition: StringOperationFilterInput
+  active: BooleanOperationFilterInput
+  mobile: StringOperationFilterInput
+  phone: StringOperationFilterInput
+  email: StringOperationFilterInput
+  website: StringOperationFilterInput
+  married: BooleanOperationFilterInput
+  birthDate: DateOperationFilterInput
+  notes: StringOperationFilterInput
+  company: ContactFilterInput
+  addresses: ListFilterInputTypeOfAddressFilterInput
+  relations: ListFilterInputTypeOfContactFilterInput
+  tenantId: UuidOperationFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input ContactRelationVariantOperationFilterInput {
+  eq: ContactRelationVariant
+  neq: ContactRelationVariant
+  in: [ContactRelationVariant!]
+  nin: [ContactRelationVariant!]
+}
+
+input ContactVariantOperationFilterInput {
+  eq: ContactVariant
+  neq: ContactVariant
+  in: [ContactVariant!]
+  nin: [ContactVariant!]
+}
+
+input CrudActionFilterInput {
+  and: [CrudActionFilterInput!]
+  or: [CrudActionFilterInput!]
+  read: BooleanOperationFilterInput
+  create: BooleanOperationFilterInput
+  update: BooleanOperationFilterInput
+  delete: BooleanOperationFilterInput
+}
+
+input DateOperationFilterInput {
+  eq: Date
+  neq: Date
+  in: [Date]
+  nin: [Date]
+  gt: Date
+  ngt: Date
+  gte: Date
+  ngte: Date
+  lt: Date
+  nlt: Date
+  lte: Date
+  nlte: Date
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DecimalOperationFilterInput {
+  eq: Decimal
+  neq: Decimal
+  in: [Decimal]
+  nin: [Decimal]
+  gt: Decimal
+  ngt: Decimal
+  gte: Decimal
+  ngte: Decimal
+  lt: Decimal
+  nlt: Decimal
+  lte: Decimal
+  nlte: Decimal
+}
+
+input DimensionOperationFilterInput {
+  eq: Dimension
+  neq: Dimension
+  in: [Dimension!]
+  nin: [Dimension!]
+}
+
+input FloatOperationFilterInput {
+  eq: Float
+  neq: Float
+  in: [Float]
+  nin: [Float]
+  gt: Float
+  ngt: Float
+  gte: Float
+  ngte: Float
+  lt: Float
+  nlt: Float
+  lte: Float
+  nlte: Float
+}
+
+input GeoJSONLineStringInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of two or more positions."
+  coordinates: [Position]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiLineStringInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of LineString coordinate arrays."
+  coordinates: [[Position]]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiPointInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of positions."
+  coordinates: [Position]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiPolygonInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of Polygon coordinate arrays."
+  coordinates: Coordinates
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONPointInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is a single position."
+  coordinates: Position
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONPolygonInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field MUST be an array of linear ring coordinate arrays. For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface."
+  coordinates: [[Position]]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeometryContainsOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+}
+
+input GeometryDistanceOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+  eq: Float
+  neq: Float
+  in: [Float!]
+  nin: [Float!]
+  gt: Float
+  ngt: Float
+  gte: Float
+  ngte: Float
+  lt: Float
+  nlt: Float
+  lte: Float
+  nlte: Float
+}
+
+input GeometryFilterInput {
+  and: [GeometryFilterInput!]
+  or: [GeometryFilterInput!]
+  area: FloatOperationFilterInput
+  boundary: GeometryFilterInput
+  centroid: PointFilterInput
+  dimension: DimensionOperationFilterInput
+  envelope: GeometryFilterInput
+  geometryType: StringOperationFilterInput
+  interiorPoint: PointFilterInput
+  isSimple: BooleanOperationFilterInput
+  isValid: BooleanOperationFilterInput
+  length: FloatOperationFilterInput
+  numPoints: IntOperationFilterInput
+  ogcGeometryType: OgcGeometryTypeOperationFilterInput
+  pointOnSurface: PointFilterInput
+  srid: IntOperationFilterInput
+  contains: GeometryContainsOperationFilterInput
+  ncontains: GeometryContainsOperationFilterInput
+  distance: GeometryDistanceOperationFilterInput
+  intersects: GeometryIntersectsOperationFilterInput
+  nintersects: GeometryIntersectsOperationFilterInput
+  overlaps: GeometryOverlapsOperationFilterInput
+  noverlaps: GeometryOverlapsOperationFilterInput
+  touches: GeometryTouchesOperationFilterInput
+  ntouches: GeometryTouchesOperationFilterInput
+  within: GeometryWithinOperationFilterInput
+  nwithin: GeometryWithinOperationFilterInput
+}
+
+input GeometryIntersectsOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+}
+
+input GeometryOverlapsOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+}
+
+input GeometryTouchesOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+}
+
+input GeometryWithinOperationFilterInput {
+  geometry: Geometry!
+  buffer: Float
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input LineStringFilterInput {
+  and: [LineStringFilterInput!]
+  or: [LineStringFilterInput!]
+  area: FloatOperationFilterInput
+  boundary: GeometryFilterInput
+  centroid: PointFilterInput
+  dimension: DimensionOperationFilterInput
+  envelope: GeometryFilterInput
+  geometryType: StringOperationFilterInput
+  interiorPoint: PointFilterInput
+  isSimple: BooleanOperationFilterInput
+  isValid: BooleanOperationFilterInput
+  length: FloatOperationFilterInput
+  numPoints: IntOperationFilterInput
+  ogcGeometryType: OgcGeometryTypeOperationFilterInput
+  pointOnSurface: PointFilterInput
+  srid: IntOperationFilterInput
+  contains: GeometryContainsOperationFilterInput
+  ncontains: GeometryContainsOperationFilterInput
+  distance: GeometryDistanceOperationFilterInput
+  intersects: GeometryIntersectsOperationFilterInput
+  nintersects: GeometryIntersectsOperationFilterInput
+  overlaps: GeometryOverlapsOperationFilterInput
+  noverlaps: GeometryOverlapsOperationFilterInput
+  touches: GeometryTouchesOperationFilterInput
+  ntouches: GeometryTouchesOperationFilterInput
+  within: GeometryWithinOperationFilterInput
+  nwithin: GeometryWithinOperationFilterInput
+}
+
+input ListFilterInputTypeOfAddressFilterInput {
+  all: AddressFilterInput
+  none: AddressFilterInput
+  some: AddressFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfContactFilterInput {
+  all: ContactFilterInput
+  none: ContactFilterInput
+  some: ContactFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfTagFilterInput {
+  all: TagFilterInput
+  none: TagFilterInput
+  some: TagFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfTagMembersFilterInput {
+  all: TagMembersFilterInput
+  none: TagMembersFilterInput
+  some: TagMembersFilterInput
+  any: Boolean
+}
+
+input ListFilterInputTypeOfUserPermissionsFilterInput {
+  all: UserPermissionsFilterInput
+  none: UserPermissionsFilterInput
+  some: UserPermissionsFilterInput
+  any: Boolean
+}
+
+input LocationCategoryFilterInput {
+  and: [LocationCategoryFilterInput!]
+  or: [LocationCategoryFilterInput!]
+  icon: StringOperationFilterInput
+  tenantId: UuidOperationFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  description: StringOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input LocationFilterInput {
+  and: [LocationFilterInput!]
+  or: [LocationFilterInput!]
+  tenantId: UuidOperationFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  address: StringOperationFilterInput
+  approvedAt: DateTimeOperationFilterInput
+  approvedBy: UuidOperationFilterInput
+  type: NullableOfLocationTypeOperationFilterInput
+  category: LocationCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  geometry: GeometryFilterInput
+  description: StringOperationFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input MapOptionFilterInput {
+  and: [MapOptionFilterInput!]
+  or: [MapOptionFilterInput!]
+  googleApiKey: StringOperationFilterInput
+  bingApiKey: StringOperationFilterInput
+  mapBoxApiKey: StringOperationFilterInput
+  mapType: StringOperationFilterInput
+  zoom: IntOperationFilterInput
+  zoomSelection: IntOperationFilterInput
+  enableTrip: BooleanOperationFilterInput
+  autoRoute: BooleanOperationFilterInput
+  autoOrder: BooleanOperationFilterInput
+  autoRouteCost: BooleanOperationFilterInput
+  autoInvoice: BooleanOperationFilterInput
+  verifyOtp: BooleanOperationFilterInput
+  autoZoneOtp: BooleanOperationFilterInput
+}
+
+input NullableOfLocationTypeOperationFilterInput {
+  eq: LocationType
+  neq: LocationType
+  in: [LocationType]
+  nin: [LocationType]
+}
+
+input OgcGeometryTypeOperationFilterInput {
+  eq: OgcGeometryType
+  neq: OgcGeometryType
+  in: [OgcGeometryType!]
+  nin: [OgcGeometryType!]
+}
+
+input PointFilterInput {
+  and: [PointFilterInput!]
+  or: [PointFilterInput!]
+  m: FloatOperationFilterInput
+  x: FloatOperationFilterInput
+  y: FloatOperationFilterInput
+  z: FloatOperationFilterInput
+  area: FloatOperationFilterInput
+  boundary: GeometryFilterInput
+  centroid: PointFilterInput
+  dimension: DimensionOperationFilterInput
+  envelope: GeometryFilterInput
+  geometryType: StringOperationFilterInput
+  interiorPoint: PointFilterInput
+  isSimple: BooleanOperationFilterInput
+  isValid: BooleanOperationFilterInput
+  length: FloatOperationFilterInput
+  numPoints: IntOperationFilterInput
+  ogcGeometryType: OgcGeometryTypeOperationFilterInput
+  pointOnSurface: PointFilterInput
+  srid: IntOperationFilterInput
+  contains: GeometryContainsOperationFilterInput
+  ncontains: GeometryContainsOperationFilterInput
+  distance: GeometryDistanceOperationFilterInput
+  intersects: GeometryIntersectsOperationFilterInput
+  nintersects: GeometryIntersectsOperationFilterInput
+  overlaps: GeometryOverlapsOperationFilterInput
+  noverlaps: GeometryOverlapsOperationFilterInput
+  touches: GeometryTouchesOperationFilterInput
+  ntouches: GeometryTouchesOperationFilterInput
+  within: GeometryWithinOperationFilterInput
+  nwithin: GeometryWithinOperationFilterInput
+}
+
+input ProfileOptionFilterInput {
+  and: [ProfileOptionFilterInput!]
+  or: [ProfileOptionFilterInput!]
+  token: StringOperationFilterInput
+  language: StringOperationFilterInput
+  timezone: StringOperationFilterInput
+  hour24Time: BooleanOperationFilterInput
+  unitDistance: StringOperationFilterInput
+  unitVolume: StringOperationFilterInput
+  unitWeight: StringOperationFilterInput
+  unitTemperature: StringOperationFilterInput
+  unitSpeed: StringOperationFilterInput
+  unitPower: StringOperationFilterInput
+  unitPressure: StringOperationFilterInput
+  unitForce: StringOperationFilterInput
+  unitArea: StringOperationFilterInput
+}
+
+input RoleLevelOperationFilterInput {
+  eq: RoleLevel
+  neq: RoleLevel
+  in: [RoleLevel!]
+  nin: [RoleLevel!]
+}
+
+input RouteFilterInput {
+  and: [RouteFilterInput!]
+  or: [RouteFilterInput!]
+  tenantId: UuidOperationFilterInput
+  approvedBy: UuidOperationFilterInput
+  approvedAt: DateTimeOperationFilterInput
+  color: StringOperationFilterInput
+  speedLimit: IntOperationFilterInput
+  restDuration: DecimalOperationFilterInput
+  toleranceDuration: DecimalOperationFilterInput
+  completedRate: IntOperationFilterInput
+  source: PointFilterInput
+  destination: PointFilterInput
+  path: LineStringFilterInput
+  tags: ListFilterInputTypeOfTagFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  description: StringOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input TagFilterInput {
+  and: [TagFilterInput!]
+  or: [TagFilterInput!]
+  name: StringOperationFilterInput
+  color: StringOperationFilterInput
+  parent: TagFilterInput
+  members: ListFilterInputTypeOfTagMembersFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input TagMembersFilterInput {
+  and: [TagMembersFilterInput!]
+  or: [TagMembersFilterInput!]
+  tag: TagFilterInput
+  tagId: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  account: UserAccountFilterInput
+  expiry: DateTimeOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input UserAccountFilterInput {
+  and: [UserAccountFilterInput!]
+  or: [UserAccountFilterInput!]
+  contact: ContactFilterInput
+  contactId: UuidOperationFilterInput
+  defaultRole: RoleLevelOperationFilterInput
+  roleId: UuidOperationFilterInput
+  role: UserRoleFilterInput
+  tenantId: UuidOperationFilterInput
+  accountSetting: AccountSettingFilterInput
+  id: UuidOperationFilterInput
+  userName: StringOperationFilterInput
+  normalizedUserName: StringOperationFilterInput
+  email: StringOperationFilterInput
+  normalizedEmail: StringOperationFilterInput
+  emailConfirmed: BooleanOperationFilterInput
+  passwordHash: StringOperationFilterInput
+  securityStamp: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+  phoneNumber: StringOperationFilterInput
+  phoneNumberConfirmed: BooleanOperationFilterInput
+  twoFactorEnabled: BooleanOperationFilterInput
+  lockoutEnd: DateTimeOperationFilterInput
+  lockoutEnabled: BooleanOperationFilterInput
+  accessFailedCount: IntOperationFilterInput
+}
+
+input UserPermissionsFilterInput {
+  and: [UserPermissionsFilterInput!]
+  or: [UserPermissionsFilterInput!]
+  role: UserRoleFilterInput
+  roleId: UuidOperationFilterInput
+  module: StringOperationFilterInput
+  feature: StringOperationFilterInput
+  actions: CrudActionFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input UserRoleFilterInput {
+  and: [UserRoleFilterInput!]
+  or: [UserRoleFilterInput!]
+  root: RoleLevelOperationFilterInput
+  permissions: ListFilterInputTypeOfUserPermissionsFilterInput
+  id: UuidOperationFilterInput
+  name: StringOperationFilterInput
+  normalizedName: StringOperationFilterInput
+  concurrencyStamp: StringOperationFilterInput
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+enum AddressVariant {
+  CONTACT
+  PRIVATE
+  INVOICE
+  SHIPPING
+  OTHER
+}
+
+enum ContactRelationVariant {
+  NONE
+  GUARANTOR
+  SPOUSE
+  SIBLING
+  CHILD
+  OTHER
+}
+
+enum ContactVariant {
+  CONTACT
+  ORGANIZATION
+  ACCOUNT
+  EXTERNAL
+  SYSTEM
+}
+
+enum DeviceStatus {
+  ONLINE
+  OFFLINE
+  MOVING
+  STOPPED
+  IDLING
+}
+
+enum Dimension {
+  POINT
+  CURVE
+  SURFACE
+  COLLAPSE
+  DONTCARE
+  TRUE
+  FALSE
+}
+
+enum GeoJSONGeometryType {
+  Point
+  MultiPoint
+  LineString
+  MultiLineString
+  Polygon
+  MultiPolygon
+  GeometryCollection
+}
+
+enum LocationType {
+  CITY
+  COUNTRY
+  COUNTY
+  CUSTOM
+  ROAD
+  STATE
+  SUBURB
+  BUS_STOP
+  DEPOT
+  FACTORY
+  FUEL_STATION
+  LANDMARK
+  MARKET
+  OFFICE
+  PARK
+  STORE
+  TRAIN_STATION
+  UNSPECIFIED
+  WAREHOUSE
+}
+
+enum OgcGeometryType {
+  POINT
+  LINE_STRING
+  POLYGON
+  MULTI_POINT
+  MULTI_LINE_STRING
+  MULTI_POLYGON
+  GEOMETRY_COLLECTION
+  CIRCULAR_STRING
+  COMPOUND_CURVE
+  CURVE_POLYGON
+  MULTI_CURVE
+  MULTI_SURFACE
+  CURVE
+  SURFACE
+  POLYHEDRAL_SURFACE
+  TIN
+}
+
+enum RoleLevel {
+  DEFAULT
+  ANONYMOUS
+  BOT
+  CUSTOMER_CLIENT
+  CUSTOMER_BASIC
+  CUSTOMER_OPERATOR
+  CUSTOMER_ADMINISTRATOR
+  TENANT_DRIVER
+  TENANT_LOAD_SUPERVISOR
+  TENANT_WAREHOUSE_MANAGER
+  TENANT_DRIVER_SUPERVISOR
+  TENANT_DRIVER_MANAGER
+  TENANT_FLEET_MEMBER
+  TENANT_FLEET_LEAD
+  TENANT_FLEET_MANAGER
+  TENANT_ADMINISTRATOR
+  TENANT_SUPER_ADMINISTRATOR
+  SYSTEM_BOT
+  SYSTEM_OPERATOR
+  SYSTEM_ADMINISTRATOR
+  SYSTEM_SUPER_ADMINISTRATOR
+}
+
+"A coordinate is an array of positions."
+scalar Coordinates
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+scalar Geometry
+
+"A position is an array of numbers. There MUST be two or more elements. The first two elements are longitude and latitude, or easting and northing, precisely in that order and using decimal numbers. Altitude or elevation MAY be included as an optional third element."
+scalar Position
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

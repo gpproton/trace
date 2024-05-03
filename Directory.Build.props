@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <Title>Trace</Title>
-    <Version>0.0.1-preview.5</Version>
+    <Version>0.0.1-preview.14</Version>
     <Authors>Godwin peter .O</Authors>
     <Description>An end to end logistic crm platform</Description>
     <RepositoryType>git</RepositoryType>
@@ -19,15 +19,29 @@
     <Nullable>enable</Nullable>
     <NoWarn>$(NoWarn);AD0001;NU1507;</NoWarn>
     <LangVersion>12</LangVersion>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <PropertyGroup>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <ContainerRegistry>ghcr.io</ContainerRegistry>
     <ContainerRepo>drolx</ContainerRepo>
-    <ContainerBaseImage>mcr.microsoft.com/dotnet/aspnet:8.0</ContainerBaseImage>
     <ContainerFamily>alpine</ContainerFamily>
-    <ContainerImageTag>$(Version)</ContainerImageTag>
+    <ContainerImageTags>$(Version);latest</ContainerImageTags>
+    <ContainerUser>root</ContainerUser>
+    <ContainerWorkingDirectory>/app</ContainerWorkingDirectory>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ContainerLabel Include="org.opencontainers.image.created" Value="2024-05-01" />
+    <ContainerLabel Include="org.opencontainers.image.authors" Value="$(Authors)" />
+    <ContainerLabel Include="org.opencontainers.image.url" Value="$(RepositoryUrl)" />
+    <ContainerLabel Include="org.opencontainers.image.version" Value="$(Version)" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTP_PORTS" Value="80" />
+    <ContainerEnvironmentVariable Include="ASPNETCORE_HTTPS_PORTS" Value="443" />
+    <ContainerPort Include="80" Type="tcp" />
+    <ContainerPort Include="443" Type="tcp" />
+    <ContainerPort Include="443" Type="udp" />
+  </ItemGroup>
 
 </Project>

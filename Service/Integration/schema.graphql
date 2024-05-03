@@ -1,0 +1,742 @@
+﻿schema {
+  query: QueryRoot
+  mutation: MutationRoot
+  subscription: SubscriptionRoot
+}
+
+interface GeoJSONInterface {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+type AccountSetting {
+  userAccountId: UUID
+  option: ProfileOption!
+  map: MapOption!
+  tenantId: UUID
+  id: UUID!
+}
+
+"Address for contacts"
+type Address {
+  id: ID!
+  type: AddressVariant!
+  line1: String
+  line2: String
+  city: String
+  county: String
+  state: String
+  zip: String
+  country: String
+  homePhone: String
+  phone: String
+  contact: Contact
+  contactId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type AssetCategory {
+  color: String
+  default: Boolean!
+  name: String
+  description: String
+  id: UUID!
+}
+
+"Contact for individual or organizations"
+type Contact {
+  id: ID!
+  type: ContactVariant!
+  relationType: ContactRelationVariant!
+  fullName: String!
+  jobPosition: String
+  active: Boolean!
+  mobile: String!
+  phone: String
+  email: String!
+  website: String
+  married: Boolean!
+  birthDate: Date
+  notes: String
+  company: Contact
+  addresses: [Address!]!
+  relations: [Contact!]!
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type CrudAction {
+  read: Boolean!
+  create: Boolean!
+  update: Boolean!
+  delete: Boolean!
+}
+
+"IOT devices"
+type Device {
+  id: ID!
+  uniqueId: String!
+  positionId: UUID
+  lastUpdate: DateTime
+  lastMoved: DateTime
+  phone: String
+  status: DeviceStatus!
+  speedLimit: Int!
+  expiry: DateTime
+  position: DevicePosition
+  barcode: String
+  color: String
+  deployed: DateTime
+  decommissioned: DateTime
+  category: AssetCategory
+  categoryId: UUID
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"IOT device commands"
+type DeviceCommand {
+  id: ID!
+  tenantId: UUID
+  delay: Int!
+  messages: String!
+  default: Boolean!
+  name: String
+  description: String
+}
+
+"A connection to a list of items."
+type DeviceCommandsConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [DeviceCommandsEdge!]
+  "A flattened list of the nodes."
+  nodes: [DeviceCommand!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type DeviceCommandsEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: DeviceCommand!
+}
+
+type DevicePosition {
+  hasAttribute(key: String!): Boolean!
+  attributes: [KeyValuePairOfStringAndObject!]!
+  string(key: String!): String!
+  boolean(key: String!): Boolean!
+  decimal(key: String!): Decimal!
+  double(key: String!): Float!
+  integer(key: String!): Int!
+  float(key: String!): Float!
+  deviceId: UUID!
+  device: Device!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+  tenantId: UUID
+  time: DateTime!
+  serverTime: DateTime!
+  longitude: Float!
+  latitude: Float!
+  address: String
+  speed: Float!
+  course: Float!
+  distance: Float!
+  odometer: Float!
+  altitude: Float!
+  satellites: Int!
+  fuel: Float!
+  battery: Float!
+  charging: Boolean!
+}
+
+"A connection to a list of items."
+type DevicesConnection {
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+  "A list of edges."
+  edges: [DevicesEdge!]
+  "A flattened list of the nodes."
+  nodes: [Device!]
+  "Identifies the total count of items in the connection."
+  totalCount: Int!
+}
+
+"An edge in a connection."
+type DevicesEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Device!
+}
+
+type GeoJSONLineStringType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of two or more positions."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiLineStringType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of LineString coordinate arrays."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiPointType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of positions."
+  coordinates: [Position]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONMultiPolygonType implements GeoJSONInterface {
+  "The \"coordinates\" field is an array of Polygon coordinate arrays."
+  coordinates: Coordinates
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONPointType implements GeoJSONInterface {
+  "The \"coordinates\" field is a single position."
+  coordinates: Position
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type GeoJSONPolygonType implements GeoJSONInterface {
+  "The \"coordinates\" field MUST be an array of linear ring coordinate arrays. For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface."
+  coordinates: [[Position]]
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType!
+  "The minimum bounding box around the geometry object"
+  bbox: [Float!]!
+  "The coordinate reference system integer identifier"
+  crs: Int!
+}
+
+type KeyValuePairOfStringAndObject {
+  key: String!
+}
+
+"Lead for customers"
+type Lead {
+  id: ID!
+  contact: Contact
+  time: DateTime!
+  source: String
+  tenantId: UUID
+  tags: [Tag!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+type MapOption {
+  googleApiKey: String
+  bingApiKey: String
+  mapBoxApiKey: String
+  mapType: String
+  zoom: Int
+  zoomSelection: Int
+  enableTrip: Boolean!
+  autoRoute: Boolean!
+  autoOrder: Boolean!
+  autoRouteCost: Boolean!
+  autoInvoice: Boolean!
+  verifyOtp: Boolean!
+  autoZoneOtp: Boolean!
+}
+
+type MutationRoot {
+  version: VersionPayload!
+}
+
+"Oppertunities details"
+type Opportunity {
+  id: ID!
+  description: String
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "Indicates whether more edges exist following the set defined by the clients arguments."
+  hasNextPage: Boolean!
+  "Indicates whether more edges exist prior the set defined by the clients arguments."
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+}
+
+type ProfileOption {
+  token: String
+  language: String
+  timezone: String
+  hour24Time: Boolean!
+  unitDistance: String
+  unitVolume: String
+  unitWeight: String
+  unitTemperature: String
+  unitSpeed: String
+  unitPower: String
+  unitPressure: String
+  unitForce: String
+  unitArea: String
+}
+
+type QueryRoot {
+  version: String!
+  "Query IOT devices  commands"
+  deviceCommands("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: DeviceCommandFilterInput): DeviceCommandsConnection
+  "Query IOT devices"
+  devices("Returns the first _n_ elements from the list." first: Int "Returns the elements in the list that come after the specified cursor." after: String "Returns the last _n_ elements from the list." last: Int "Returns the elements in the list that come before the specified cursor." before: String where: DeviceFilterInput): DevicesConnection
+}
+
+type SubscriptionRoot {
+  version: String!
+}
+
+"Tags for binding most entities"
+type Tag {
+  name: String!
+  color: String
+  parent: Tag
+  members: [TagMembers!]!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+"user attached to tag"
+type TagMembers {
+  tag: Tag!
+  tagId: UUID
+  name: String
+  account: UserAccount
+  expiry: DateTime
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type UserAccount {
+  contact: Contact!
+  contactId: UUID
+  defaultRole: RoleLevel!
+  roleId: UUID
+  role: UserRole
+  tenantId: UUID
+  accountSetting: AccountSetting
+  id: UUID!
+  userName: String
+  normalizedUserName: String
+  email: String
+  normalizedEmail: String
+  emailConfirmed: Boolean!
+  passwordHash: String
+  securityStamp: String
+  concurrencyStamp: String
+  phoneNumber: String
+  phoneNumberConfirmed: Boolean!
+  twoFactorEnabled: Boolean!
+  lockoutEnd: DateTime
+  lockoutEnabled: Boolean!
+  accessFailedCount: Int!
+}
+
+type UserPermissions {
+  role: UserRole
+  roleId: UUID
+  module: String
+  feature: String
+  actions: CrudAction!
+  createdBy: UUID!
+  createdAt: DateTime!
+  updatedBy: UUID!
+  updatedAt: DateTime
+  deletedBy: UUID!
+  deletedAt: DateTime
+  id: UUID!
+}
+
+type UserRole {
+  root: RoleLevel!
+  permissions: [UserPermissions!]!
+  id: UUID!
+  name: String
+  normalizedName: String
+  concurrencyStamp: String
+}
+
+type VersionPayload {
+  string: String
+}
+
+input AssetCategoryFilterInput {
+  and: [AssetCategoryFilterInput!]
+  or: [AssetCategoryFilterInput!]
+  color: StringOperationFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  description: StringOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input BooleanOperationFilterInput {
+  eq: Boolean
+  neq: Boolean
+}
+
+input DateTimeOperationFilterInput {
+  eq: DateTime
+  neq: DateTime
+  in: [DateTime]
+  nin: [DateTime]
+  gt: DateTime
+  ngt: DateTime
+  gte: DateTime
+  ngte: DateTime
+  lt: DateTime
+  nlt: DateTime
+  lte: DateTime
+  nlte: DateTime
+}
+
+input DeviceCommandFilterInput {
+  and: [DeviceCommandFilterInput!]
+  or: [DeviceCommandFilterInput!]
+  tenantId: UuidOperationFilterInput
+  delay: IntOperationFilterInput
+  messages: StringOperationFilterInput
+  default: BooleanOperationFilterInput
+  name: StringOperationFilterInput
+  description: StringOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input DeviceFilterInput {
+  and: [DeviceFilterInput!]
+  or: [DeviceFilterInput!]
+  uniqueId: StringOperationFilterInput
+  positionId: UuidOperationFilterInput
+  lastUpdate: DateTimeOperationFilterInput
+  lastMoved: DateTimeOperationFilterInput
+  phone: StringOperationFilterInput
+  status: DeviceStatusOperationFilterInput
+  speedLimit: IntOperationFilterInput
+  expiry: DateTimeOperationFilterInput
+  position: DevicePositionFilterInput
+  barcode: StringOperationFilterInput
+  color: StringOperationFilterInput
+  deployed: DateTimeOperationFilterInput
+  decommissioned: DateTimeOperationFilterInput
+  category: AssetCategoryFilterInput
+  categoryId: UuidOperationFilterInput
+  createdBy: UuidOperationFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedBy: UuidOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedBy: UuidOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  id: UuidOperationFilterInput
+}
+
+input DevicePositionFilterInput {
+  and: [DevicePositionFilterInput!]
+  or: [DevicePositionFilterInput!]
+  deviceId: UuidOperationFilterInput
+  device: DeviceFilterInput
+  createdAt: DateTimeOperationFilterInput
+  updatedAt: DateTimeOperationFilterInput
+  deletedAt: DateTimeOperationFilterInput
+  tenantId: UuidOperationFilterInput
+  time: DateTimeOperationFilterInput
+  serverTime: DateTimeOperationFilterInput
+  longitude: FloatOperationFilterInput
+  latitude: FloatOperationFilterInput
+  address: StringOperationFilterInput
+  speed: FloatOperationFilterInput
+  course: FloatOperationFilterInput
+  distance: FloatOperationFilterInput
+  odometer: FloatOperationFilterInput
+  altitude: FloatOperationFilterInput
+  satellites: IntOperationFilterInput
+  fuel: FloatOperationFilterInput
+  battery: FloatOperationFilterInput
+  charging: BooleanOperationFilterInput
+}
+
+input DeviceStatusOperationFilterInput {
+  eq: DeviceStatus
+  neq: DeviceStatus
+  in: [DeviceStatus!]
+  nin: [DeviceStatus!]
+}
+
+input FloatOperationFilterInput {
+  eq: Float
+  neq: Float
+  in: [Float]
+  nin: [Float]
+  gt: Float
+  ngt: Float
+  gte: Float
+  ngte: Float
+  lt: Float
+  nlt: Float
+  lte: Float
+  nlte: Float
+}
+
+input GeoJSONLineStringInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of two or more positions."
+  coordinates: [Position]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiLineStringInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of LineString coordinate arrays."
+  coordinates: [[Position]]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiPointInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of positions."
+  coordinates: [Position]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONMultiPolygonInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is an array of Polygon coordinate arrays."
+  coordinates: Coordinates
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONPointInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field is a single position."
+  coordinates: Position
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input GeoJSONPolygonInput {
+  "The geometry type of the GeoJson object"
+  type: GeoJSONGeometryType
+  "The \"coordinates\" field MUST be an array of linear ring coordinate arrays. For Polygons with more than one of these rings, the first MUST be the exterior ring, and any others MUST be interior rings. The exterior ring bounds the surface, and the interior rings (if present) bound holes within the surface."
+  coordinates: [[Position]]
+  "The coordinate reference system integer identifier"
+  crs: Int
+}
+
+input IntOperationFilterInput {
+  eq: Int
+  neq: Int
+  in: [Int]
+  nin: [Int]
+  gt: Int
+  ngt: Int
+  gte: Int
+  ngte: Int
+  lt: Int
+  nlt: Int
+  lte: Int
+  nlte: Int
+}
+
+input StringOperationFilterInput {
+  and: [StringOperationFilterInput!]
+  or: [StringOperationFilterInput!]
+  eq: String
+  neq: String
+  contains: String
+  ncontains: String
+  in: [String]
+  nin: [String]
+  startsWith: String
+  nstartsWith: String
+  endsWith: String
+  nendsWith: String
+}
+
+input UuidOperationFilterInput {
+  eq: UUID
+  neq: UUID
+  in: [UUID]
+  nin: [UUID]
+  gt: UUID
+  ngt: UUID
+  gte: UUID
+  ngte: UUID
+  lt: UUID
+  nlt: UUID
+  lte: UUID
+  nlte: UUID
+}
+
+enum AddressVariant {
+  CONTACT
+  PRIVATE
+  INVOICE
+  SHIPPING
+  OTHER
+}
+
+enum ContactRelationVariant {
+  NONE
+  GUARANTOR
+  SPOUSE
+  SIBLING
+  CHILD
+  OTHER
+}
+
+enum ContactVariant {
+  CONTACT
+  ORGANIZATION
+  ACCOUNT
+  EXTERNAL
+  SYSTEM
+}
+
+enum DeviceStatus {
+  ONLINE
+  OFFLINE
+  MOVING
+  STOPPED
+  IDLING
+}
+
+enum GeoJSONGeometryType {
+  Point
+  MultiPoint
+  LineString
+  MultiLineString
+  Polygon
+  MultiPolygon
+  GeometryCollection
+}
+
+enum RoleLevel {
+  DEFAULT
+  ANONYMOUS
+  BOT
+  CUSTOMER_CLIENT
+  CUSTOMER_BASIC
+  CUSTOMER_OPERATOR
+  CUSTOMER_ADMINISTRATOR
+  TENANT_DRIVER
+  TENANT_LOAD_SUPERVISOR
+  TENANT_WAREHOUSE_MANAGER
+  TENANT_DRIVER_SUPERVISOR
+  TENANT_DRIVER_MANAGER
+  TENANT_FLEET_MEMBER
+  TENANT_FLEET_LEAD
+  TENANT_FLEET_MANAGER
+  TENANT_ADMINISTRATOR
+  TENANT_SUPER_ADMINISTRATOR
+  SYSTEM_BOT
+  SYSTEM_OPERATOR
+  SYSTEM_ADMINISTRATOR
+  SYSTEM_SUPER_ADMINISTRATOR
+}
+
+"A coordinate is an array of positions."
+scalar Coordinates
+
+"The `Date` scalar represents an ISO-8601 compliant date type."
+scalar Date
+
+"The `DateTime` scalar represents an ISO-8601 compliant date time type."
+scalar DateTime @specifiedBy(url: "https:\/\/www.graphql-scalars.com\/date-time")
+
+"The built-in `Decimal` scalar type."
+scalar Decimal
+
+scalar Geometry
+
+"A position is an array of numbers. There MUST be two or more elements. The first two elements are longitude and latitude, or easting and northing, precisely in that order and using decimal numbers. Altitude or elevation MAY be included as an optional third element."
+scalar Position
+
+scalar UUID @specifiedBy(url: "https:\/\/tools.ietf.org\/html\/rfc4122")
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

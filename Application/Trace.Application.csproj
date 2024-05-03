@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup Label="Other">
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
+    <PackageReference Include="MassTransit" />
+    <PackageReference Include="NetTopologySuite" />
+    <PackageReference Include="Redis.OM" />
+    <PackageReference Include="Scrutor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Boarding/Commands/" />
+    <Folder Include="Boarding/Consumers/" />
+    <Folder Include="Boarding/Queries/" />
+    <Folder Include="Boarding/Responses/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Application.Abstractions\Trace.Application.Abstractions.csproj" />
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\Common\Warehouse\Trace.Common.Warehouse.csproj" />
+  </ItemGroup>
+
+</Project>

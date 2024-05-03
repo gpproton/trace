@@ -3,7 +3,7 @@
   "isRoot": true,
   "tools": {
     "run-script": {
-      "version": "0.5.0",
+      "version": "0.6.0",
       "commands": [
         "r"
       ]
@@ -15,13 +15,13 @@
       ]
     },
     "dotnet-ef": {
-      "version": "8.0.1",
+      "version": "8.0.4",
       "commands": [
         "dotnet-ef"
       ]
     },
     "aspirate": {
-      "version": "0.1.28-preview",
+      "version": "0.6.5-preview",
       "commands": [
         "aspirate"
       ]

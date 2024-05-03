@@ -1,30 +1,28 @@
 {
-  "sdk": {
-    "version": "8.0.101",
-    "rollForward": "latestPatch",
-    "allowPrerelease": true
-  },
   "scripts": {
-    "w:update": "dotnet workload update --skip-sign-check --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet8/nuget/v3/index.json",
+    "w:update": "dotnet workload update",
     "w:restore": "dotnet workload restore Trace.sln",
-    "docker": "docker-compose up -d cache messaging scylladb db traccar",
+    "docker": "docker-compose up -d cache messaging scylladb db",
+    "publish": "dotnet publish -t:PublishContainer",
+    "dev": "dotnet r docker;dotnet watch --project AppHost --launch-profile https",
+    "run": "dotnet r docker;dotnet run --project AppHost --launch-profile https",
     "docker:down": "docker-compose down -v",
     "docker:refresh": "dotnet r docker:down;dotnet r docker;dotnet r build",
-    "docker:publish": "docker-compose build; docker-compose push",
+    "docker:build": "docker compose --env-file .env -f docker/projects.yml build",
+    "docker:push": "docker compose --env-file .env -f docker/projects.yml push",
+    "docker:publish": "dotnet r docker:build; dotnet r docker:push",
     "fresh": "dotnet tool restore;dotnet r docker:refresh",
     "lint": "dotnet format Trace.sln",
     "install": "dotnet restore && dotnet build && pnpm install",
     "clean": "dotnet clean && pnpm clean && rm -rf ./**/{bin,obj,node_modules} && pnpm store prune",
-    "dev": "dotnet watch --project src/AppHost",
-    "run": "dotnet run --project src/AppHost",
     "build": "dotnet build --configuration Debug",
-    "k:generate": "cd src/AppHost; dotnet aspirate generate --skip-build",
-    "k:compose": "cd src/AppHost; dotnet aspirate generate --skip-build --output-format compose",
-    "k:apply": "cd src/AppHost; dotnet aspirate apply",
-    "k:destroy": "cd src/AppHost; dotnet aspirate destroy",
-    "k:build": "cd src/AppHost; dotnet aspirate build",
-    "k:frontend": "kubectl port-forward svc/frontend 4040:8080",
-    "opt:migrate": "dotnet ef migrations add --project src/Infrastructure/Trace.Infrastructure.csproj --startup-project src/Infrastructure/Trace.Infrastructure.csproj --context Trace.Application.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
-    "opt:update": "dotnet ef database update --project src/Infrastructure/Trace.Infrastructure.csproj --startup-project src/Infrastructure/Trace.Infrastructure.csproj --context Trace.Application.ServiceContext --configuration Debug"
+    "a:generate": "cd AppHost; dotnet aspirate generate --include-dashboard --skip-build/",
+    "a:compose": "cd AppHost; dotnet aspirate generate --include-dashboard --skip-build --output-format compose",
+    "a:apply": "cd AppHost; dotnet aspirate apply",
+    "a:destroy": "cd AppHost; dotnet aspirate destroy",
+    "a:build": "cd AppHost; dotnet aspirate build",
+    "a:frontend": "kubectl port-forward svc/frontend 4040:8080",
+    "m:run": "dotnet ef migrations add --project Infrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug Initial --output-dir EFCore/Migrations",
+    "m:update": "dotnet ef database update --project nfrastructure/Trace.Infrastructure.csproj --startup-project Infrastructure/Trace.Infrastructure.csproj --context Trace.Infrastructure.EFCore.Context.ServiceContext --configuration Debug"
   }
 }

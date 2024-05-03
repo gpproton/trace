@@ -1,0 +1,22 @@
+<Project>
+
+  <ItemGroup>
+    <PackageReference Include="HotChocolate.Types.Analyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\config\**\*.*" Link="config\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\Application\Trace.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Trace.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

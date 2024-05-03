@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Title>Trace.Service.Worker</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>$(ContainerRepo)/trace-service-worker</ContainerRepository>
+  </PropertyGroup>
+
+  <Import Project="..\Shared.props" />
+  <Import Project="..\..\Hangfire.props" />
+
+</Project>
