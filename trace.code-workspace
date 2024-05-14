@@ -37,7 +37,7 @@
   ],
   "settings": {
     "window.zoomLevel": -1,
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "onWindowChange",
     "dotnet.defaultSolution": "Trace.sln",
     "editor.bracketPairColorization.enabled": true,
     "editor.guides.bracketPairs": true,

@@ -22,5 +22,6 @@ public static class AppConstants {
     public const string Cache = "cache";
     public const string Messaging = "messaging";
     public const string Db = "db";
+    public const string DefaultDatabase = "trace";
     public const string Scylladb = "scylladb";
 }

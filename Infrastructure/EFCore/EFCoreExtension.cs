@@ -17,8 +17,6 @@
 // Modified At: Fri Jan 12 2024
 
 using Axolotl.EFCore;
-using Axolotl.EFCore.Implementation;
-using Axolotl.EFCore.Interfaces;
 using Axolotl.EFCore.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -27,16 +25,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Scrutor;
 using Trace.Application;
+using Trace.Common;
 using Trace.Infrastructure.EFCore.Context;
 
 namespace Trace.Infrastructure.EFCore;
 
 public static class EfCoreExtension {
     public static WebApplicationBuilder RegisterEfCoreInfrastructure(this WebApplicationBuilder builder) {
-        var connectionString = builder.Configuration.GetConnectionString("trace");
+        var connectionString = builder.Configuration.GetConnectionString(AppConstants.DefaultDatabase);
 
-        builder.AddNpgsqlDbContext<ServiceContext>("db", o => {
-            o.HealthChecks = true;
+        builder.AddNpgsqlDbContext<ServiceContext>(AppConstants.Db, o => {
             o.ConnectionString = connectionString;
         }, DbOptions);
         builder.Services.AddPooledDbContextFactory<ServiceContext>(DbOptions);
