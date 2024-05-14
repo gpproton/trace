@@ -19,9 +19,6 @@
     <!-- <PackageReference Include="Grpc.AspNetCore" /> -->
     <!-- <PackageReference Include="Google.Protobuf" /> -->
     <!-- <PackageReference Include="Google.Protobuf.Tools" /> -->
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>

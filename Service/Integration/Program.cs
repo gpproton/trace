@@ -25,6 +25,7 @@ using Trace.Infrastructure;
 using Trace.Application.Abstractions;
 using Trace.Service.Integration.Devices;
 using HotChocolate;
+using Trace.Service.Integration.Position;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -60,8 +61,8 @@ app.RegisterDefaults();
 app.RegisterGraphQl();
 // TODO: Temporary till adding GRPC back
 // app.MapGrpcService<ProtocolService>();
-// app.MapProtocolEndpoint();
-app.MapDeviceEndpoint();
+app.MapDeviceEndpoints();
+app.MapPositionEndpoints();
 app.MapGet("/", () => "service.integration");
 
 app.RunWithGraphQLCommands(args);

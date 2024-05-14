@@ -13,6 +13,8 @@
     <PackageReference Include="Yarp.ReverseProxy" />
     <PackageReference Include="HotChocolate.Fusion" />
     <PackageReference Include="HotChocolate.Diagnostics" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
   </ItemGroup>
 
   <ItemGroup>

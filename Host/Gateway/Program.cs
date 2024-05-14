@@ -18,11 +18,14 @@
 
 using HotChocolate;
 using HotChocolate.Types.Spatial;
+using Trace.Gateway.TenantServer;
 using Trace.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.RegisterDefaults();
 builder.Services.RegisterDefaultServices();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddHttpForwarderWithServiceDiscovery();
 builder.Services.AddCors()
     .AddHeaderPropagation(c => {
@@ -44,8 +47,16 @@ builder.Services
     .AddType<GeoJsonCoordinatesType>();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment()) {
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 app.RegisterDefaults();
 app.UseHeaderPropagation();
 app.RegisterGraphQl();
+app.MapServerEndpoints();
 app.MapGet("/", () => "service.gateway");
+
 app.RunWithGraphQLCommands(args);
