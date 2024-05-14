@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ using Axolotl.EFCore.Repository;
 
 namespace Trace.Application.Engagement.Repositories;
 
-public interface IContactRepository : IRepository<Contact, Guid> {
+public interface IContactRepository : IRepository<Contact, Guid>
+{
 
 }

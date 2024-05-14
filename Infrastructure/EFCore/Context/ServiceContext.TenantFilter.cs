@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -25,13 +25,16 @@ using Trace.Application.Account;
 
 namespace Trace.Infrastructure.EFCore.Context;
 
-public sealed partial class ServiceContext {
-    private static void RegisterTenantFilter(ModelBuilder modelBuilder) {
+public sealed partial class ServiceContext
+{
+    private static void RegisterTenantFilter(ModelBuilder modelBuilder)
+    {
         foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             if (typeof(ITenantEntity).IsAssignableFrom(entityType.ClrType))
                 AddTenantQueryFilter(entityType);
     }
-    private static void AddTenantQueryFilter(IMutableEntityType entityData) {
+    private static void AddTenantQueryFilter(IMutableEntityType entityData)
+    {
         var methodToCall = typeof(ServiceContext)
             .GetMethod(nameof(GetTenantFilter), BindingFlags.NonPublic | BindingFlags.Instance)
             ?.MakeGenericMethod(entityData.ClrType);
@@ -41,7 +44,8 @@ public sealed partial class ServiceContext {
     }
 
     private Expression<Func<TEntity, bool>> GetTenantFilter<TEntity>()
-        where TEntity : ITenantEntity {
+        where TEntity : ITenantEntity
+    {
         Expression<Func<TEntity, bool>> filter = x => x.TenantId == TenantId;
         return filter;
     }
