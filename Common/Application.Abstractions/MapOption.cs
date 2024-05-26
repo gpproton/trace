@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,8 @@ using Trace.Application.Abstractions.Interfaces;
 namespace Trace.Application.Abstractions;
 
 [ComplexType]
-public class MapOption : IMapSettingEntity {
+public class MapOption : IMapSettingEntity
+{
     [MaxLength(128)]
     public string? GoogleApiKey { get; set; }
     [MaxLength(128)]

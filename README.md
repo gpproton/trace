@@ -13,8 +13,8 @@ Trace is license under the [Trace Source Available License 1.0](./LICENSE.md) an
 
 |                       |                                                                                                                                                                                                           |
 | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Licensor:             | drolx Solutions.                                                                                                                                                                                          |
-| Licensed Work:        | The Licensed Work is (c) 2024 drolx Solutions                                                                                                                                                             |
+| Licensor:             | drolx Labs.                                                                                                                                                                                          |
+| Licensed Work:        | The Licensed Work is (c) 2024 drolx Labs                                                                                                                                                             |
 | Additional Use Grant: | You may make production use of the Licensed Work, provided such use does not include offering the Licensed Work to third parties on a hosted or embedded basis which is competitive with drolx's products |
 | Change Date:          | Four years from the date a Licensed version is                                                                                                                                                            |
 | Change License:       | [Reciprocal Public License \(RPL-1.5\)](./LICENSE\(Change\).md)                                                                                                                                           |

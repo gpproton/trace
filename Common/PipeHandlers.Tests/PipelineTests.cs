@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -22,9 +22,11 @@ using Trace.Common.PipeHandlers.Tests.Handlers;
 namespace Trace.Common.PipeHandlers.Tests;
 
 [TestFixture]
-public class PipelineTests {
+public class PipelineTests
+{
     [Test]
-    public async Task test_pipeline_execution() {
+    public async Task test_pipeline_execution()
+    {
         var services = new ServiceCollection();
         SamplePipeline.RegisterHandlers(services, [
             typeof(HandlerOne),

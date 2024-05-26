@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -24,7 +24,8 @@ using Trace.Application.Tags;
 namespace Trace.Service.Core.Tags;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class TagQuery(ITagRepository tagRepository) {
+public class TagQuery(ITagRepository tagRepository)
+{
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query Tags")]

@@ -3,19 +3,20 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
     <AxolotlVersion>8.0.5</AxolotlVersion>
-    <AspireVersion>8.0.0-preview.6.24214.1</AspireVersion>
+    <AspireVersion>8.0.0-preview.7.24251.11</AspireVersion>
     <OpenTelemetryVersion>1.8.0</OpenTelemetryVersion>
     <AspNetCoreVersion>8.0.4</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
     <EFCoreVersion>8.0.4</EFCoreVersion>
     <NpgsqlVersion>8.0.2</NpgsqlVersion>
-    <HotChocolateVersion>14.0.0-p.93</HotChocolateVersion>
+    <HotChocolateVersion>14.0.0-p.100</HotChocolateVersion>
     <CassandraVersion>3.19.3</CassandraVersion>
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
     <MassTransitVersion>8.1.2</MassTransitVersion>
     <FluentUIVersion>4.4.1</FluentUIVersion>
   </PropertyGroup>
+  
   <!-- Core packages -->
   <ItemGroup Label="Core">
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
@@ -23,7 +24,7 @@
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
@@ -59,7 +60,7 @@
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.4.0" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
@@ -98,7 +99,7 @@
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="$(AspireVersion)" />
     <!-- Open Telemetry -->
     <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="$(OpenTelemetryVersion)" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
     <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />

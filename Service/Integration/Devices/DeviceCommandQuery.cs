@@ -1,4 +1,4 @@
-// Copyright 2023 - 2024 drolx Solutions
+// Copyright 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,8 @@ using Trace.Application.Device.Repositories;
 namespace Trace.Service.Integration.Devices;
 
 [ExtendObjectType(typeof(QueryRoot))]
-public class DeviceCommandQuery(IDeviceCommandRepository deviceCommandRepository) {
+public class DeviceCommandQuery(IDeviceCommandRepository deviceCommandRepository)
+{
     [UsePaging]
     [UseFiltering]
     [GraphQLDescription("Query IOT devices  commands")]

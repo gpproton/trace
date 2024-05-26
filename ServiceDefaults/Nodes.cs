@@ -1,4 +1,4 @@
-// Copyright (c) 2023 - 2024 drolx Solutions
+// Copyright (c) 2023 - 2024 drolx Labs
 //
 // Licensed under the Business Source License 1.1 and Trace Source Available License 1.0;
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,8 @@
 
 namespace Trace.ServiceDefaults;
 
-public static class Nodes {
+public static class Nodes
+{
     public const string GroupName = "Trace";
 
     public static IReadOnlyList<string> All => [

@@ -1,5 +1,9 @@
 {
+  "sdk": {
+    "version": "8.0.204"
+  },
   "scripts": {
+    "init": "dotnet tool restore;dotnet r docker:refresh",
     "w:update": "dotnet workload update",
     "w:restore": "dotnet workload restore Trace.sln",
     "docker": "docker-compose up -d cache messaging scylladb db",
@@ -11,7 +15,6 @@
     "docker:build": "docker compose --env-file .env -f docker/projects.yml build",
     "docker:push": "docker compose --env-file .env -f docker/projects.yml push",
     "docker:publish": "dotnet r docker:build; dotnet r docker:push",
-    "fresh": "dotnet tool restore;dotnet r docker:refresh",
     "lint": "dotnet format Trace.sln",
     "install": "dotnet restore && dotnet build && pnpm install",
     "clean": "dotnet clean && pnpm clean && rm -rf ./**/{bin,obj,node_modules} && pnpm store prune",
