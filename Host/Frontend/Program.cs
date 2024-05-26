@@ -16,6 +16,7 @@
 // Modified By: Godwin peter .O
 // Modified At: Thu Mar 21 2024
 
+using Microsoft.Net.Http.Headers;
 using Trace.ServiceDefaults;
 using Yarp.ReverseProxy.Forwarder;
 using Yarp.ReverseProxy.Transforms;
@@ -33,7 +34,13 @@ builder.Services.AddHttpForwarderWithServiceDiscovery();
 var app = builder.Build();
 
 app.MapControllers();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions {
+    OnPrepareResponse = ctx => {
+        const int durationInSeconds = 60 * 60 * 24 * 365;
+        ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+            "public,max-age=" + durationInSeconds;
+    }
+});
 app.RegisterDefaults();
 
 var geocodingUrl = app.Configuration.GetValue<string>("services:geocoding") ?? "http://geocoding";

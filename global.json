@@ -1,4 +1,7 @@
 {
+  "sdk": {
+    "version": "8.0.204"
+  },
   "scripts": {
     "init": "dotnet tool restore;dotnet r docker:refresh",
     "w:update": "dotnet workload update",

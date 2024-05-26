@@ -21,6 +21,7 @@ using Trace.ServiceDefaults.Extensions;
 using Trace.Infrastructure;
 using Trace.Application.Abstractions;
 using Trace.Application;
+using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(TenantEntity<>).Assembly;
@@ -41,7 +42,13 @@ builder.Services.AddGraphQLServer()
 var app = builder.Build();
 
 app.MapControllers();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions {
+    OnPrepareResponse = ctx => {
+        const int durationInSeconds = 60 * 60 * 24 * 365;
+        ctx.Context.Response.Headers[HeaderNames.CacheControl] =
+            "public,max-age=" + durationInSeconds;
+    }
+});
 app.RegisterDefaults();
 app.RegisterGraphQl();
 app.UseOutputCache();
