@@ -1,0 +1,185 @@
+x-app: &app
+  restart: unless-stopped
+  volumes:
+  - ~/certs:/app/certs:ro
+  deploy: &app-deploy
+    mode: replicated
+    resources:
+      limits:
+        cpus: "0.5"
+        memory: 256M
+      reservations:
+        cpus: "0.1"
+        memory: 128M
+  environment: &app-env
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EXCEPTION_LOG_ATTRIBUTES: "true"
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_EMIT_EVENT_LOG_ATTRIBUTES: "true"
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    ASPNETCORE_HTTP_PORTS: 80
+    ASPNETCORE_HTTPS_PORTS: 443
+    ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+    ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
+    MessagingUser: "guest"
+    MessagingPass: "guest"
+    DbUser: "postgres"
+    DbPass: "postgres"
+    CassandraHost: "scylladb"
+    CassandraPort: 9042
+    CassandraUser: "cassandra"
+    CassandraPass: "cassandra"
+    ConnectionStrings__cache: "cache:6379,abortConnect=false,AllowAdmin=true"
+    ConnectionStrings__messaging: "amqp://guest:guest@messaging:5672"
+    ConnectionStrings__trace: "Host=db;Port=5432;Username=postgres;Password=postgres;Database=trace"
+    OTEL_EXPORTER_OTLP_ENDPOINT: "http://dashboard:18889"
+    services__geocoding: "https://nominatim.openstreetmap.org"
+    services__routing: "https://valhalla.openstreetmap.de"
+    services__service-gateway__http__0: "http://service-gateway:80/"
+    services__service-gateway__http__1: "https://service-gateway:443/"
+    services__service-core__http__0: "http://service-core:80"
+    services__service-core__http__1: "https://service-core:443"
+    services__service-integration__http__0: "http://service-integration:80"
+    services__service-integration__http__1: "https://service-integration:443"
+    services__service-navigation__http__0: "http://service-navigation:80"
+    services__service-navigation__http__1: "https://service-navigation:443"
+
+services:
+  dashboard:
+    container_name: "dashboard"
+    image: "mcr.microsoft.com/dotnet/nightly/aspire-dashboard:8.0.0-preview.6"
+    environment:
+      DOTNET_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
+      ASPNETCORE_HTTPS_PORTS: 18888
+      ASPNETCORE_Kestrel__Certificates__Default__Password: ""
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/certs/localhost.pfx"
+    deploy:
+      <<: *app-deploy
+    ports:
+    - target: 18888
+      published: 18888
+    - target: 18889
+      published: 4317
+    restart: unless-stopped
+    networks:
+      default:
+
+  manager:
+    <<: *app
+    image: ${REGISTRY}/trace-manager:${VERSION}
+    container_name: manager
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: manager
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4590:443
+    networks:
+      default:
+
+  frontend:
+    <<: *app
+    image: ${REGISTRY}/trace-frontend:${VERSION}
+    container_name: frontend
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: frontend
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4700:443
+    networks:
+      default:
+
+  website:
+    <<: *app
+    image: ${REGISTRY}/trace-website:${VERSION}
+    container_name: website
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: website
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4600:443
+    networks:
+      default:
+
+  service-worker:
+    <<: *app
+    image: ${REGISTRY}/trace-service-worker:${VERSION}
+    container_name: service-worker
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-worker
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4650:443
+    networks:
+      default:
+
+  service-gateway:
+    <<: *app
+    image: ${REGISTRY}/trace-service-gateway:${VERSION}
+    container_name: service-gateway
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-gateway
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 5000:443
+    networks:
+      default:
+
+  service-core:
+    <<: *app
+    image: ${REGISTRY}/trace-service-core:${VERSION}
+    container_name: service-core
+    build:
+      context: .
+      dockerfile: Service/Core/Dockerfile
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-core
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4571:443
+    networks:
+      default:
+
+  service-integration:
+    <<: *app
+    image: ${REGISTRY}/trace-service-integration:${VERSION}
+    container_name: service-integration
+    build:
+      context: .
+      dockerfile: Service/Integration/Dockerfile
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-integration
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4572:443
+    networks:
+      default:
+
+  service-navigation:
+    <<: *app
+    image: ${REGISTRY}/trace-service-navigation:${VERSION}
+    container_name: service-navigation
+    build:
+      context: .
+      dockerfile: Service/Navigation/Dockerfile
+    environment:
+      <<: *app-env
+      OTEL_SERVICE_NAME: service-navigation
+    deploy:
+      <<: *app-deploy
+    ports:
+      - 4573:443
+    networks:
+      default:

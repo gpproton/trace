@@ -1,0 +1,7 @@
+{
+  "subgraph": "service-navigation",
+  "http": {
+    "baseAddress": "https://service-navigation/graphql",
+    "clientName": "http"
+  }
+}

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Title>Trace.Service.Integration</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>$(ContainerRepo)/trace-service-integration</ContainerRepository>
+  </PropertyGroup>
+
+  <Import Project="..\Shared.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\PipeHandlers\Trace.Common.PipeHandlers.csproj" />
+    <ProjectReference Include="..\..\Common\Queueing\Trace.Common.Queueing.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- TODO: Temporary till adding GRPC back -->
+    <!-- <Protobuf Include="proto\PositionMessage.proto" GrpcServices="Server" /> -->
+    <!-- <PackageReference Include="Grpc.AspNetCore" /> -->
+    <!-- <PackageReference Include="Google.Protobuf" /> -->
+    <!-- <PackageReference Include="Google.Protobuf.Tools" /> -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Swashbuckle.AspNetCore" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handler\" />
+  </ItemGroup>
+
+</Project>

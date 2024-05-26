@@ -1,0 +1,68 @@
+{
+  "name": "trace-services",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "2"
+    },
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers-contrib/features/pnpm:2": {},
+    "ghcr.io/devcontainers-contrib/features/ansible:2": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "sibiraj-s.vscode-scss-formatter",
+        "eliostruyf.vscode-typescript-exportallmodules",
+        "nuxtr.nuxt-vscode-extentions",
+        "vue.volar",
+        "gitHub.vscode-github-actions",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-dotnettools.csdevkit",
+        "ms-dotnetools.csharp",
+        "ms-azuretools.vscode-docker",
+        "ms-dotnettools.vscodeintellicode-csharp",
+        "editorconfig.editorconfig",
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.blazorwasm-companion",
+        "wayou.vscode-todo-highlight",
+        "vscode-icons-team.vscode-icons",
+        "gruntfuggly.todo-tree",
+        "jacokok.csharp-stretch",
+        "psioniq.psi-header"
+      ]
+    }
+  },
+  "forwardPorts": [
+    3005,
+    3010,
+    5000,
+    5001,
+    5432
+  ],
+  "hostRequirements": {
+    "memory": "8gb",
+    "cpus": 4
+  },
+  "remoteEnv": {
+    "DOTNET_MULTILEVEL_LOOKUP": "0",
+    "TARGET": "net8.0",
+    "ASPNETCORE_Kestrel__Certificates__Default__Password": "",
+    "ASPNETCORE_Kestrel__Certificates__Default__Path": "~/localhost.pfx"
+  },
+  "postCreateCommand": "dotnet tool restore",
+  "postAttachCommand": "",
+  "portsAttributes": {
+    "5001": {
+      "protocol": "https",
+      "label": "gateway",
+      "onAutoForward": "notify"
+    }
+  }
+}

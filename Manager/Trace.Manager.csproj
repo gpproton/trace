@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <UserSecretsId>aspnet-Trace.Manager-1efca38a-bc2c-4129-a543-a8e8640b4a78</UserSecretsId>
+    <Title>Trace.Manager</Title>
+    <EnableSdkContainerSupport>true</EnableSdkContainerSupport>
+    <ContainerRepository>$(ContainerRepo)/trace-manager</ContainerRepository>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\config\**\*.*" Link="config\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup Label="Core">
+    <ProjectReference Include="..\Common\Shared\Trace.Common.csproj" />
+    <ProjectReference Include="..\ServiceDefaults\Trace.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Infrastructure\Trace.Infrastructure.csproj" />
+    <ProjectReference Include="..\Application\Trace.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Label="Standard">
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" />
+    <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" />
+  </ItemGroup>
+
+  <ItemGroup Label="FluentUI">
+	  <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" />
+  </ItemGroup>
+
+</Project>

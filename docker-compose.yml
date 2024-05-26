@@ -1,0 +1,8 @@
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
+

@@ -2,41 +2,54 @@
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
-    <AxolotlVersion>8.0.1</AxolotlVersion>
-    <AspireVersion>8.0.0-preview.3.23619.4</AspireVersion>
-    <AspNetCoreVersion>8.0.0</AspNetCoreVersion>
+    <AxolotlVersion>8.0.5</AxolotlVersion>
+    <AspireVersion>8.0.0-preview.7.24251.11</AspireVersion>
+    <OpenTelemetryVersion>1.8.0</OpenTelemetryVersion>
+    <AspNetCoreVersion>8.0.4</AspNetCoreVersion>
     <RuntimeVersion>8.0.0</RuntimeVersion>
-    <EFCoreVersion>8.0.0</EFCoreVersion>
-    <NpgsqlVersion>8.0.0</NpgsqlVersion>
-    <HotChocolateVersion>13.5.1</HotChocolateVersion>
+    <EFCoreVersion>8.0.4</EFCoreVersion>
+    <NpgsqlVersion>8.0.2</NpgsqlVersion>
+    <HotChocolateVersion>14.0.0-p.100</HotChocolateVersion>
     <CassandraVersion>3.19.3</CassandraVersion>
     <MinioVersion>6.0.0</MinioVersion>
     <MQTTnetVersion>4.3.1.873</MQTTnetVersion>
     <MassTransitVersion>8.1.2</MassTransitVersion>
-    <FluentUIVersion>4.3.1</FluentUIVersion>
+    <FluentUIVersion>4.4.1</FluentUIVersion>
   </PropertyGroup>
+  
   <!-- Core packages -->
   <ItemGroup Label="Core">
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="$(RuntimeVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.4" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(RuntimeVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(RuntimeVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageVersion Include="NUnit" Version="4.0.1" />
     <PackageVersion Include="NUnit3TestAdapter" Version="4.5.0" />
+    <PackageVersion Include="CliWrap" Version="3.6.6" />
   </ItemGroup>
+
   <!-- Axolotl packages -->
   <ItemGroup Label="Axolotl">
     <PackageVersion Include="Axolotl" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.AspNet" Version="$(AxolotlVersion)" />
     <PackageVersion Include="Axolotl.EFCore" Version="$(AxolotlVersion)" />
   </ItemGroup>
+
+  <!-- Multitenancy packages -->
+  <ItemGroup>
+    <PackageVersion Include="Finbuckle.MultiTenant" Version="6.13.1" />
+    <PackageVersion Include="Finbuckle.MultiTenant.AspNetCore" Version="6.13.1" />
+    <PackageVersion Include="Finbuckle.MultiTenant.EntityFrameworkCore" Version="6.13.1" />
+  </ItemGroup>
+
   <!-- AspNet packages -->
   <ItemGroup Label="AspNetCore">
+    <PackageVersion Include="LettuceEncrypt" Version="1.3.2" />
     <PackageVersion Include="Microsoft.AspNetCore.DataProtection.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCoreVersion)" />
@@ -47,14 +60,14 @@
     <PackageVersion Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.SpaProxy" Version="$(AspNetCoreVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="$(AspNetCoreVersion)" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.1" />
     <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components" Version="$(FluentUIVersion)" />
-    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="$(FluentUIVersion)" />
+    <PackageVersion Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.4.0" />
     <PackageVersion Include="Yarp.ReverseProxy" Version="2.1.0" />
-    <PackageVersion Include="Grpc.AspNetCore" Version="2.59.0" />
+    <PackageVersion Include="Grpc.AspNetCore" Version="2.61.0" />
     <PackageVersion Include="MQTTnet.AspNetCore" Version="$(MQTTnetVersion)" />
-    <PackageVersion Include="Google.Protobuf" Version="3.25.1" />
-    <PackageVersion Include="Google.Protobuf.Tools" Version="3.25.1" />
+    <PackageVersion Include="Google.Protobuf" Version="3.25.3" />
+    <PackageVersion Include="Google.Protobuf.Tools" Version="3.25.3" />
   </ItemGroup>
   <!-- EFcore packages -->
   <ItemGroup Label="Efcore">
@@ -70,38 +83,46 @@
   <!-- Aspire packages -->
   <ItemGroup>
     <PackageVersion Include="Aspire.Hosting" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.Redis" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.RabbitMQ" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="$(AspireVersion)" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Npgsql" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.StackExchange.Redis" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.StackExchange.Redis.DistributedCaching" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.StackExchange.Redis.OutputCaching" Version="$(AspireVersion)" />
     <PackageVersion Include="Aspire.RabbitMQ.Client" Version="$(AspireVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="8.2.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="$(AspireVersion)" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Abstractions" Version="$(AspireVersion)" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery.Yarp" Version="$(AspireVersion)" />
     <!-- Open Telemetry -->
-    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.7.0-alpha.1" />
-    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0-alpha.1" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.6.0-beta.2" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.GrpcNetClient" Version="1.6.0-beta.2" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.6.0-beta.2" />
-    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.5.1" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="$(OpenTelemetryVersion)" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.8.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="$(OpenTelemetryVersion)" />
   </ItemGroup>
   <!-- HotChocolate packages -->
   <ItemGroup Label="HotChocolate">
+    <PackageVersion Include="Microsoft.AspNetCore.HeaderPropagation" Version="$(AspNetCoreVersion)" />
+    <PackageVersion Include="BananaCakePop.Services" Version="3.2.0" />
     <PackageVersion Include="HotChocolate.Abstractions" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.AspNetCore.CommandLine" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.AspNetCore" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.EntityFramework" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Data.Spatial" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Diagnostics" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Execution" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Fusion" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Fusion.Aspire" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.InMemory" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.PersistedQueries.Redis" Version="$(HotChocolateVersion)" />
-    <PackageVersion Include="HotChocolate.Stitching" Version="$(HotChocolateVersion)" />
-    <PackageVersion Include="HotChocolate.Stitching.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Subscriptions.Redis" Version="$(HotChocolateVersion)" />
     <PackageVersion Include="HotChocolate.Types" Version="$(HotChocolateVersion)" />
+    <PackageVersion Include="HotChocolate.Types.Analyzers" Version="$(HotChocolateVersion)" />
   </ItemGroup>
   <!-- Hangfire packages -->
   <ItemGroup Label="Hangfire">

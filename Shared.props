@@ -1,0 +1,9 @@
+<Project>
+
+   <ItemGroup>
+    <None Include="..\..\config\**\*.*" Link="config\%(Filename)%(Extension)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
